@@ -30,7 +30,7 @@ var import_curtailmentPower = require("./curtailmentPower");
 var import_systemBatPower = require("./systemBatPower");
 var import_objectHierarchy = require("./objectHierarchy");
 const SOLARBANK_INFO_LABELS = {
-  battery_energy: "Batterie-Energie (Wh)"
+  battery_energy: "Battery energy (Wh)"
 };
 function resolveStateType(meta, value) {
   if ((meta == null ? void 0 : meta.kind) === "number") {
@@ -127,7 +127,7 @@ async function syncSolarbankInfo(adapter, hierarchy, channelPath, info) {
     return;
   }
   const base = `${channelPath}.solarbank_info`;
-  await hierarchy.ensureChannel(base, "Solarbank-Info (Gesamtsystem)");
+  await hierarchy.ensureChannel(base, "Solarbank info (system total)");
   const siteId = channelPath.split(".").pop() || "";
   if (siteId) {
     await (0, import_systemBatPower.pruneSolarbankInfoPowerStates)(adapter, siteId);
@@ -137,7 +137,7 @@ async function syncSolarbankInfo(adapter, hierarchy, channelPath, info) {
     return;
   }
   const listBase = `${base}.solarbank_list`;
-  await hierarchy.ensureChannel(listBase, "Solarbank-Liste");
+  await hierarchy.ensureChannel(listBase, "Solarbank list");
   for (const [sn, entry] of Object.entries(list)) {
     const snPart = sanitizeIdPart(sn);
     const bankBase = `${listBase}.${snPart}`;

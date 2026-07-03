@@ -236,16 +236,16 @@ class AnkerSolix extends utils.Adapter {
       if (msg.includes("CaptchaRequired") || msg.includes("100032") || msg.toLowerCase().includes("captcha")) {
         const cacheFile = this.getAuthCacheFile();
         const missing = !fs.existsSync(cacheFile);
-        const hint = missing ? `Erwartete Datei: ${cacheFile} \u2013 von funktionierender Anker/Solix-Integration (z. B. ha-anker-solix) dorthin kopieren, Ordner anlegen falls n\xF6tig, Adapter neu starten.` : `Cache vorhanden aber ung\xFCltig: ${cacheFile} \u2013 frische Datei von HA kopieren oder Passwort in Admin neu speichern.`;
+        const hint = missing ? `Expected file: ${cacheFile} \u2013 copy from a working Anker/Solix setup (e.g. ha-anker-solix), create the folder if needed, then restart the adapter.` : `Cache present but invalid: ${cacheFile} \u2013 copy a fresh file from HA or re-save the password in Admin.`;
         this.log.error(
-          `Poll failed: ${msg} \u2013 API-Neulogin n\xF6tig${missing ? " (kein Login-Cache)" : ""}. ${hint}`
+          `Poll failed: ${msg} \u2013 API re-login required${missing ? " (no login cache)" : ""}. ${hint}`
         );
         if (missing) {
           this.logAuthCacheStatus();
         }
       } else if (msg.includes("Cached Anker login is invalid") || msg.includes("invalidated by the mobile app")) {
         this.log.error(
-          `Poll failed: ${msg} \u2013 Gespeicherter API-Token ung\xFCltig (abgelaufen oder durch App ersetzt). Nicht \u201ECache l\xF6schen\u201C \u2013 stattdessen frische authcache-Datei von HA kopieren oder App kurz abmelden, dann neu starten.`
+          `Poll failed: ${msg} \u2013 Stored API token invalid (expired or replaced by mobile app). Do not clear the cache \u2013 copy a fresh authcache file from HA or briefly log out in the app, then restart.`
         );
       } else if (msg.includes("InvalidCredentials") || msg.includes("Authentication failed")) {
         this.log.error(

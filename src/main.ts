@@ -276,18 +276,18 @@ class AnkerSolix extends utils.Adapter {
 				const cacheFile = this.getAuthCacheFile();
 				const missing = !fs.existsSync(cacheFile);
 				const hint = missing
-					? `Erwartete Datei: ${cacheFile} – von funktionierender Anker/Solix-Integration (z. B. ha-anker-solix) dorthin kopieren, Ordner anlegen falls nötig, Adapter neu starten.`
-					: `Cache vorhanden aber ungültig: ${cacheFile} – frische Datei von HA kopieren oder Passwort in Admin neu speichern.`;
+					? `Expected file: ${cacheFile} – copy from a working Anker/Solix setup (e.g. ha-anker-solix), create the folder if needed, then restart the adapter.`
+					: `Cache present but invalid: ${cacheFile} – copy a fresh file from HA or re-save the password in Admin.`;
 				this.log.error(
-					`Poll failed: ${msg} – API-Neulogin nötig${missing ? " (kein Login-Cache)" : ""}. ${hint}`,
+					`Poll failed: ${msg} – API re-login required${missing ? " (no login cache)" : ""}. ${hint}`,
 				);
 				if (missing) {
 					this.logAuthCacheStatus();
 				}
 			} else if (msg.includes("Cached Anker login is invalid") || msg.includes("invalidated by the mobile app")) {
 				this.log.error(
-					`Poll failed: ${msg} – Gespeicherter API-Token ungültig (abgelaufen oder durch App ersetzt). ` +
-						"Nicht „Cache löschen“ – stattdessen frische authcache-Datei von HA kopieren oder App kurz abmelden, dann neu starten.",
+					`Poll failed: ${msg} – Stored API token invalid (expired or replaced by mobile app). ` +
+						"Do not clear the cache – copy a fresh authcache file from HA or briefly log out in the app, then restart.",
 				);
 			} else if (msg.includes("InvalidCredentials") || msg.includes("Authentication failed")) {
 				this.log.error(
