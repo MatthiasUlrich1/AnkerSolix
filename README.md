@@ -319,6 +319,10 @@ Tab **Abregelungsvermeidung** / **Curtailment avoidance**: requires the [ioBroke
 
 ## Changelog
 
+### 0.10.78
+
+- **Adapter-check:** use `adapter.setTimeout` instead of plain `setTimeout` (E5005)
+
 ### 0.10.77
 
 - **Repository review:** English-only log messages; English default state names and list labels (common.name/common.states)

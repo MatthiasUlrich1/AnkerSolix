@@ -123,7 +123,7 @@ async function setupServiceStates(adapter) {
 }
 async function runServiceAction(adapter, config, action, params, pythonPath) {
   const serviceConfig = { ...config, service: action, params };
-  const result = await (0, import_pythonBridge.runBridge)("service", serviceConfig, pythonPath, adapter.log);
+  const result = await (0, import_pythonBridge.runBridge)("service", serviceConfig, pythonPath, adapter.log, { adapter });
   return result;
 }
 // Annotate the CommonJS export names for ESM import in node:

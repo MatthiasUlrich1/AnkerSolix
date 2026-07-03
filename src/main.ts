@@ -17,6 +17,7 @@ import {
 	restoreAuthCacheFromBackup,
 } from "./lib/authCacheBackup";
 import { parseSelectedDeviceIds } from "./lib/configHelpers";
+import { type AdapterTimer } from "./lib/adapterTimers";
 import { ControlQueue } from "./lib/controlQueue";
 import {
 	normalizeMinPvForCurtailmentW,
@@ -47,14 +48,14 @@ import type { BridgeConfig, BridgeDevice, BridgeServiceConfig, DeviceControlCont
 
 class AnkerSolix extends utils.Adapter {
 	private pollTimer: ioBroker.Interval | undefined;
-	private readonly controlQueue = new ControlQueue();
+	private readonly controlQueue: ControlQueue;
 	private readonly deviceContexts = new Map<string, DeviceControlContext>();
 	private readonly deviceEntities = new Map<string, Record<string, unknown>>();
 	private readonly deviceWritable = new Map<string, string[]>();
 	private readonly lastNotifiedPvW = new Map<string, number>();
 	private readonly curtailmentDeviceIds = new Set<string>();
 	private siteSolarbanks = new Map<string, string[]>();
-	private pollAfterControlTimer: NodeJS.Timeout | undefined;
+	private pollAfterControlTimer: AdapterTimer | undefined;
 	private pollInFlight = false;
 
 	public constructor(options: Partial<utils.AdapterOptions> = {}) {
@@ -66,6 +67,7 @@ class AnkerSolix extends utils.Adapter {
 		this.on("stateChange", this.onStateChange.bind(this));
 		this.on("message", this.onMessage.bind(this));
 		this.on("unload", this.onUnload.bind(this));
+		this.controlQueue = new ControlQueue(this);
 	}
 
 	private getAuthCacheDir(): string {
@@ -220,7 +222,9 @@ class AnkerSolix extends utils.Adapter {
 		}
 
 		try {
-			const result = await runBridge("poll", this.getBridgeConfig(), this.config.pythonPath || "", this.log);
+			const result = await runBridge("poll", this.getBridgeConfig(), this.config.pythonPath || "", this.log, {
+				adapter: this,
+			});
 
 			if (this.config.enableCurtailmentAvoidance) {
 				this.refreshCurtailmentDeviceIds();
@@ -350,7 +354,9 @@ class AnkerSolix extends utils.Adapter {
 				service: action,
 				params,
 			};
-			const result = await runBridge("service", serviceConfig, this.config.pythonPath || "", this.log);
+			const result = await runBridge("service", serviceConfig, this.config.pythonPath || "", this.log, {
+				adapter: this,
+			});
 
 			if (action === "get_schedule" && result.schedule !== undefined) {
 				await this.setState(SERVICE_STATES.scheduleJson, JSON.stringify(result.schedule, null, 2), true);
@@ -421,6 +427,7 @@ class AnkerSolix extends utils.Adapter {
 			},
 			this.config.pythonPath || "",
 			this.log,
+			{ adapter: this },
 		);
 	}
 
@@ -574,10 +581,10 @@ class AnkerSolix extends utils.Adapter {
 	}
 
 	private schedulePollAfterControl(): void {
-		if (this.pollAfterControlTimer) {
-			clearTimeout(this.pollAfterControlTimer);
+		if (this.pollAfterControlTimer !== undefined) {
+			this.clearTimeout(this.pollAfterControlTimer);
 		}
-		this.pollAfterControlTimer = setTimeout(() => {
+		this.pollAfterControlTimer = this.setTimeout(() => {
 			this.pollAfterControlTimer = undefined;
 			void this.pollOnce();
 		}, 12_000);
@@ -662,6 +669,7 @@ class AnkerSolix extends utils.Adapter {
 						},
 						this.config.pythonPath || "",
 						this.log,
+						{ adapter: this },
 					);
 					await this.setState(id, { val: value, ack: true });
 					this.log.info(`Applied ${control.control} on ${control.deviceId}`);
@@ -848,8 +856,8 @@ class AnkerSolix extends utils.Adapter {
 			this.clearInterval(this.pollTimer);
 			this.pollTimer = undefined;
 		}
-		if (this.pollAfterControlTimer) {
-			clearTimeout(this.pollAfterControlTimer);
+		if (this.pollAfterControlTimer !== undefined) {
+			this.clearTimeout(this.pollAfterControlTimer);
 			this.pollAfterControlTimer = undefined;
 		}
 		this.lastNotifiedPvW.clear();

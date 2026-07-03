@@ -38,7 +38,7 @@ var import_systemBatPower = require("./lib/systemBatPower");
 var import_stateSync = require("./lib/stateSync");
 class AnkerSolix extends utils.Adapter {
   pollTimer;
-  controlQueue = new import_controlQueue.ControlQueue();
+  controlQueue;
   deviceContexts = /* @__PURE__ */ new Map();
   deviceEntities = /* @__PURE__ */ new Map();
   deviceWritable = /* @__PURE__ */ new Map();
@@ -56,6 +56,7 @@ class AnkerSolix extends utils.Adapter {
     this.on("stateChange", this.onStateChange.bind(this));
     this.on("message", this.onMessage.bind(this));
     this.on("unload", this.onUnload.bind(this));
+    this.controlQueue = new import_controlQueue.ControlQueue(this);
   }
   getAuthCacheDir() {
     return path.join(utils.getAbsoluteInstanceDataDir(this), "authcache");
@@ -193,7 +194,9 @@ class AnkerSolix extends utils.Adapter {
       return;
     }
     try {
-      const result = await (0, import_pythonBridge.runBridge)("poll", this.getBridgeConfig(), this.config.pythonPath || "", this.log);
+      const result = await (0, import_pythonBridge.runBridge)("poll", this.getBridgeConfig(), this.config.pythonPath || "", this.log, {
+        adapter: this
+      });
       if (this.config.enableCurtailmentAvoidance) {
         this.refreshCurtailmentDeviceIds();
       }
@@ -294,7 +297,9 @@ class AnkerSolix extends utils.Adapter {
         service: action,
         params
       };
-      const result = await (0, import_pythonBridge.runBridge)("service", serviceConfig, this.config.pythonPath || "", this.log);
+      const result = await (0, import_pythonBridge.runBridge)("service", serviceConfig, this.config.pythonPath || "", this.log, {
+        adapter: this
+      });
       if (action === "get_schedule" && result.schedule !== void 0) {
         await this.setState(import_services.SERVICE_STATES.scheduleJson, JSON.stringify(result.schedule, null, 2), true);
       }
@@ -355,7 +360,8 @@ class AnkerSolix extends utils.Adapter {
         acOutputApiOnly: opts == null ? void 0 : opts.acOutputApiOnly
       },
       this.config.pythonPath || "",
-      this.log
+      this.log,
+      { adapter: this }
     );
   }
   rememberDeviceEntities(devices) {
@@ -498,10 +504,10 @@ class AnkerSolix extends utils.Adapter {
     }
   }
   schedulePollAfterControl() {
-    if (this.pollAfterControlTimer) {
-      clearTimeout(this.pollAfterControlTimer);
+    if (this.pollAfterControlTimer !== void 0) {
+      this.clearTimeout(this.pollAfterControlTimer);
     }
-    this.pollAfterControlTimer = setTimeout(() => {
+    this.pollAfterControlTimer = this.setTimeout(() => {
       this.pollAfterControlTimer = void 0;
       void this.pollOnce();
     }, 12e3);
@@ -571,7 +577,8 @@ class AnkerSolix extends utils.Adapter {
               deviceContext
             },
             this.config.pythonPath || "",
-            this.log
+            this.log,
+            { adapter: this }
           );
           await this.setState(id, { val: value, ack: true });
           this.log.info(`Applied ${control.control} on ${control.deviceId}`);
@@ -732,8 +739,8 @@ class AnkerSolix extends utils.Adapter {
       this.clearInterval(this.pollTimer);
       this.pollTimer = void 0;
     }
-    if (this.pollAfterControlTimer) {
-      clearTimeout(this.pollAfterControlTimer);
+    if (this.pollAfterControlTimer !== void 0) {
+      this.clearTimeout(this.pollAfterControlTimer);
       this.pollAfterControlTimer = void 0;
     }
     this.lastNotifiedPvW.clear();

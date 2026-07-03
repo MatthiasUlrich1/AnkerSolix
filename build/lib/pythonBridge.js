@@ -38,6 +38,7 @@ var fs = __toESM(require("node:fs"));
 var os = __toESM(require("node:os"));
 var path = __toESM(require("node:path"));
 var import_bridgeDaemon = require("./bridgeDaemon");
+var import_adapterTimers = require("./adapterTimers");
 var import_pythonPaths = require("./pythonPaths");
 function bridgeScriptPath() {
   return path.join(__dirname, "..", "..", "python", "bridge.py");
@@ -145,7 +146,11 @@ async function runBridge(action, config, pythonPath, log, options) {
     const daemon = (0, import_bridgeDaemon.getBridgeDaemon)(pythonPath, log);
     if (daemon.isRunning && isTransientApiError(msg)) {
       log == null ? void 0 : log.warn(`Bridge daemon API error (${msg}) \u2013 retrying once after 15s\u2026`);
-      await new Promise((r) => setTimeout(r, 15e3));
+      if (options == null ? void 0 : options.adapter) {
+        await (0, import_adapterTimers.adapterDelay)(options.adapter, 15e3);
+      } else {
+        throw new Error("Bridge daemon retry requires adapter instance (E5005)");
+      }
       try {
         return await runBridgeDaemon(action, config, pythonPath, log);
       } catch (retryErr) {

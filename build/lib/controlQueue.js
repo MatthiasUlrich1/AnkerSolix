@@ -23,23 +23,27 @@ __export(controlQueue_exports, {
   ControlQueue: () => ControlQueue
 });
 module.exports = __toCommonJS(controlQueue_exports);
+var import_adapterTimers = require("./adapterTimers");
 const CONTROL_DEBOUNCE_MS = 1200;
 const CONTROL_MIN_INTERVAL_MS = 4e3;
 class ControlQueue {
+  constructor(adapter) {
+    this.adapter = adapter;
+  }
   debounceTimers = /* @__PURE__ */ new Map();
   queue = [];
   running = false;
   lastRunAt = 0;
   enqueue(job) {
     const existing = this.debounceTimers.get(job.stateId);
-    if (existing) {
-      clearTimeout(existing);
+    if (existing !== void 0) {
+      this.adapter.clearTimeout(existing);
     }
     this.queue = this.queue.filter((entry) => entry.stateId !== job.stateId);
     this.queue.push(job);
     this.debounceTimers.set(
       job.stateId,
-      setTimeout(() => {
+      this.adapter.setTimeout(() => {
         this.debounceTimers.delete(job.stateId);
         void this.pump();
       }, CONTROL_DEBOUNCE_MS)
@@ -54,7 +58,7 @@ class ControlQueue {
       while (this.queue.length > 0) {
         const waitMs = CONTROL_MIN_INTERVAL_MS - (Date.now() - this.lastRunAt);
         if (waitMs > 0) {
-          await new Promise((resolve) => setTimeout(resolve, waitMs));
+          await (0, import_adapterTimers.adapterDelay)(this.adapter, waitMs);
         }
         const job = this.queue.shift();
         if (!job) {
