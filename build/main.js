@@ -687,7 +687,7 @@ class AnkerSolix extends utils.Adapter {
     const offset = Math.floor(Math.random() * 15) * 60;
     this.config.periodScheduleOffsetSec = offset;
     try {
-      await this.extendObjectAsync(`system.adapter.${this.namespace}`, {
+      await this.extendForeignObjectAsync(`system.adapter.${this.namespace}`, {
         native: { periodScheduleOffsetSec: offset }
       });
       this.log.debug(`Period energy schedule offset: ${offset}s (stored in instance config)`);

@@ -1,9 +1,22 @@
 {
 	"common": {
 		"name": "anker-solix",
-		"version": "0.10.79",
+		"version": "0.10.80",
 		"messagebox": true,
 		"news": {
+			"0.10.80": {
+				"en": "Fix periodScheduleOffsetSec persistence: use extendForeignObjectAsync (no invalid anker-solix.0.system.adapter.* object in dumps)",
+				"de": "Fix periodScheduleOffsetSec: extendForeignObjectAsync (kein ungültiges anker-solix.0.system.adapter.*-Objekt mehr in Dumps)",
+				"ru": "Fix periodScheduleOffsetSec persistence via extendForeignObjectAsync",
+				"pt": "Fix periodScheduleOffsetSec persistence via extendForeignObjectAsync",
+				"nl": "Fix periodScheduleOffsetSec persistence via extendForeignObjectAsync",
+				"fr": "Fix periodScheduleOffsetSec persistence via extendForeignObjectAsync",
+				"it": "Fix periodScheduleOffsetSec persistence via extendForeignObjectAsync",
+				"es": "Fix periodScheduleOffsetSec persistence via extendForeignObjectAsync",
+				"pl": "Fix periodScheduleOffsetSec persistence via extendForeignObjectAsync",
+				"uk": "Fix periodScheduleOffsetSec persistence via extendForeignObjectAsync",
+				"zh-cn": "修复 periodScheduleOffsetSec 持久化（extendForeignObjectAsync）"
+			},
 			"0.10.79": {
 				"en": "Repository re-review: period schedule jitter, sensor migration, Windows support documented, remove curtailmentModeBefore",
 				"de": "Repository Re-Review: Perioden-Jitter, Sensor-Migration, Windows-Unterstützung dokumentiert, curtailmentModeBefore entfernt",
