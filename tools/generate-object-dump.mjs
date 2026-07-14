@@ -32,15 +32,13 @@ const ACL = {
 	ownerGroup: "system.group.administrator",
 };
 
-/** @type {Record<string, unknown>} */
 const objects = {};
-/** @type {Record<string, { val: unknown; ack: boolean }>} */
 const states = {};
 
 function deepMerge(target, patch) {
 	for (const [key, val] of Object.entries(patch)) {
 		if (val && typeof val === "object" && !Array.isArray(val) && typeof target[key] === "object") {
-			deepMerge(/** @type {Record<string, unknown>} */ (target[key]), /** @type {Record<string, unknown>} */ (val));
+			deepMerge(target[key], val);
 		} else {
 			target[key] = val;
 		}
@@ -65,7 +63,6 @@ function recordObject(id, obj) {
 	}
 }
 
-/** @type {import("../build/lib/types.js").BridgeDevice[]} */
 const sampleDevices = [
 	{
 		info: {
