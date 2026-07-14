@@ -4,16 +4,16 @@
 
 ioBroker adapter for **Anker Solix** power systems (Solarbank, Smart Meter, PPS, EV charger, and more). It is based on the Home Assistant integration [thomluther/ha-anker-solix](https://github.com/thomluther/ha-anker-solix) and uses the same unofficial **solixapi** Python library.
 
-> **Linux only — not for Windows or macOS production hosts**
+> **Supported platforms**
 >
-> This adapter is published for **Linux** ioBroker hosts only (`package.json` `"os": ["linux"]`). **`iobroker install anker-solix` is blocked on Windows and macOS.** Production use requires a Linux host (Docker, NAS, Raspberry Pi, HA Supervised ioBroker, etc.) with **Python 3.12+** and a long-lived Python bridge subprocess. Windows/macOS are excluded because ioBroker production deployments are Linux-based, CI validates Linux only, and the Python venv + MQTT/cloud bridge model is not supported or tested on desktop OSes. See [Platform requirements](#platform-requirements-linux-only).
+> **Linux** is the primary production target (Docker, NAS, Raspberry Pi, HA Supervised ioBroker). **Windows** is **supported and tested** (Python 3.12+ via `py -3.12` / `py -3.13` or `pythonPath` in admin). **macOS** uses the same Unix code path as Linux (Python 3.12+ via Homebrew recommended); not covered by CI. See [Supported platforms](#supported-platforms).
 
 A small **Python bridge** (persistent daemon, like HA) polls the Anker cloud and optional MQTT, then exposes values as ioBroker states. Optional entity groups (since v0.9.0) mirror HA’s scope: only **Core** is on by default to limit API load.
 
 ## Table of contents
 
 1. [Disclaimer & usage terms](#disclaimer--usage-terms)
-2. [Platform requirements (Linux only)](#platform-requirements-linux-only)
+2. [Supported platforms](#supported-platforms)
 3. [How this adapter works in ioBroker](#how-this-adapter-works-in-iobroker)
 4. [Requirements & installation](#requirements--installation)
 5. [Configuration](#configuration)
@@ -39,22 +39,15 @@ The adapter uses an **unofficial** Python library to talk to the Anker Power **c
 
 ---
 
-## Platform requirements (Linux only)
+## Supported platforms
 
-| Platform | Supported for production? | Notes |
-|----------|-------------------------|-------|
-| **Linux** (Debian, Ubuntu, Docker, Proxmox, NAS, RPi, HA Supervised ioBroker) | **Yes** | Target platform; CI tests Ubuntu; Python 3.12+ venv on the host |
-| **Windows** | **No** | npm `os` field blocks install; Python bridge not validated on Windows ioBroker |
-| **macOS** | **No** | Same as Windows — not in npm `os` list; no CI coverage |
+| Platform | Status | Notes |
+|----------|--------|-------|
+| **Linux** (Debian, Ubuntu, Docker, Proxmox, NAS, RPi, HA Supervised ioBroker) | **Primary / CI-tested** | Recommended for production; Python 3.12+ venv (`python3-venv`, `python3-pip`) |
+| **Windows** | **Supported & tested** | Verified on ioBroker for Windows; installer tries `py -3.13`, `py -3.12`, then Program Files paths; set **pythonPath** in admin if needed; installs **`tzdata`** for `Europe/Berlin`. `package.json` declares `"linux"` for CI (E3027); use `iobroker upload` / local install on Windows hosts |
+| **macOS** | **Best-effort (Unix path)** | Same code as Linux; `brew install python@3.12` if auto-install fails; not tested in CI |
 
-**Why Linux only?**
-
-1. **ioBroker production hosts are Linux** — Docker images, NAS packages, and typical community setups run Linux. That is what this adapter is built and tested for.
-2. **Persistent Python bridge** — The adapter keeps a long-lived Python daemon (`python/bridge.py`) with a venv under the adapter directory. Paths, signals, and venv layout follow Linux conventions (`python3`, `bin/python3`).
-3. **CI and adapter-check** — GitHub Actions runs integration tests on `ubuntu-latest` only; `package.json` `"os": ["linux"]` matches that matrix (E3027).
-4. **No desktop support commitment** — Some installer helpers detect Windows for local development, but **Windows/macOS are not supported production targets** and cannot install from the ioBroker catalog.
-
-Use a Linux ioBroker host (VM, Docker, or dedicated hardware) for this adapter.
+**Linux** remains the main target for ioBroker deployments (Docker, NAS, dedicated hardware). **Windows** has dedicated support in the adapter (Python launcher, venv under `python\.venv`, path handling) and has been verified on a real ioBroker Windows host. **macOS** is not excluded in code but is not CI-tested.
 
 ---
 
@@ -77,7 +70,10 @@ Poll interval should be **60–180 s** (same recommendation as HA). Site list is
 
 - ioBroker **js-controller >= 6**, **admin >= 7.6**
 - **Node.js >= 22**
-- **Linux** ioBroker host with **Python 3.12+** (`python3-venv` + `python3-pip` recommended on Debian/Ubuntu). Docker, NAS, and HA Supervised ioBroker on Linux are typical targets.
+- **Python 3.12+** on the ioBroker host:
+  - **Linux:** `python3-venv` + `python3-pip` (Debian/Ubuntu) — primary production target
+  - **Windows:** Python 3.12+ from python.org or `py -3.12`; adapter installer handles venv and **`tzdata`**
+  - **macOS:** `brew install python@3.12` if automatic install fails
 
 Python dependencies install into the adapter folder (`python/.venv` or `python/site-packages`). Since v0.2.0: automatic on start (**Options** → `autoInstallPython`) or button **Install Python dependencies**.
 
@@ -345,7 +341,7 @@ Tab **Abregelungsvermeidung** / **Curtailment avoidance**: requires the [ioBroke
 
 ### 0.10.79
 
-- **Repository re-review:** per-instance period energy schedule jitter (no worldwide fixed cloud timestamps); sensor-kind state name migration; remove unused `curtailmentModeBefore`; prominent Linux-only README notice
+- **Repository re-review:** per-instance period energy schedule jitter; sensor-kind state name migration; remove unused `curtailmentModeBefore`; document Linux + **tested Windows** support
 
 ### 0.10.78
 
