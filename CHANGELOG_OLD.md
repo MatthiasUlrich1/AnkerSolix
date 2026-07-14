@@ -2,7 +2,12 @@
 
 Current releases **0.10.63 and newer** (except the latest seven messagebox news entries) are documented in [README.md](README.md#changelog).
 
-Removed from `common.news` when trimming to the ioBroker repository limit of **7** entries: 0.10.63 and older (see README), plus versions never published to npm (e.g. 0.10.50–0.10.53, 0.10.58), **0.10.69**, **0.10.70**, **0.10.71**, and **0.10.72**.
+Removed from `common.news` when trimming to the ioBroker repository limit of **7** entries: 0.10.63 and older (see README), plus versions never published to npm (e.g. 0.10.50–0.10.53, 0.10.58), **0.10.69**, **0.10.70**, **0.10.71**, **0.10.72**, and **0.10.73**.
+
+## 0.10.73
+
+- **en:** README: remove GitHub URL install hints (adapter-check E6013)
+- **de:** README: GitHub-URL-Installation entfernt (Adapter-Check E6013)
 
 ## 0.10.72
 

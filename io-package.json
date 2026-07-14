@@ -94,19 +94,6 @@
 				"pl": "TypeScript 6 and repo-check cleanup",
 				"uk": "TypeScript 6 and repo-check cleanup",
 				"zh-cn": "TypeScript 6 与仓库检查项清理"
-			},
-			"0.10.73": {
-				"en": "README: remove GitHub URL install hints (adapter-check E6013)",
-				"de": "README: GitHub-URL-Installation entfernt (Adapter-Check E6013)",
-				"ru": "README E6013 fix",
-				"pt": "README E6013 fix",
-				"nl": "README E6013 fix",
-				"fr": "README E6013 fix",
-				"it": "README E6013 fix",
-				"es": "README E6013 fix",
-				"pl": "README E6013 fix",
-				"uk": "README E6013 fix",
-				"zh-cn": "README 移除 GitHub 安装说明 (E6013)"
 			}
 		},
 		"titleLang": {
