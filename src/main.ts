@@ -136,6 +136,7 @@ class AnkerSolix extends utils.Adapter {
 			requestDelay: Number(this.config.requestDelay) || 0.3,
 			requestTimeout: Number(this.config.requestTimeout) || 10,
 			endpointLimit: Number(this.config.endpointLimit) || 10,
+			periodScheduleOffsetSec: this.config.periodScheduleOffsetSec,
 			enableCoreEntities: this.config.enableCoreEntities !== false,
 			enableEnergyStatistics: !!this.config.enableEnergyStatistics,
 			enableEnergyStatisticsWeek: !!this.config.enableEnergyStatisticsWeek,
@@ -784,6 +785,23 @@ class AnkerSolix extends utils.Adapter {
 		}
 	}
 
+	private async ensurePeriodScheduleOffset(): Promise<void> {
+		const raw = Number(this.config.periodScheduleOffsetSec);
+		if (Number.isFinite(raw) && raw >= 0 && raw <= 14 * 60) {
+			return;
+		}
+		const offset = Math.floor(Math.random() * 15) * 60;
+		this.config.periodScheduleOffsetSec = offset;
+		try {
+			await this.extendObjectAsync(`system.adapter.${this.namespace}`, {
+				native: { periodScheduleOffsetSec: offset },
+			});
+			this.log.debug(`Period energy schedule offset: ${offset}s (stored in instance config)`);
+		} catch (err) {
+			this.log.warn(`Could not persist periodScheduleOffsetSec: ${(err as Error).message}`);
+		}
+	}
+
 	private async onReady(): Promise<void> {
 		this.cleanupLegacyInstallSymlink();
 
@@ -837,6 +855,8 @@ class AnkerSolix extends utils.Adapter {
 		await this.ensurePythonDeps();
 
 		this.logAuthCacheStatus();
+
+		await this.ensurePeriodScheduleOffset();
 
 		await ensureBridgeDaemon(this.getBridgeConfig(), this.config.pythonPath || "", this.log);
 

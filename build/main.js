@@ -115,6 +115,7 @@ class AnkerSolix extends utils.Adapter {
       requestDelay: Number(this.config.requestDelay) || 0.3,
       requestTimeout: Number(this.config.requestTimeout) || 10,
       endpointLimit: Number(this.config.endpointLimit) || 10,
+      periodScheduleOffsetSec: this.config.periodScheduleOffsetSec,
       enableCoreEntities: this.config.enableCoreEntities !== false,
       enableEnergyStatistics: !!this.config.enableEnergyStatistics,
       enableEnergyStatisticsWeek: !!this.config.enableEnergyStatisticsWeek,
@@ -678,6 +679,22 @@ class AnkerSolix extends utils.Adapter {
       respond({ error: error.message });
     }
   }
+  async ensurePeriodScheduleOffset() {
+    const raw = Number(this.config.periodScheduleOffsetSec);
+    if (Number.isFinite(raw) && raw >= 0 && raw <= 14 * 60) {
+      return;
+    }
+    const offset = Math.floor(Math.random() * 15) * 60;
+    this.config.periodScheduleOffsetSec = offset;
+    try {
+      await this.extendObjectAsync(`system.adapter.${this.namespace}`, {
+        native: { periodScheduleOffsetSec: offset }
+      });
+      this.log.debug(`Period energy schedule offset: ${offset}s (stored in instance config)`);
+    } catch (err) {
+      this.log.warn(`Could not persist periodScheduleOffsetSec: ${err.message}`);
+    }
+  }
   async onReady() {
     this.cleanupLegacyInstallSymlink();
     await this.setObjectNotExistsAsync("account", {
@@ -724,6 +741,7 @@ class AnkerSolix extends utils.Adapter {
     );
     await this.ensurePythonDeps();
     this.logAuthCacheStatus();
+    await this.ensurePeriodScheduleOffset();
     await (0, import_pythonBridge.ensureBridgeDaemon)(this.getBridgeConfig(), this.config.pythonPath || "", this.log);
     this.subscribeStates(`${this.namespace}.*.control.*`);
     this.subscribeStates(`${this.namespace}.services.*`);

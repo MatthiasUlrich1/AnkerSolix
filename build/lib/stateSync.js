@@ -325,7 +325,7 @@ async function syncDevices(adapter, devices) {
         common,
         native: { control: entityId }
       });
-      if ((meta == null ? void 0 : meta.kind) === "number" || (meta == null ? void 0 : meta.kind) === "switch" || (meta == null ? void 0 : meta.kind) === "list" || (meta == null ? void 0 : meta.kind) === "text" || entityId === "ev_charger_mode_status") {
+      if ((meta == null ? void 0 : meta.kind) === "number" || (meta == null ? void 0 : meta.kind) === "switch" || (meta == null ? void 0 : meta.kind) === "list" || (meta == null ? void 0 : meta.kind) === "text" || (meta == null ? void 0 : meta.kind) === "sensor" || entityId === "ev_charger_mode_status") {
         await adapter.extendObject(stateId, { common });
       } else if (import_entities.STATISTICS_LABELS[entityId]) {
         await adapter.extendObject(stateId, { common: { name: common.name } });

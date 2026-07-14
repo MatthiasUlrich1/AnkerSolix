@@ -8,6 +8,8 @@ from datetime import datetime, timedelta
 from typing import Any
 from zoneinfo import ZoneInfo
 
+MAX_PERIOD_SCHEDULE_OFFSET_SEC = 14 * 60
+
 from entity_groups import (
     GROUP_ENERGY_STATISTICS_MONTH,
     GROUP_ENERGY_STATISTICS_WEEK,
@@ -580,8 +582,33 @@ def berlin_today_str(now: datetime | None = None) -> str:
     return (now or berlin_now()).strftime("%Y-%m-%d")
 
 
-def period_schedule_label(period: str) -> str:
+def period_schedule_offset_sec(config: dict | None) -> int:
+    """Per-instance jitter (0–14 min) so cloud period fetches do not align worldwide."""
+    if not config:
+        return 0
+    raw = config.get("periodScheduleOffsetSec")
+    if raw is None:
+        return 0
+    try:
+        offset = int(raw)
+    except (TypeError, ValueError):
+        return 0
+    return max(0, min(offset, MAX_PERIOD_SCHEDULE_OFFSET_SEC))
+
+
+def effective_period_schedule(
+    period: str, config: dict | None = None
+) -> tuple[int, int, int]:
     hour, minute = PERIOD_SCHEDULE_LOCAL.get(period, (0, 0))
+    base = datetime(2000, 1, 1, hour, minute, 0, tzinfo=BERLIN_TZ)
+    shifted = base + timedelta(seconds=period_schedule_offset_sec(config))
+    return shifted.hour, shifted.minute, shifted.second
+
+
+def period_schedule_label(period: str, config: dict | None = None) -> str:
+    hour, minute, second = effective_period_schedule(period, config)
+    if second:
+        return f"{hour:02d}:{minute:02d}:{second:02d}"
     return f"{hour:02d}:{minute:02d}"
 
 
@@ -589,6 +616,7 @@ def periods_due_for_fetch(
     enabled: list[str],
     last_fetched: dict[str, str],
     now: datetime | None = None,
+    config: dict | None = None,
 ) -> list[str]:
     """Periods to fetch on this detail refresh (scheduled local time, once per day)."""
     now = now or berlin_now()
@@ -597,11 +625,12 @@ def periods_due_for_fetch(
     today = now.strftime("%Y-%m-%d")
     due: list[str] = []
     for period in enabled:
-        sched = PERIOD_SCHEDULE_LOCAL.get(period)
-        if not sched:
+        if period not in PERIOD_SCHEDULE_LOCAL:
             continue
-        hour, minute = sched
-        scheduled_today = now.replace(hour=hour, minute=minute, second=0, microsecond=0)
+        hour, minute, second = effective_period_schedule(period, config)
+        scheduled_today = now.replace(
+            hour=hour, minute=minute, second=second, microsecond=0
+        )
         if now >= scheduled_today and last_fetched.get(period) != today:
             due.append(period)
     return due

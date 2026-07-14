@@ -1,9 +1,22 @@
 {
 	"common": {
 		"name": "anker-solix",
-		"version": "0.10.78",
+		"version": "0.10.79",
 		"messagebox": true,
 		"news": {
+			"0.10.79": {
+				"en": "Repository re-review: period schedule jitter, sensor name migration, Linux-only notice, remove unused curtailmentModeBefore",
+				"de": "Repository Re-Review: Perioden-Jitter, Sensor-Namens-Migration, Linux-only Hinweis, curtailmentModeBefore entfernt",
+				"ru": "Repository re-review fixes: schedule jitter and sensor migration",
+				"pt": "Repository re-review fixes: schedule jitter and sensor migration",
+				"nl": "Repository re-review fixes: schedule jitter and sensor migration",
+				"fr": "Repository re-review fixes: schedule jitter and sensor migration",
+				"it": "Repository re-review fixes: schedule jitter and sensor migration",
+				"es": "Repository re-review fixes: schedule jitter and sensor migration",
+				"pl": "Repository re-review fixes: schedule jitter and sensor migration",
+				"uk": "Repository re-review fixes: schedule jitter and sensor migration",
+				"zh-cn": "仓库复审修复：周期调度抖动与传感器名称迁移"
+			},
 			"0.10.78": {
 				"en": "Adapter-check: use adapter.setTimeout instead of plain setTimeout (E5005)",
 				"de": "Adapter-Check: adapter.setTimeout statt plain setTimeout (E5005)",
@@ -81,19 +94,6 @@
 				"pl": "README E6013 fix",
 				"uk": "README E6013 fix",
 				"zh-cn": "README 移除 GitHub 安装说明 (E6013)"
-			},
-			"0.10.72": {
-				"en": "Repository checker: admin i18n sync, package.json os aligned with CI, policy tests",
-				"de": "Repository-Checker: Admin-i18n synchronisiert, package.json os an CI angepasst, Policy-Tests",
-				"ru": "Repository checker fixes and admin i18n",
-				"pt": "Repository checker fixes and admin i18n",
-				"nl": "Repository checker fixes and admin i18n",
-				"fr": "Repository checker fixes and admin i18n",
-				"it": "Repository checker fixes and admin i18n",
-				"es": "Repository checker fixes and admin i18n",
-				"pl": "Repository checker fixes and admin i18n",
-				"uk": "Repository checker fixes and admin i18n",
-				"zh-cn": "仓库检查修复与 admin 多语言同步"
 			}
 		},
 		"titleLang": {
@@ -198,7 +198,7 @@
 		"enableCurtailmentAvoidance": false,
 		"curtailmentMinPvW": 50,
 		"curtailmentForecastPath": "solarprognose.0.forecast.00.hourly",
-		"curtailmentModeBefore": "smartmeter",
+		"periodScheduleOffsetSec": -1,
 		"curtailmentModeAfter": "smartmeter",
 		"curtailmentHasCombiner": false,
 		"curtailmentStandaloneDeviceId": "",

@@ -1,0 +1,5826 @@
+{
+  "account": {
+    "_id": "account",
+    "type": "device",
+    "common": {
+      "name": "Account"
+    },
+    "native": {},
+    "from": "system.adapter.anker-solix.0",
+    "user": "system.user.admin",
+    "ts": 1784044413955,
+    "acl": {
+      "object": 1636,
+      "state": 1636,
+      "owner": "system.user.admin",
+      "ownerGroup": "system.group.administrator"
+    }
+  },
+  "account.nickname": {
+    "_id": "account.nickname",
+    "type": "state",
+    "common": {
+      "name": "Account nickname",
+      "type": "string",
+      "role": "text",
+      "read": true,
+      "write": false
+    },
+    "native": {},
+    "from": "system.adapter.anker-solix.0",
+    "user": "system.user.admin",
+    "ts": 1784044413955,
+    "acl": {
+      "object": 1636,
+      "state": 1636,
+      "owner": "system.user.admin",
+      "ownerGroup": "system.group.administrator"
+    },
+    "val": "demo@example.com",
+    "ack": true
+  },
+  "anker-solix.0.combiner_box": {
+    "_id": "anker-solix.0.combiner_box",
+    "type": "folder",
+    "common": {
+      "name": "Combiner Box"
+    },
+    "native": {},
+    "from": "system.adapter.anker-solix.0",
+    "user": "system.user.admin",
+    "ts": 1784044413955,
+    "acl": {
+      "object": 1636,
+      "state": 1636,
+      "owner": "system.user.admin",
+      "ownerGroup": "system.group.administrator"
+    }
+  },
+  "anker-solix.0.combiner_box.CB001": {
+    "_id": "anker-solix.0.combiner_box.CB001",
+    "type": "device",
+    "common": {
+      "name": "Power Dock (combiner_box)"
+    },
+    "native": {
+      "id": "CB001",
+      "type": "combiner_box",
+      "name": "Power Dock",
+      "site_id": "SITE1",
+      "model": "A17X7"
+    },
+    "from": "system.adapter.anker-solix.0",
+    "user": "system.user.admin",
+    "ts": 1784044413955,
+    "acl": {
+      "object": 1636,
+      "state": 1636,
+      "owner": "system.user.admin",
+      "ownerGroup": "system.group.administrator"
+    }
+  },
+  "anker-solix.0.combiner_box.CB001.control": {
+    "_id": "anker-solix.0.combiner_box.CB001.control",
+    "type": "channel",
+    "common": {
+      "name": "Control"
+    },
+    "native": {},
+    "from": "system.adapter.anker-solix.0",
+    "user": "system.user.admin",
+    "ts": 1784044413955,
+    "acl": {
+      "object": 1636,
+      "state": 1636,
+      "owner": "system.user.admin",
+      "ownerGroup": "system.group.administrator"
+    }
+  },
+  "anker-solix.0.combiner_box.CB001.control.max_total_ac_output": {
+    "_id": "anker-solix.0.combiner_box.CB001.control.max_total_ac_output",
+    "type": "state",
+    "common": {
+      "name": "Max total AC output (grid power cap)",
+      "type": "string",
+      "role": "state",
+      "read": true,
+      "write": true,
+      "unit": "W",
+      "states": {
+        "800": "800 W",
+        "1200": "1200 W",
+        "1600": "1600 W"
+      }
+    },
+    "native": {
+      "control": "max_total_ac_output"
+    },
+    "from": "system.adapter.anker-solix.0",
+    "user": "system.user.admin",
+    "ts": 1784044413955,
+    "acl": {
+      "object": 1636,
+      "state": 1636,
+      "owner": "system.user.admin",
+      "ownerGroup": "system.group.administrator"
+    },
+    "val": "",
+    "ack": true
+  },
+  "anker-solix.0.combiner_box.CB001.control.preset_usage_mode": {
+    "_id": "anker-solix.0.combiner_box.CB001.control.preset_usage_mode",
+    "type": "state",
+    "common": {
+      "name": "Usage mode",
+      "type": "string",
+      "role": "state",
+      "read": true,
+      "write": true,
+      "states": {
+        "manual": "Custom",
+        "smartmeter": "Self-consumption",
+        "smartplugs": "Smart plugs",
+        "smart": "Smart mode",
+        "use_time": "Time of use",
+        "time_slot": "Dynamic tariff",
+        "backup": "Backup charging"
+      }
+    },
+    "native": {
+      "control": "preset_usage_mode"
+    },
+    "from": "system.adapter.anker-solix.0",
+    "user": "system.user.admin",
+    "ts": 1784044413955,
+    "acl": {
+      "object": 1636,
+      "state": 1636,
+      "owner": "system.user.admin",
+      "ownerGroup": "system.group.administrator"
+    },
+    "val": "",
+    "ack": true
+  },
+  "anker-solix.0.combiner_box.CB001.info": {
+    "_id": "anker-solix.0.combiner_box.CB001.info",
+    "type": "channel",
+    "common": {
+      "name": "Info"
+    },
+    "native": {},
+    "from": "system.adapter.anker-solix.0",
+    "user": "system.user.admin",
+    "ts": 1784044413955,
+    "acl": {
+      "object": 1636,
+      "state": 1636,
+      "owner": "system.user.admin",
+      "ownerGroup": "system.group.administrator"
+    }
+  },
+  "anker-solix.0.combiner_box.CB001.info.model": {
+    "_id": "anker-solix.0.combiner_box.CB001.info.model",
+    "type": "state",
+    "common": {
+      "name": "Model",
+      "type": "string",
+      "role": "text",
+      "read": true,
+      "write": false
+    },
+    "native": {},
+    "from": "system.adapter.anker-solix.0",
+    "user": "system.user.admin",
+    "ts": 1784044413955,
+    "acl": {
+      "object": 1636,
+      "state": 1636,
+      "owner": "system.user.admin",
+      "ownerGroup": "system.group.administrator"
+    },
+    "val": "A17X7",
+    "ack": true
+  },
+  "anker-solix.0.combiner_box.CB001.sensors": {
+    "_id": "anker-solix.0.combiner_box.CB001.sensors",
+    "type": "channel",
+    "common": {
+      "name": "Sensors"
+    },
+    "native": {},
+    "from": "system.adapter.anker-solix.0",
+    "user": "system.user.admin",
+    "ts": 1784044413955,
+    "acl": {
+      "object": 1636,
+      "state": 1636,
+      "owner": "system.user.admin",
+      "ownerGroup": "system.group.administrator"
+    }
+  },
+  "anker-solix.0.combiner_box.CB001.sensors.solar_power_total": {
+    "_id": "anker-solix.0.combiner_box.CB001.sensors.solar_power_total",
+    "type": "state",
+    "common": {
+      "name": "solar_power_total",
+      "type": "number",
+      "role": "value.power",
+      "read": true,
+      "write": false,
+      "unit": "W"
+    },
+    "native": {
+      "control": "solar_power_total"
+    },
+    "from": "system.adapter.anker-solix.0",
+    "user": "system.user.admin",
+    "ts": 1784044413955,
+    "acl": {
+      "object": 1636,
+      "state": 1636,
+      "owner": "system.user.admin",
+      "ownerGroup": "system.group.administrator"
+    },
+    "val": 1200,
+    "ack": true
+  },
+  "anker-solix.0.combiner_box.CB001.sensors.total_state_of_charge": {
+    "_id": "anker-solix.0.combiner_box.CB001.sensors.total_state_of_charge",
+    "type": "state",
+    "common": {
+      "name": "total_state_of_charge",
+      "type": "number",
+      "role": "value.battery",
+      "read": true,
+      "write": false,
+      "unit": "%"
+    },
+    "native": {
+      "control": "total_state_of_charge"
+    },
+    "from": "system.adapter.anker-solix.0",
+    "user": "system.user.admin",
+    "ts": 1784044413955,
+    "acl": {
+      "object": 1636,
+      "state": 1636,
+      "owner": "system.user.admin",
+      "ownerGroup": "system.group.administrator"
+    },
+    "val": 68,
+    "ack": true
+  },
+  "anker-solix.0.combiner_box.CB001.statistics": {
+    "_id": "anker-solix.0.combiner_box.CB001.statistics",
+    "type": "channel",
+    "common": {
+      "name": "Statistics"
+    },
+    "native": {},
+    "from": "system.adapter.anker-solix.0",
+    "user": "system.user.admin",
+    "ts": 1784044413955,
+    "acl": {
+      "object": 1636,
+      "state": 1636,
+      "owner": "system.user.admin",
+      "ownerGroup": "system.group.administrator"
+    }
+  },
+  "anker-solix.0.combiner_box.CB001.statistics.daily_3rd_party_pv_to_bat": {
+    "_id": "anker-solix.0.combiner_box.CB001.statistics.daily_3rd_party_pv_to_bat",
+    "type": "state",
+    "common": {
+      "name": "3rd-party PV → battery (today)",
+      "type": "number",
+      "role": "value.energy",
+      "read": true,
+      "write": false,
+      "unit": "kWh"
+    },
+    "native": {
+      "control": "daily_3rd_party_pv_to_bat"
+    },
+    "from": "system.adapter.anker-solix.0",
+    "user": "system.user.admin",
+    "ts": 1784044413955,
+    "acl": {
+      "object": 1636,
+      "state": 1636,
+      "owner": "system.user.admin",
+      "ownerGroup": "system.group.administrator"
+    }
+  },
+  "anker-solix.0.combiner_box.CB001.statistics.daily_ac_socket": {
+    "_id": "anker-solix.0.combiner_box.CB001.statistics.daily_ac_socket",
+    "type": "state",
+    "common": {
+      "name": "AC socket (today)",
+      "type": "number",
+      "role": "value.energy",
+      "read": true,
+      "write": false,
+      "unit": "kWh"
+    },
+    "native": {
+      "control": "daily_ac_socket"
+    },
+    "from": "system.adapter.anker-solix.0",
+    "user": "system.user.admin",
+    "ts": 1784044413955,
+    "acl": {
+      "object": 1636,
+      "state": 1636,
+      "owner": "system.user.admin",
+      "ownerGroup": "system.group.administrator"
+    }
+  },
+  "anker-solix.0.combiner_box.CB001.statistics.daily_battery_share": {
+    "_id": "anker-solix.0.combiner_box.CB001.statistics.daily_battery_share",
+    "type": "state",
+    "common": {
+      "name": "Battery share (today)",
+      "type": "number",
+      "role": "value",
+      "read": true,
+      "write": false,
+      "unit": "%"
+    },
+    "native": {
+      "control": "daily_battery_share"
+    },
+    "from": "system.adapter.anker-solix.0",
+    "user": "system.user.admin",
+    "ts": 1784044413955,
+    "acl": {
+      "object": 1636,
+      "state": 1636,
+      "owner": "system.user.admin",
+      "ownerGroup": "system.group.administrator"
+    }
+  },
+  "anker-solix.0.combiner_box.CB001.statistics.daily_battery_to_home": {
+    "_id": "anker-solix.0.combiner_box.CB001.statistics.daily_battery_to_home",
+    "type": "state",
+    "common": {
+      "name": "Battery → home (today)",
+      "type": "number",
+      "role": "value.energy",
+      "read": true,
+      "write": false,
+      "unit": "kWh"
+    },
+    "native": {
+      "control": "daily_battery_to_home"
+    },
+    "from": "system.adapter.anker-solix.0",
+    "user": "system.user.admin",
+    "ts": 1784044413955,
+    "acl": {
+      "object": 1636,
+      "state": 1636,
+      "owner": "system.user.admin",
+      "ownerGroup": "system.group.administrator"
+    }
+  },
+  "anker-solix.0.combiner_box.CB001.statistics.daily_charge_energy": {
+    "_id": "anker-solix.0.combiner_box.CB001.statistics.daily_charge_energy",
+    "type": "state",
+    "common": {
+      "name": "Battery charge (today)",
+      "type": "number",
+      "role": "value.energy",
+      "read": true,
+      "write": false,
+      "unit": "kWh"
+    },
+    "native": {
+      "control": "daily_charge_energy"
+    },
+    "from": "system.adapter.anker-solix.0",
+    "user": "system.user.admin",
+    "ts": 1784044413955,
+    "acl": {
+      "object": 1636,
+      "state": 1636,
+      "owner": "system.user.admin",
+      "ownerGroup": "system.group.administrator"
+    }
+  },
+  "anker-solix.0.combiner_box.CB001.statistics.daily_discharge_energy": {
+    "_id": "anker-solix.0.combiner_box.CB001.statistics.daily_discharge_energy",
+    "type": "state",
+    "common": {
+      "name": "Battery discharge (today)",
+      "type": "number",
+      "role": "value.energy",
+      "read": true,
+      "write": false,
+      "unit": "kWh"
+    },
+    "native": {
+      "control": "daily_discharge_energy"
+    },
+    "from": "system.adapter.anker-solix.0",
+    "user": "system.user.admin",
+    "ts": 1784044413955,
+    "acl": {
+      "object": 1636,
+      "state": 1636,
+      "owner": "system.user.admin",
+      "ownerGroup": "system.group.administrator"
+    }
+  },
+  "anker-solix.0.combiner_box.CB001.statistics.daily_ev_charge": {
+    "_id": "anker-solix.0.combiner_box.CB001.statistics.daily_ev_charge",
+    "type": "state",
+    "common": {
+      "name": "EV charge (today)",
+      "type": "number",
+      "role": "value.energy",
+      "read": true,
+      "write": false,
+      "unit": "kWh"
+    },
+    "native": {
+      "control": "daily_ev_charge"
+    },
+    "from": "system.adapter.anker-solix.0",
+    "user": "system.user.admin",
+    "ts": 1784044413955,
+    "acl": {
+      "object": 1636,
+      "state": 1636,
+      "owner": "system.user.admin",
+      "ownerGroup": "system.group.administrator"
+    }
+  },
+  "anker-solix.0.combiner_box.CB001.statistics.daily_grid_export": {
+    "_id": "anker-solix.0.combiner_box.CB001.statistics.daily_grid_export",
+    "type": "state",
+    "common": {
+      "name": "Grid export (today)",
+      "type": "number",
+      "role": "value.energy",
+      "read": true,
+      "write": false,
+      "unit": "kWh"
+    },
+    "native": {
+      "control": "daily_grid_export"
+    },
+    "from": "system.adapter.anker-solix.0",
+    "user": "system.user.admin",
+    "ts": 1784044413955,
+    "acl": {
+      "object": 1636,
+      "state": 1636,
+      "owner": "system.user.admin",
+      "ownerGroup": "system.group.administrator"
+    }
+  },
+  "anker-solix.0.combiner_box.CB001.statistics.daily_grid_import": {
+    "_id": "anker-solix.0.combiner_box.CB001.statistics.daily_grid_import",
+    "type": "state",
+    "common": {
+      "name": "Grid import (today)",
+      "type": "number",
+      "role": "value.energy",
+      "read": true,
+      "write": false,
+      "unit": "kWh"
+    },
+    "native": {
+      "control": "daily_grid_import"
+    },
+    "from": "system.adapter.anker-solix.0",
+    "user": "system.user.admin",
+    "ts": 1784044413955,
+    "acl": {
+      "object": 1636,
+      "state": 1636,
+      "owner": "system.user.admin",
+      "ownerGroup": "system.group.administrator"
+    }
+  },
+  "anker-solix.0.combiner_box.CB001.statistics.daily_grid_share": {
+    "_id": "anker-solix.0.combiner_box.CB001.statistics.daily_grid_share",
+    "type": "state",
+    "common": {
+      "name": "Grid share (today)",
+      "type": "number",
+      "role": "value",
+      "read": true,
+      "write": false,
+      "unit": "%"
+    },
+    "native": {
+      "control": "daily_grid_share"
+    },
+    "from": "system.adapter.anker-solix.0",
+    "user": "system.user.admin",
+    "ts": 1784044413955,
+    "acl": {
+      "object": 1636,
+      "state": 1636,
+      "owner": "system.user.admin",
+      "ownerGroup": "system.group.administrator"
+    }
+  },
+  "anker-solix.0.combiner_box.CB001.statistics.daily_grid_to_battery": {
+    "_id": "anker-solix.0.combiner_box.CB001.statistics.daily_grid_to_battery",
+    "type": "state",
+    "common": {
+      "name": "Grid → battery (today)",
+      "type": "number",
+      "role": "value.energy",
+      "read": true,
+      "write": false,
+      "unit": "kWh"
+    },
+    "native": {
+      "control": "daily_grid_to_battery"
+    },
+    "from": "system.adapter.anker-solix.0",
+    "user": "system.user.admin",
+    "ts": 1784044413955,
+    "acl": {
+      "object": 1636,
+      "state": 1636,
+      "owner": "system.user.admin",
+      "ownerGroup": "system.group.administrator"
+    }
+  },
+  "anker-solix.0.combiner_box.CB001.statistics.daily_grid_to_home": {
+    "_id": "anker-solix.0.combiner_box.CB001.statistics.daily_grid_to_home",
+    "type": "state",
+    "common": {
+      "name": "Grid → home (today)",
+      "type": "number",
+      "role": "value.energy",
+      "read": true,
+      "write": false,
+      "unit": "kWh"
+    },
+    "native": {
+      "control": "daily_grid_to_home"
+    },
+    "from": "system.adapter.anker-solix.0",
+    "user": "system.user.admin",
+    "ts": 1784044413955,
+    "acl": {
+      "object": 1636,
+      "state": 1636,
+      "owner": "system.user.admin",
+      "ownerGroup": "system.group.administrator"
+    }
+  },
+  "anker-solix.0.combiner_box.CB001.statistics.daily_home_usage": {
+    "_id": "anker-solix.0.combiner_box.CB001.statistics.daily_home_usage",
+    "type": "state",
+    "common": {
+      "name": "Home usage (today)",
+      "type": "number",
+      "role": "value.energy",
+      "read": true,
+      "write": false,
+      "unit": "kWh"
+    },
+    "native": {
+      "control": "daily_home_usage"
+    },
+    "from": "system.adapter.anker-solix.0",
+    "user": "system.user.admin",
+    "ts": 1784044413955,
+    "acl": {
+      "object": 1636,
+      "state": 1636,
+      "owner": "system.user.admin",
+      "ownerGroup": "system.group.administrator"
+    }
+  },
+  "anker-solix.0.combiner_box.CB001.statistics.daily_smartplugs_total": {
+    "_id": "anker-solix.0.combiner_box.CB001.statistics.daily_smartplugs_total",
+    "type": "state",
+    "common": {
+      "name": "Smart plugs total (today)",
+      "type": "number",
+      "role": "value.energy",
+      "read": true,
+      "write": false,
+      "unit": "kWh"
+    },
+    "native": {
+      "control": "daily_smartplugs_total"
+    },
+    "from": "system.adapter.anker-solix.0",
+    "user": "system.user.admin",
+    "ts": 1784044413955,
+    "acl": {
+      "object": 1636,
+      "state": 1636,
+      "owner": "system.user.admin",
+      "ownerGroup": "system.group.administrator"
+    }
+  },
+  "anker-solix.0.combiner_box.CB001.statistics.daily_solar_production": {
+    "_id": "anker-solix.0.combiner_box.CB001.statistics.daily_solar_production",
+    "type": "state",
+    "common": {
+      "name": "Solar production (today)",
+      "type": "number",
+      "role": "value.energy",
+      "read": true,
+      "write": false,
+      "unit": "kWh"
+    },
+    "native": {
+      "control": "daily_solar_production"
+    },
+    "from": "system.adapter.anker-solix.0",
+    "user": "system.user.admin",
+    "ts": 1784044413955,
+    "acl": {
+      "object": 1636,
+      "state": 1636,
+      "owner": "system.user.admin",
+      "ownerGroup": "system.group.administrator"
+    }
+  },
+  "anker-solix.0.combiner_box.CB001.statistics.daily_solar_production_inverter": {
+    "_id": "anker-solix.0.combiner_box.CB001.statistics.daily_solar_production_inverter",
+    "type": "state",
+    "common": {
+      "name": "Inverter production (today)",
+      "type": "number",
+      "role": "value.energy",
+      "read": true,
+      "write": false,
+      "unit": "kWh"
+    },
+    "native": {
+      "control": "daily_solar_production_inverter"
+    },
+    "from": "system.adapter.anker-solix.0",
+    "user": "system.user.admin",
+    "ts": 1784044413955,
+    "acl": {
+      "object": 1636,
+      "state": 1636,
+      "owner": "system.user.admin",
+      "ownerGroup": "system.group.administrator"
+    }
+  },
+  "anker-solix.0.combiner_box.CB001.statistics.daily_solar_production_pv1": {
+    "_id": "anker-solix.0.combiner_box.CB001.statistics.daily_solar_production_pv1",
+    "type": "state",
+    "common": {
+      "name": "PV1 production (today)",
+      "type": "number",
+      "role": "value.energy",
+      "read": true,
+      "write": false,
+      "unit": "kWh"
+    },
+    "native": {
+      "control": "daily_solar_production_pv1"
+    },
+    "from": "system.adapter.anker-solix.0",
+    "user": "system.user.admin",
+    "ts": 1784044413955,
+    "acl": {
+      "object": 1636,
+      "state": 1636,
+      "owner": "system.user.admin",
+      "ownerGroup": "system.group.administrator"
+    }
+  },
+  "anker-solix.0.combiner_box.CB001.statistics.daily_solar_production_pv2": {
+    "_id": "anker-solix.0.combiner_box.CB001.statistics.daily_solar_production_pv2",
+    "type": "state",
+    "common": {
+      "name": "PV2 production (today)",
+      "type": "number",
+      "role": "value.energy",
+      "read": true,
+      "write": false,
+      "unit": "kWh"
+    },
+    "native": {
+      "control": "daily_solar_production_pv2"
+    },
+    "from": "system.adapter.anker-solix.0",
+    "user": "system.user.admin",
+    "ts": 1784044413955,
+    "acl": {
+      "object": 1636,
+      "state": 1636,
+      "owner": "system.user.admin",
+      "ownerGroup": "system.group.administrator"
+    }
+  },
+  "anker-solix.0.combiner_box.CB001.statistics.daily_solar_production_pv3": {
+    "_id": "anker-solix.0.combiner_box.CB001.statistics.daily_solar_production_pv3",
+    "type": "state",
+    "common": {
+      "name": "PV3 production (today)",
+      "type": "number",
+      "role": "value.energy",
+      "read": true,
+      "write": false,
+      "unit": "kWh"
+    },
+    "native": {
+      "control": "daily_solar_production_pv3"
+    },
+    "from": "system.adapter.anker-solix.0",
+    "user": "system.user.admin",
+    "ts": 1784044413955,
+    "acl": {
+      "object": 1636,
+      "state": 1636,
+      "owner": "system.user.admin",
+      "ownerGroup": "system.group.administrator"
+    }
+  },
+  "anker-solix.0.combiner_box.CB001.statistics.daily_solar_production_pv4": {
+    "_id": "anker-solix.0.combiner_box.CB001.statistics.daily_solar_production_pv4",
+    "type": "state",
+    "common": {
+      "name": "PV4 production (today)",
+      "type": "number",
+      "role": "value.energy",
+      "read": true,
+      "write": false,
+      "unit": "kWh"
+    },
+    "native": {
+      "control": "daily_solar_production_pv4"
+    },
+    "from": "system.adapter.anker-solix.0",
+    "user": "system.user.admin",
+    "ts": 1784044413955,
+    "acl": {
+      "object": 1636,
+      "state": 1636,
+      "owner": "system.user.admin",
+      "ownerGroup": "system.group.administrator"
+    }
+  },
+  "anker-solix.0.combiner_box.CB001.statistics.daily_solar_share": {
+    "_id": "anker-solix.0.combiner_box.CB001.statistics.daily_solar_share",
+    "type": "state",
+    "common": {
+      "name": "Solar share (today)",
+      "type": "number",
+      "role": "value",
+      "read": true,
+      "write": false,
+      "unit": "%"
+    },
+    "native": {
+      "control": "daily_solar_share"
+    },
+    "from": "system.adapter.anker-solix.0",
+    "user": "system.user.admin",
+    "ts": 1784044413955,
+    "acl": {
+      "object": 1636,
+      "state": 1636,
+      "owner": "system.user.admin",
+      "ownerGroup": "system.group.administrator"
+    }
+  },
+  "anker-solix.0.combiner_box.CB001.statistics.daily_solar_to_battery": {
+    "_id": "anker-solix.0.combiner_box.CB001.statistics.daily_solar_to_battery",
+    "type": "state",
+    "common": {
+      "name": "Solar → battery (today)",
+      "type": "number",
+      "role": "value.energy",
+      "read": true,
+      "write": false,
+      "unit": "kWh"
+    },
+    "native": {
+      "control": "daily_solar_to_battery"
+    },
+    "from": "system.adapter.anker-solix.0",
+    "user": "system.user.admin",
+    "ts": 1784044413955,
+    "acl": {
+      "object": 1636,
+      "state": 1636,
+      "owner": "system.user.admin",
+      "ownerGroup": "system.group.administrator"
+    }
+  },
+  "anker-solix.0.combiner_box.CB001.statistics.daily_solar_to_grid": {
+    "_id": "anker-solix.0.combiner_box.CB001.statistics.daily_solar_to_grid",
+    "type": "state",
+    "common": {
+      "name": "Solar → grid (today)",
+      "type": "number",
+      "role": "value.energy",
+      "read": true,
+      "write": false,
+      "unit": "kWh"
+    },
+    "native": {
+      "control": "daily_solar_to_grid"
+    },
+    "from": "system.adapter.anker-solix.0",
+    "user": "system.user.admin",
+    "ts": 1784044413955,
+    "acl": {
+      "object": 1636,
+      "state": 1636,
+      "owner": "system.user.admin",
+      "ownerGroup": "system.group.administrator"
+    }
+  },
+  "anker-solix.0.combiner_box.CB001.statistics.daily_solar_to_home": {
+    "_id": "anker-solix.0.combiner_box.CB001.statistics.daily_solar_to_home",
+    "type": "state",
+    "common": {
+      "name": "Solar → home (today)",
+      "type": "number",
+      "role": "value.energy",
+      "read": true,
+      "write": false,
+      "unit": "kWh"
+    },
+    "native": {
+      "control": "daily_solar_to_home"
+    },
+    "from": "system.adapter.anker-solix.0",
+    "user": "system.user.admin",
+    "ts": 1784044413955,
+    "acl": {
+      "object": 1636,
+      "state": 1636,
+      "owner": "system.user.admin",
+      "ownerGroup": "system.group.administrator"
+    }
+  },
+  "anker-solix.0.combiner_box.CB001.statistics.energy_statistics_date": {
+    "_id": "anker-solix.0.combiner_box.CB001.statistics.energy_statistics_date",
+    "type": "state",
+    "common": {
+      "name": "Statistics date",
+      "type": "string",
+      "role": "text",
+      "read": true,
+      "write": false
+    },
+    "native": {
+      "control": "energy_statistics_date"
+    },
+    "from": "system.adapter.anker-solix.0",
+    "user": "system.user.admin",
+    "ts": 1784044413955,
+    "acl": {
+      "object": 1636,
+      "state": 1636,
+      "owner": "system.user.admin",
+      "ownerGroup": "system.group.administrator"
+    }
+  },
+  "anker-solix.0.combiner_box.CB001.statistics.month": {
+    "_id": "anker-solix.0.combiner_box.CB001.statistics.month",
+    "type": "folder",
+    "common": {
+      "name": "Month"
+    },
+    "native": {},
+    "from": "system.adapter.anker-solix.0",
+    "user": "system.user.admin",
+    "ts": 1784044413955,
+    "acl": {
+      "object": 1636,
+      "state": 1636,
+      "owner": "system.user.admin",
+      "ownerGroup": "system.group.administrator"
+    }
+  },
+  "anker-solix.0.combiner_box.CB001.statistics.month.3rd_party_pv_to_bat": {
+    "_id": "anker-solix.0.combiner_box.CB001.statistics.month.3rd_party_pv_to_bat",
+    "type": "state",
+    "common": {
+      "name": "3rd-party PV → battery (Month)",
+      "type": "number",
+      "role": "value.energy",
+      "read": true,
+      "write": false,
+      "unit": "kWh"
+    },
+    "native": {
+      "control": "month_3rd_party_pv_to_bat"
+    },
+    "from": "system.adapter.anker-solix.0",
+    "user": "system.user.admin",
+    "ts": 1784044413955,
+    "acl": {
+      "object": 1636,
+      "state": 1636,
+      "owner": "system.user.admin",
+      "ownerGroup": "system.group.administrator"
+    }
+  },
+  "anker-solix.0.combiner_box.CB001.statistics.month.battery_to_home": {
+    "_id": "anker-solix.0.combiner_box.CB001.statistics.month.battery_to_home",
+    "type": "state",
+    "common": {
+      "name": "Battery → home (Month)",
+      "type": "number",
+      "role": "value.energy",
+      "read": true,
+      "write": false,
+      "unit": "kWh"
+    },
+    "native": {
+      "control": "month_battery_to_home"
+    },
+    "from": "system.adapter.anker-solix.0",
+    "user": "system.user.admin",
+    "ts": 1784044413955,
+    "acl": {
+      "object": 1636,
+      "state": 1636,
+      "owner": "system.user.admin",
+      "ownerGroup": "system.group.administrator"
+    }
+  },
+  "anker-solix.0.combiner_box.CB001.statistics.month.charge_energy": {
+    "_id": "anker-solix.0.combiner_box.CB001.statistics.month.charge_energy",
+    "type": "state",
+    "common": {
+      "name": "Battery charge (Month)",
+      "type": "number",
+      "role": "value.energy",
+      "read": true,
+      "write": false,
+      "unit": "kWh"
+    },
+    "native": {
+      "control": "month_charge_energy"
+    },
+    "from": "system.adapter.anker-solix.0",
+    "user": "system.user.admin",
+    "ts": 1784044413955,
+    "acl": {
+      "object": 1636,
+      "state": 1636,
+      "owner": "system.user.admin",
+      "ownerGroup": "system.group.administrator"
+    }
+  },
+  "anker-solix.0.combiner_box.CB001.statistics.month.discharge_energy": {
+    "_id": "anker-solix.0.combiner_box.CB001.statistics.month.discharge_energy",
+    "type": "state",
+    "common": {
+      "name": "Battery discharge (Month)",
+      "type": "number",
+      "role": "value.energy",
+      "read": true,
+      "write": false,
+      "unit": "kWh"
+    },
+    "native": {
+      "control": "month_discharge_energy"
+    },
+    "from": "system.adapter.anker-solix.0",
+    "user": "system.user.admin",
+    "ts": 1784044413955,
+    "acl": {
+      "object": 1636,
+      "state": 1636,
+      "owner": "system.user.admin",
+      "ownerGroup": "system.group.administrator"
+    }
+  },
+  "anker-solix.0.combiner_box.CB001.statistics.month.energy_period": {
+    "_id": "anker-solix.0.combiner_box.CB001.statistics.month.energy_period",
+    "type": "state",
+    "common": {
+      "name": "Month",
+      "type": "string",
+      "role": "text",
+      "read": true,
+      "write": false
+    },
+    "native": {
+      "control": "month_energy_period"
+    },
+    "from": "system.adapter.anker-solix.0",
+    "user": "system.user.admin",
+    "ts": 1784044413955,
+    "acl": {
+      "object": 1636,
+      "state": 1636,
+      "owner": "system.user.admin",
+      "ownerGroup": "system.group.administrator"
+    }
+  },
+  "anker-solix.0.combiner_box.CB001.statistics.month.ev_charge": {
+    "_id": "anker-solix.0.combiner_box.CB001.statistics.month.ev_charge",
+    "type": "state",
+    "common": {
+      "name": "EV charge (Month)",
+      "type": "number",
+      "role": "value.energy",
+      "read": true,
+      "write": false,
+      "unit": "kWh"
+    },
+    "native": {
+      "control": "month_ev_charge"
+    },
+    "from": "system.adapter.anker-solix.0",
+    "user": "system.user.admin",
+    "ts": 1784044413955,
+    "acl": {
+      "object": 1636,
+      "state": 1636,
+      "owner": "system.user.admin",
+      "ownerGroup": "system.group.administrator"
+    }
+  },
+  "anker-solix.0.combiner_box.CB001.statistics.month.grid_export": {
+    "_id": "anker-solix.0.combiner_box.CB001.statistics.month.grid_export",
+    "type": "state",
+    "common": {
+      "name": "Grid export (Month)",
+      "type": "number",
+      "role": "value.energy",
+      "read": true,
+      "write": false,
+      "unit": "kWh"
+    },
+    "native": {
+      "control": "month_grid_export"
+    },
+    "from": "system.adapter.anker-solix.0",
+    "user": "system.user.admin",
+    "ts": 1784044413955,
+    "acl": {
+      "object": 1636,
+      "state": 1636,
+      "owner": "system.user.admin",
+      "ownerGroup": "system.group.administrator"
+    }
+  },
+  "anker-solix.0.combiner_box.CB001.statistics.month.grid_import": {
+    "_id": "anker-solix.0.combiner_box.CB001.statistics.month.grid_import",
+    "type": "state",
+    "common": {
+      "name": "Grid import (Month)",
+      "type": "number",
+      "role": "value.energy",
+      "read": true,
+      "write": false,
+      "unit": "kWh"
+    },
+    "native": {
+      "control": "month_grid_import"
+    },
+    "from": "system.adapter.anker-solix.0",
+    "user": "system.user.admin",
+    "ts": 1784044413955,
+    "acl": {
+      "object": 1636,
+      "state": 1636,
+      "owner": "system.user.admin",
+      "ownerGroup": "system.group.administrator"
+    }
+  },
+  "anker-solix.0.combiner_box.CB001.statistics.month.grid_to_battery": {
+    "_id": "anker-solix.0.combiner_box.CB001.statistics.month.grid_to_battery",
+    "type": "state",
+    "common": {
+      "name": "Grid → battery (Month)",
+      "type": "number",
+      "role": "value.energy",
+      "read": true,
+      "write": false,
+      "unit": "kWh"
+    },
+    "native": {
+      "control": "month_grid_to_battery"
+    },
+    "from": "system.adapter.anker-solix.0",
+    "user": "system.user.admin",
+    "ts": 1784044413955,
+    "acl": {
+      "object": 1636,
+      "state": 1636,
+      "owner": "system.user.admin",
+      "ownerGroup": "system.group.administrator"
+    }
+  },
+  "anker-solix.0.combiner_box.CB001.statistics.month.grid_to_home": {
+    "_id": "anker-solix.0.combiner_box.CB001.statistics.month.grid_to_home",
+    "type": "state",
+    "common": {
+      "name": "Grid → home (Month)",
+      "type": "number",
+      "role": "value.energy",
+      "read": true,
+      "write": false,
+      "unit": "kWh"
+    },
+    "native": {
+      "control": "month_grid_to_home"
+    },
+    "from": "system.adapter.anker-solix.0",
+    "user": "system.user.admin",
+    "ts": 1784044413955,
+    "acl": {
+      "object": 1636,
+      "state": 1636,
+      "owner": "system.user.admin",
+      "ownerGroup": "system.group.administrator"
+    }
+  },
+  "anker-solix.0.combiner_box.CB001.statistics.month.home_usage": {
+    "_id": "anker-solix.0.combiner_box.CB001.statistics.month.home_usage",
+    "type": "state",
+    "common": {
+      "name": "Home usage (Month)",
+      "type": "number",
+      "role": "value.energy",
+      "read": true,
+      "write": false,
+      "unit": "kWh"
+    },
+    "native": {
+      "control": "month_home_usage"
+    },
+    "from": "system.adapter.anker-solix.0",
+    "user": "system.user.admin",
+    "ts": 1784044413955,
+    "acl": {
+      "object": 1636,
+      "state": 1636,
+      "owner": "system.user.admin",
+      "ownerGroup": "system.group.administrator"
+    }
+  },
+  "anker-solix.0.combiner_box.CB001.statistics.month.solar_production": {
+    "_id": "anker-solix.0.combiner_box.CB001.statistics.month.solar_production",
+    "type": "state",
+    "common": {
+      "name": "Solar production (Month)",
+      "type": "number",
+      "role": "value.energy",
+      "read": true,
+      "write": false,
+      "unit": "kWh"
+    },
+    "native": {
+      "control": "month_solar_production"
+    },
+    "from": "system.adapter.anker-solix.0",
+    "user": "system.user.admin",
+    "ts": 1784044413955,
+    "acl": {
+      "object": 1636,
+      "state": 1636,
+      "owner": "system.user.admin",
+      "ownerGroup": "system.group.administrator"
+    }
+  },
+  "anker-solix.0.combiner_box.CB001.statistics.month.solar_to_battery": {
+    "_id": "anker-solix.0.combiner_box.CB001.statistics.month.solar_to_battery",
+    "type": "state",
+    "common": {
+      "name": "Solar → battery (Month)",
+      "type": "number",
+      "role": "value.energy",
+      "read": true,
+      "write": false,
+      "unit": "kWh"
+    },
+    "native": {
+      "control": "month_solar_to_battery"
+    },
+    "from": "system.adapter.anker-solix.0",
+    "user": "system.user.admin",
+    "ts": 1784044413955,
+    "acl": {
+      "object": 1636,
+      "state": 1636,
+      "owner": "system.user.admin",
+      "ownerGroup": "system.group.administrator"
+    }
+  },
+  "anker-solix.0.combiner_box.CB001.statistics.month.solar_to_home": {
+    "_id": "anker-solix.0.combiner_box.CB001.statistics.month.solar_to_home",
+    "type": "state",
+    "common": {
+      "name": "Solar → home (Month)",
+      "type": "number",
+      "role": "value.energy",
+      "read": true,
+      "write": false,
+      "unit": "kWh"
+    },
+    "native": {
+      "control": "month_solar_to_home"
+    },
+    "from": "system.adapter.anker-solix.0",
+    "user": "system.user.admin",
+    "ts": 1784044413955,
+    "acl": {
+      "object": 1636,
+      "state": 1636,
+      "owner": "system.user.admin",
+      "ownerGroup": "system.group.administrator"
+    }
+  },
+  "anker-solix.0.combiner_box.CB001.statistics.week": {
+    "_id": "anker-solix.0.combiner_box.CB001.statistics.week",
+    "type": "folder",
+    "common": {
+      "name": "Week"
+    },
+    "native": {},
+    "from": "system.adapter.anker-solix.0",
+    "user": "system.user.admin",
+    "ts": 1784044413955,
+    "acl": {
+      "object": 1636,
+      "state": 1636,
+      "owner": "system.user.admin",
+      "ownerGroup": "system.group.administrator"
+    }
+  },
+  "anker-solix.0.combiner_box.CB001.statistics.week.3rd_party_pv_to_bat": {
+    "_id": "anker-solix.0.combiner_box.CB001.statistics.week.3rd_party_pv_to_bat",
+    "type": "state",
+    "common": {
+      "name": "3rd-party PV → battery (Week)",
+      "type": "number",
+      "role": "value.energy",
+      "read": true,
+      "write": false,
+      "unit": "kWh"
+    },
+    "native": {
+      "control": "week_3rd_party_pv_to_bat"
+    },
+    "from": "system.adapter.anker-solix.0",
+    "user": "system.user.admin",
+    "ts": 1784044413955,
+    "acl": {
+      "object": 1636,
+      "state": 1636,
+      "owner": "system.user.admin",
+      "ownerGroup": "system.group.administrator"
+    }
+  },
+  "anker-solix.0.combiner_box.CB001.statistics.week.battery_to_home": {
+    "_id": "anker-solix.0.combiner_box.CB001.statistics.week.battery_to_home",
+    "type": "state",
+    "common": {
+      "name": "Battery → home (Week)",
+      "type": "number",
+      "role": "value.energy",
+      "read": true,
+      "write": false,
+      "unit": "kWh"
+    },
+    "native": {
+      "control": "week_battery_to_home"
+    },
+    "from": "system.adapter.anker-solix.0",
+    "user": "system.user.admin",
+    "ts": 1784044413955,
+    "acl": {
+      "object": 1636,
+      "state": 1636,
+      "owner": "system.user.admin",
+      "ownerGroup": "system.group.administrator"
+    }
+  },
+  "anker-solix.0.combiner_box.CB001.statistics.week.charge_energy": {
+    "_id": "anker-solix.0.combiner_box.CB001.statistics.week.charge_energy",
+    "type": "state",
+    "common": {
+      "name": "Battery charge (Week)",
+      "type": "number",
+      "role": "value.energy",
+      "read": true,
+      "write": false,
+      "unit": "kWh"
+    },
+    "native": {
+      "control": "week_charge_energy"
+    },
+    "from": "system.adapter.anker-solix.0",
+    "user": "system.user.admin",
+    "ts": 1784044413955,
+    "acl": {
+      "object": 1636,
+      "state": 1636,
+      "owner": "system.user.admin",
+      "ownerGroup": "system.group.administrator"
+    }
+  },
+  "anker-solix.0.combiner_box.CB001.statistics.week.discharge_energy": {
+    "_id": "anker-solix.0.combiner_box.CB001.statistics.week.discharge_energy",
+    "type": "state",
+    "common": {
+      "name": "Battery discharge (Week)",
+      "type": "number",
+      "role": "value.energy",
+      "read": true,
+      "write": false,
+      "unit": "kWh"
+    },
+    "native": {
+      "control": "week_discharge_energy"
+    },
+    "from": "system.adapter.anker-solix.0",
+    "user": "system.user.admin",
+    "ts": 1784044413955,
+    "acl": {
+      "object": 1636,
+      "state": 1636,
+      "owner": "system.user.admin",
+      "ownerGroup": "system.group.administrator"
+    }
+  },
+  "anker-solix.0.combiner_box.CB001.statistics.week.energy_period": {
+    "_id": "anker-solix.0.combiner_box.CB001.statistics.week.energy_period",
+    "type": "state",
+    "common": {
+      "name": "Week",
+      "type": "string",
+      "role": "text",
+      "read": true,
+      "write": false
+    },
+    "native": {
+      "control": "week_energy_period"
+    },
+    "from": "system.adapter.anker-solix.0",
+    "user": "system.user.admin",
+    "ts": 1784044413955,
+    "acl": {
+      "object": 1636,
+      "state": 1636,
+      "owner": "system.user.admin",
+      "ownerGroup": "system.group.administrator"
+    }
+  },
+  "anker-solix.0.combiner_box.CB001.statistics.week.ev_charge": {
+    "_id": "anker-solix.0.combiner_box.CB001.statistics.week.ev_charge",
+    "type": "state",
+    "common": {
+      "name": "EV charge (Week)",
+      "type": "number",
+      "role": "value.energy",
+      "read": true,
+      "write": false,
+      "unit": "kWh"
+    },
+    "native": {
+      "control": "week_ev_charge"
+    },
+    "from": "system.adapter.anker-solix.0",
+    "user": "system.user.admin",
+    "ts": 1784044413955,
+    "acl": {
+      "object": 1636,
+      "state": 1636,
+      "owner": "system.user.admin",
+      "ownerGroup": "system.group.administrator"
+    }
+  },
+  "anker-solix.0.combiner_box.CB001.statistics.week.grid_export": {
+    "_id": "anker-solix.0.combiner_box.CB001.statistics.week.grid_export",
+    "type": "state",
+    "common": {
+      "name": "Grid export (Week)",
+      "type": "number",
+      "role": "value.energy",
+      "read": true,
+      "write": false,
+      "unit": "kWh"
+    },
+    "native": {
+      "control": "week_grid_export"
+    },
+    "from": "system.adapter.anker-solix.0",
+    "user": "system.user.admin",
+    "ts": 1784044413955,
+    "acl": {
+      "object": 1636,
+      "state": 1636,
+      "owner": "system.user.admin",
+      "ownerGroup": "system.group.administrator"
+    }
+  },
+  "anker-solix.0.combiner_box.CB001.statistics.week.grid_import": {
+    "_id": "anker-solix.0.combiner_box.CB001.statistics.week.grid_import",
+    "type": "state",
+    "common": {
+      "name": "Grid import (Week)",
+      "type": "number",
+      "role": "value.energy",
+      "read": true,
+      "write": false,
+      "unit": "kWh"
+    },
+    "native": {
+      "control": "week_grid_import"
+    },
+    "from": "system.adapter.anker-solix.0",
+    "user": "system.user.admin",
+    "ts": 1784044413955,
+    "acl": {
+      "object": 1636,
+      "state": 1636,
+      "owner": "system.user.admin",
+      "ownerGroup": "system.group.administrator"
+    }
+  },
+  "anker-solix.0.combiner_box.CB001.statistics.week.grid_to_battery": {
+    "_id": "anker-solix.0.combiner_box.CB001.statistics.week.grid_to_battery",
+    "type": "state",
+    "common": {
+      "name": "Grid → battery (Week)",
+      "type": "number",
+      "role": "value.energy",
+      "read": true,
+      "write": false,
+      "unit": "kWh"
+    },
+    "native": {
+      "control": "week_grid_to_battery"
+    },
+    "from": "system.adapter.anker-solix.0",
+    "user": "system.user.admin",
+    "ts": 1784044413955,
+    "acl": {
+      "object": 1636,
+      "state": 1636,
+      "owner": "system.user.admin",
+      "ownerGroup": "system.group.administrator"
+    }
+  },
+  "anker-solix.0.combiner_box.CB001.statistics.week.grid_to_home": {
+    "_id": "anker-solix.0.combiner_box.CB001.statistics.week.grid_to_home",
+    "type": "state",
+    "common": {
+      "name": "Grid → home (Week)",
+      "type": "number",
+      "role": "value.energy",
+      "read": true,
+      "write": false,
+      "unit": "kWh"
+    },
+    "native": {
+      "control": "week_grid_to_home"
+    },
+    "from": "system.adapter.anker-solix.0",
+    "user": "system.user.admin",
+    "ts": 1784044413955,
+    "acl": {
+      "object": 1636,
+      "state": 1636,
+      "owner": "system.user.admin",
+      "ownerGroup": "system.group.administrator"
+    }
+  },
+  "anker-solix.0.combiner_box.CB001.statistics.week.home_usage": {
+    "_id": "anker-solix.0.combiner_box.CB001.statistics.week.home_usage",
+    "type": "state",
+    "common": {
+      "name": "Home usage (Week)",
+      "type": "number",
+      "role": "value.energy",
+      "read": true,
+      "write": false,
+      "unit": "kWh"
+    },
+    "native": {
+      "control": "week_home_usage"
+    },
+    "from": "system.adapter.anker-solix.0",
+    "user": "system.user.admin",
+    "ts": 1784044413955,
+    "acl": {
+      "object": 1636,
+      "state": 1636,
+      "owner": "system.user.admin",
+      "ownerGroup": "system.group.administrator"
+    }
+  },
+  "anker-solix.0.combiner_box.CB001.statistics.week.solar_production": {
+    "_id": "anker-solix.0.combiner_box.CB001.statistics.week.solar_production",
+    "type": "state",
+    "common": {
+      "name": "Solar production (Week)",
+      "type": "number",
+      "role": "value.energy",
+      "read": true,
+      "write": false,
+      "unit": "kWh"
+    },
+    "native": {
+      "control": "week_solar_production"
+    },
+    "from": "system.adapter.anker-solix.0",
+    "user": "system.user.admin",
+    "ts": 1784044413955,
+    "acl": {
+      "object": 1636,
+      "state": 1636,
+      "owner": "system.user.admin",
+      "ownerGroup": "system.group.administrator"
+    }
+  },
+  "anker-solix.0.combiner_box.CB001.statistics.week.solar_to_battery": {
+    "_id": "anker-solix.0.combiner_box.CB001.statistics.week.solar_to_battery",
+    "type": "state",
+    "common": {
+      "name": "Solar → battery (Week)",
+      "type": "number",
+      "role": "value.energy",
+      "read": true,
+      "write": false,
+      "unit": "kWh"
+    },
+    "native": {
+      "control": "week_solar_to_battery"
+    },
+    "from": "system.adapter.anker-solix.0",
+    "user": "system.user.admin",
+    "ts": 1784044413955,
+    "acl": {
+      "object": 1636,
+      "state": 1636,
+      "owner": "system.user.admin",
+      "ownerGroup": "system.group.administrator"
+    }
+  },
+  "anker-solix.0.combiner_box.CB001.statistics.week.solar_to_home": {
+    "_id": "anker-solix.0.combiner_box.CB001.statistics.week.solar_to_home",
+    "type": "state",
+    "common": {
+      "name": "Solar → home (Week)",
+      "type": "number",
+      "role": "value.energy",
+      "read": true,
+      "write": false,
+      "unit": "kWh"
+    },
+    "native": {
+      "control": "week_solar_to_home"
+    },
+    "from": "system.adapter.anker-solix.0",
+    "user": "system.user.admin",
+    "ts": 1784044413955,
+    "acl": {
+      "object": 1636,
+      "state": 1636,
+      "owner": "system.user.admin",
+      "ownerGroup": "system.group.administrator"
+    }
+  },
+  "anker-solix.0.combiner_box.CB001.statistics.year": {
+    "_id": "anker-solix.0.combiner_box.CB001.statistics.year",
+    "type": "folder",
+    "common": {
+      "name": "Year"
+    },
+    "native": {},
+    "from": "system.adapter.anker-solix.0",
+    "user": "system.user.admin",
+    "ts": 1784044413955,
+    "acl": {
+      "object": 1636,
+      "state": 1636,
+      "owner": "system.user.admin",
+      "ownerGroup": "system.group.administrator"
+    }
+  },
+  "anker-solix.0.combiner_box.CB001.statistics.year.3rd_party_pv_to_bat": {
+    "_id": "anker-solix.0.combiner_box.CB001.statistics.year.3rd_party_pv_to_bat",
+    "type": "state",
+    "common": {
+      "name": "3rd-party PV → battery (Year)",
+      "type": "number",
+      "role": "value.energy",
+      "read": true,
+      "write": false,
+      "unit": "kWh"
+    },
+    "native": {
+      "control": "year_3rd_party_pv_to_bat"
+    },
+    "from": "system.adapter.anker-solix.0",
+    "user": "system.user.admin",
+    "ts": 1784044413955,
+    "acl": {
+      "object": 1636,
+      "state": 1636,
+      "owner": "system.user.admin",
+      "ownerGroup": "system.group.administrator"
+    }
+  },
+  "anker-solix.0.combiner_box.CB001.statistics.year.battery_to_home": {
+    "_id": "anker-solix.0.combiner_box.CB001.statistics.year.battery_to_home",
+    "type": "state",
+    "common": {
+      "name": "Battery → home (Year)",
+      "type": "number",
+      "role": "value.energy",
+      "read": true,
+      "write": false,
+      "unit": "kWh"
+    },
+    "native": {
+      "control": "year_battery_to_home"
+    },
+    "from": "system.adapter.anker-solix.0",
+    "user": "system.user.admin",
+    "ts": 1784044413955,
+    "acl": {
+      "object": 1636,
+      "state": 1636,
+      "owner": "system.user.admin",
+      "ownerGroup": "system.group.administrator"
+    }
+  },
+  "anker-solix.0.combiner_box.CB001.statistics.year.charge_energy": {
+    "_id": "anker-solix.0.combiner_box.CB001.statistics.year.charge_energy",
+    "type": "state",
+    "common": {
+      "name": "Battery charge (Year)",
+      "type": "number",
+      "role": "value.energy",
+      "read": true,
+      "write": false,
+      "unit": "kWh"
+    },
+    "native": {
+      "control": "year_charge_energy"
+    },
+    "from": "system.adapter.anker-solix.0",
+    "user": "system.user.admin",
+    "ts": 1784044413955,
+    "acl": {
+      "object": 1636,
+      "state": 1636,
+      "owner": "system.user.admin",
+      "ownerGroup": "system.group.administrator"
+    }
+  },
+  "anker-solix.0.combiner_box.CB001.statistics.year.discharge_energy": {
+    "_id": "anker-solix.0.combiner_box.CB001.statistics.year.discharge_energy",
+    "type": "state",
+    "common": {
+      "name": "Battery discharge (Year)",
+      "type": "number",
+      "role": "value.energy",
+      "read": true,
+      "write": false,
+      "unit": "kWh"
+    },
+    "native": {
+      "control": "year_discharge_energy"
+    },
+    "from": "system.adapter.anker-solix.0",
+    "user": "system.user.admin",
+    "ts": 1784044413955,
+    "acl": {
+      "object": 1636,
+      "state": 1636,
+      "owner": "system.user.admin",
+      "ownerGroup": "system.group.administrator"
+    }
+  },
+  "anker-solix.0.combiner_box.CB001.statistics.year.energy_period": {
+    "_id": "anker-solix.0.combiner_box.CB001.statistics.year.energy_period",
+    "type": "state",
+    "common": {
+      "name": "Year",
+      "type": "string",
+      "role": "text",
+      "read": true,
+      "write": false
+    },
+    "native": {
+      "control": "year_energy_period"
+    },
+    "from": "system.adapter.anker-solix.0",
+    "user": "system.user.admin",
+    "ts": 1784044413955,
+    "acl": {
+      "object": 1636,
+      "state": 1636,
+      "owner": "system.user.admin",
+      "ownerGroup": "system.group.administrator"
+    }
+  },
+  "anker-solix.0.combiner_box.CB001.statistics.year.ev_charge": {
+    "_id": "anker-solix.0.combiner_box.CB001.statistics.year.ev_charge",
+    "type": "state",
+    "common": {
+      "name": "EV charge (Year)",
+      "type": "number",
+      "role": "value.energy",
+      "read": true,
+      "write": false,
+      "unit": "kWh"
+    },
+    "native": {
+      "control": "year_ev_charge"
+    },
+    "from": "system.adapter.anker-solix.0",
+    "user": "system.user.admin",
+    "ts": 1784044413955,
+    "acl": {
+      "object": 1636,
+      "state": 1636,
+      "owner": "system.user.admin",
+      "ownerGroup": "system.group.administrator"
+    }
+  },
+  "anker-solix.0.combiner_box.CB001.statistics.year.grid_export": {
+    "_id": "anker-solix.0.combiner_box.CB001.statistics.year.grid_export",
+    "type": "state",
+    "common": {
+      "name": "Grid export (Year)",
+      "type": "number",
+      "role": "value.energy",
+      "read": true,
+      "write": false,
+      "unit": "kWh"
+    },
+    "native": {
+      "control": "year_grid_export"
+    },
+    "from": "system.adapter.anker-solix.0",
+    "user": "system.user.admin",
+    "ts": 1784044413955,
+    "acl": {
+      "object": 1636,
+      "state": 1636,
+      "owner": "system.user.admin",
+      "ownerGroup": "system.group.administrator"
+    }
+  },
+  "anker-solix.0.combiner_box.CB001.statistics.year.grid_import": {
+    "_id": "anker-solix.0.combiner_box.CB001.statistics.year.grid_import",
+    "type": "state",
+    "common": {
+      "name": "Grid import (Year)",
+      "type": "number",
+      "role": "value.energy",
+      "read": true,
+      "write": false,
+      "unit": "kWh"
+    },
+    "native": {
+      "control": "year_grid_import"
+    },
+    "from": "system.adapter.anker-solix.0",
+    "user": "system.user.admin",
+    "ts": 1784044413955,
+    "acl": {
+      "object": 1636,
+      "state": 1636,
+      "owner": "system.user.admin",
+      "ownerGroup": "system.group.administrator"
+    }
+  },
+  "anker-solix.0.combiner_box.CB001.statistics.year.grid_to_battery": {
+    "_id": "anker-solix.0.combiner_box.CB001.statistics.year.grid_to_battery",
+    "type": "state",
+    "common": {
+      "name": "Grid → battery (Year)",
+      "type": "number",
+      "role": "value.energy",
+      "read": true,
+      "write": false,
+      "unit": "kWh"
+    },
+    "native": {
+      "control": "year_grid_to_battery"
+    },
+    "from": "system.adapter.anker-solix.0",
+    "user": "system.user.admin",
+    "ts": 1784044413955,
+    "acl": {
+      "object": 1636,
+      "state": 1636,
+      "owner": "system.user.admin",
+      "ownerGroup": "system.group.administrator"
+    }
+  },
+  "anker-solix.0.combiner_box.CB001.statistics.year.grid_to_home": {
+    "_id": "anker-solix.0.combiner_box.CB001.statistics.year.grid_to_home",
+    "type": "state",
+    "common": {
+      "name": "Grid → home (Year)",
+      "type": "number",
+      "role": "value.energy",
+      "read": true,
+      "write": false,
+      "unit": "kWh"
+    },
+    "native": {
+      "control": "year_grid_to_home"
+    },
+    "from": "system.adapter.anker-solix.0",
+    "user": "system.user.admin",
+    "ts": 1784044413955,
+    "acl": {
+      "object": 1636,
+      "state": 1636,
+      "owner": "system.user.admin",
+      "ownerGroup": "system.group.administrator"
+    }
+  },
+  "anker-solix.0.combiner_box.CB001.statistics.year.home_usage": {
+    "_id": "anker-solix.0.combiner_box.CB001.statistics.year.home_usage",
+    "type": "state",
+    "common": {
+      "name": "Home usage (Year)",
+      "type": "number",
+      "role": "value.energy",
+      "read": true,
+      "write": false,
+      "unit": "kWh"
+    },
+    "native": {
+      "control": "year_home_usage"
+    },
+    "from": "system.adapter.anker-solix.0",
+    "user": "system.user.admin",
+    "ts": 1784044413955,
+    "acl": {
+      "object": 1636,
+      "state": 1636,
+      "owner": "system.user.admin",
+      "ownerGroup": "system.group.administrator"
+    }
+  },
+  "anker-solix.0.combiner_box.CB001.statistics.year.solar_production": {
+    "_id": "anker-solix.0.combiner_box.CB001.statistics.year.solar_production",
+    "type": "state",
+    "common": {
+      "name": "Solar production (Year)",
+      "type": "number",
+      "role": "value.energy",
+      "read": true,
+      "write": false,
+      "unit": "kWh"
+    },
+    "native": {
+      "control": "year_solar_production"
+    },
+    "from": "system.adapter.anker-solix.0",
+    "user": "system.user.admin",
+    "ts": 1784044413955,
+    "acl": {
+      "object": 1636,
+      "state": 1636,
+      "owner": "system.user.admin",
+      "ownerGroup": "system.group.administrator"
+    }
+  },
+  "anker-solix.0.combiner_box.CB001.statistics.year.solar_to_battery": {
+    "_id": "anker-solix.0.combiner_box.CB001.statistics.year.solar_to_battery",
+    "type": "state",
+    "common": {
+      "name": "Solar → battery (Year)",
+      "type": "number",
+      "role": "value.energy",
+      "read": true,
+      "write": false,
+      "unit": "kWh"
+    },
+    "native": {
+      "control": "year_solar_to_battery"
+    },
+    "from": "system.adapter.anker-solix.0",
+    "user": "system.user.admin",
+    "ts": 1784044413955,
+    "acl": {
+      "object": 1636,
+      "state": 1636,
+      "owner": "system.user.admin",
+      "ownerGroup": "system.group.administrator"
+    }
+  },
+  "anker-solix.0.combiner_box.CB001.statistics.year.solar_to_home": {
+    "_id": "anker-solix.0.combiner_box.CB001.statistics.year.solar_to_home",
+    "type": "state",
+    "common": {
+      "name": "Solar → home (Year)",
+      "type": "number",
+      "role": "value.energy",
+      "read": true,
+      "write": false,
+      "unit": "kWh"
+    },
+    "native": {
+      "control": "year_solar_to_home"
+    },
+    "from": "system.adapter.anker-solix.0",
+    "user": "system.user.admin",
+    "ts": 1784044413955,
+    "acl": {
+      "object": 1636,
+      "state": 1636,
+      "owner": "system.user.admin",
+      "ownerGroup": "system.group.administrator"
+    }
+  },
+  "anker-solix.0.combiner_box.CB001.statistics.yesterday_charge_energy": {
+    "_id": "anker-solix.0.combiner_box.CB001.statistics.yesterday_charge_energy",
+    "type": "state",
+    "common": {
+      "name": "Battery charge (yesterday)",
+      "type": "number",
+      "role": "value.energy",
+      "read": true,
+      "write": false,
+      "unit": "kWh"
+    },
+    "native": {
+      "control": "yesterday_charge_energy"
+    },
+    "from": "system.adapter.anker-solix.0",
+    "user": "system.user.admin",
+    "ts": 1784044413955,
+    "acl": {
+      "object": 1636,
+      "state": 1636,
+      "owner": "system.user.admin",
+      "ownerGroup": "system.group.administrator"
+    }
+  },
+  "anker-solix.0.combiner_box.CB001.statistics.yesterday_discharge_energy": {
+    "_id": "anker-solix.0.combiner_box.CB001.statistics.yesterday_discharge_energy",
+    "type": "state",
+    "common": {
+      "name": "Battery discharge (yesterday)",
+      "type": "number",
+      "role": "value.energy",
+      "read": true,
+      "write": false,
+      "unit": "kWh"
+    },
+    "native": {
+      "control": "yesterday_discharge_energy"
+    },
+    "from": "system.adapter.anker-solix.0",
+    "user": "system.user.admin",
+    "ts": 1784044413955,
+    "acl": {
+      "object": 1636,
+      "state": 1636,
+      "owner": "system.user.admin",
+      "ownerGroup": "system.group.administrator"
+    }
+  },
+  "anker-solix.0.combiner_box.CB001.statistics.yesterday_home_usage": {
+    "_id": "anker-solix.0.combiner_box.CB001.statistics.yesterday_home_usage",
+    "type": "state",
+    "common": {
+      "name": "Home usage (yesterday)",
+      "type": "number",
+      "role": "value.energy",
+      "read": true,
+      "write": false,
+      "unit": "kWh"
+    },
+    "native": {
+      "control": "yesterday_home_usage"
+    },
+    "from": "system.adapter.anker-solix.0",
+    "user": "system.user.admin",
+    "ts": 1784044413955,
+    "acl": {
+      "object": 1636,
+      "state": 1636,
+      "owner": "system.user.admin",
+      "ownerGroup": "system.group.administrator"
+    }
+  },
+  "anker-solix.0.combiner_box.CB001.statistics.yesterday_solar_production": {
+    "_id": "anker-solix.0.combiner_box.CB001.statistics.yesterday_solar_production",
+    "type": "state",
+    "common": {
+      "name": "Solar production (yesterday)",
+      "type": "number",
+      "role": "value.energy",
+      "read": true,
+      "write": false,
+      "unit": "kWh"
+    },
+    "native": {
+      "control": "yesterday_solar_production"
+    },
+    "from": "system.adapter.anker-solix.0",
+    "user": "system.user.admin",
+    "ts": 1784044413955,
+    "acl": {
+      "object": 1636,
+      "state": 1636,
+      "owner": "system.user.admin",
+      "ownerGroup": "system.group.administrator"
+    }
+  },
+  "anker-solix.0.ev_charger": {
+    "_id": "anker-solix.0.ev_charger",
+    "type": "folder",
+    "common": {
+      "name": "EV Charger"
+    },
+    "native": {},
+    "from": "system.adapter.anker-solix.0",
+    "user": "system.user.admin",
+    "ts": 1784044413955,
+    "acl": {
+      "object": 1636,
+      "state": 1636,
+      "owner": "system.user.admin",
+      "ownerGroup": "system.group.administrator"
+    }
+  },
+  "anker-solix.0.ev_charger.EV001": {
+    "_id": "anker-solix.0.ev_charger.EV001",
+    "type": "device",
+    "common": {
+      "name": "EV Charger (ev_charger)"
+    },
+    "native": {
+      "id": "EV001",
+      "type": "ev_charger",
+      "name": "EV Charger",
+      "site_id": "SITE1",
+      "model": "A17E1"
+    },
+    "from": "system.adapter.anker-solix.0",
+    "user": "system.user.admin",
+    "ts": 1784044413955,
+    "acl": {
+      "object": 1636,
+      "state": 1636,
+      "owner": "system.user.admin",
+      "ownerGroup": "system.group.administrator"
+    }
+  },
+  "anker-solix.0.ev_charger.EV001.control": {
+    "_id": "anker-solix.0.ev_charger.EV001.control",
+    "type": "channel",
+    "common": {
+      "name": "Control"
+    },
+    "native": {},
+    "from": "system.adapter.anker-solix.0",
+    "user": "system.user.admin",
+    "ts": 1784044413955,
+    "acl": {
+      "object": 1636,
+      "state": 1636,
+      "owner": "system.user.admin",
+      "ownerGroup": "system.group.administrator"
+    }
+  },
+  "anker-solix.0.ev_charger.EV001.control.ev_charger_max_current": {
+    "_id": "anker-solix.0.ev_charger.EV001.control.ev_charger_max_current",
+    "type": "state",
+    "common": {
+      "name": "Max charge current (EV charger)",
+      "type": "number",
+      "role": "level.current",
+      "read": true,
+      "write": true,
+      "unit": "A",
+      "min": 6,
+      "max": 32
+    },
+    "native": {
+      "control": "ev_charger_max_current"
+    },
+    "from": "system.adapter.anker-solix.0",
+    "user": "system.user.admin",
+    "ts": 1784044413955,
+    "acl": {
+      "object": 1636,
+      "state": 1636,
+      "owner": "system.user.admin",
+      "ownerGroup": "system.group.administrator"
+    },
+    "val": 6,
+    "ack": true
+  },
+  "anker-solix.0.ev_charger.EV001.control.ev_charger_mode": {
+    "_id": "anker-solix.0.ev_charger.EV001.control.ev_charger_mode",
+    "type": "state",
+    "common": {
+      "name": "Charge mode (EV charger)",
+      "type": "string",
+      "role": "state",
+      "read": true,
+      "write": true,
+      "states": {
+        "start_charge": "Start charging",
+        "stop_charge": "Stop charging",
+        "skip_delay": "Skip delay",
+        "boost_charge": "Boost"
+      }
+    },
+    "native": {
+      "control": "ev_charger_mode"
+    },
+    "from": "system.adapter.anker-solix.0",
+    "user": "system.user.admin",
+    "ts": 1784044413955,
+    "acl": {
+      "object": 1636,
+      "state": 1636,
+      "owner": "system.user.admin",
+      "ownerGroup": "system.group.administrator"
+    },
+    "val": "",
+    "ack": true
+  },
+  "anker-solix.0.ev_charger.EV001.control.ev_charger_schedule_switch": {
+    "_id": "anker-solix.0.ev_charger.EV001.control.ev_charger_schedule_switch",
+    "type": "state",
+    "common": {
+      "name": "Schedule enabled (EV charger)",
+      "type": "boolean",
+      "role": "switch",
+      "read": true,
+      "write": true
+    },
+    "native": {
+      "control": "ev_charger_schedule_switch"
+    },
+    "from": "system.adapter.anker-solix.0",
+    "user": "system.user.admin",
+    "ts": 1784044413955,
+    "acl": {
+      "object": 1636,
+      "state": 1636,
+      "owner": "system.user.admin",
+      "ownerGroup": "system.group.administrator"
+    },
+    "val": false,
+    "ack": true
+  },
+  "anker-solix.0.ev_charger.EV001.control.ev_charger_solar_switch": {
+    "_id": "anker-solix.0.ev_charger.EV001.control.ev_charger_solar_switch",
+    "type": "state",
+    "common": {
+      "name": "Solar charging (EV charger)",
+      "type": "boolean",
+      "role": "switch",
+      "read": true,
+      "write": true
+    },
+    "native": {
+      "control": "ev_charger_solar_switch"
+    },
+    "from": "system.adapter.anker-solix.0",
+    "user": "system.user.admin",
+    "ts": 1784044413955,
+    "acl": {
+      "object": 1636,
+      "state": 1636,
+      "owner": "system.user.admin",
+      "ownerGroup": "system.group.administrator"
+    },
+    "val": false,
+    "ack": true
+  },
+  "anker-solix.0.ev_charger.EV001.info": {
+    "_id": "anker-solix.0.ev_charger.EV001.info",
+    "type": "channel",
+    "common": {
+      "name": "Info"
+    },
+    "native": {},
+    "from": "system.adapter.anker-solix.0",
+    "user": "system.user.admin",
+    "ts": 1784044413955,
+    "acl": {
+      "object": 1636,
+      "state": 1636,
+      "owner": "system.user.admin",
+      "ownerGroup": "system.group.administrator"
+    }
+  },
+  "anker-solix.0.ev_charger.EV001.info.model": {
+    "_id": "anker-solix.0.ev_charger.EV001.info.model",
+    "type": "state",
+    "common": {
+      "name": "Model",
+      "type": "string",
+      "role": "text",
+      "read": true,
+      "write": false
+    },
+    "native": {},
+    "from": "system.adapter.anker-solix.0",
+    "user": "system.user.admin",
+    "ts": 1784044413955,
+    "acl": {
+      "object": 1636,
+      "state": 1636,
+      "owner": "system.user.admin",
+      "ownerGroup": "system.group.administrator"
+    },
+    "val": "A17E1",
+    "ack": true
+  },
+  "anker-solix.0.ev_charger.EV001.sensors": {
+    "_id": "anker-solix.0.ev_charger.EV001.sensors",
+    "type": "channel",
+    "common": {
+      "name": "Sensors"
+    },
+    "native": {},
+    "from": "system.adapter.anker-solix.0",
+    "user": "system.user.admin",
+    "ts": 1784044413955,
+    "acl": {
+      "object": 1636,
+      "state": 1636,
+      "owner": "system.user.admin",
+      "ownerGroup": "system.group.administrator"
+    }
+  },
+  "anker-solix.0.ev_charger.EV001.sensors.ev_charger_bat_charge_power": {
+    "_id": "anker-solix.0.ev_charger.EV001.sensors.ev_charger_bat_charge_power",
+    "type": "state",
+    "common": {
+      "name": "Charge power MQTT (EV charger)",
+      "type": "number",
+      "role": "value.power",
+      "read": true,
+      "write": false,
+      "unit": "W"
+    },
+    "native": {
+      "control": "ev_charger_bat_charge_power"
+    },
+    "from": "system.adapter.anker-solix.0",
+    "user": "system.user.admin",
+    "ts": 1784044413955,
+    "acl": {
+      "object": 1636,
+      "state": 1636,
+      "owner": "system.user.admin",
+      "ownerGroup": "system.group.administrator"
+    },
+    "val": 7200,
+    "ack": true
+  },
+  "anker-solix.0.ev_charger.EV001.sensors.ev_charger_boost_status": {
+    "_id": "anker-solix.0.ev_charger.EV001.sensors.ev_charger_boost_status",
+    "type": "state",
+    "common": {
+      "name": "Boost active (EV charger)",
+      "type": "boolean",
+      "role": "indicator",
+      "read": true,
+      "write": false
+    },
+    "native": {
+      "control": "ev_charger_boost_status"
+    },
+    "from": "system.adapter.anker-solix.0",
+    "user": "system.user.admin",
+    "ts": 1784044413955,
+    "acl": {
+      "object": 1636,
+      "state": 1636,
+      "owner": "system.user.admin",
+      "ownerGroup": "system.group.administrator"
+    },
+    "val": false,
+    "ack": true
+  },
+  "anker-solix.0.ev_charger.EV001.sensors.ev_charger_charging_energy": {
+    "_id": "anker-solix.0.ev_charger.EV001.sensors.ev_charger_charging_energy",
+    "type": "state",
+    "common": {
+      "name": "Charging energy (EV charger)",
+      "type": "number",
+      "role": "value.energy",
+      "read": true,
+      "write": false,
+      "unit": "kWh"
+    },
+    "native": {
+      "control": "ev_charger_charging_energy"
+    },
+    "from": "system.adapter.anker-solix.0",
+    "user": "system.user.admin",
+    "ts": 1784044413955,
+    "acl": {
+      "object": 1636,
+      "state": 1636,
+      "owner": "system.user.admin",
+      "ownerGroup": "system.group.administrator"
+    },
+    "val": 18.4,
+    "ack": true
+  },
+  "anker-solix.0.ev_charger.EV001.sensors.ev_charger_current_l1": {
+    "_id": "anker-solix.0.ev_charger.EV001.sensors.ev_charger_current_l1",
+    "type": "state",
+    "common": {
+      "name": "Current L1 (EV charger)",
+      "type": "number",
+      "role": "value.current",
+      "read": true,
+      "write": false,
+      "unit": "A"
+    },
+    "native": {
+      "control": "ev_charger_current_l1"
+    },
+    "from": "system.adapter.anker-solix.0",
+    "user": "system.user.admin",
+    "ts": 1784044413955,
+    "acl": {
+      "object": 1636,
+      "state": 1636,
+      "owner": "system.user.admin",
+      "ownerGroup": "system.group.administrator"
+    },
+    "val": 10.2,
+    "ack": true
+  },
+  "anker-solix.0.ev_charger.EV001.sensors.ev_charger_current_l2": {
+    "_id": "anker-solix.0.ev_charger.EV001.sensors.ev_charger_current_l2",
+    "type": "state",
+    "common": {
+      "name": "Current L2 (EV charger)",
+      "type": "number",
+      "role": "value.current",
+      "read": true,
+      "write": false,
+      "unit": "A"
+    },
+    "native": {
+      "control": "ev_charger_current_l2"
+    },
+    "from": "system.adapter.anker-solix.0",
+    "user": "system.user.admin",
+    "ts": 1784044413955,
+    "acl": {
+      "object": 1636,
+      "state": 1636,
+      "owner": "system.user.admin",
+      "ownerGroup": "system.group.administrator"
+    },
+    "val": 10.1,
+    "ack": true
+  },
+  "anker-solix.0.ev_charger.EV001.sensors.ev_charger_current_l3": {
+    "_id": "anker-solix.0.ev_charger.EV001.sensors.ev_charger_current_l3",
+    "type": "state",
+    "common": {
+      "name": "Current L3 (EV charger)",
+      "type": "number",
+      "role": "value.current",
+      "read": true,
+      "write": false,
+      "unit": "A"
+    },
+    "native": {
+      "control": "ev_charger_current_l3"
+    },
+    "from": "system.adapter.anker-solix.0",
+    "user": "system.user.admin",
+    "ts": 1784044413955,
+    "acl": {
+      "object": 1636,
+      "state": 1636,
+      "owner": "system.user.admin",
+      "ownerGroup": "system.group.administrator"
+    },
+    "val": 10,
+    "ack": true
+  },
+  "anker-solix.0.ev_charger.EV001.sensors.ev_charger_mode_status": {
+    "_id": "anker-solix.0.ev_charger.EV001.sensors.ev_charger_mode_status",
+    "type": "state",
+    "common": {
+      "name": "Charge mode status (EV charger)",
+      "type": "string",
+      "role": "state",
+      "read": true,
+      "write": false,
+      "states": {
+        "start_charge": "Start charging",
+        "stop_charge": "Stop charging",
+        "skip_delay": "Skip delay",
+        "boost_charge": "Boost",
+        "wait_plug": "Waiting for plug",
+        "wait_start": "Waiting to start"
+      }
+    },
+    "native": {
+      "control": "ev_charger_mode_status"
+    },
+    "from": "system.adapter.anker-solix.0",
+    "user": "system.user.admin",
+    "ts": 1784044413955,
+    "acl": {
+      "object": 1636,
+      "state": 1636,
+      "owner": "system.user.admin",
+      "ownerGroup": "system.group.administrator"
+    },
+    "val": "solar",
+    "ack": true
+  },
+  "anker-solix.0.ev_charger.EV001.sensors.ev_charger_plug_status": {
+    "_id": "anker-solix.0.ev_charger.EV001.sensors.ev_charger_plug_status",
+    "type": "state",
+    "common": {
+      "name": "Plug connected (EV charger)",
+      "type": "boolean",
+      "role": "indicator",
+      "read": true,
+      "write": false
+    },
+    "native": {
+      "control": "ev_charger_plug_status"
+    },
+    "from": "system.adapter.anker-solix.0",
+    "user": "system.user.admin",
+    "ts": 1784044413955,
+    "acl": {
+      "object": 1636,
+      "state": 1636,
+      "owner": "system.user.admin",
+      "ownerGroup": "system.group.administrator"
+    },
+    "val": true,
+    "ack": true
+  },
+  "anker-solix.0.ev_charger.EV001.sensors.ev_charger_power_l1": {
+    "_id": "anker-solix.0.ev_charger.EV001.sensors.ev_charger_power_l1",
+    "type": "state",
+    "common": {
+      "name": "Power L1 (EV charger)",
+      "type": "number",
+      "role": "value.power",
+      "read": true,
+      "write": false,
+      "unit": "W"
+    },
+    "native": {
+      "control": "ev_charger_power_l1"
+    },
+    "from": "system.adapter.anker-solix.0",
+    "user": "system.user.admin",
+    "ts": 1784044413955,
+    "acl": {
+      "object": 1636,
+      "state": 1636,
+      "owner": "system.user.admin",
+      "ownerGroup": "system.group.administrator"
+    },
+    "val": 2400,
+    "ack": true
+  },
+  "anker-solix.0.ev_charger.EV001.sensors.ev_charger_power_l2": {
+    "_id": "anker-solix.0.ev_charger.EV001.sensors.ev_charger_power_l2",
+    "type": "state",
+    "common": {
+      "name": "Power L2 (EV charger)",
+      "type": "number",
+      "role": "value.power",
+      "read": true,
+      "write": false,
+      "unit": "W"
+    },
+    "native": {
+      "control": "ev_charger_power_l2"
+    },
+    "from": "system.adapter.anker-solix.0",
+    "user": "system.user.admin",
+    "ts": 1784044413955,
+    "acl": {
+      "object": 1636,
+      "state": 1636,
+      "owner": "system.user.admin",
+      "ownerGroup": "system.group.administrator"
+    },
+    "val": 2400,
+    "ack": true
+  },
+  "anker-solix.0.ev_charger.EV001.sensors.ev_charger_power_l3": {
+    "_id": "anker-solix.0.ev_charger.EV001.sensors.ev_charger_power_l3",
+    "type": "state",
+    "common": {
+      "name": "Power L3 (EV charger)",
+      "type": "number",
+      "role": "value.power",
+      "read": true,
+      "write": false,
+      "unit": "W"
+    },
+    "native": {
+      "control": "ev_charger_power_l3"
+    },
+    "from": "system.adapter.anker-solix.0",
+    "user": "system.user.admin",
+    "ts": 1784044413955,
+    "acl": {
+      "object": 1636,
+      "state": 1636,
+      "owner": "system.user.admin",
+      "ownerGroup": "system.group.administrator"
+    },
+    "val": 2400,
+    "ack": true
+  },
+  "anker-solix.0.ev_charger.EV001.sensors.ev_charger_status": {
+    "_id": "anker-solix.0.ev_charger.EV001.sensors.ev_charger_status",
+    "type": "state",
+    "common": {
+      "name": "Charge status (EV charger)",
+      "type": "string",
+      "role": "value",
+      "read": true,
+      "write": false
+    },
+    "native": {
+      "control": "ev_charger_status"
+    },
+    "from": "system.adapter.anker-solix.0",
+    "user": "system.user.admin",
+    "ts": 1784044413955,
+    "acl": {
+      "object": 1636,
+      "state": 1636,
+      "owner": "system.user.admin",
+      "ownerGroup": "system.group.administrator"
+    },
+    "val": "charging",
+    "ack": true
+  },
+  "anker-solix.0.ev_charger.EV001.sensors.ev_charger_voltage_l1": {
+    "_id": "anker-solix.0.ev_charger.EV001.sensors.ev_charger_voltage_l1",
+    "type": "state",
+    "common": {
+      "name": "Voltage L1 (EV charger)",
+      "type": "number",
+      "role": "value.voltage",
+      "read": true,
+      "write": false,
+      "unit": "V"
+    },
+    "native": {
+      "control": "ev_charger_voltage_l1"
+    },
+    "from": "system.adapter.anker-solix.0",
+    "user": "system.user.admin",
+    "ts": 1784044413955,
+    "acl": {
+      "object": 1636,
+      "state": 1636,
+      "owner": "system.user.admin",
+      "ownerGroup": "system.group.administrator"
+    },
+    "val": 230,
+    "ack": true
+  },
+  "anker-solix.0.ev_charger.EV001.sensors.ev_charger_voltage_l2": {
+    "_id": "anker-solix.0.ev_charger.EV001.sensors.ev_charger_voltage_l2",
+    "type": "state",
+    "common": {
+      "name": "Voltage L2 (EV charger)",
+      "type": "number",
+      "role": "value.voltage",
+      "read": true,
+      "write": false,
+      "unit": "V"
+    },
+    "native": {
+      "control": "ev_charger_voltage_l2"
+    },
+    "from": "system.adapter.anker-solix.0",
+    "user": "system.user.admin",
+    "ts": 1784044413955,
+    "acl": {
+      "object": 1636,
+      "state": 1636,
+      "owner": "system.user.admin",
+      "ownerGroup": "system.group.administrator"
+    },
+    "val": 231,
+    "ack": true
+  },
+  "anker-solix.0.ev_charger.EV001.sensors.ev_charger_voltage_l3": {
+    "_id": "anker-solix.0.ev_charger.EV001.sensors.ev_charger_voltage_l3",
+    "type": "state",
+    "common": {
+      "name": "Voltage L3 (EV charger)",
+      "type": "number",
+      "role": "value.voltage",
+      "read": true,
+      "write": false,
+      "unit": "V"
+    },
+    "native": {
+      "control": "ev_charger_voltage_l3"
+    },
+    "from": "system.adapter.anker-solix.0",
+    "user": "system.user.admin",
+    "ts": 1784044413955,
+    "acl": {
+      "object": 1636,
+      "state": 1636,
+      "owner": "system.user.admin",
+      "ownerGroup": "system.group.administrator"
+    },
+    "val": 229,
+    "ack": true
+  },
+  "anker-solix.0.services.clear_schedule": {
+    "_id": "anker-solix.0.services.clear_schedule",
+    "type": "state",
+    "common": {
+      "name": "Clear Solarbank schedule",
+      "type": "boolean",
+      "role": "button",
+      "read": true,
+      "write": true,
+      "def": false
+    },
+    "native": {},
+    "from": "system.adapter.anker-solix.0",
+    "user": "system.user.admin",
+    "ts": 1784044413955,
+    "acl": {
+      "object": 1636,
+      "state": 1636,
+      "owner": "system.user.admin",
+      "ownerGroup": "system.group.administrator"
+    }
+  },
+  "anker-solix.0.services.export_result": {
+    "_id": "anker-solix.0.services.export_result",
+    "type": "state",
+    "common": {
+      "name": "Export result path",
+      "type": "string",
+      "role": "text",
+      "read": true,
+      "write": false,
+      "def": ""
+    },
+    "native": {},
+    "from": "system.adapter.anker-solix.0",
+    "user": "system.user.admin",
+    "ts": 1784044413955,
+    "acl": {
+      "object": 1636,
+      "state": 1636,
+      "owner": "system.user.admin",
+      "ownerGroup": "system.group.administrator"
+    }
+  },
+  "anker-solix.0.services.export_systems": {
+    "_id": "anker-solix.0.services.export_systems",
+    "type": "state",
+    "common": {
+      "name": "Export systems (anonymized)",
+      "type": "boolean",
+      "role": "button",
+      "read": true,
+      "write": true,
+      "def": false
+    },
+    "native": {},
+    "from": "system.adapter.anker-solix.0",
+    "user": "system.user.admin",
+    "ts": 1784044413955,
+    "acl": {
+      "object": 1636,
+      "state": 1636,
+      "owner": "system.user.admin",
+      "ownerGroup": "system.group.administrator"
+    }
+  },
+  "anker-solix.0.services.get_schedule": {
+    "_id": "anker-solix.0.services.get_schedule",
+    "type": "state",
+    "common": {
+      "name": "Get Solarbank schedule",
+      "type": "boolean",
+      "role": "button",
+      "read": true,
+      "write": true,
+      "def": false
+    },
+    "native": {},
+    "from": "system.adapter.anker-solix.0",
+    "user": "system.user.admin",
+    "ts": 1784044413955,
+    "acl": {
+      "object": 1636,
+      "state": 1636,
+      "owner": "system.user.admin",
+      "ownerGroup": "system.group.administrator"
+    }
+  },
+  "anker-solix.0.services.get_system_info": {
+    "_id": "anker-solix.0.services.get_system_info",
+    "type": "state",
+    "common": {
+      "name": "Get system info",
+      "type": "boolean",
+      "role": "button",
+      "read": true,
+      "write": true,
+      "def": false
+    },
+    "native": {},
+    "from": "system.adapter.anker-solix.0",
+    "user": "system.user.admin",
+    "ts": 1784044413955,
+    "acl": {
+      "object": 1636,
+      "state": 1636,
+      "owner": "system.user.admin",
+      "ownerGroup": "system.group.administrator"
+    }
+  },
+  "anker-solix.0.services.refresh_devices": {
+    "_id": "anker-solix.0.services.refresh_devices",
+    "type": "state",
+    "common": {
+      "name": "Refresh device list",
+      "type": "boolean",
+      "role": "button",
+      "read": true,
+      "write": true,
+      "def": false
+    },
+    "native": {},
+    "from": "system.adapter.anker-solix.0",
+    "user": "system.user.admin",
+    "ts": 1784044413955,
+    "acl": {
+      "object": 1636,
+      "state": 1636,
+      "owner": "system.user.admin",
+      "ownerGroup": "system.group.administrator"
+    }
+  },
+  "anker-solix.0.services.schedule_json": {
+    "_id": "anker-solix.0.services.schedule_json",
+    "type": "state",
+    "common": {
+      "name": "Schedule JSON",
+      "type": "string",
+      "role": "json",
+      "read": true,
+      "write": false,
+      "def": ""
+    },
+    "native": {},
+    "from": "system.adapter.anker-solix.0",
+    "user": "system.user.admin",
+    "ts": 1784044413955,
+    "acl": {
+      "object": 1636,
+      "state": 1636,
+      "owner": "system.user.admin",
+      "ownerGroup": "system.group.administrator"
+    }
+  },
+  "anker-solix.0.services.system_info": {
+    "_id": "anker-solix.0.services.system_info",
+    "type": "state",
+    "common": {
+      "name": "System info JSON",
+      "type": "string",
+      "role": "json",
+      "read": true,
+      "write": false,
+      "def": ""
+    },
+    "native": {},
+    "from": "system.adapter.anker-solix.0",
+    "user": "system.user.admin",
+    "ts": 1784044413955,
+    "acl": {
+      "object": 1636,
+      "state": 1636,
+      "owner": "system.user.admin",
+      "ownerGroup": "system.group.administrator"
+    }
+  },
+  "anker-solix.0.smartmeter": {
+    "_id": "anker-solix.0.smartmeter",
+    "type": "folder",
+    "common": {
+      "name": "Smart Meter"
+    },
+    "native": {},
+    "from": "system.adapter.anker-solix.0",
+    "user": "system.user.admin",
+    "ts": 1784044413955,
+    "acl": {
+      "object": 1636,
+      "state": 1636,
+      "owner": "system.user.admin",
+      "ownerGroup": "system.group.administrator"
+    }
+  },
+  "anker-solix.0.smartmeter.SM001": {
+    "_id": "anker-solix.0.smartmeter.SM001",
+    "type": "device",
+    "common": {
+      "name": "Smart Meter (smartmeter)"
+    },
+    "native": {
+      "id": "SM001",
+      "type": "smartmeter",
+      "name": "Smart Meter",
+      "site_id": "SITE1",
+      "model": "Shelly 3EM"
+    },
+    "from": "system.adapter.anker-solix.0",
+    "user": "system.user.admin",
+    "ts": 1784044413955,
+    "acl": {
+      "object": 1636,
+      "state": 1636,
+      "owner": "system.user.admin",
+      "ownerGroup": "system.group.administrator"
+    }
+  },
+  "anker-solix.0.smartmeter.SM001.info": {
+    "_id": "anker-solix.0.smartmeter.SM001.info",
+    "type": "channel",
+    "common": {
+      "name": "Info"
+    },
+    "native": {},
+    "from": "system.adapter.anker-solix.0",
+    "user": "system.user.admin",
+    "ts": 1784044413955,
+    "acl": {
+      "object": 1636,
+      "state": 1636,
+      "owner": "system.user.admin",
+      "ownerGroup": "system.group.administrator"
+    }
+  },
+  "anker-solix.0.smartmeter.SM001.info.model": {
+    "_id": "anker-solix.0.smartmeter.SM001.info.model",
+    "type": "state",
+    "common": {
+      "name": "Model",
+      "type": "string",
+      "role": "text",
+      "read": true,
+      "write": false
+    },
+    "native": {},
+    "from": "system.adapter.anker-solix.0",
+    "user": "system.user.admin",
+    "ts": 1784044413955,
+    "acl": {
+      "object": 1636,
+      "state": 1636,
+      "owner": "system.user.admin",
+      "ownerGroup": "system.group.administrator"
+    },
+    "val": "Shelly 3EM",
+    "ack": true
+  },
+  "anker-solix.0.smartmeter.SM001.sensors": {
+    "_id": "anker-solix.0.smartmeter.SM001.sensors",
+    "type": "channel",
+    "common": {
+      "name": "Sensors"
+    },
+    "native": {},
+    "from": "system.adapter.anker-solix.0",
+    "user": "system.user.admin",
+    "ts": 1784044413955,
+    "acl": {
+      "object": 1636,
+      "state": 1636,
+      "owner": "system.user.admin",
+      "ownerGroup": "system.group.administrator"
+    }
+  },
+  "anker-solix.0.smartmeter.SM001.sensors.grid_import_energy": {
+    "_id": "anker-solix.0.smartmeter.SM001.sensors.grid_import_energy",
+    "type": "state",
+    "common": {
+      "name": "grid_import_energy",
+      "type": "number",
+      "role": "value.energy",
+      "read": true,
+      "write": false,
+      "unit": "kWh"
+    },
+    "native": {
+      "control": "grid_import_energy"
+    },
+    "from": "system.adapter.anker-solix.0",
+    "user": "system.user.admin",
+    "ts": 1784044413955,
+    "acl": {
+      "object": 1636,
+      "state": 1636,
+      "owner": "system.user.admin",
+      "ownerGroup": "system.group.administrator"
+    },
+    "val": 12.5,
+    "ack": true
+  },
+  "anker-solix.0.smartmeter.SM001.sensors.grid_power": {
+    "_id": "anker-solix.0.smartmeter.SM001.sensors.grid_power",
+    "type": "state",
+    "common": {
+      "name": "grid_power",
+      "type": "number",
+      "role": "value.power",
+      "read": true,
+      "write": false,
+      "unit": "W"
+    },
+    "native": {
+      "control": "grid_power"
+    },
+    "from": "system.adapter.anker-solix.0",
+    "user": "system.user.admin",
+    "ts": 1784044413955,
+    "acl": {
+      "object": 1636,
+      "state": 1636,
+      "owner": "system.user.admin",
+      "ownerGroup": "system.group.administrator"
+    },
+    "val": -200,
+    "ack": true
+  },
+  "anker-solix.0.smartmeter.SM001.sensors.grid_to_home_power": {
+    "_id": "anker-solix.0.smartmeter.SM001.sensors.grid_to_home_power",
+    "type": "state",
+    "common": {
+      "name": "grid_to_home_power",
+      "type": "number",
+      "role": "value.power",
+      "read": true,
+      "write": false,
+      "unit": "W"
+    },
+    "native": {
+      "control": "grid_to_home_power"
+    },
+    "from": "system.adapter.anker-solix.0",
+    "user": "system.user.admin",
+    "ts": 1784044413955,
+    "acl": {
+      "object": 1636,
+      "state": 1636,
+      "owner": "system.user.admin",
+      "ownerGroup": "system.group.administrator"
+    },
+    "val": 150,
+    "ack": true
+  },
+  "anker-solix.0.solarbank": {
+    "_id": "anker-solix.0.solarbank",
+    "type": "folder",
+    "common": {
+      "name": "Solarbank"
+    },
+    "native": {},
+    "from": "system.adapter.anker-solix.0",
+    "user": "system.user.admin",
+    "ts": 1784044413955,
+    "acl": {
+      "object": 1636,
+      "state": 1636,
+      "owner": "system.user.admin",
+      "ownerGroup": "system.group.administrator"
+    }
+  },
+  "anker-solix.0.solarbank.SB001": {
+    "_id": "anker-solix.0.solarbank.SB001",
+    "type": "device",
+    "common": {
+      "name": "Solarbank 1 (solarbank)"
+    },
+    "native": {
+      "id": "SB001",
+      "type": "solarbank",
+      "name": "Solarbank 1",
+      "site_id": "SITE1",
+      "model": "A17C0",
+      "generation": 2
+    },
+    "from": "system.adapter.anker-solix.0",
+    "user": "system.user.admin",
+    "ts": 1784044413955,
+    "acl": {
+      "object": 1636,
+      "state": 1636,
+      "owner": "system.user.admin",
+      "ownerGroup": "system.group.administrator"
+    }
+  },
+  "anker-solix.0.solarbank.SB001.control": {
+    "_id": "anker-solix.0.solarbank.SB001.control",
+    "type": "channel",
+    "common": {
+      "name": "Control"
+    },
+    "native": {},
+    "from": "system.adapter.anker-solix.0",
+    "user": "system.user.admin",
+    "ts": 1784044413955,
+    "acl": {
+      "object": 1636,
+      "state": 1636,
+      "owner": "system.user.admin",
+      "ownerGroup": "system.group.administrator"
+    }
+  },
+  "anker-solix.0.solarbank.SB001.control.ac_output_limit": {
+    "_id": "anker-solix.0.solarbank.SB001.control.ac_output_limit",
+    "type": "state",
+    "common": {
+      "name": "Manual export preset (curtailment)",
+      "type": "number",
+      "role": "level",
+      "read": true,
+      "write": true,
+      "unit": "W",
+      "min": 0,
+      "max": 4800
+    },
+    "native": {
+      "control": "ac_output_limit"
+    },
+    "from": "system.adapter.anker-solix.0",
+    "user": "system.user.admin",
+    "ts": 1784044413955,
+    "acl": {
+      "object": 1636,
+      "state": 1636,
+      "owner": "system.user.admin",
+      "ownerGroup": "system.group.administrator"
+    },
+    "val": 0,
+    "ack": true
+  },
+  "anker-solix.0.solarbank.SB001.control.min_soc": {
+    "_id": "anker-solix.0.solarbank.SB001.control.min_soc",
+    "type": "state",
+    "common": {
+      "name": "Minimum SOC reserve (%)",
+      "type": "number",
+      "role": "level.battery",
+      "read": true,
+      "write": true,
+      "unit": "%",
+      "min": 0,
+      "max": 100
+    },
+    "native": {
+      "control": "min_soc"
+    },
+    "from": "system.adapter.anker-solix.0",
+    "user": "system.user.admin",
+    "ts": 1784044413955,
+    "acl": {
+      "object": 1636,
+      "state": 1636,
+      "owner": "system.user.admin",
+      "ownerGroup": "system.group.administrator"
+    },
+    "val": 0,
+    "ack": true
+  },
+  "anker-solix.0.solarbank.SB001.control.preset_usage_mode": {
+    "_id": "anker-solix.0.solarbank.SB001.control.preset_usage_mode",
+    "type": "state",
+    "common": {
+      "name": "Usage mode",
+      "type": "string",
+      "role": "state",
+      "read": true,
+      "write": true,
+      "states": {
+        "smartmeter": "Self-consumption",
+        "smart": "Smart mode"
+      }
+    },
+    "native": {
+      "control": "preset_usage_mode"
+    },
+    "from": "system.adapter.anker-solix.0",
+    "user": "system.user.admin",
+    "ts": 1784044413955,
+    "acl": {
+      "object": 1636,
+      "state": 1636,
+      "owner": "system.user.admin",
+      "ownerGroup": "system.group.administrator"
+    },
+    "val": "",
+    "ack": true
+  },
+  "anker-solix.0.solarbank.SB001.info": {
+    "_id": "anker-solix.0.solarbank.SB001.info",
+    "type": "channel",
+    "common": {
+      "name": "Info"
+    },
+    "native": {},
+    "from": "system.adapter.anker-solix.0",
+    "user": "system.user.admin",
+    "ts": 1784044413955,
+    "acl": {
+      "object": 1636,
+      "state": 1636,
+      "owner": "system.user.admin",
+      "ownerGroup": "system.group.administrator"
+    }
+  },
+  "anker-solix.0.solarbank.SB001.info.model": {
+    "_id": "anker-solix.0.solarbank.SB001.info.model",
+    "type": "state",
+    "common": {
+      "name": "Model",
+      "type": "string",
+      "role": "text",
+      "read": true,
+      "write": false
+    },
+    "native": {},
+    "from": "system.adapter.anker-solix.0",
+    "user": "system.user.admin",
+    "ts": 1784044413955,
+    "acl": {
+      "object": 1636,
+      "state": 1636,
+      "owner": "system.user.admin",
+      "ownerGroup": "system.group.administrator"
+    },
+    "val": "A17C0",
+    "ack": true
+  },
+  "anker-solix.0.solarbank.SB001.sensors": {
+    "_id": "anker-solix.0.solarbank.SB001.sensors",
+    "type": "channel",
+    "common": {
+      "name": "Sensors"
+    },
+    "native": {},
+    "from": "system.adapter.anker-solix.0",
+    "user": "system.user.admin",
+    "ts": 1784044413955,
+    "acl": {
+      "object": 1636,
+      "state": 1636,
+      "owner": "system.user.admin",
+      "ownerGroup": "system.group.administrator"
+    }
+  },
+  "anker-solix.0.solarbank.SB001.sensors.bat_charge_power": {
+    "_id": "anker-solix.0.solarbank.SB001.sensors.bat_charge_power",
+    "type": "state",
+    "common": {
+      "name": "bat_charge_power",
+      "type": "number",
+      "role": "value.power",
+      "read": true,
+      "write": false,
+      "unit": "W"
+    },
+    "native": {
+      "control": "bat_charge_power"
+    },
+    "from": "system.adapter.anker-solix.0",
+    "user": "system.user.admin",
+    "ts": 1784044413955,
+    "acl": {
+      "object": 1636,
+      "state": 1636,
+      "owner": "system.user.admin",
+      "ownerGroup": "system.group.administrator"
+    },
+    "val": 400,
+    "ack": true
+  },
+  "anker-solix.0.solarbank.SB001.sensors.bat_discharge_power": {
+    "_id": "anker-solix.0.solarbank.SB001.sensors.bat_discharge_power",
+    "type": "state",
+    "common": {
+      "name": "bat_discharge_power",
+      "type": "number",
+      "role": "value.power",
+      "read": true,
+      "write": false,
+      "unit": "W"
+    },
+    "native": {
+      "control": "bat_discharge_power"
+    },
+    "from": "system.adapter.anker-solix.0",
+    "user": "system.user.admin",
+    "ts": 1784044413955,
+    "acl": {
+      "object": 1636,
+      "state": 1636,
+      "owner": "system.user.admin",
+      "ownerGroup": "system.group.administrator"
+    },
+    "val": 0,
+    "ack": true
+  },
+  "anker-solix.0.solarbank.SB001.sensors.battery_power": {
+    "_id": "anker-solix.0.solarbank.SB001.sensors.battery_power",
+    "type": "state",
+    "common": {
+      "name": "battery_power",
+      "type": "number",
+      "role": "value.power",
+      "read": true,
+      "write": false,
+      "unit": "W"
+    },
+    "native": {
+      "control": "battery_power"
+    },
+    "from": "system.adapter.anker-solix.0",
+    "user": "system.user.admin",
+    "ts": 1784044413955,
+    "acl": {
+      "object": 1636,
+      "state": 1636,
+      "owner": "system.user.admin",
+      "ownerGroup": "system.group.administrator"
+    },
+    "val": 400,
+    "ack": true
+  },
+  "anker-solix.0.solarbank.SB001.sensors.cloud_state": {
+    "_id": "anker-solix.0.solarbank.SB001.sensors.cloud_state",
+    "type": "state",
+    "common": {
+      "name": "cloud_state",
+      "type": "boolean",
+      "role": "indicator",
+      "read": true,
+      "write": false
+    },
+    "native": {
+      "control": "cloud_state"
+    },
+    "from": "system.adapter.anker-solix.0",
+    "user": "system.user.admin",
+    "ts": 1784044413955,
+    "acl": {
+      "object": 1636,
+      "state": 1636,
+      "owner": "system.user.admin",
+      "ownerGroup": "system.group.administrator"
+    },
+    "val": true,
+    "ack": true
+  },
+  "anker-solix.0.solarbank.SB001.sensors.output_power_total": {
+    "_id": "anker-solix.0.solarbank.SB001.sensors.output_power_total",
+    "type": "state",
+    "common": {
+      "name": "output_power_total",
+      "type": "number",
+      "role": "value.power",
+      "read": true,
+      "write": false,
+      "unit": "W"
+    },
+    "native": {
+      "control": "output_power_total"
+    },
+    "from": "system.adapter.anker-solix.0",
+    "user": "system.user.admin",
+    "ts": 1784044413955,
+    "acl": {
+      "object": 1636,
+      "state": 1636,
+      "owner": "system.user.admin",
+      "ownerGroup": "system.group.administrator"
+    },
+    "val": 900,
+    "ack": true
+  },
+  "anker-solix.0.solarbank.SB001.sensors.state_of_charge": {
+    "_id": "anker-solix.0.solarbank.SB001.sensors.state_of_charge",
+    "type": "state",
+    "common": {
+      "name": "state_of_charge",
+      "type": "number",
+      "role": "value.battery",
+      "read": true,
+      "write": false,
+      "unit": "%"
+    },
+    "native": {
+      "control": "state_of_charge"
+    },
+    "from": "system.adapter.anker-solix.0",
+    "user": "system.user.admin",
+    "ts": 1784044413955,
+    "acl": {
+      "object": 1636,
+      "state": 1636,
+      "owner": "system.user.admin",
+      "ownerGroup": "system.group.administrator"
+    },
+    "val": 72,
+    "ack": true
+  },
+  "anker-solix.0.system": {
+    "_id": "anker-solix.0.system",
+    "type": "folder",
+    "common": {
+      "name": "System"
+    },
+    "native": {},
+    "from": "system.adapter.anker-solix.0",
+    "user": "system.user.admin",
+    "ts": 1784044413955,
+    "acl": {
+      "object": 1636,
+      "state": 1636,
+      "owner": "system.user.admin",
+      "ownerGroup": "system.group.administrator"
+    }
+  },
+  "anker-solix.0.system.SITE1": {
+    "_id": "anker-solix.0.system.SITE1",
+    "type": "device",
+    "common": {
+      "name": "Demo Site (system)"
+    },
+    "native": {
+      "id": "SITE1",
+      "type": "system",
+      "name": "Demo Site",
+      "site_id": "SITE1",
+      "model": "Power System"
+    },
+    "from": "system.adapter.anker-solix.0",
+    "user": "system.user.admin",
+    "ts": 1784044413955,
+    "acl": {
+      "object": 1636,
+      "state": 1636,
+      "owner": "system.user.admin",
+      "ownerGroup": "system.group.administrator"
+    }
+  },
+  "anker-solix.0.system.SITE1.info": {
+    "_id": "anker-solix.0.system.SITE1.info",
+    "type": "channel",
+    "common": {
+      "name": "Info"
+    },
+    "native": {},
+    "from": "system.adapter.anker-solix.0",
+    "user": "system.user.admin",
+    "ts": 1784044413955,
+    "acl": {
+      "object": 1636,
+      "state": 1636,
+      "owner": "system.user.admin",
+      "ownerGroup": "system.group.administrator"
+    }
+  },
+  "anker-solix.0.system.SITE1.info.model": {
+    "_id": "anker-solix.0.system.SITE1.info.model",
+    "type": "state",
+    "common": {
+      "name": "Model",
+      "type": "string",
+      "role": "text",
+      "read": true,
+      "write": false
+    },
+    "native": {},
+    "from": "system.adapter.anker-solix.0",
+    "user": "system.user.admin",
+    "ts": 1784044413955,
+    "acl": {
+      "object": 1636,
+      "state": 1636,
+      "owner": "system.user.admin",
+      "ownerGroup": "system.group.administrator"
+    },
+    "val": "Power System",
+    "ack": true
+  },
+  "anker-solix.0.system.SITE1.sensors": {
+    "_id": "anker-solix.0.system.SITE1.sensors",
+    "type": "channel",
+    "common": {
+      "name": "Sensors"
+    },
+    "native": {},
+    "from": "system.adapter.anker-solix.0",
+    "user": "system.user.admin",
+    "ts": 1784044413955,
+    "acl": {
+      "object": 1636,
+      "state": 1636,
+      "owner": "system.user.admin",
+      "ownerGroup": "system.group.administrator"
+    }
+  },
+  "anker-solix.0.system.SITE1.sensors.bat_charge_power": {
+    "_id": "anker-solix.0.system.SITE1.sensors.bat_charge_power",
+    "type": "state",
+    "common": {
+      "name": "Total battery charge power (sum of solarbanks)",
+      "type": "number",
+      "role": "value.power",
+      "unit": "W",
+      "read": true,
+      "write": false
+    },
+    "native": {
+      "aggregated": true
+    },
+    "from": "system.adapter.anker-solix.0",
+    "user": "system.user.admin",
+    "ts": 1784044413955,
+    "acl": {
+      "object": 1636,
+      "state": 1636,
+      "owner": "system.user.admin",
+      "ownerGroup": "system.group.administrator"
+    }
+  },
+  "anker-solix.0.system.SITE1.sensors.bat_discharge_power": {
+    "_id": "anker-solix.0.system.SITE1.sensors.bat_discharge_power",
+    "type": "state",
+    "common": {
+      "name": "Total battery discharge power (sum of solarbanks)",
+      "type": "number",
+      "role": "value.power",
+      "unit": "W",
+      "read": true,
+      "write": false
+    },
+    "native": {
+      "aggregated": true
+    },
+    "from": "system.adapter.anker-solix.0",
+    "user": "system.user.admin",
+    "ts": 1784044413955,
+    "acl": {
+      "object": 1636,
+      "state": 1636,
+      "owner": "system.user.admin",
+      "ownerGroup": "system.group.administrator"
+    }
+  },
+  "anker-solix.0.system.SITE1.sensors.battery_power": {
+    "_id": "anker-solix.0.system.SITE1.sensors.battery_power",
+    "type": "state",
+    "common": {
+      "name": "battery_power",
+      "type": "number",
+      "role": "value.power",
+      "read": true,
+      "write": false,
+      "unit": "W"
+    },
+    "native": {
+      "control": "battery_power"
+    },
+    "from": "system.adapter.anker-solix.0",
+    "user": "system.user.admin",
+    "ts": 1784044413955,
+    "acl": {
+      "object": 1636,
+      "state": 1636,
+      "owner": "system.user.admin",
+      "ownerGroup": "system.group.administrator"
+    },
+    "val": 400,
+    "ack": true
+  },
+  "anker-solix.0.system.SITE1.sensors.grid_power": {
+    "_id": "anker-solix.0.system.SITE1.sensors.grid_power",
+    "type": "state",
+    "common": {
+      "name": "grid_power",
+      "type": "number",
+      "role": "value.power",
+      "read": true,
+      "write": false,
+      "unit": "W"
+    },
+    "native": {
+      "control": "grid_power"
+    },
+    "from": "system.adapter.anker-solix.0",
+    "user": "system.user.admin",
+    "ts": 1784044413955,
+    "acl": {
+      "object": 1636,
+      "state": 1636,
+      "owner": "system.user.admin",
+      "ownerGroup": "system.group.administrator"
+    },
+    "val": -200,
+    "ack": true
+  },
+  "anker-solix.0.system.SITE1.sensors.home_power": {
+    "_id": "anker-solix.0.system.SITE1.sensors.home_power",
+    "type": "state",
+    "common": {
+      "name": "home_power",
+      "type": "number",
+      "role": "value.power",
+      "read": true,
+      "write": false,
+      "unit": "W"
+    },
+    "native": {
+      "control": "home_power"
+    },
+    "from": "system.adapter.anker-solix.0",
+    "user": "system.user.admin",
+    "ts": 1784044413955,
+    "acl": {
+      "object": 1636,
+      "state": 1636,
+      "owner": "system.user.admin",
+      "ownerGroup": "system.group.administrator"
+    },
+    "val": 800,
+    "ack": true
+  },
+  "anker-solix.0.system.SITE1.sensors.state_of_charge": {
+    "_id": "anker-solix.0.system.SITE1.sensors.state_of_charge",
+    "type": "state",
+    "common": {
+      "name": "state_of_charge",
+      "type": "number",
+      "role": "value.battery",
+      "read": true,
+      "write": false,
+      "unit": "%"
+    },
+    "native": {
+      "control": "state_of_charge"
+    },
+    "from": "system.adapter.anker-solix.0",
+    "user": "system.user.admin",
+    "ts": 1784044413955,
+    "acl": {
+      "object": 1636,
+      "state": 1636,
+      "owner": "system.user.admin",
+      "ownerGroup": "system.group.administrator"
+    },
+    "val": 72,
+    "ack": true
+  },
+  "anker-solix.0.system.SITE1.sensors.total_co2_savings": {
+    "_id": "anker-solix.0.system.SITE1.sensors.total_co2_savings",
+    "type": "state",
+    "common": {
+      "name": "Total CO₂ savings",
+      "type": "number",
+      "role": "value",
+      "read": true,
+      "write": false,
+      "unit": "kg"
+    },
+    "native": {
+      "control": "total_co2_savings"
+    },
+    "from": "system.adapter.anker-solix.0",
+    "user": "system.user.admin",
+    "ts": 1784044413955,
+    "acl": {
+      "object": 1636,
+      "state": 1636,
+      "owner": "system.user.admin",
+      "ownerGroup": "system.group.administrator"
+    }
+  },
+  "anker-solix.0.system.SITE1.sensors.total_energy": {
+    "_id": "anker-solix.0.system.SITE1.sensors.total_energy",
+    "type": "state",
+    "common": {
+      "name": "Total energy (lifetime)",
+      "type": "number",
+      "role": "value.energy",
+      "read": true,
+      "write": false,
+      "unit": "kWh"
+    },
+    "native": {
+      "control": "total_energy"
+    },
+    "from": "system.adapter.anker-solix.0",
+    "user": "system.user.admin",
+    "ts": 1784044413955,
+    "acl": {
+      "object": 1636,
+      "state": 1636,
+      "owner": "system.user.admin",
+      "ownerGroup": "system.group.administrator"
+    }
+  },
+  "anker-solix.0.system.SITE1.sensors.total_money_savings": {
+    "_id": "anker-solix.0.system.SITE1.sensors.total_money_savings",
+    "type": "state",
+    "common": {
+      "name": "Total money savings",
+      "type": "number",
+      "role": "value",
+      "read": true,
+      "write": false
+    },
+    "native": {
+      "control": "total_money_savings"
+    },
+    "from": "system.adapter.anker-solix.0",
+    "user": "system.user.admin",
+    "ts": 1784044413955,
+    "acl": {
+      "object": 1636,
+      "state": 1636,
+      "owner": "system.user.admin",
+      "ownerGroup": "system.group.administrator"
+    }
+  },
+  "anker-solix.0.system.SITE1.sensors.total_pv_power": {
+    "_id": "anker-solix.0.system.SITE1.sensors.total_pv_power",
+    "type": "state",
+    "common": {
+      "name": "total_pv_power",
+      "type": "number",
+      "role": "value.power",
+      "read": true,
+      "write": false,
+      "unit": "W"
+    },
+    "native": {
+      "control": "total_pv_power"
+    },
+    "from": "system.adapter.anker-solix.0",
+    "user": "system.user.admin",
+    "ts": 1784044413955,
+    "acl": {
+      "object": 1636,
+      "state": 1636,
+      "owner": "system.user.admin",
+      "ownerGroup": "system.group.administrator"
+    },
+    "val": 1200,
+    "ack": true
+  },
+  "anker-solix.0.system.SITE1.statistics": {
+    "_id": "anker-solix.0.system.SITE1.statistics",
+    "type": "channel",
+    "common": {
+      "name": "Statistics"
+    },
+    "native": {},
+    "from": "system.adapter.anker-solix.0",
+    "user": "system.user.admin",
+    "ts": 1784044413955,
+    "acl": {
+      "object": 1636,
+      "state": 1636,
+      "owner": "system.user.admin",
+      "ownerGroup": "system.group.administrator"
+    }
+  },
+  "anker-solix.0.system.SITE1.statistics.daily_3rd_party_pv_to_bat": {
+    "_id": "anker-solix.0.system.SITE1.statistics.daily_3rd_party_pv_to_bat",
+    "type": "state",
+    "common": {
+      "name": "3rd-party PV → battery (today)",
+      "type": "number",
+      "role": "value.energy",
+      "read": true,
+      "write": false,
+      "unit": "kWh"
+    },
+    "native": {
+      "control": "daily_3rd_party_pv_to_bat"
+    },
+    "from": "system.adapter.anker-solix.0",
+    "user": "system.user.admin",
+    "ts": 1784044413955,
+    "acl": {
+      "object": 1636,
+      "state": 1636,
+      "owner": "system.user.admin",
+      "ownerGroup": "system.group.administrator"
+    }
+  },
+  "anker-solix.0.system.SITE1.statistics.daily_ac_socket": {
+    "_id": "anker-solix.0.system.SITE1.statistics.daily_ac_socket",
+    "type": "state",
+    "common": {
+      "name": "AC socket (today)",
+      "type": "number",
+      "role": "value.energy",
+      "read": true,
+      "write": false,
+      "unit": "kWh"
+    },
+    "native": {
+      "control": "daily_ac_socket"
+    },
+    "from": "system.adapter.anker-solix.0",
+    "user": "system.user.admin",
+    "ts": 1784044413955,
+    "acl": {
+      "object": 1636,
+      "state": 1636,
+      "owner": "system.user.admin",
+      "ownerGroup": "system.group.administrator"
+    }
+  },
+  "anker-solix.0.system.SITE1.statistics.daily_battery_share": {
+    "_id": "anker-solix.0.system.SITE1.statistics.daily_battery_share",
+    "type": "state",
+    "common": {
+      "name": "Battery share (today)",
+      "type": "number",
+      "role": "value",
+      "read": true,
+      "write": false,
+      "unit": "%"
+    },
+    "native": {
+      "control": "daily_battery_share"
+    },
+    "from": "system.adapter.anker-solix.0",
+    "user": "system.user.admin",
+    "ts": 1784044413955,
+    "acl": {
+      "object": 1636,
+      "state": 1636,
+      "owner": "system.user.admin",
+      "ownerGroup": "system.group.administrator"
+    }
+  },
+  "anker-solix.0.system.SITE1.statistics.daily_battery_to_home": {
+    "_id": "anker-solix.0.system.SITE1.statistics.daily_battery_to_home",
+    "type": "state",
+    "common": {
+      "name": "Battery → home (today)",
+      "type": "number",
+      "role": "value.energy",
+      "read": true,
+      "write": false,
+      "unit": "kWh"
+    },
+    "native": {
+      "control": "daily_battery_to_home"
+    },
+    "from": "system.adapter.anker-solix.0",
+    "user": "system.user.admin",
+    "ts": 1784044413955,
+    "acl": {
+      "object": 1636,
+      "state": 1636,
+      "owner": "system.user.admin",
+      "ownerGroup": "system.group.administrator"
+    }
+  },
+  "anker-solix.0.system.SITE1.statistics.daily_charge_energy": {
+    "_id": "anker-solix.0.system.SITE1.statistics.daily_charge_energy",
+    "type": "state",
+    "common": {
+      "name": "Battery charge (today)",
+      "type": "number",
+      "role": "value.energy",
+      "read": true,
+      "write": false,
+      "unit": "kWh"
+    },
+    "native": {
+      "control": "daily_charge_energy"
+    },
+    "from": "system.adapter.anker-solix.0",
+    "user": "system.user.admin",
+    "ts": 1784044413955,
+    "acl": {
+      "object": 1636,
+      "state": 1636,
+      "owner": "system.user.admin",
+      "ownerGroup": "system.group.administrator"
+    }
+  },
+  "anker-solix.0.system.SITE1.statistics.daily_discharge_energy": {
+    "_id": "anker-solix.0.system.SITE1.statistics.daily_discharge_energy",
+    "type": "state",
+    "common": {
+      "name": "Battery discharge (today)",
+      "type": "number",
+      "role": "value.energy",
+      "read": true,
+      "write": false,
+      "unit": "kWh"
+    },
+    "native": {
+      "control": "daily_discharge_energy"
+    },
+    "from": "system.adapter.anker-solix.0",
+    "user": "system.user.admin",
+    "ts": 1784044413955,
+    "acl": {
+      "object": 1636,
+      "state": 1636,
+      "owner": "system.user.admin",
+      "ownerGroup": "system.group.administrator"
+    }
+  },
+  "anker-solix.0.system.SITE1.statistics.daily_ev_charge": {
+    "_id": "anker-solix.0.system.SITE1.statistics.daily_ev_charge",
+    "type": "state",
+    "common": {
+      "name": "EV charge (today)",
+      "type": "number",
+      "role": "value.energy",
+      "read": true,
+      "write": false,
+      "unit": "kWh"
+    },
+    "native": {
+      "control": "daily_ev_charge"
+    },
+    "from": "system.adapter.anker-solix.0",
+    "user": "system.user.admin",
+    "ts": 1784044413955,
+    "acl": {
+      "object": 1636,
+      "state": 1636,
+      "owner": "system.user.admin",
+      "ownerGroup": "system.group.administrator"
+    }
+  },
+  "anker-solix.0.system.SITE1.statistics.daily_grid_export": {
+    "_id": "anker-solix.0.system.SITE1.statistics.daily_grid_export",
+    "type": "state",
+    "common": {
+      "name": "Grid export (today)",
+      "type": "number",
+      "role": "value.energy",
+      "read": true,
+      "write": false,
+      "unit": "kWh"
+    },
+    "native": {
+      "control": "daily_grid_export"
+    },
+    "from": "system.adapter.anker-solix.0",
+    "user": "system.user.admin",
+    "ts": 1784044413955,
+    "acl": {
+      "object": 1636,
+      "state": 1636,
+      "owner": "system.user.admin",
+      "ownerGroup": "system.group.administrator"
+    }
+  },
+  "anker-solix.0.system.SITE1.statistics.daily_grid_import": {
+    "_id": "anker-solix.0.system.SITE1.statistics.daily_grid_import",
+    "type": "state",
+    "common": {
+      "name": "Grid import (today)",
+      "type": "number",
+      "role": "value.energy",
+      "read": true,
+      "write": false,
+      "unit": "kWh"
+    },
+    "native": {
+      "control": "daily_grid_import"
+    },
+    "from": "system.adapter.anker-solix.0",
+    "user": "system.user.admin",
+    "ts": 1784044413955,
+    "acl": {
+      "object": 1636,
+      "state": 1636,
+      "owner": "system.user.admin",
+      "ownerGroup": "system.group.administrator"
+    }
+  },
+  "anker-solix.0.system.SITE1.statistics.daily_grid_share": {
+    "_id": "anker-solix.0.system.SITE1.statistics.daily_grid_share",
+    "type": "state",
+    "common": {
+      "name": "Grid share (today)",
+      "type": "number",
+      "role": "value",
+      "read": true,
+      "write": false,
+      "unit": "%"
+    },
+    "native": {
+      "control": "daily_grid_share"
+    },
+    "from": "system.adapter.anker-solix.0",
+    "user": "system.user.admin",
+    "ts": 1784044413955,
+    "acl": {
+      "object": 1636,
+      "state": 1636,
+      "owner": "system.user.admin",
+      "ownerGroup": "system.group.administrator"
+    }
+  },
+  "anker-solix.0.system.SITE1.statistics.daily_grid_to_battery": {
+    "_id": "anker-solix.0.system.SITE1.statistics.daily_grid_to_battery",
+    "type": "state",
+    "common": {
+      "name": "Grid → battery (today)",
+      "type": "number",
+      "role": "value.energy",
+      "read": true,
+      "write": false,
+      "unit": "kWh"
+    },
+    "native": {
+      "control": "daily_grid_to_battery"
+    },
+    "from": "system.adapter.anker-solix.0",
+    "user": "system.user.admin",
+    "ts": 1784044413955,
+    "acl": {
+      "object": 1636,
+      "state": 1636,
+      "owner": "system.user.admin",
+      "ownerGroup": "system.group.administrator"
+    }
+  },
+  "anker-solix.0.system.SITE1.statistics.daily_grid_to_home": {
+    "_id": "anker-solix.0.system.SITE1.statistics.daily_grid_to_home",
+    "type": "state",
+    "common": {
+      "name": "Grid → home (today)",
+      "type": "number",
+      "role": "value.energy",
+      "read": true,
+      "write": false,
+      "unit": "kWh"
+    },
+    "native": {
+      "control": "daily_grid_to_home"
+    },
+    "from": "system.adapter.anker-solix.0",
+    "user": "system.user.admin",
+    "ts": 1784044413955,
+    "acl": {
+      "object": 1636,
+      "state": 1636,
+      "owner": "system.user.admin",
+      "ownerGroup": "system.group.administrator"
+    }
+  },
+  "anker-solix.0.system.SITE1.statistics.daily_home_usage": {
+    "_id": "anker-solix.0.system.SITE1.statistics.daily_home_usage",
+    "type": "state",
+    "common": {
+      "name": "Home usage (today)",
+      "type": "number",
+      "role": "value.energy",
+      "read": true,
+      "write": false,
+      "unit": "kWh"
+    },
+    "native": {
+      "control": "daily_home_usage"
+    },
+    "from": "system.adapter.anker-solix.0",
+    "user": "system.user.admin",
+    "ts": 1784044413955,
+    "acl": {
+      "object": 1636,
+      "state": 1636,
+      "owner": "system.user.admin",
+      "ownerGroup": "system.group.administrator"
+    }
+  },
+  "anker-solix.0.system.SITE1.statistics.daily_smartplugs_total": {
+    "_id": "anker-solix.0.system.SITE1.statistics.daily_smartplugs_total",
+    "type": "state",
+    "common": {
+      "name": "Smart plugs total (today)",
+      "type": "number",
+      "role": "value.energy",
+      "read": true,
+      "write": false,
+      "unit": "kWh"
+    },
+    "native": {
+      "control": "daily_smartplugs_total"
+    },
+    "from": "system.adapter.anker-solix.0",
+    "user": "system.user.admin",
+    "ts": 1784044413955,
+    "acl": {
+      "object": 1636,
+      "state": 1636,
+      "owner": "system.user.admin",
+      "ownerGroup": "system.group.administrator"
+    }
+  },
+  "anker-solix.0.system.SITE1.statistics.daily_solar_production": {
+    "_id": "anker-solix.0.system.SITE1.statistics.daily_solar_production",
+    "type": "state",
+    "common": {
+      "name": "Solar production (today)",
+      "type": "number",
+      "role": "value.energy",
+      "read": true,
+      "write": false,
+      "unit": "kWh"
+    },
+    "native": {
+      "control": "daily_solar_production"
+    },
+    "from": "system.adapter.anker-solix.0",
+    "user": "system.user.admin",
+    "ts": 1784044413955,
+    "acl": {
+      "object": 1636,
+      "state": 1636,
+      "owner": "system.user.admin",
+      "ownerGroup": "system.group.administrator"
+    }
+  },
+  "anker-solix.0.system.SITE1.statistics.daily_solar_production_inverter": {
+    "_id": "anker-solix.0.system.SITE1.statistics.daily_solar_production_inverter",
+    "type": "state",
+    "common": {
+      "name": "Inverter production (today)",
+      "type": "number",
+      "role": "value.energy",
+      "read": true,
+      "write": false,
+      "unit": "kWh"
+    },
+    "native": {
+      "control": "daily_solar_production_inverter"
+    },
+    "from": "system.adapter.anker-solix.0",
+    "user": "system.user.admin",
+    "ts": 1784044413955,
+    "acl": {
+      "object": 1636,
+      "state": 1636,
+      "owner": "system.user.admin",
+      "ownerGroup": "system.group.administrator"
+    }
+  },
+  "anker-solix.0.system.SITE1.statistics.daily_solar_production_pv1": {
+    "_id": "anker-solix.0.system.SITE1.statistics.daily_solar_production_pv1",
+    "type": "state",
+    "common": {
+      "name": "PV1 production (today)",
+      "type": "number",
+      "role": "value.energy",
+      "read": true,
+      "write": false,
+      "unit": "kWh"
+    },
+    "native": {
+      "control": "daily_solar_production_pv1"
+    },
+    "from": "system.adapter.anker-solix.0",
+    "user": "system.user.admin",
+    "ts": 1784044413955,
+    "acl": {
+      "object": 1636,
+      "state": 1636,
+      "owner": "system.user.admin",
+      "ownerGroup": "system.group.administrator"
+    }
+  },
+  "anker-solix.0.system.SITE1.statistics.daily_solar_production_pv2": {
+    "_id": "anker-solix.0.system.SITE1.statistics.daily_solar_production_pv2",
+    "type": "state",
+    "common": {
+      "name": "PV2 production (today)",
+      "type": "number",
+      "role": "value.energy",
+      "read": true,
+      "write": false,
+      "unit": "kWh"
+    },
+    "native": {
+      "control": "daily_solar_production_pv2"
+    },
+    "from": "system.adapter.anker-solix.0",
+    "user": "system.user.admin",
+    "ts": 1784044413955,
+    "acl": {
+      "object": 1636,
+      "state": 1636,
+      "owner": "system.user.admin",
+      "ownerGroup": "system.group.administrator"
+    }
+  },
+  "anker-solix.0.system.SITE1.statistics.daily_solar_production_pv3": {
+    "_id": "anker-solix.0.system.SITE1.statistics.daily_solar_production_pv3",
+    "type": "state",
+    "common": {
+      "name": "PV3 production (today)",
+      "type": "number",
+      "role": "value.energy",
+      "read": true,
+      "write": false,
+      "unit": "kWh"
+    },
+    "native": {
+      "control": "daily_solar_production_pv3"
+    },
+    "from": "system.adapter.anker-solix.0",
+    "user": "system.user.admin",
+    "ts": 1784044413955,
+    "acl": {
+      "object": 1636,
+      "state": 1636,
+      "owner": "system.user.admin",
+      "ownerGroup": "system.group.administrator"
+    }
+  },
+  "anker-solix.0.system.SITE1.statistics.daily_solar_production_pv4": {
+    "_id": "anker-solix.0.system.SITE1.statistics.daily_solar_production_pv4",
+    "type": "state",
+    "common": {
+      "name": "PV4 production (today)",
+      "type": "number",
+      "role": "value.energy",
+      "read": true,
+      "write": false,
+      "unit": "kWh"
+    },
+    "native": {
+      "control": "daily_solar_production_pv4"
+    },
+    "from": "system.adapter.anker-solix.0",
+    "user": "system.user.admin",
+    "ts": 1784044413955,
+    "acl": {
+      "object": 1636,
+      "state": 1636,
+      "owner": "system.user.admin",
+      "ownerGroup": "system.group.administrator"
+    }
+  },
+  "anker-solix.0.system.SITE1.statistics.daily_solar_share": {
+    "_id": "anker-solix.0.system.SITE1.statistics.daily_solar_share",
+    "type": "state",
+    "common": {
+      "name": "Solar share (today)",
+      "type": "number",
+      "role": "value",
+      "read": true,
+      "write": false,
+      "unit": "%"
+    },
+    "native": {
+      "control": "daily_solar_share"
+    },
+    "from": "system.adapter.anker-solix.0",
+    "user": "system.user.admin",
+    "ts": 1784044413955,
+    "acl": {
+      "object": 1636,
+      "state": 1636,
+      "owner": "system.user.admin",
+      "ownerGroup": "system.group.administrator"
+    }
+  },
+  "anker-solix.0.system.SITE1.statistics.daily_solar_to_battery": {
+    "_id": "anker-solix.0.system.SITE1.statistics.daily_solar_to_battery",
+    "type": "state",
+    "common": {
+      "name": "Solar → battery (today)",
+      "type": "number",
+      "role": "value.energy",
+      "read": true,
+      "write": false,
+      "unit": "kWh"
+    },
+    "native": {
+      "control": "daily_solar_to_battery"
+    },
+    "from": "system.adapter.anker-solix.0",
+    "user": "system.user.admin",
+    "ts": 1784044413955,
+    "acl": {
+      "object": 1636,
+      "state": 1636,
+      "owner": "system.user.admin",
+      "ownerGroup": "system.group.administrator"
+    }
+  },
+  "anker-solix.0.system.SITE1.statistics.daily_solar_to_grid": {
+    "_id": "anker-solix.0.system.SITE1.statistics.daily_solar_to_grid",
+    "type": "state",
+    "common": {
+      "name": "Solar → grid (today)",
+      "type": "number",
+      "role": "value.energy",
+      "read": true,
+      "write": false,
+      "unit": "kWh"
+    },
+    "native": {
+      "control": "daily_solar_to_grid"
+    },
+    "from": "system.adapter.anker-solix.0",
+    "user": "system.user.admin",
+    "ts": 1784044413955,
+    "acl": {
+      "object": 1636,
+      "state": 1636,
+      "owner": "system.user.admin",
+      "ownerGroup": "system.group.administrator"
+    }
+  },
+  "anker-solix.0.system.SITE1.statistics.daily_solar_to_home": {
+    "_id": "anker-solix.0.system.SITE1.statistics.daily_solar_to_home",
+    "type": "state",
+    "common": {
+      "name": "Solar → home (today)",
+      "type": "number",
+      "role": "value.energy",
+      "read": true,
+      "write": false,
+      "unit": "kWh"
+    },
+    "native": {
+      "control": "daily_solar_to_home"
+    },
+    "from": "system.adapter.anker-solix.0",
+    "user": "system.user.admin",
+    "ts": 1784044413955,
+    "acl": {
+      "object": 1636,
+      "state": 1636,
+      "owner": "system.user.admin",
+      "ownerGroup": "system.group.administrator"
+    }
+  },
+  "anker-solix.0.system.SITE1.statistics.energy_statistics_date": {
+    "_id": "anker-solix.0.system.SITE1.statistics.energy_statistics_date",
+    "type": "state",
+    "common": {
+      "name": "Statistics date",
+      "type": "string",
+      "role": "text",
+      "read": true,
+      "write": false
+    },
+    "native": {
+      "control": "energy_statistics_date"
+    },
+    "from": "system.adapter.anker-solix.0",
+    "user": "system.user.admin",
+    "ts": 1784044413955,
+    "acl": {
+      "object": 1636,
+      "state": 1636,
+      "owner": "system.user.admin",
+      "ownerGroup": "system.group.administrator"
+    }
+  },
+  "anker-solix.0.system.SITE1.statistics.month": {
+    "_id": "anker-solix.0.system.SITE1.statistics.month",
+    "type": "folder",
+    "common": {
+      "name": "Month"
+    },
+    "native": {},
+    "from": "system.adapter.anker-solix.0",
+    "user": "system.user.admin",
+    "ts": 1784044413955,
+    "acl": {
+      "object": 1636,
+      "state": 1636,
+      "owner": "system.user.admin",
+      "ownerGroup": "system.group.administrator"
+    }
+  },
+  "anker-solix.0.system.SITE1.statistics.month.3rd_party_pv_to_bat": {
+    "_id": "anker-solix.0.system.SITE1.statistics.month.3rd_party_pv_to_bat",
+    "type": "state",
+    "common": {
+      "name": "3rd-party PV → battery (Month)",
+      "type": "number",
+      "role": "value.energy",
+      "read": true,
+      "write": false,
+      "unit": "kWh"
+    },
+    "native": {
+      "control": "month_3rd_party_pv_to_bat"
+    },
+    "from": "system.adapter.anker-solix.0",
+    "user": "system.user.admin",
+    "ts": 1784044413955,
+    "acl": {
+      "object": 1636,
+      "state": 1636,
+      "owner": "system.user.admin",
+      "ownerGroup": "system.group.administrator"
+    }
+  },
+  "anker-solix.0.system.SITE1.statistics.month.battery_to_home": {
+    "_id": "anker-solix.0.system.SITE1.statistics.month.battery_to_home",
+    "type": "state",
+    "common": {
+      "name": "Battery → home (Month)",
+      "type": "number",
+      "role": "value.energy",
+      "read": true,
+      "write": false,
+      "unit": "kWh"
+    },
+    "native": {
+      "control": "month_battery_to_home"
+    },
+    "from": "system.adapter.anker-solix.0",
+    "user": "system.user.admin",
+    "ts": 1784044413955,
+    "acl": {
+      "object": 1636,
+      "state": 1636,
+      "owner": "system.user.admin",
+      "ownerGroup": "system.group.administrator"
+    }
+  },
+  "anker-solix.0.system.SITE1.statistics.month.charge_energy": {
+    "_id": "anker-solix.0.system.SITE1.statistics.month.charge_energy",
+    "type": "state",
+    "common": {
+      "name": "Battery charge (Month)",
+      "type": "number",
+      "role": "value.energy",
+      "read": true,
+      "write": false,
+      "unit": "kWh"
+    },
+    "native": {
+      "control": "month_charge_energy"
+    },
+    "from": "system.adapter.anker-solix.0",
+    "user": "system.user.admin",
+    "ts": 1784044413955,
+    "acl": {
+      "object": 1636,
+      "state": 1636,
+      "owner": "system.user.admin",
+      "ownerGroup": "system.group.administrator"
+    }
+  },
+  "anker-solix.0.system.SITE1.statistics.month.discharge_energy": {
+    "_id": "anker-solix.0.system.SITE1.statistics.month.discharge_energy",
+    "type": "state",
+    "common": {
+      "name": "Battery discharge (Month)",
+      "type": "number",
+      "role": "value.energy",
+      "read": true,
+      "write": false,
+      "unit": "kWh"
+    },
+    "native": {
+      "control": "month_discharge_energy"
+    },
+    "from": "system.adapter.anker-solix.0",
+    "user": "system.user.admin",
+    "ts": 1784044413955,
+    "acl": {
+      "object": 1636,
+      "state": 1636,
+      "owner": "system.user.admin",
+      "ownerGroup": "system.group.administrator"
+    }
+  },
+  "anker-solix.0.system.SITE1.statistics.month.energy_period": {
+    "_id": "anker-solix.0.system.SITE1.statistics.month.energy_period",
+    "type": "state",
+    "common": {
+      "name": "Month",
+      "type": "string",
+      "role": "text",
+      "read": true,
+      "write": false
+    },
+    "native": {
+      "control": "month_energy_period"
+    },
+    "from": "system.adapter.anker-solix.0",
+    "user": "system.user.admin",
+    "ts": 1784044413955,
+    "acl": {
+      "object": 1636,
+      "state": 1636,
+      "owner": "system.user.admin",
+      "ownerGroup": "system.group.administrator"
+    }
+  },
+  "anker-solix.0.system.SITE1.statistics.month.ev_charge": {
+    "_id": "anker-solix.0.system.SITE1.statistics.month.ev_charge",
+    "type": "state",
+    "common": {
+      "name": "EV charge (Month)",
+      "type": "number",
+      "role": "value.energy",
+      "read": true,
+      "write": false,
+      "unit": "kWh"
+    },
+    "native": {
+      "control": "month_ev_charge"
+    },
+    "from": "system.adapter.anker-solix.0",
+    "user": "system.user.admin",
+    "ts": 1784044413955,
+    "acl": {
+      "object": 1636,
+      "state": 1636,
+      "owner": "system.user.admin",
+      "ownerGroup": "system.group.administrator"
+    }
+  },
+  "anker-solix.0.system.SITE1.statistics.month.grid_export": {
+    "_id": "anker-solix.0.system.SITE1.statistics.month.grid_export",
+    "type": "state",
+    "common": {
+      "name": "Grid export (Month)",
+      "type": "number",
+      "role": "value.energy",
+      "read": true,
+      "write": false,
+      "unit": "kWh"
+    },
+    "native": {
+      "control": "month_grid_export"
+    },
+    "from": "system.adapter.anker-solix.0",
+    "user": "system.user.admin",
+    "ts": 1784044413955,
+    "acl": {
+      "object": 1636,
+      "state": 1636,
+      "owner": "system.user.admin",
+      "ownerGroup": "system.group.administrator"
+    }
+  },
+  "anker-solix.0.system.SITE1.statistics.month.grid_import": {
+    "_id": "anker-solix.0.system.SITE1.statistics.month.grid_import",
+    "type": "state",
+    "common": {
+      "name": "Grid import (Month)",
+      "type": "number",
+      "role": "value.energy",
+      "read": true,
+      "write": false,
+      "unit": "kWh"
+    },
+    "native": {
+      "control": "month_grid_import"
+    },
+    "from": "system.adapter.anker-solix.0",
+    "user": "system.user.admin",
+    "ts": 1784044413955,
+    "acl": {
+      "object": 1636,
+      "state": 1636,
+      "owner": "system.user.admin",
+      "ownerGroup": "system.group.administrator"
+    }
+  },
+  "anker-solix.0.system.SITE1.statistics.month.grid_to_battery": {
+    "_id": "anker-solix.0.system.SITE1.statistics.month.grid_to_battery",
+    "type": "state",
+    "common": {
+      "name": "Grid → battery (Month)",
+      "type": "number",
+      "role": "value.energy",
+      "read": true,
+      "write": false,
+      "unit": "kWh"
+    },
+    "native": {
+      "control": "month_grid_to_battery"
+    },
+    "from": "system.adapter.anker-solix.0",
+    "user": "system.user.admin",
+    "ts": 1784044413955,
+    "acl": {
+      "object": 1636,
+      "state": 1636,
+      "owner": "system.user.admin",
+      "ownerGroup": "system.group.administrator"
+    }
+  },
+  "anker-solix.0.system.SITE1.statistics.month.grid_to_home": {
+    "_id": "anker-solix.0.system.SITE1.statistics.month.grid_to_home",
+    "type": "state",
+    "common": {
+      "name": "Grid → home (Month)",
+      "type": "number",
+      "role": "value.energy",
+      "read": true,
+      "write": false,
+      "unit": "kWh"
+    },
+    "native": {
+      "control": "month_grid_to_home"
+    },
+    "from": "system.adapter.anker-solix.0",
+    "user": "system.user.admin",
+    "ts": 1784044413955,
+    "acl": {
+      "object": 1636,
+      "state": 1636,
+      "owner": "system.user.admin",
+      "ownerGroup": "system.group.administrator"
+    }
+  },
+  "anker-solix.0.system.SITE1.statistics.month.home_usage": {
+    "_id": "anker-solix.0.system.SITE1.statistics.month.home_usage",
+    "type": "state",
+    "common": {
+      "name": "Home usage (Month)",
+      "type": "number",
+      "role": "value.energy",
+      "read": true,
+      "write": false,
+      "unit": "kWh"
+    },
+    "native": {
+      "control": "month_home_usage"
+    },
+    "from": "system.adapter.anker-solix.0",
+    "user": "system.user.admin",
+    "ts": 1784044413955,
+    "acl": {
+      "object": 1636,
+      "state": 1636,
+      "owner": "system.user.admin",
+      "ownerGroup": "system.group.administrator"
+    }
+  },
+  "anker-solix.0.system.SITE1.statistics.month.solar_production": {
+    "_id": "anker-solix.0.system.SITE1.statistics.month.solar_production",
+    "type": "state",
+    "common": {
+      "name": "Solar production (Month)",
+      "type": "number",
+      "role": "value.energy",
+      "read": true,
+      "write": false,
+      "unit": "kWh"
+    },
+    "native": {
+      "control": "month_solar_production"
+    },
+    "from": "system.adapter.anker-solix.0",
+    "user": "system.user.admin",
+    "ts": 1784044413955,
+    "acl": {
+      "object": 1636,
+      "state": 1636,
+      "owner": "system.user.admin",
+      "ownerGroup": "system.group.administrator"
+    }
+  },
+  "anker-solix.0.system.SITE1.statistics.month.solar_to_battery": {
+    "_id": "anker-solix.0.system.SITE1.statistics.month.solar_to_battery",
+    "type": "state",
+    "common": {
+      "name": "Solar → battery (Month)",
+      "type": "number",
+      "role": "value.energy",
+      "read": true,
+      "write": false,
+      "unit": "kWh"
+    },
+    "native": {
+      "control": "month_solar_to_battery"
+    },
+    "from": "system.adapter.anker-solix.0",
+    "user": "system.user.admin",
+    "ts": 1784044413955,
+    "acl": {
+      "object": 1636,
+      "state": 1636,
+      "owner": "system.user.admin",
+      "ownerGroup": "system.group.administrator"
+    }
+  },
+  "anker-solix.0.system.SITE1.statistics.month.solar_to_home": {
+    "_id": "anker-solix.0.system.SITE1.statistics.month.solar_to_home",
+    "type": "state",
+    "common": {
+      "name": "Solar → home (Month)",
+      "type": "number",
+      "role": "value.energy",
+      "read": true,
+      "write": false,
+      "unit": "kWh"
+    },
+    "native": {
+      "control": "month_solar_to_home"
+    },
+    "from": "system.adapter.anker-solix.0",
+    "user": "system.user.admin",
+    "ts": 1784044413955,
+    "acl": {
+      "object": 1636,
+      "state": 1636,
+      "owner": "system.user.admin",
+      "ownerGroup": "system.group.administrator"
+    }
+  },
+  "anker-solix.0.system.SITE1.statistics.week": {
+    "_id": "anker-solix.0.system.SITE1.statistics.week",
+    "type": "folder",
+    "common": {
+      "name": "Week"
+    },
+    "native": {},
+    "from": "system.adapter.anker-solix.0",
+    "user": "system.user.admin",
+    "ts": 1784044413955,
+    "acl": {
+      "object": 1636,
+      "state": 1636,
+      "owner": "system.user.admin",
+      "ownerGroup": "system.group.administrator"
+    }
+  },
+  "anker-solix.0.system.SITE1.statistics.week.3rd_party_pv_to_bat": {
+    "_id": "anker-solix.0.system.SITE1.statistics.week.3rd_party_pv_to_bat",
+    "type": "state",
+    "common": {
+      "name": "3rd-party PV → battery (Week)",
+      "type": "number",
+      "role": "value.energy",
+      "read": true,
+      "write": false,
+      "unit": "kWh"
+    },
+    "native": {
+      "control": "week_3rd_party_pv_to_bat"
+    },
+    "from": "system.adapter.anker-solix.0",
+    "user": "system.user.admin",
+    "ts": 1784044413955,
+    "acl": {
+      "object": 1636,
+      "state": 1636,
+      "owner": "system.user.admin",
+      "ownerGroup": "system.group.administrator"
+    }
+  },
+  "anker-solix.0.system.SITE1.statistics.week.battery_to_home": {
+    "_id": "anker-solix.0.system.SITE1.statistics.week.battery_to_home",
+    "type": "state",
+    "common": {
+      "name": "Battery → home (Week)",
+      "type": "number",
+      "role": "value.energy",
+      "read": true,
+      "write": false,
+      "unit": "kWh"
+    },
+    "native": {
+      "control": "week_battery_to_home"
+    },
+    "from": "system.adapter.anker-solix.0",
+    "user": "system.user.admin",
+    "ts": 1784044413955,
+    "acl": {
+      "object": 1636,
+      "state": 1636,
+      "owner": "system.user.admin",
+      "ownerGroup": "system.group.administrator"
+    }
+  },
+  "anker-solix.0.system.SITE1.statistics.week.charge_energy": {
+    "_id": "anker-solix.0.system.SITE1.statistics.week.charge_energy",
+    "type": "state",
+    "common": {
+      "name": "Battery charge (Week)",
+      "type": "number",
+      "role": "value.energy",
+      "read": true,
+      "write": false,
+      "unit": "kWh"
+    },
+    "native": {
+      "control": "week_charge_energy"
+    },
+    "from": "system.adapter.anker-solix.0",
+    "user": "system.user.admin",
+    "ts": 1784044413955,
+    "acl": {
+      "object": 1636,
+      "state": 1636,
+      "owner": "system.user.admin",
+      "ownerGroup": "system.group.administrator"
+    }
+  },
+  "anker-solix.0.system.SITE1.statistics.week.discharge_energy": {
+    "_id": "anker-solix.0.system.SITE1.statistics.week.discharge_energy",
+    "type": "state",
+    "common": {
+      "name": "Battery discharge (Week)",
+      "type": "number",
+      "role": "value.energy",
+      "read": true,
+      "write": false,
+      "unit": "kWh"
+    },
+    "native": {
+      "control": "week_discharge_energy"
+    },
+    "from": "system.adapter.anker-solix.0",
+    "user": "system.user.admin",
+    "ts": 1784044413955,
+    "acl": {
+      "object": 1636,
+      "state": 1636,
+      "owner": "system.user.admin",
+      "ownerGroup": "system.group.administrator"
+    }
+  },
+  "anker-solix.0.system.SITE1.statistics.week.energy_period": {
+    "_id": "anker-solix.0.system.SITE1.statistics.week.energy_period",
+    "type": "state",
+    "common": {
+      "name": "Week",
+      "type": "string",
+      "role": "text",
+      "read": true,
+      "write": false
+    },
+    "native": {
+      "control": "week_energy_period"
+    },
+    "from": "system.adapter.anker-solix.0",
+    "user": "system.user.admin",
+    "ts": 1784044413955,
+    "acl": {
+      "object": 1636,
+      "state": 1636,
+      "owner": "system.user.admin",
+      "ownerGroup": "system.group.administrator"
+    }
+  },
+  "anker-solix.0.system.SITE1.statistics.week.ev_charge": {
+    "_id": "anker-solix.0.system.SITE1.statistics.week.ev_charge",
+    "type": "state",
+    "common": {
+      "name": "EV charge (Week)",
+      "type": "number",
+      "role": "value.energy",
+      "read": true,
+      "write": false,
+      "unit": "kWh"
+    },
+    "native": {
+      "control": "week_ev_charge"
+    },
+    "from": "system.adapter.anker-solix.0",
+    "user": "system.user.admin",
+    "ts": 1784044413955,
+    "acl": {
+      "object": 1636,
+      "state": 1636,
+      "owner": "system.user.admin",
+      "ownerGroup": "system.group.administrator"
+    }
+  },
+  "anker-solix.0.system.SITE1.statistics.week.grid_export": {
+    "_id": "anker-solix.0.system.SITE1.statistics.week.grid_export",
+    "type": "state",
+    "common": {
+      "name": "Grid export (Week)",
+      "type": "number",
+      "role": "value.energy",
+      "read": true,
+      "write": false,
+      "unit": "kWh"
+    },
+    "native": {
+      "control": "week_grid_export"
+    },
+    "from": "system.adapter.anker-solix.0",
+    "user": "system.user.admin",
+    "ts": 1784044413955,
+    "acl": {
+      "object": 1636,
+      "state": 1636,
+      "owner": "system.user.admin",
+      "ownerGroup": "system.group.administrator"
+    }
+  },
+  "anker-solix.0.system.SITE1.statistics.week.grid_import": {
+    "_id": "anker-solix.0.system.SITE1.statistics.week.grid_import",
+    "type": "state",
+    "common": {
+      "name": "Grid import (Week)",
+      "type": "number",
+      "role": "value.energy",
+      "read": true,
+      "write": false,
+      "unit": "kWh"
+    },
+    "native": {
+      "control": "week_grid_import"
+    },
+    "from": "system.adapter.anker-solix.0",
+    "user": "system.user.admin",
+    "ts": 1784044413955,
+    "acl": {
+      "object": 1636,
+      "state": 1636,
+      "owner": "system.user.admin",
+      "ownerGroup": "system.group.administrator"
+    }
+  },
+  "anker-solix.0.system.SITE1.statistics.week.grid_to_battery": {
+    "_id": "anker-solix.0.system.SITE1.statistics.week.grid_to_battery",
+    "type": "state",
+    "common": {
+      "name": "Grid → battery (Week)",
+      "type": "number",
+      "role": "value.energy",
+      "read": true,
+      "write": false,
+      "unit": "kWh"
+    },
+    "native": {
+      "control": "week_grid_to_battery"
+    },
+    "from": "system.adapter.anker-solix.0",
+    "user": "system.user.admin",
+    "ts": 1784044413955,
+    "acl": {
+      "object": 1636,
+      "state": 1636,
+      "owner": "system.user.admin",
+      "ownerGroup": "system.group.administrator"
+    }
+  },
+  "anker-solix.0.system.SITE1.statistics.week.grid_to_home": {
+    "_id": "anker-solix.0.system.SITE1.statistics.week.grid_to_home",
+    "type": "state",
+    "common": {
+      "name": "Grid → home (Week)",
+      "type": "number",
+      "role": "value.energy",
+      "read": true,
+      "write": false,
+      "unit": "kWh"
+    },
+    "native": {
+      "control": "week_grid_to_home"
+    },
+    "from": "system.adapter.anker-solix.0",
+    "user": "system.user.admin",
+    "ts": 1784044413955,
+    "acl": {
+      "object": 1636,
+      "state": 1636,
+      "owner": "system.user.admin",
+      "ownerGroup": "system.group.administrator"
+    }
+  },
+  "anker-solix.0.system.SITE1.statistics.week.home_usage": {
+    "_id": "anker-solix.0.system.SITE1.statistics.week.home_usage",
+    "type": "state",
+    "common": {
+      "name": "Home usage (Week)",
+      "type": "number",
+      "role": "value.energy",
+      "read": true,
+      "write": false,
+      "unit": "kWh"
+    },
+    "native": {
+      "control": "week_home_usage"
+    },
+    "from": "system.adapter.anker-solix.0",
+    "user": "system.user.admin",
+    "ts": 1784044413955,
+    "acl": {
+      "object": 1636,
+      "state": 1636,
+      "owner": "system.user.admin",
+      "ownerGroup": "system.group.administrator"
+    }
+  },
+  "anker-solix.0.system.SITE1.statistics.week.solar_production": {
+    "_id": "anker-solix.0.system.SITE1.statistics.week.solar_production",
+    "type": "state",
+    "common": {
+      "name": "Solar production (Week)",
+      "type": "number",
+      "role": "value.energy",
+      "read": true,
+      "write": false,
+      "unit": "kWh"
+    },
+    "native": {
+      "control": "week_solar_production"
+    },
+    "from": "system.adapter.anker-solix.0",
+    "user": "system.user.admin",
+    "ts": 1784044413955,
+    "acl": {
+      "object": 1636,
+      "state": 1636,
+      "owner": "system.user.admin",
+      "ownerGroup": "system.group.administrator"
+    }
+  },
+  "anker-solix.0.system.SITE1.statistics.week.solar_to_battery": {
+    "_id": "anker-solix.0.system.SITE1.statistics.week.solar_to_battery",
+    "type": "state",
+    "common": {
+      "name": "Solar → battery (Week)",
+      "type": "number",
+      "role": "value.energy",
+      "read": true,
+      "write": false,
+      "unit": "kWh"
+    },
+    "native": {
+      "control": "week_solar_to_battery"
+    },
+    "from": "system.adapter.anker-solix.0",
+    "user": "system.user.admin",
+    "ts": 1784044413955,
+    "acl": {
+      "object": 1636,
+      "state": 1636,
+      "owner": "system.user.admin",
+      "ownerGroup": "system.group.administrator"
+    }
+  },
+  "anker-solix.0.system.SITE1.statistics.week.solar_to_home": {
+    "_id": "anker-solix.0.system.SITE1.statistics.week.solar_to_home",
+    "type": "state",
+    "common": {
+      "name": "Solar → home (Week)",
+      "type": "number",
+      "role": "value.energy",
+      "read": true,
+      "write": false,
+      "unit": "kWh"
+    },
+    "native": {
+      "control": "week_solar_to_home"
+    },
+    "from": "system.adapter.anker-solix.0",
+    "user": "system.user.admin",
+    "ts": 1784044413955,
+    "acl": {
+      "object": 1636,
+      "state": 1636,
+      "owner": "system.user.admin",
+      "ownerGroup": "system.group.administrator"
+    }
+  },
+  "anker-solix.0.system.SITE1.statistics.year": {
+    "_id": "anker-solix.0.system.SITE1.statistics.year",
+    "type": "folder",
+    "common": {
+      "name": "Year"
+    },
+    "native": {},
+    "from": "system.adapter.anker-solix.0",
+    "user": "system.user.admin",
+    "ts": 1784044413955,
+    "acl": {
+      "object": 1636,
+      "state": 1636,
+      "owner": "system.user.admin",
+      "ownerGroup": "system.group.administrator"
+    }
+  },
+  "anker-solix.0.system.SITE1.statistics.year.3rd_party_pv_to_bat": {
+    "_id": "anker-solix.0.system.SITE1.statistics.year.3rd_party_pv_to_bat",
+    "type": "state",
+    "common": {
+      "name": "3rd-party PV → battery (Year)",
+      "type": "number",
+      "role": "value.energy",
+      "read": true,
+      "write": false,
+      "unit": "kWh"
+    },
+    "native": {
+      "control": "year_3rd_party_pv_to_bat"
+    },
+    "from": "system.adapter.anker-solix.0",
+    "user": "system.user.admin",
+    "ts": 1784044413955,
+    "acl": {
+      "object": 1636,
+      "state": 1636,
+      "owner": "system.user.admin",
+      "ownerGroup": "system.group.administrator"
+    }
+  },
+  "anker-solix.0.system.SITE1.statistics.year.battery_to_home": {
+    "_id": "anker-solix.0.system.SITE1.statistics.year.battery_to_home",
+    "type": "state",
+    "common": {
+      "name": "Battery → home (Year)",
+      "type": "number",
+      "role": "value.energy",
+      "read": true,
+      "write": false,
+      "unit": "kWh"
+    },
+    "native": {
+      "control": "year_battery_to_home"
+    },
+    "from": "system.adapter.anker-solix.0",
+    "user": "system.user.admin",
+    "ts": 1784044413955,
+    "acl": {
+      "object": 1636,
+      "state": 1636,
+      "owner": "system.user.admin",
+      "ownerGroup": "system.group.administrator"
+    }
+  },
+  "anker-solix.0.system.SITE1.statistics.year.charge_energy": {
+    "_id": "anker-solix.0.system.SITE1.statistics.year.charge_energy",
+    "type": "state",
+    "common": {
+      "name": "Battery charge (Year)",
+      "type": "number",
+      "role": "value.energy",
+      "read": true,
+      "write": false,
+      "unit": "kWh"
+    },
+    "native": {
+      "control": "year_charge_energy"
+    },
+    "from": "system.adapter.anker-solix.0",
+    "user": "system.user.admin",
+    "ts": 1784044413955,
+    "acl": {
+      "object": 1636,
+      "state": 1636,
+      "owner": "system.user.admin",
+      "ownerGroup": "system.group.administrator"
+    }
+  },
+  "anker-solix.0.system.SITE1.statistics.year.discharge_energy": {
+    "_id": "anker-solix.0.system.SITE1.statistics.year.discharge_energy",
+    "type": "state",
+    "common": {
+      "name": "Battery discharge (Year)",
+      "type": "number",
+      "role": "value.energy",
+      "read": true,
+      "write": false,
+      "unit": "kWh"
+    },
+    "native": {
+      "control": "year_discharge_energy"
+    },
+    "from": "system.adapter.anker-solix.0",
+    "user": "system.user.admin",
+    "ts": 1784044413955,
+    "acl": {
+      "object": 1636,
+      "state": 1636,
+      "owner": "system.user.admin",
+      "ownerGroup": "system.group.administrator"
+    }
+  },
+  "anker-solix.0.system.SITE1.statistics.year.energy_period": {
+    "_id": "anker-solix.0.system.SITE1.statistics.year.energy_period",
+    "type": "state",
+    "common": {
+      "name": "Year",
+      "type": "string",
+      "role": "text",
+      "read": true,
+      "write": false
+    },
+    "native": {
+      "control": "year_energy_period"
+    },
+    "from": "system.adapter.anker-solix.0",
+    "user": "system.user.admin",
+    "ts": 1784044413955,
+    "acl": {
+      "object": 1636,
+      "state": 1636,
+      "owner": "system.user.admin",
+      "ownerGroup": "system.group.administrator"
+    }
+  },
+  "anker-solix.0.system.SITE1.statistics.year.ev_charge": {
+    "_id": "anker-solix.0.system.SITE1.statistics.year.ev_charge",
+    "type": "state",
+    "common": {
+      "name": "EV charge (Year)",
+      "type": "number",
+      "role": "value.energy",
+      "read": true,
+      "write": false,
+      "unit": "kWh"
+    },
+    "native": {
+      "control": "year_ev_charge"
+    },
+    "from": "system.adapter.anker-solix.0",
+    "user": "system.user.admin",
+    "ts": 1784044413955,
+    "acl": {
+      "object": 1636,
+      "state": 1636,
+      "owner": "system.user.admin",
+      "ownerGroup": "system.group.administrator"
+    }
+  },
+  "anker-solix.0.system.SITE1.statistics.year.grid_export": {
+    "_id": "anker-solix.0.system.SITE1.statistics.year.grid_export",
+    "type": "state",
+    "common": {
+      "name": "Grid export (Year)",
+      "type": "number",
+      "role": "value.energy",
+      "read": true,
+      "write": false,
+      "unit": "kWh"
+    },
+    "native": {
+      "control": "year_grid_export"
+    },
+    "from": "system.adapter.anker-solix.0",
+    "user": "system.user.admin",
+    "ts": 1784044413955,
+    "acl": {
+      "object": 1636,
+      "state": 1636,
+      "owner": "system.user.admin",
+      "ownerGroup": "system.group.administrator"
+    }
+  },
+  "anker-solix.0.system.SITE1.statistics.year.grid_import": {
+    "_id": "anker-solix.0.system.SITE1.statistics.year.grid_import",
+    "type": "state",
+    "common": {
+      "name": "Grid import (Year)",
+      "type": "number",
+      "role": "value.energy",
+      "read": true,
+      "write": false,
+      "unit": "kWh"
+    },
+    "native": {
+      "control": "year_grid_import"
+    },
+    "from": "system.adapter.anker-solix.0",
+    "user": "system.user.admin",
+    "ts": 1784044413955,
+    "acl": {
+      "object": 1636,
+      "state": 1636,
+      "owner": "system.user.admin",
+      "ownerGroup": "system.group.administrator"
+    }
+  },
+  "anker-solix.0.system.SITE1.statistics.year.grid_to_battery": {
+    "_id": "anker-solix.0.system.SITE1.statistics.year.grid_to_battery",
+    "type": "state",
+    "common": {
+      "name": "Grid → battery (Year)",
+      "type": "number",
+      "role": "value.energy",
+      "read": true,
+      "write": false,
+      "unit": "kWh"
+    },
+    "native": {
+      "control": "year_grid_to_battery"
+    },
+    "from": "system.adapter.anker-solix.0",
+    "user": "system.user.admin",
+    "ts": 1784044413955,
+    "acl": {
+      "object": 1636,
+      "state": 1636,
+      "owner": "system.user.admin",
+      "ownerGroup": "system.group.administrator"
+    }
+  },
+  "anker-solix.0.system.SITE1.statistics.year.grid_to_home": {
+    "_id": "anker-solix.0.system.SITE1.statistics.year.grid_to_home",
+    "type": "state",
+    "common": {
+      "name": "Grid → home (Year)",
+      "type": "number",
+      "role": "value.energy",
+      "read": true,
+      "write": false,
+      "unit": "kWh"
+    },
+    "native": {
+      "control": "year_grid_to_home"
+    },
+    "from": "system.adapter.anker-solix.0",
+    "user": "system.user.admin",
+    "ts": 1784044413955,
+    "acl": {
+      "object": 1636,
+      "state": 1636,
+      "owner": "system.user.admin",
+      "ownerGroup": "system.group.administrator"
+    }
+  },
+  "anker-solix.0.system.SITE1.statistics.year.home_usage": {
+    "_id": "anker-solix.0.system.SITE1.statistics.year.home_usage",
+    "type": "state",
+    "common": {
+      "name": "Home usage (Year)",
+      "type": "number",
+      "role": "value.energy",
+      "read": true,
+      "write": false,
+      "unit": "kWh"
+    },
+    "native": {
+      "control": "year_home_usage"
+    },
+    "from": "system.adapter.anker-solix.0",
+    "user": "system.user.admin",
+    "ts": 1784044413955,
+    "acl": {
+      "object": 1636,
+      "state": 1636,
+      "owner": "system.user.admin",
+      "ownerGroup": "system.group.administrator"
+    }
+  },
+  "anker-solix.0.system.SITE1.statistics.year.solar_production": {
+    "_id": "anker-solix.0.system.SITE1.statistics.year.solar_production",
+    "type": "state",
+    "common": {
+      "name": "Solar production (Year)",
+      "type": "number",
+      "role": "value.energy",
+      "read": true,
+      "write": false,
+      "unit": "kWh"
+    },
+    "native": {
+      "control": "year_solar_production"
+    },
+    "from": "system.adapter.anker-solix.0",
+    "user": "system.user.admin",
+    "ts": 1784044413955,
+    "acl": {
+      "object": 1636,
+      "state": 1636,
+      "owner": "system.user.admin",
+      "ownerGroup": "system.group.administrator"
+    }
+  },
+  "anker-solix.0.system.SITE1.statistics.year.solar_to_battery": {
+    "_id": "anker-solix.0.system.SITE1.statistics.year.solar_to_battery",
+    "type": "state",
+    "common": {
+      "name": "Solar → battery (Year)",
+      "type": "number",
+      "role": "value.energy",
+      "read": true,
+      "write": false,
+      "unit": "kWh"
+    },
+    "native": {
+      "control": "year_solar_to_battery"
+    },
+    "from": "system.adapter.anker-solix.0",
+    "user": "system.user.admin",
+    "ts": 1784044413955,
+    "acl": {
+      "object": 1636,
+      "state": 1636,
+      "owner": "system.user.admin",
+      "ownerGroup": "system.group.administrator"
+    }
+  },
+  "anker-solix.0.system.SITE1.statistics.year.solar_to_home": {
+    "_id": "anker-solix.0.system.SITE1.statistics.year.solar_to_home",
+    "type": "state",
+    "common": {
+      "name": "Solar → home (Year)",
+      "type": "number",
+      "role": "value.energy",
+      "read": true,
+      "write": false,
+      "unit": "kWh"
+    },
+    "native": {
+      "control": "year_solar_to_home"
+    },
+    "from": "system.adapter.anker-solix.0",
+    "user": "system.user.admin",
+    "ts": 1784044413955,
+    "acl": {
+      "object": 1636,
+      "state": 1636,
+      "owner": "system.user.admin",
+      "ownerGroup": "system.group.administrator"
+    }
+  },
+  "anker-solix.0.system.SITE1.statistics.yesterday_charge_energy": {
+    "_id": "anker-solix.0.system.SITE1.statistics.yesterday_charge_energy",
+    "type": "state",
+    "common": {
+      "name": "Battery charge (yesterday)",
+      "type": "number",
+      "role": "value.energy",
+      "read": true,
+      "write": false,
+      "unit": "kWh"
+    },
+    "native": {
+      "control": "yesterday_charge_energy"
+    },
+    "from": "system.adapter.anker-solix.0",
+    "user": "system.user.admin",
+    "ts": 1784044413955,
+    "acl": {
+      "object": 1636,
+      "state": 1636,
+      "owner": "system.user.admin",
+      "ownerGroup": "system.group.administrator"
+    }
+  },
+  "anker-solix.0.system.SITE1.statistics.yesterday_discharge_energy": {
+    "_id": "anker-solix.0.system.SITE1.statistics.yesterday_discharge_energy",
+    "type": "state",
+    "common": {
+      "name": "Battery discharge (yesterday)",
+      "type": "number",
+      "role": "value.energy",
+      "read": true,
+      "write": false,
+      "unit": "kWh"
+    },
+    "native": {
+      "control": "yesterday_discharge_energy"
+    },
+    "from": "system.adapter.anker-solix.0",
+    "user": "system.user.admin",
+    "ts": 1784044413955,
+    "acl": {
+      "object": 1636,
+      "state": 1636,
+      "owner": "system.user.admin",
+      "ownerGroup": "system.group.administrator"
+    }
+  },
+  "anker-solix.0.system.SITE1.statistics.yesterday_home_usage": {
+    "_id": "anker-solix.0.system.SITE1.statistics.yesterday_home_usage",
+    "type": "state",
+    "common": {
+      "name": "Home usage (yesterday)",
+      "type": "number",
+      "role": "value.energy",
+      "read": true,
+      "write": false,
+      "unit": "kWh"
+    },
+    "native": {
+      "control": "yesterday_home_usage"
+    },
+    "from": "system.adapter.anker-solix.0",
+    "user": "system.user.admin",
+    "ts": 1784044413955,
+    "acl": {
+      "object": 1636,
+      "state": 1636,
+      "owner": "system.user.admin",
+      "ownerGroup": "system.group.administrator"
+    }
+  },
+  "anker-solix.0.system.SITE1.statistics.yesterday_solar_production": {
+    "_id": "anker-solix.0.system.SITE1.statistics.yesterday_solar_production",
+    "type": "state",
+    "common": {
+      "name": "Solar production (yesterday)",
+      "type": "number",
+      "role": "value.energy",
+      "read": true,
+      "write": false,
+      "unit": "kWh"
+    },
+    "native": {
+      "control": "yesterday_solar_production"
+    },
+    "from": "system.adapter.anker-solix.0",
+    "user": "system.user.admin",
+    "ts": 1784044413955,
+    "acl": {
+      "object": 1636,
+      "state": 1636,
+      "owner": "system.user.admin",
+      "ownerGroup": "system.group.administrator"
+    }
+  },
+  "curtailment": {
+    "_id": "curtailment",
+    "type": "device",
+    "common": {
+      "name": "Curtailment avoidance"
+    },
+    "native": {},
+    "from": "system.adapter.anker-solix.0",
+    "user": "system.user.admin",
+    "ts": 1784044413955,
+    "acl": {
+      "object": 1636,
+      "state": 1636,
+      "owner": "system.user.admin",
+      "ownerGroup": "system.group.administrator"
+    }
+  },
+  "curtailment.ac_limit_w": {
+    "_id": "curtailment.ac_limit_w",
+    "type": "state",
+    "common": {
+      "name": "AC export limit (active group)",
+      "type": "number",
+      "role": "value.power",
+      "unit": "W",
+      "read": true,
+      "write": false,
+      "def": 0
+    },
+    "native": {},
+    "from": "system.adapter.anker-solix.0",
+    "user": "system.user.admin",
+    "ts": 1784044413955,
+    "acl": {
+      "object": 1636,
+      "state": 1636,
+      "owner": "system.user.admin",
+      "ownerGroup": "system.group.administrator"
+    }
+  },
+  "curtailment.curtailment_end": {
+    "_id": "curtailment.curtailment_end",
+    "type": "state",
+    "common": {
+      "name": "Curtailment window end (hour)",
+      "type": "string",
+      "role": "text",
+      "read": true,
+      "write": false,
+      "def": ""
+    },
+    "native": {},
+    "from": "system.adapter.anker-solix.0",
+    "user": "system.user.admin",
+    "ts": 1784044413955,
+    "acl": {
+      "object": 1636,
+      "state": 1636,
+      "owner": "system.user.admin",
+      "ownerGroup": "system.group.administrator"
+    }
+  },
+  "curtailment.curtailment_start": {
+    "_id": "curtailment.curtailment_start",
+    "type": "state",
+    "common": {
+      "name": "Curtailment window start (hour)",
+      "type": "string",
+      "role": "text",
+      "read": true,
+      "write": false,
+      "def": ""
+    },
+    "native": {},
+    "from": "system.adapter.anker-solix.0",
+    "user": "system.user.admin",
+    "ts": 1784044413955,
+    "acl": {
+      "object": 1636,
+      "state": 1636,
+      "owner": "system.user.admin",
+      "ownerGroup": "system.group.administrator"
+    }
+  },
+  "curtailment.export_w": {
+    "_id": "curtailment.export_w",
+    "type": "state",
+    "common": {
+      "name": "AC/grid export target (W)",
+      "type": "number",
+      "role": "value.power",
+      "unit": "W",
+      "read": true,
+      "write": false,
+      "def": 0
+    },
+    "native": {},
+    "from": "system.adapter.anker-solix.0",
+    "user": "system.user.admin",
+    "ts": 1784044413955,
+    "acl": {
+      "object": 1636,
+      "state": 1636,
+      "owner": "system.user.admin",
+      "ownerGroup": "system.group.administrator"
+    }
+  },
+  "curtailment.live_pv_w": {
+    "_id": "curtailment.live_pv_w",
+    "type": "state",
+    "common": {
+      "name": "Live PV generation (W)",
+      "type": "number",
+      "role": "value.power",
+      "unit": "W",
+      "read": true,
+      "write": false,
+      "def": 0
+    },
+    "native": {},
+    "from": "system.adapter.anker-solix.0",
+    "user": "system.user.admin",
+    "ts": 1784044413955,
+    "acl": {
+      "object": 1636,
+      "state": 1636,
+      "owner": "system.user.admin",
+      "ownerGroup": "system.group.administrator"
+    }
+  },
+  "curtailment.max_charge_w": {
+    "_id": "curtailment.max_charge_w",
+    "type": "state",
+    "common": {
+      "name": "Max AC charge power (missing Wh ÷ remaining hours, W)",
+      "type": "number",
+      "role": "value.power",
+      "unit": "W",
+      "read": true,
+      "write": false,
+      "def": 0
+    },
+    "native": {},
+    "from": "system.adapter.anker-solix.0",
+    "user": "system.user.admin",
+    "ts": 1784044413955,
+    "acl": {
+      "object": 1636,
+      "state": 1636,
+      "owner": "system.user.admin",
+      "ownerGroup": "system.group.administrator"
+    }
+  },
+  "curtailment.missing_charge_wh": {
+    "_id": "curtailment.missing_charge_wh",
+    "type": "state",
+    "common": {
+      "name": "Missing charge energy to full SOC (active phase, Wh)",
+      "type": "number",
+      "role": "value.energy",
+      "unit": "Wh",
+      "read": true,
+      "write": false,
+      "def": 0
+    },
+    "native": {},
+    "from": "system.adapter.anker-solix.0",
+    "user": "system.user.admin",
+    "ts": 1784044413955,
+    "acl": {
+      "object": 1636,
+      "state": 1636,
+      "owner": "system.user.admin",
+      "ownerGroup": "system.group.administrator"
+    }
+  },
+  "curtailment.phase": {
+    "_id": "curtailment.phase",
+    "type": "state",
+    "common": {
+      "name": "Curtailment phase",
+      "type": "string",
+      "role": "text",
+      "read": true,
+      "write": false,
+      "def": "idle"
+    },
+    "native": {},
+    "from": "system.adapter.anker-solix.0",
+    "user": "system.user.admin",
+    "ts": 1784044413955,
+    "acl": {
+      "object": 1636,
+      "state": 1636,
+      "owner": "system.user.admin",
+      "ownerGroup": "system.group.administrator"
+    }
+  },
+  "curtailment.remaining_hours": {
+    "_id": "curtailment.remaining_hours",
+    "type": "state",
+    "common": {
+      "name": "Remaining curtailment hours",
+      "type": "number",
+      "role": "value",
+      "unit": "h",
+      "read": true,
+      "write": false,
+      "def": 0
+    },
+    "native": {},
+    "from": "system.adapter.anker-solix.0",
+    "user": "system.user.admin",
+    "ts": 1784044413955,
+    "acl": {
+      "object": 1636,
+      "state": 1636,
+      "owner": "system.user.admin",
+      "ownerGroup": "system.group.administrator"
+    }
+  },
+  "curtailment.soc_percent": {
+    "_id": "curtailment.soc_percent",
+    "type": "state",
+    "common": {
+      "name": "Battery SOC used for curtailment (%)",
+      "type": "number",
+      "role": "value.battery",
+      "unit": "%",
+      "min": 0,
+      "max": 100,
+      "read": true,
+      "write": false,
+      "def": 0
+    },
+    "native": {},
+    "from": "system.adapter.anker-solix.0",
+    "user": "system.user.admin",
+    "ts": 1784044413955,
+    "acl": {
+      "object": 1636,
+      "state": 1636,
+      "owner": "system.user.admin",
+      "ownerGroup": "system.group.administrator"
+    }
+  },
+  "curtailment.today": {
+    "_id": "curtailment.today",
+    "type": "state",
+    "common": {
+      "name": "Curtailment expected today",
+      "type": "boolean",
+      "role": "indicator",
+      "read": true,
+      "write": false,
+      "def": false
+    },
+    "native": {},
+    "from": "system.adapter.anker-solix.0",
+    "user": "system.user.admin",
+    "ts": 1784044413955,
+    "acl": {
+      "object": 1636,
+      "state": 1636,
+      "owner": "system.user.admin",
+      "ownerGroup": "system.group.administrator"
+    }
+  },
+  "info": {
+    "_id": "info",
+    "type": "channel",
+    "common": {
+      "name": "Information"
+    },
+    "native": {},
+    "from": "system.adapter.anker-solix.0",
+    "user": "system.user.admin",
+    "ts": 1784044413955,
+    "acl": {
+      "object": 1636,
+      "state": 1636,
+      "owner": "system.user.admin",
+      "ownerGroup": "system.group.administrator"
+    }
+  },
+  "info.connection": {
+    "_id": "info.connection",
+    "type": "state",
+    "common": {
+      "name": "Cloud connected",
+      "type": "boolean",
+      "role": "indicator.reachability",
+      "read": true,
+      "write": false
+    },
+    "native": {},
+    "from": "system.adapter.anker-solix.0",
+    "user": "system.user.admin",
+    "ts": 1784044413955,
+    "acl": {
+      "object": 1636,
+      "state": 1636,
+      "owner": "system.user.admin",
+      "ownerGroup": "system.group.administrator"
+    },
+    "val": true,
+    "ack": true
+  },
+  "info.pythonReady": {
+    "_id": "info.pythonReady",
+    "type": "state",
+    "common": {
+      "name": "Python dependencies ready",
+      "type": "boolean",
+      "role": "indicator",
+      "read": true,
+      "write": false
+    },
+    "native": {},
+    "from": "system.adapter.anker-solix.0",
+    "user": "system.user.admin",
+    "ts": 1784044413955,
+    "acl": {
+      "object": 1636,
+      "state": 1636,
+      "owner": "system.user.admin",
+      "ownerGroup": "system.group.administrator"
+    },
+    "val": true,
+    "ack": true
+  },
+  "services": {
+    "_id": "services",
+    "type": "device",
+    "common": {
+      "name": "Services (HA-compatible)"
+    },
+    "native": {},
+    "from": "system.adapter.anker-solix.0",
+    "user": "system.user.admin",
+    "ts": 1784044413955,
+    "acl": {
+      "object": 1636,
+      "state": 1636,
+      "owner": "system.user.admin",
+      "ownerGroup": "system.group.administrator"
+    }
+  }
+}

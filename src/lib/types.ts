@@ -103,6 +103,8 @@ export interface BridgeConfig {
 	enableHes?: boolean;
 	enablePowerPanel?: boolean;
 	enableInverter?: boolean;
+	/** Per-instance jitter (seconds, 0–840) for period energy schedule; set once at install. */
+	periodScheduleOffsetSec?: number;
 }
 
 export interface BridgeSetConfig extends BridgeConfig {

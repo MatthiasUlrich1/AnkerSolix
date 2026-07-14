@@ -27,6 +27,11 @@ def test_period_schedule_labels() -> None:
     assert period_schedule_label(PERIOD_YEAR) == "23:30"
 
 
+def test_period_schedule_label_with_offset() -> None:
+    config = {"periodScheduleOffsetSec": 300}
+    assert period_schedule_label(PERIOD_WEEK, config) == "23:05"
+
+
 def test_week_not_due_before_23() -> None:
     now = datetime(2026, 5, 24, 22, 30, tzinfo=BERLIN)
     due = periods_due_for_fetch([PERIOD_WEEK], {}, now)
@@ -41,6 +46,16 @@ def test_week_due_after_23_once_per_day() -> None:
         [PERIOD_WEEK], {PERIOD_WEEK: "2026-05-24"}, now
     )
     assert due_again == []
+
+
+def test_week_not_due_before_offset() -> None:
+    config = {"periodScheduleOffsetSec": 600}
+    now = datetime(2026, 5, 24, 23, 5, tzinfo=BERLIN)
+    due = periods_due_for_fetch([PERIOD_WEEK], {}, now, config=config)
+    assert due == []
+    now_after = datetime(2026, 5, 24, 23, 11, tzinfo=BERLIN)
+    due = periods_due_for_fetch([PERIOD_WEEK], {}, now_after, config=config)
+    assert due == [PERIOD_WEEK]
 
 
 def test_staggered_times_same_evening() -> None:

@@ -4,25 +4,30 @@
 
 ioBroker adapter for **Anker Solix** power systems (Solarbank, Smart Meter, PPS, EV charger, and more). It is based on the Home Assistant integration [thomluther/ha-anker-solix](https://github.com/thomluther/ha-anker-solix) and uses the same unofficial **solixapi** Python library.
 
+> **Linux only — not for Windows or macOS production hosts**
+>
+> This adapter is published for **Linux** ioBroker hosts only (`package.json` `"os": ["linux"]`). **`iobroker install anker-solix` is blocked on Windows and macOS.** Production use requires a Linux host (Docker, NAS, Raspberry Pi, HA Supervised ioBroker, etc.) with **Python 3.12+** and a long-lived Python bridge subprocess. Windows/macOS are excluded because ioBroker production deployments are Linux-based, CI validates Linux only, and the Python venv + MQTT/cloud bridge model is not supported or tested on desktop OSes. See [Platform requirements](#platform-requirements-linux-only).
+
 A small **Python bridge** (persistent daemon, like HA) polls the Anker cloud and optional MQTT, then exposes values as ioBroker states. Optional entity groups (since v0.9.0) mirror HA’s scope: only **Core** is on by default to limit API load.
 
 ## Table of contents
 
 1. [Disclaimer & usage terms](#disclaimer--usage-terms)
-2. [How this adapter works in ioBroker](#how-this-adapter-works-in-iobroker)
-3. [Requirements & installation](#requirements--installation)
-4. [Configuration](#configuration)
-5. [Anker account & login cache](#anker-account--login-cache)
-6. [Limitations](#limitations)
-7. [Supported devices](#supported-devices)
-8. [State structure & entity groups](#state-structure--entity-groups)
-9. [MQTT](#mqtt-managed-devices)
-10. [Special device notes](#special-device-notes)
-11. [Troubleshooting login / poll](#troubleshooting-login--poll)
-12. [Services](#services)
-13. [Credits & further reading](#credits--further-reading)
-14. [Changelog](#changelog)
-15. [Publishing](#publishing-npm--iobroker-catalog)
+2. [Platform requirements (Linux only)](#platform-requirements-linux-only)
+3. [How this adapter works in ioBroker](#how-this-adapter-works-in-iobroker)
+4. [Requirements & installation](#requirements--installation)
+5. [Configuration](#configuration)
+6. [Anker account & login cache](#anker-account--login-cache)
+7. [Limitations](#limitations)
+8. [Supported devices](#supported-devices)
+9. [State structure & entity groups](#state-structure--entity-groups)
+10. [MQTT](#mqtt-managed-devices)
+11. [Special device notes](#special-device-notes)
+12. [Troubleshooting login / poll](#troubleshooting-login--poll)
+13. [Services](#services)
+14. [Credits & further reading](#credits--further-reading)
+15. [Changelog](#changelog)
+16. [Publishing](#publishing-npm--iobroker-catalog)
 
 ---
 
@@ -31,6 +36,25 @@ A small **Python bridge** (persistent daemon, like HA) polls the Anker cloud and
 This adapter is **not** affiliated with Anker. Trademarks and product names belong to their respective owners.
 
 The adapter uses an **unofficial** Python library to talk to the Anker Power **cloud API** (same as the mobile app). That API can change or break at any time. Improper settings may affect devices; the user accepts these risks when enabling the instance (**Account** tab). Future adapter updates may extend monitoring or controls.
+
+---
+
+## Platform requirements (Linux only)
+
+| Platform | Supported for production? | Notes |
+|----------|-------------------------|-------|
+| **Linux** (Debian, Ubuntu, Docker, Proxmox, NAS, RPi, HA Supervised ioBroker) | **Yes** | Target platform; CI tests Ubuntu; Python 3.12+ venv on the host |
+| **Windows** | **No** | npm `os` field blocks install; Python bridge not validated on Windows ioBroker |
+| **macOS** | **No** | Same as Windows — not in npm `os` list; no CI coverage |
+
+**Why Linux only?**
+
+1. **ioBroker production hosts are Linux** — Docker images, NAS packages, and typical community setups run Linux. That is what this adapter is built and tested for.
+2. **Persistent Python bridge** — The adapter keeps a long-lived Python daemon (`python/bridge.py`) with a venv under the adapter directory. Paths, signals, and venv layout follow Linux conventions (`python3`, `bin/python3`).
+3. **CI and adapter-check** — GitHub Actions runs integration tests on `ubuntu-latest` only; `package.json` `"os": ["linux"]` matches that matrix (E3027).
+4. **No desktop support commitment** — Some installer helpers detect Windows for local development, but **Windows/macOS are not supported production targets** and cannot install from the ioBroker catalog.
+
+Use a Linux ioBroker host (VM, Docker, or dedicated hardware) for this adapter.
 
 ---
 
@@ -53,7 +77,7 @@ Poll interval should be **60–180 s** (same recommendation as HA). Site list is
 
 - ioBroker **js-controller >= 6**, **admin >= 7.6**
 - **Node.js >= 22**
-- **Python 3.12+** on the ioBroker host (`python3-venv` + `python3-pip` recommended on Debian/Ubuntu). Production targets are **Linux** (Docker, HA add-on, typical ioBroker hosts); `package.json` declares `"os": ["linux"]` accordingly (adapter-check S3031). **Windows** (dev/testing): installer tries `py -3.13`, `py -3.12`, then `py -0p` paths; installs **`tzdata`** for `Europe/Berlin`.
+- **Linux** ioBroker host with **Python 3.12+** (`python3-venv` + `python3-pip` recommended on Debian/Ubuntu). Docker, NAS, and HA Supervised ioBroker on Linux are typical targets.
 
 Python dependencies install into the adapter folder (`python/.venv` or `python/site-packages`). Since v0.2.0: automatic on start (**Options** → `autoInstallPython`) or button **Install Python dependencies**.
 
@@ -319,6 +343,10 @@ Tab **Abregelungsvermeidung** / **Curtailment avoidance**: requires the [ioBroke
 
 ## Changelog
 
+### 0.10.79
+
+- **Repository re-review:** per-instance period energy schedule jitter (no worldwide fixed cloud timestamps); sensor-kind state name migration; remove unused `curtailmentModeBefore`; prominent Linux-only README notice
+
 ### 0.10.78
 
 - **Adapter-check:** use `adapter.setTimeout` instead of plain `setTimeout` (E5005)
@@ -571,13 +599,13 @@ Tab **Abregelungsvermeidung** / **Curtailment avoidance**: requires the [ioBroke
 
 - Usage mode `preset_usage_mode`, AC fast charge switch
 
-### 0.6.x
+### 0.6.0
 
-- Persistent bridge daemon, HA-aligned poll, multisystem controls, rate-limit fixes
+- Persistent bridge daemon, HA-aligned poll, multisystem controls, rate-limit fixes (see [CHANGELOG_OLD.md](CHANGELOG_OLD.md) for 0.6.1–0.6.5)
 
-### 0.2.x – 0.5.x
+### 0.5.0
 
-- Python auto-install, device selection, staggered polling, repository rename
+- Python auto-install, device selection, staggered polling, repository rename (see [CHANGELOG_OLD.md](CHANGELOG_OLD.md) for 0.2.0–0.4.2)
 
 Older release notes: [CHANGELOG_OLD.md](CHANGELOG_OLD.md) and git history.
 

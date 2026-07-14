@@ -52,14 +52,13 @@ declare global {
 			selectedDeviceIds: string | string[];
 			/** Populated by admin sendTo – login cache status line */
 			authCacheStatusLine?: string;
-			/** Optional curtailment avoidance (solarprognose forecast). */
+			/** Per-instance jitter (seconds, 0–840) for period energy schedule; assigned once at first start. */
+			periodScheduleOffsetSec?: number;
 			enableCurtailmentAvoidance?: boolean;
 			/** Minimum live PV (W) before curtailment controls apply (default 50). */
 			curtailmentMinPvW?: number;
 			/** Base path to hourly forecast objects (without .power). */
 			curtailmentForecastPath?: string;
-			/** @deprecated unused – mode before window is not changed */
-			curtailmentModeBefore?: "smartmeter" | "smart";
 			curtailmentModeAfter?: "smartmeter" | "smart";
 			curtailmentHasCombiner?: boolean;
 			curtailmentStandaloneDeviceId?: string;

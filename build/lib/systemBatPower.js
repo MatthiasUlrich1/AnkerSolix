@@ -72,18 +72,20 @@ async function ensureSystemBatPowerStates(adapter, siteId) {
   await hierarchy.ensureChannel(`${base}.sensors`, "Sensors");
   for (const entityId of SYSTEM_BAT_POWER_IDS) {
     const stateId = `${base}.sensors.${entityId}`;
+    const common = {
+      name: SYSTEM_BAT_POWER_LABELS[entityId],
+      type: "number",
+      role: "value.power",
+      unit: "W",
+      read: true,
+      write: false
+    };
     await adapter.setObjectNotExistsAsync(stateId, {
       type: "state",
-      common: {
-        name: SYSTEM_BAT_POWER_LABELS[entityId],
-        type: "number",
-        role: "value.power",
-        unit: "W",
-        read: true,
-        write: false
-      },
+      common,
       native: { aggregated: true }
     });
+    await adapter.extendObject(stateId, { common });
   }
 }
 async function sumSolarbankBatPowerToSystem(adapter, siteId, solarbankSns) {

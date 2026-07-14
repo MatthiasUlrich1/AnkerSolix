@@ -372,6 +372,7 @@ export async function syncDevices(adapter: ioBroker.Adapter, devices: BridgeDevi
 				meta?.kind === "switch" ||
 				meta?.kind === "list" ||
 				meta?.kind === "text" ||
+				meta?.kind === "sensor" ||
 				entityId === "ev_charger_mode_status"
 			) {
 				await adapter.extendObject(stateId, { common });

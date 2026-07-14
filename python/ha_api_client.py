@@ -279,7 +279,7 @@ class IoBrokerAnkerApiClient:
         enabled = enabled_periods(self.config)
         if not enabled:
             return []
-        return periods_due_for_fetch(enabled, self._period_last_fetch)
+        return periods_due_for_fetch(enabled, self._period_last_fetch, config=self.config)
 
     async def _update_energy_periods(self) -> bool:
         periods = self._periods_due_list()
@@ -305,7 +305,7 @@ class IoBrokerAnkerApiClient:
                 self._period_last_fetch[period] = today
             self._last_period_energy_updated = updated
             schedule_hint = ", ".join(
-                f"{p} {period_schedule_label(p)}" for p in updated
+                f"{p} {period_schedule_label(p, self.config)}" for p in updated
             )
             self._logger.info(
                 "Period energy updated for %s (daily schedule Europe/Berlin: %s)",
