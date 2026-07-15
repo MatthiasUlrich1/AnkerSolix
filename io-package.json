@@ -1,9 +1,22 @@
 {
 	"common": {
 		"name": "anker-solix",
-		"version": "0.10.80",
+		"version": "0.10.81",
 		"messagebox": true,
 		"news": {
+			"0.10.81": {
+				"en": "Repository review: standard CI workflow (Linux+Windows tests on every push/tag), package.json os linux+win32, macOS not supported",
+				"de": "Repository-Review: Standard-CI (Linux+Windows bei jedem Push/Tag), package.json os linux+win32, macOS nicht unterstützt",
+				"ru": "Standard CI workflow and Linux+Windows platform declaration",
+				"pt": "Standard CI workflow and Linux+Windows platform declaration",
+				"nl": "Standard CI workflow and Linux+Windows platform declaration",
+				"fr": "Standard CI workflow and Linux+Windows platform declaration",
+				"it": "Standard CI workflow and Linux+Windows platform declaration",
+				"es": "Standard CI workflow and Linux+Windows platform declaration",
+				"pl": "Standard CI workflow and Linux+Windows platform declaration",
+				"uk": "Standard CI workflow and Linux+Windows platform declaration",
+				"zh-cn": "仓库审查：标准 CI 工作流与 Linux+Windows 平台声明"
+			},
 			"0.10.80": {
 				"en": "Fix periodScheduleOffsetSec persistence: use extendForeignObjectAsync (no invalid anker-solix.0.system.adapter.* object in dumps)",
 				"de": "Fix periodScheduleOffsetSec: extendForeignObjectAsync (kein ungültiges anker-solix.0.system.adapter.*-Objekt mehr in Dumps)",
@@ -81,19 +94,6 @@
 				"pl": "Object hierarchy and role fixes for repository review",
 				"uk": "Object hierarchy and role fixes for repository review",
 				"zh-cn": "对象结构层级与角色修复（仓库审查）"
-			},
-			"0.10.74": {
-				"en": "TypeScript 6, workflow actions @v1, npm pack policy test (adapter-check cleanup)",
-				"de": "TypeScript 6, Workflow-Actions @v1, npm-pack-Policy-Test (Adapter-Check)",
-				"ru": "TypeScript 6 and repo-check cleanup",
-				"pt": "TypeScript 6 and repo-check cleanup",
-				"nl": "TypeScript 6 and repo-check cleanup",
-				"fr": "TypeScript 6 and repo-check cleanup",
-				"it": "TypeScript 6 and repo-check cleanup",
-				"es": "TypeScript 6 and repo-check cleanup",
-				"pl": "TypeScript 6 and repo-check cleanup",
-				"uk": "TypeScript 6 and repo-check cleanup",
-				"zh-cn": "TypeScript 6 与仓库检查项清理"
 			}
 		},
 		"titleLang": {

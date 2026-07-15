@@ -1,6 +1,6 @@
 {
   "name": "iobroker.anker-solix",
-  "version": "0.10.80",
+  "version": "0.10.81",
   "description": "ioBroker adapter for Anker Solix (based on ha-anker-solix)",
   "author": {
     "name": "MatthiasUlrich1",
@@ -28,7 +28,8 @@
     "node": ">= 22"
   },
   "os": [
-    "linux"
+    "linux",
+    "win32"
   ],
   "dependencies": {
     "@iobroker/adapter-core": "^3.4.1"

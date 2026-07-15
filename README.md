@@ -4,9 +4,15 @@
 
 ioBroker adapter for **Anker Solix** power systems (Solarbank, Smart Meter, PPS, EV charger, and more). It is based on the Home Assistant integration [thomluther/ha-anker-solix](https://github.com/thomluther/ha-anker-solix) and uses the same unofficial **solixapi** Python library.
 
-> **Supported platforms**
+> **Supported operating systems**
 >
-> **Linux** is the primary production target (Docker, NAS, Raspberry Pi, HA Supervised ioBroker). **Windows** is **supported and tested** (Python 3.12+ via `py -3.12` / `py -3.13` or `pythonPath` in admin). **macOS** uses the same Unix code path as Linux (Python 3.12+ via Homebrew recommended); not covered by CI. See [Supported platforms](#supported-platforms).
+> | OS | Status |
+> |----|--------|
+> | **Linux** | Primary production target — **CI-tested** (Docker, NAS, Raspberry Pi, …) |
+> | **Windows** | **Supported and tested** on ioBroker for Windows (Python 3.12+) |
+> | **macOS** | **Not supported** — automatic Python/venv installation was not verified |
+>
+> npm / `package.json` catalog install: **`linux`** and **`win32`** only. Details: [Supported platforms](#supported-platforms).
 
 A small **Python bridge** (persistent daemon, like HA) polls the Anker cloud and optional MQTT, then exposes values as ioBroker states. Optional entity groups (since v0.9.0) mirror HA’s scope: only **Core** is on by default to limit API load.
 
@@ -43,11 +49,11 @@ The adapter uses an **unofficial** Python library to talk to the Anker Power **c
 
 | Platform | Status | Notes |
 |----------|--------|-------|
-| **Linux** (Debian, Ubuntu, Docker, Proxmox, NAS, RPi, HA Supervised ioBroker) | **Primary / CI-tested** | Recommended for production; Python 3.12+ venv (`python3-venv`, `python3-pip`) |
-| **Windows** | **Supported & tested** | Verified on ioBroker for Windows; installer tries `py -3.13`, `py -3.12`, then Program Files paths; set **pythonPath** in admin if needed; installs **`tzdata`** for `Europe/Berlin`. `package.json` declares `"linux"` for CI (E3027); use `iobroker upload` / local install on Windows hosts |
-| **macOS** | **Best-effort (Unix path)** | Same code as Linux; `brew install python@3.12` if auto-install fails; not tested in CI |
+| **Linux** (Debian, Ubuntu, Docker, Proxmox, NAS, RPi) | **Primary / CI-tested** | Recommended for production; Python 3.12+ venv (`python3-venv`, `python3-pip`) |
+| **Windows** (ioBroker for Windows) | **Supported & tested** | Verified on a real ioBroker Windows host; installer tries `py -3.13`, `py -3.12`, then Program Files paths; set **pythonPath** in admin if needed; installs **`tzdata`** for `Europe/Berlin` |
+| **macOS** | **Not supported** | Same Unix code path as Linux in theory, but automatic Python/venv bootstrap was **not tested** — no npm catalog support (`package.json` has no `darwin`) |
 
-**Linux** remains the main target for ioBroker deployments (Docker, NAS, dedicated hardware). **Windows** has dedicated support in the adapter (Python launcher, venv under `python\.venv`, path handling) and has been verified on a real ioBroker Windows host. **macOS** is not excluded in code but is not CI-tested.
+**Linux** remains the main target for ioBroker deployments. **Windows** is fully supported in code and verified manually; GitHub Actions runs adapter tests on **`ubuntu-latest`** and **`windows-latest`**. **macOS** is excluded from support claims until Python installation is tested.
 
 ---
 
@@ -73,7 +79,7 @@ Poll interval should be **60–180 s** (same recommendation as HA). Site list is
 - **Python 3.12+** on the ioBroker host:
   - **Linux:** `python3-venv` + `python3-pip` (Debian/Ubuntu) — primary production target
   - **Windows:** Python 3.12+ from python.org or `py -3.12`; adapter installer handles venv and **`tzdata`**
-  - **macOS:** `brew install python@3.12` if automatic install fails
+  - **macOS:** **not supported** (automatic Python install not verified)
 
 Python dependencies install into the adapter folder (`python/.venv` or `python/site-packages`). Since v0.2.0: automatic on start (**Options** → `autoInstallPython`) or button **Install Python dependencies**.
 
@@ -338,6 +344,10 @@ Tab **Abregelungsvermeidung** / **Curtailment avoidance**: requires the [ioBroke
 ---
 
 ## Changelog
+
+### 0.10.81
+
+- **Repository review (mcm1957):** restore standard `test-and-release` workflow — adapter tests on every push/tag (Linux + Windows matrix), deploy only after all jobs succeed (no `always()` / no skipped-tests workaround); declare **`linux` + `win32`** in `package.json`; README: Windows supported & tested, **macOS not supported**
 
 ### 0.10.80
 
@@ -613,7 +623,7 @@ Older release notes: [CHANGELOG_OLD.md](CHANGELOG_OLD.md) and git history.
 
 ## Publishing (npm & ioBroker catalog)
 
-**npm:** Release via git tag (`v*`) and CI deploy after [adapter check](https://adaptercheck.iobroker.in/) is green. Register in [ioBroker.repositories](https://github.com/ioBroker/ioBroker.repositories) once the package is on npm.
+**npm:** Release via git tag (`v*`) and CI deploy after [adapter check](https://adaptercheck.iobroker.in/) is green. Publishing uses **npm trusted publishing** (OIDC from GitHub Actions — no long-lived npm token). Classic automation tokens are deprecated by npm from **January 2027**; this adapter is already on trusted publishing. Register in [ioBroker.repositories](https://github.com/ioBroker/ioBroker.repositories) once the package is on npm.
 
 **Before each release** (enforced by `npm run test:package` → `test/io-package-policy.js`):
 

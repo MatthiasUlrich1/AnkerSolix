@@ -2,7 +2,12 @@
 
 Current releases **0.10.63 and newer** (except the latest seven messagebox news entries) are documented in [README.md](README.md#changelog).
 
-Removed from `common.news` when trimming to the ioBroker repository limit of **7** entries: 0.10.63 and older (see README), plus versions never published to npm (e.g. 0.10.50–0.10.53, 0.10.58), **0.10.69**, **0.10.70**, **0.10.71**, **0.10.72**, and **0.10.73**.
+Removed from `common.news` when trimming to the ioBroker repository limit of **7** entries: 0.10.63 and older (see README), plus versions never published to npm (e.g. 0.10.50–0.10.53, 0.10.58), **0.10.69**, **0.10.70**, **0.10.71**, **0.10.72**, **0.10.73**, and **0.10.74**.
+
+## 0.10.74
+
+- **en:** TypeScript 6, workflow actions @v1, npm pack policy test (adapter-check cleanup)
+- **de:** TypeScript 6, Workflow-Actions @v1, npm-pack-Policy-Test (Adapter-Check)
 
 ## 0.10.73
 
