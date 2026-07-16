@@ -28,6 +28,7 @@ var import_authCacheBackup = require("./lib/authCacheBackup");
 var import_configHelpers = require("./lib/configHelpers");
 var import_controlQueue = require("./lib/controlQueue");
 var import_curtailmentPower = require("./lib/curtailmentPower");
+var import_curtailmentForecast = require("./lib/curtailmentForecast");
 var import_curtailmentRunner = require("./lib/curtailmentRunner");
 var import_curtailmentStates = require("./lib/curtailmentStates");
 var import_ensurePython = require("./lib/ensurePython");
@@ -374,7 +375,8 @@ class AnkerSolix extends utils.Adapter {
     const modeAfter = this.config.curtailmentModeAfter === "smart" ? "smart" : "smartmeter";
     return {
       enabled: true,
-      forecastBasePath: (this.config.curtailmentForecastPath || "solarprognose.0.forecast.00.hourly").trim(),
+      forecastBasePath: (this.config.curtailmentForecastPath || "pvforecast.0.plants.pv").trim(),
+      forecastResolutionMin: (0, import_curtailmentForecast.normalizeForecastResolutionMin)(this.config.curtailmentForecastResolutionMin),
       modeAfter,
       minPvW: (0, import_curtailmentPower.normalizeMinPvForCurtailmentW)(this.config.curtailmentMinPvW),
       curtailmentHasCombiner: this.config.curtailmentHasCombiner,

@@ -1,11 +1,14 @@
 import type { CurtailmentPhase, CurtailmentWindow, HourlyForecast } from "./curtailmentTypes";
 
-const FORECAST_HOURS = [4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20] as const;
+/** Daytime hours covered by typical PV forecast objects. */
+const FORECAST_HOURS = [4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21] as const;
+
+export type ForecastResolutionMin = 15 | 30 | 60;
 
 type StateReader = (id: string) => Promise<ioBroker.State | null | undefined>;
 type ObjectReader = (id: string) => Promise<ioBroker.Object | null | undefined>;
 
-/** Convert forecast power to watts (solarprognose.de API uses kW). */
+/** Convert forecast power to watts (supports W and kW units). */
 export function normalizeForecastPowerW(raw: number, unit?: string): number {
 	if (!Number.isFinite(raw) || raw <= 0) {
 		return 0;
@@ -24,46 +27,89 @@ export function normalizeForecastPowerW(raw: number, unit?: string): number {
 	return Math.round(raw);
 }
 
-function hourStateCandidates(base: string, hour: number): string[] {
-	const hourKey = hour.toString().padStart(2, "0");
-	return [
-		// ioBroker.solarprognose 2.x: forecast.00.hourly.11h.power (kW)
-		`${base}.${hourKey}h.power`,
-		`${base}.${hourKey}.power`,
-		`${base}.${hour}.power`,
-		`${base}.${hourKey}-hour.power`,
-		`${base}.hour_${hourKey}.power`,
-	];
+export function normalizeForecastResolutionMin(raw: unknown): ForecastResolutionMin {
+	const n = Number(raw);
+	if (n === 15 || n === 30) {
+		return n;
+	}
+	return 60;
 }
 
-/** Read hourly forecast power (W) from solarprognose (or compatible) object tree. */
-export async function readHourlyForecast(
-	basePath: string,
-	getState: StateReader,
-	getObject?: ObjectReader,
-): Promise<HourlyForecast> {
-	const base = basePath.replace(/\.$/, "");
-	const hours = new Map<number, number>();
+function pad2(n: number): string {
+	return n.toString().padStart(2, "0");
+}
 
+/** Slot keys under power.hoursToday for the given resolution (HH:MM:SS). */
+export function buildForecastSlotKeys(resolutionMin: ForecastResolutionMin): string[] {
+	const minutes =
+		resolutionMin === 15 ? [0, 15, 30, 45] : resolutionMin === 30 ? [0, 30] : [0];
+	const keys: string[] = [];
 	for (const h of FORECAST_HOURS) {
-		for (const id of hourStateCandidates(base, h)) {
-			const st = await getState(id);
-			if (st?.val !== null && st?.val !== undefined && st.val !== "") {
-				const raw = Number(st.val);
-				if (!Number.isNaN(raw)) {
-					let unit: string | undefined;
-					if (getObject) {
-						const obj = await getObject(id);
-						const common = obj?.common as { unit?: string } | undefined;
-						unit = common?.unit;
-					}
-					hours.set(h, normalizeForecastPowerW(raw, unit));
-					break;
-				}
-			}
+		for (const m of minutes) {
+			keys.push(`${pad2(h)}:${pad2(m)}:00`);
 		}
 	}
-	return { hours };
+	return keys;
+}
+
+/** Berlin clock time floored to the forecast interval as HH:MM:SS. */
+export function currentBerlinSlotKey(resolutionMin: ForecastResolutionMin, now = new Date()): string {
+	const parts = new Intl.DateTimeFormat("en-GB", {
+		timeZone: "Europe/Berlin",
+		hour: "2-digit",
+		minute: "2-digit",
+		hour12: false,
+	}).formatToParts(now);
+	const hour = Number(parts.find(p => p.type === "hour")?.value ?? 0);
+	const minute = Number(parts.find(p => p.type === "minute")?.value ?? 0);
+	const floored = Math.floor(minute / resolutionMin) * resolutionMin;
+	return `${pad2(Math.min(23, Math.max(0, hour)))}:${pad2(floored)}:00`;
+}
+
+/**
+ * Read pvforecast plant power slots from `{plantPath}.power.hoursToday.{HH:MM:SS}`.
+ * Aggregates max W per calendar hour into `hours`; raw slots go into `slots`.
+ */
+export async function readHourlyForecast(
+	plantPath: string,
+	getState: StateReader,
+	getObject?: ObjectReader,
+	resolutionMin: ForecastResolutionMin | number = 60,
+): Promise<HourlyForecast> {
+	const base = plantPath.replace(/\.$/, "").trim();
+	const resolution = normalizeForecastResolutionMin(resolutionMin);
+	const channel = `${base}.power.hoursToday`;
+	const hours = new Map<number, number>();
+	const slots = new Map<string, number>();
+
+	if (!base) {
+		return { hours, slots };
+	}
+
+	for (const key of buildForecastSlotKeys(resolution)) {
+		const id = `${channel}.${key}`;
+		const st = await getState(id);
+		if (st?.val === null || st?.val === undefined || st.val === "") {
+			continue;
+		}
+		const raw = Number(st.val);
+		if (Number.isNaN(raw)) {
+			continue;
+		}
+		let unit: string | undefined;
+		if (getObject) {
+			const obj = await getObject(id);
+			const common = obj?.common as { unit?: string } | undefined;
+			unit = common?.unit;
+		}
+		const watts = normalizeForecastPowerW(raw, unit);
+		slots.set(key, watts);
+		const hour = Number(key.slice(0, 2));
+		if (Number.isFinite(hour)) {
+			hours.set(hour, Math.max(hours.get(hour) ?? 0, watts));
+		}
+	}
+	return { hours, slots };
 }
 
 export function detectCurtailmentWindow(forecast: HourlyForecast, acLimitW: number): CurtailmentWindow {
@@ -121,12 +167,26 @@ export function forecastPowerAtHour(forecast: HourlyForecast, hour: number): num
 }
 
 /**
- * Target AC/grid export (W) to feed full forecast generation into the grid (no battery charging).
- * Uses current hour; before the window starts, falls back to window start hour or peak in window.
+ * Target AC/grid export (W) from forecast.
+ * Prefers the current interval slot when available; otherwise hour / window peak.
  */
-export function forecastExportTargetW(forecast: HourlyForecast, nowHour: number, window: CurtailmentWindow): number {
+export function forecastExportTargetW(
+	forecast: HourlyForecast,
+	nowHour: number,
+	window: CurtailmentWindow,
+	resolutionMin: ForecastResolutionMin | number = 60,
+	now = new Date(),
+): number {
 	if (!window.today) {
 		return 0;
+	}
+	const resolution = normalizeForecastResolutionMin(resolutionMin);
+	if (forecast.slots && forecast.slots.size > 0) {
+		const slotKey = currentBerlinSlotKey(resolution, now);
+		const slotW = forecast.slots.get(slotKey) ?? 0;
+		if (slotW > 0) {
+			return slotW;
+		}
 	}
 	const current = forecastPowerAtHour(forecast, nowHour);
 	if (current > 0) {

@@ -35,6 +35,8 @@ export interface CurtailmentWindow {
 }
 
 export interface HourlyForecast {
-	/** Hour 0–23 → expected PV power (W). */
+	/** Hour 0–23 → expected PV power (W); max of slots in that hour when resolution < 60. */
 	hours: Map<number, number>;
+	/** Optional raw slots under power.hoursToday (HH:MM:SS → W). */
+	slots?: Map<string, number>;
 }

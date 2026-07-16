@@ -41,6 +41,11 @@ function forecastSignature(forecast) {
   for (const h of [...forecast.hours.keys()].sort((a, b) => a - b)) {
     parts.push(`${h}:${forecast.hours.get(h)}`);
   }
+  if (forecast.slots && forecast.slots.size > 0) {
+    for (const key of [...forecast.slots.keys()].sort()) {
+      parts.push(`${key}=${forecast.slots.get(key)}`);
+    }
+  }
   return parts.join("|");
 }
 const cycle = {

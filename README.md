@@ -329,7 +329,7 @@ Uses `selectedDeviceId` / `selectedSiteId` from config. See Admin **Objects** ta
 | [HA discussions](https://github.com/thomluther/ha-anker-solix/discussions) | Energy dashboard, zero export, efficiency |
 | [SolixBLE](https://github.com/flip-dots/SolixBLE) | Local BLE (not cloud) |
 | [ha-anker-solix-official](https://github.com/anker-charging/ha-anker-solix-official) | Official Modbus (local devices) |
-| [ioBroker.solarprognose](https://www.iobroker.net/#en/adapters/adapterref/iobroker.solarprognose/README.md) | PV forecast from [solarprognose.de](https://solarprognose.de) ([GitHub](https://github.com/Scrounger/ioBroker.solarprognose)) — optional input for curtailment avoidance |
+| [ioBroker.pvforecast](https://www.iobroker.net/#en/adapters/adapterref/iobroker.pvforecast/README.md) | PV forecast (optional input for curtailment avoidance) |
 
 German guides/videos linked from the [HA README](https://github.com/thomluther/ha-anker-solix#additional-resources) apply conceptually to data and limits; wiring is via ioBroker states instead of HA entities.
 
@@ -337,13 +337,17 @@ German guides/videos linked from the [HA README](https://github.com/thomluther/h
 
 ## Curtailment avoidance (optional)
 
-Tab **Abregelungsvermeidung** / **Curtailment avoidance**: requires the [ioBroker.solarprognose](https://www.iobroker.net/#en/adapters/adapterref/iobroker.solarprognose/README.md) adapter ([GitHub](https://github.com/Scrounger/ioBroker.solarprognose)) to detect overproduction days. **Controls only:** **manual** mode + **`ac_output_limit`** (AC output / export). **Does not** change station base settings (grid export cap, `allow_grid_export`, home load preset, AC charge limit). **Before:** `ac_output_limit` = live PV. **Active:** `missing_charge_wh`, `max_charge_w` = `missing_charge_wh` ÷ `remaining_hours`, `export_w` = `live_pv_w` − `max_charge_w`, `ac_output_limit` = `export_w`. **After:** restore selected mode. States: `curtailment.live_pv_w`, `missing_charge_wh`, `max_charge_w`, `export_w`, `remaining_hours`.
+Tab **Abregelungsvermeidung** / **Curtailment avoidance**: requires the [ioBroker.pvforecast](https://www.iobroker.net/#en/adapters/adapterref/iobroker.pvforecast/README.md) adapter. (Previously based on [ioBroker.solarprognose](https://www.iobroker.net/#en/adapters/adapterref/iobroker.solarprognose/README.md) / solarprognose.de — switched because **solarprognose.de is shutting down** and that data source is no longer viable.) Set the **plant path** (e.g. `pvforecast.0.plants.pv`); power values are read from `{path}.power.hoursToday.*`. **Forecast resolution** (60 / 30 / 15 minutes, default **60**) must match the interval configured in pvforecast. **Controls only:** **manual** mode + **`ac_output_limit`** (AC output / export). **Does not** change station base settings (grid export cap, `allow_grid_export`, home load preset, AC charge limit). **Before:** `ac_output_limit` = live PV. **Active:** `missing_charge_wh`, `max_charge_w` = `missing_charge_wh` ÷ `remaining_hours`, `export_w` = `live_pv_w` − `max_charge_w`, `ac_output_limit` = `export_w`. **After:** restore selected mode. States: `curtailment.live_pv_w`, `missing_charge_wh`, `max_charge_w`, `export_w`, `remaining_hours`.
 
 **Admin:** checkbox *Combiner box present* — without combiner: device ID + solarbank type + battery Wh; with combiner: combiner ID + up to **4** solarbank slots (each slot can be *none*). **Combiner:** total AC limit = **sum** of per-unit limits (SB2 **1000** W, SB3 Pro **1200** W, SB4 Pro **2500** W). **Standalone:** always **800** W.
 
 ---
 
 ## Changelog
+
+### 0.10.82
+
+- **Curtailment:** switch forecast source from solarprognose.de / [ioBroker.solarprognose](https://www.iobroker.net/#en/adapters/adapterref/iobroker.solarprognose/README.md) to [ioBroker.pvforecast](https://www.iobroker.net/#en/adapters/adapterref/iobroker.pvforecast/README.md) because **solarprognose.de is shutting down**. Plant path (`…power.hoursToday`); resolution option 60/30/15 min (default 60)
 
 ### 0.10.81
 

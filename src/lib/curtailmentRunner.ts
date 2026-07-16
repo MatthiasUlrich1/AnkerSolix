@@ -10,6 +10,7 @@ import { resolveCurtailmentDevices, type CurtailmentStructuredNative } from "./c
 import {
 	currentPhase,
 	detectCurtailmentWindow,
+	normalizeForecastResolutionMin,
 	readHourlyForecast,
 	remainingCurtailmentHours,
 } from "./curtailmentForecast";
@@ -29,6 +30,8 @@ import type { DeviceControlContext } from "./types";
 export interface CurtailmentRunnerConfig extends CurtailmentStructuredNative {
 	enabled: boolean;
 	forecastBasePath: string;
+	/** pvforecast power.hoursToday slot resolution (minutes). */
+	forecastResolutionMin: 15 | 30 | 60;
 	modeAfter: "smartmeter" | "smart";
 	/** Minimum live PV (W) before manual mode and ac_output_limit are applied. */
 	minPvW: number;
@@ -315,11 +318,13 @@ export async function runCurtailmentOnPvChange(
 	if (!devices.length) {
 		return;
 	}
-	const basePath = (config.forecastBasePath || "solarprognose.0.forecast.00.hourly").trim();
+	const basePath = (config.forecastBasePath || "pvforecast.0.plants.pv").trim();
+	const resolution = normalizeForecastResolutionMin(config.forecastResolutionMin);
 	const forecast = await readHourlyForecast(
 		basePath,
 		id => host.getForeignStateAsync(id),
 		host.getForeignObjectAsync ? id => host.getForeignObjectAsync!(id) : undefined,
+		resolution,
 	);
 	if (await handleAwaitingForecastRefresh(host, devices, config, forecast)) {
 		return;
@@ -369,11 +374,13 @@ export async function runCurtailmentAvoidance(
 		return;
 	}
 
-	const basePath = (config.forecastBasePath || "solarprognose.0.forecast.00.hourly").trim();
+	const basePath = (config.forecastBasePath || "pvforecast.0.plants.pv").trim();
+	const resolution = normalizeForecastResolutionMin(config.forecastResolutionMin);
 	const forecast = await readHourlyForecast(
 		basePath,
 		id => host.getForeignStateAsync(id),
 		host.getForeignObjectAsync ? id => host.getForeignObjectAsync!(id) : undefined,
+		resolution,
 	);
 	if (await handleAwaitingForecastRefresh(host, devices, config, forecast)) {
 		return;

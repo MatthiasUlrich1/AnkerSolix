@@ -57,8 +57,10 @@ declare global {
 			enableCurtailmentAvoidance?: boolean;
 			/** Minimum live PV (W) before curtailment controls apply (default 50). */
 			curtailmentMinPvW?: number;
-			/** Base path to hourly forecast objects (without .power). */
+			/** PV forecast plant path (e.g. pvforecast.0.plants.pv); values under .power.hoursToday. */
 			curtailmentForecastPath?: string;
+			/** Forecast slot resolution in minutes (must match pvforecast adapter): 60, 30, or 15. */
+			curtailmentForecastResolutionMin?: 15 | 30 | 60;
 			curtailmentModeAfter?: "smartmeter" | "smart";
 			curtailmentHasCombiner?: boolean;
 			curtailmentStandaloneDeviceId?: string;

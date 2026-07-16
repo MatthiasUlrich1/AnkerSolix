@@ -1,9 +1,22 @@
 {
 	"common": {
 		"name": "anker-solix",
-		"version": "0.10.81",
+		"version": "0.10.82",
 		"messagebox": true,
 		"news": {
+			"0.10.82": {
+				"en": "Curtailment: switch to pvforecast (solarprognose.de shutting down); plant path power.hoursToday; resolution 60/30/15",
+				"de": "Abregelung: Wechsel auf pvforecast (Abschaltung von solarprognose.de); Anlagenpfad power.hoursToday; Auflösung 60/30/15",
+				"ru": "Curtailment: switch to pvforecast (solarprognose.de shutting down)",
+				"pt": "Curtailment: switch to pvforecast (solarprognose.de shutting down)",
+				"nl": "Curtailment: switch to pvforecast (solarprognose.de shutting down)",
+				"fr": "Curtailment: switch to pvforecast (solarprognose.de shutting down)",
+				"it": "Curtailment: switch to pvforecast (solarprognose.de shutting down)",
+				"es": "Curtailment: switch to pvforecast (solarprognose.de shutting down)",
+				"pl": "Curtailment: switch to pvforecast (solarprognose.de shutting down)",
+				"uk": "Curtailment: switch to pvforecast (solarprognose.de shutting down)",
+				"zh-cn": "限电规避：因 solarprognose.de 关停改用 pvforecast"
+			},
 			"0.10.81": {
 				"en": "Repository review: standard CI workflow (Linux+Windows tests on every push/tag), package.json os linux+win32, macOS not supported",
 				"de": "Repository-Review: Standard-CI (Linux+Windows bei jedem Push/Tag), package.json os linux+win32, macOS nicht unterstützt",
@@ -81,19 +94,6 @@
 				"pl": "List control role fixes for repository review",
 				"uk": "List control role fixes for repository review",
 				"zh-cn": "列表控件角色修复（仓库审查）"
-			},
-			"0.10.75": {
-				"en": "Object structure: folder/device/channel hierarchy (E3009), valid state roles/types, release-script 5.2.1",
-				"de": "Objektstruktur: folder/device/channel-Hierarchie (E3009), gültige State-Rollen/Typen, release-script 5.2.1",
-				"ru": "Object hierarchy and role fixes for repository review",
-				"pt": "Object hierarchy and role fixes for repository review",
-				"nl": "Object hierarchy and role fixes for repository review",
-				"fr": "Object hierarchy and role fixes for repository review",
-				"it": "Object hierarchy and role fixes for repository review",
-				"es": "Object hierarchy and role fixes for repository review",
-				"pl": "Object hierarchy and role fixes for repository review",
-				"uk": "Object hierarchy and role fixes for repository review",
-				"zh-cn": "对象结构层级与角色修复（仓库审查）"
 			}
 		},
 		"titleLang": {
@@ -197,7 +197,8 @@
 		"authCacheStatusLine": "",
 		"enableCurtailmentAvoidance": false,
 		"curtailmentMinPvW": 50,
-		"curtailmentForecastPath": "solarprognose.0.forecast.00.hourly",
+		"curtailmentForecastPath": "pvforecast.0.plants.pv",
+		"curtailmentForecastResolutionMin": 60,
 		"periodScheduleOffsetSec": -1,
 		"curtailmentModeAfter": "smartmeter",
 		"curtailmentHasCombiner": false,

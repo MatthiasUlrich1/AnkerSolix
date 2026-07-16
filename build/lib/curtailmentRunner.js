@@ -203,11 +203,13 @@ async function runCurtailmentOnPvChange(host, config, deviceId, livePvW) {
   if (!devices.length) {
     return;
   }
-  const basePath = (config.forecastBasePath || "solarprognose.0.forecast.00.hourly").trim();
+  const basePath = (config.forecastBasePath || "pvforecast.0.plants.pv").trim();
+  const resolution = (0, import_curtailmentForecast.normalizeForecastResolutionMin)(config.forecastResolutionMin);
   const forecast = await (0, import_curtailmentForecast.readHourlyForecast)(
     basePath,
     (id) => host.getForeignStateAsync(id),
-    host.getForeignObjectAsync ? (id) => host.getForeignObjectAsync(id) : void 0
+    host.getForeignObjectAsync ? (id) => host.getForeignObjectAsync(id) : void 0,
+    resolution
   );
   if (await handleAwaitingForecastRefresh(host, devices, config, forecast)) {
     return;
@@ -250,11 +252,13 @@ async function runCurtailmentAvoidance(host, config) {
     await host.setState(import_curtailmentStates.CURTAILMENT_STATE_IDS.phase, "no_devices", true);
     return;
   }
-  const basePath = (config.forecastBasePath || "solarprognose.0.forecast.00.hourly").trim();
+  const basePath = (config.forecastBasePath || "pvforecast.0.plants.pv").trim();
+  const resolution = (0, import_curtailmentForecast.normalizeForecastResolutionMin)(config.forecastResolutionMin);
   const forecast = await (0, import_curtailmentForecast.readHourlyForecast)(
     basePath,
     (id) => host.getForeignStateAsync(id),
-    host.getForeignObjectAsync ? (id) => host.getForeignObjectAsync(id) : void 0
+    host.getForeignObjectAsync ? (id) => host.getForeignObjectAsync(id) : void 0,
+    resolution
   );
   if (await handleAwaitingForecastRefresh(host, devices, config, forecast)) {
     return;

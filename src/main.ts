@@ -26,6 +26,7 @@ import {
 	parseSystemPvStateId,
 	type SolarbankSocSample,
 } from "./lib/curtailmentPower";
+import { normalizeForecastResolutionMin } from "./lib/curtailmentForecast";
 import {
 	runCurtailmentAvoidance,
 	runCurtailmentOnPvChange,
@@ -442,7 +443,8 @@ class AnkerSolix extends utils.Adapter {
 		const modeAfter = this.config.curtailmentModeAfter === "smart" ? "smart" : "smartmeter";
 		return {
 			enabled: true,
-			forecastBasePath: (this.config.curtailmentForecastPath || "solarprognose.0.forecast.00.hourly").trim(),
+			forecastBasePath: (this.config.curtailmentForecastPath || "pvforecast.0.plants.pv").trim(),
+			forecastResolutionMin: normalizeForecastResolutionMin(this.config.curtailmentForecastResolutionMin),
 			modeAfter,
 			minPvW: normalizeMinPvForCurtailmentW(this.config.curtailmentMinPvW),
 			curtailmentHasCombiner: this.config.curtailmentHasCombiner,
