@@ -81,7 +81,7 @@ describe("curtailmentForecast", () => {
 	});
 
 	it("returns empty forecast for empty plant path", async () => {
-		const forecast = await readHourlyForecast("", async () => null);
+		const forecast = await readHourlyForecast("", () => Promise.resolve(null));
 		expect(forecast.hours.size).to.equal(0);
 	});
 

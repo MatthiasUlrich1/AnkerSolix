@@ -41,8 +41,7 @@ function pad2(n: number): string {
 
 /** Slot keys under power.hoursToday for the given resolution (HH:MM:SS). */
 export function buildForecastSlotKeys(resolutionMin: ForecastResolutionMin): string[] {
-	const minutes =
-		resolutionMin === 15 ? [0, 15, 30, 45] : resolutionMin === 30 ? [0, 30] : [0];
+	const minutes = resolutionMin === 15 ? [0, 15, 30, 45] : resolutionMin === 30 ? [0, 30] : [0];
 	const keys: string[] = [];
 	for (const h of FORECAST_HOURS) {
 		for (const m of minutes) {
@@ -74,7 +73,7 @@ export async function readHourlyForecast(
 	plantPath: string,
 	getState: StateReader,
 	getObject?: ObjectReader,
-	resolutionMin: ForecastResolutionMin | number = 60,
+	resolutionMin: number = 60,
 ): Promise<HourlyForecast> {
 	const base = plantPath.replace(/\.$/, "").trim();
 	const resolution = normalizeForecastResolutionMin(resolutionMin);
@@ -174,7 +173,7 @@ export function forecastExportTargetW(
 	forecast: HourlyForecast,
 	nowHour: number,
 	window: CurtailmentWindow,
-	resolutionMin: ForecastResolutionMin | number = 60,
+	resolutionMin: number = 60,
 	now = new Date(),
 ): number {
 	if (!window.today) {
