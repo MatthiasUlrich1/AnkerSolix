@@ -81,11 +81,9 @@
 	"cloud_state": "Хмарний стан",
 	"wifi_state": "Стан WiFi",
 	"CurtailmentAvoidance": "Уникнення скорочення",
-	"curtailment_hint": "У дні з високим прогнозом PV (ризик скорочення) адаптер навмисно затримує зарядку батареї та зміщує її на час, коли генерація перевищує ліміт інвертора. Після закінчення часу вибраний режим використання відновлюється. Також необхідні: адаптер <a href=\"https://www.iobroker.net/#en/adapters/adapterref/iobroker.pvforecast/README.md\" target=\"_blank\" rel=\"noopener noreferrer\">iobroker.pvforecast</a> (прогноз PV від pvforecast) і достатня кількість PV у реальному часі.",
 	"enableCurtailmentAvoidance": "Увімкнути уникнення скорочення",
 	"curtailmentMinPvW": "Мінімальна PV (Вт) для елементів керування",
 	"curtailmentMinPvW_help": "Ручний режим і обмеження вихідної потужності змінного струму застосовуються лише тоді, коли PV у реальному часі має принаймні це значення (за замовчуванням 50). При 0 достатньо будь-якої PV вище 0 Вт. Запобігає прогнозу в нічний час.",
-	"curtailmentForecastPath": "Шлях установки PV forecast (напр. pvforecast.0.plants.pv)",
 	"curtailmentForecastPath_help": "Plant path only. Power values: {path}.power.hoursToday.*",
 	"curtailmentForecastResolutionMin": "Forecast resolution (minutes)",
 	"curtailmentForecastResolutionMin_help": "Must match the interval in the pvforecast adapter.",
@@ -112,5 +110,7 @@
 	"profile_solarbank2": "Сонячний банк 2",
 	"profile_solarbank3pro": "Solarbank 3 Pro",
 	"profile_solarbank4pro": "Solarbank 4 Pro",
-	"curtailment_limits_hint": "Обмеження змінного струму: автономний завжди 800 Вт. На комбайнері на підключений банк: SB2 1000 Вт, SB3 Pro 1200 Вт, SB4 Pro 2500 Вт (сума, до 4 слотів)."
+	"curtailment_limits_hint": "Обмеження змінного струму: автономний завжди 800 Вт. На комбайнері на підключений банк: SB2 1000 Вт, SB3 Pro 1200 Вт, SB4 Pro 2500 Вт (сума, до 4 слотів).",
+	"curtailment_hint_pv": "У дні з високим прогнозом PV (ризик скорочення) адаптер навмисно затримує зарядку батареї та зміщує її на час, коли генерація перевищує ліміт інвертора. Після закінчення часу вибраний режим використання відновлюється. Також необхідні: адаптер <a href=\"https://www.iobroker.net/#en/adapters/adapterref/iobroker.pvforecast/README.md\" target=\"_blank\" rel=\"noopener noreferrer\">iobroker.pvforecast</a> (прогноз PV від pvforecast) і достатня кількість PV у реальному часі.",
+	"curtailmentForecastPlantPath": "Шлях установки PV forecast (напр. pvforecast.0.plants.pv)"
 }

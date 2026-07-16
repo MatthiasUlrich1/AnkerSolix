@@ -81,11 +81,9 @@
 	"cloud_state": "Cloud-Status",
 	"wifi_state": "WLAN-Status",
 	"CurtailmentAvoidance": "Abregelungsvermeidung",
-	"curtailment_hint": "An Tagen mit hoher PV-Prognose (Abregelungsrisiko) verzögert der Adapter gezielt die Ladung des Akkus und verschiebt sie auf Zeiten, in denen die Erzeugung über dem Limit des Wechselrichters liegt. Nach dem Zeitfenster kehrt der gewählte Nutzungsmodus zurück. Zusätzlich erforderlich: Adapter <a href=\"https://www.iobroker.net/#de/adapters/adapterref/iobroker.pvforecast/README.md\" target=\"_blank\" rel=\"noopener noreferrer\">ioBroker.pvforecast</a> sowie ausreichend Live-PV.",
 	"enableCurtailmentAvoidance": "Abregelungsvermeidung aktivieren",
 	"curtailmentMinPvW": "Mindest-Live-PV (W) für Steuerung",
 	"curtailmentMinPvW_help": "Benutzerdefiniert und AC-Ausgangsleistung nur, wenn die Live-PV mindestens diesem Wert entspricht (Standard 50). Bei 0 reicht jede PV > 0 W. Verhindert nächtliche Einspeisung aus der Prognose.",
-	"curtailmentForecastPath": "PV-Forecast Anlagenpfad (z. B. pvforecast.0.plants.pv)",
 	"curtailmentForecastPath_help": "Nur der Anlagen-Objektpfad. Leistungswerte liegen unter {path}.power.hoursToday.*",
 	"curtailmentForecastResolutionMin": "Prognose-Auflösung (Minuten)",
 	"curtailmentForecastResolutionMin_help": "Muss zur Einstellung im pvforecast-Adapter passen (dort entstehen die States unter power.hoursToday).",
@@ -112,5 +110,7 @@
 	"profile_solarbank2": "Solarbank 2",
 	"profile_solarbank3pro": "Solarbank 3 Pro",
 	"profile_solarbank4pro": "Solarbank 4 Pro",
-	"curtailment_limits_hint": "AC-Limits: einzeln immer 800 W. Am Combiner je angeschlossener Solarbank: SB2 1000 W, SB3 Pro 1200 W, SB4 Pro 2500 W (Summe, max. 4 Plätze)."
+	"curtailment_limits_hint": "AC-Limits: einzeln immer 800 W. Am Combiner je angeschlossener Solarbank: SB2 1000 W, SB3 Pro 1200 W, SB4 Pro 2500 W (Summe, max. 4 Plätze).",
+	"curtailment_hint_pv": "An Tagen mit hoher PV-Prognose (Abregelungsrisiko) verzögert der Adapter gezielt die Ladung des Akkus und verschiebt sie auf Zeiten, in denen die Erzeugung über dem Limit des Wechselrichters liegt. Nach dem Zeitfenster kehrt der gewählte Nutzungsmodus zurück. Zusätzlich erforderlich: Adapter <a href=\"https://www.iobroker.net/#de/adapters/adapterref/iobroker.pvforecast/README.md\" target=\"_blank\" rel=\"noopener noreferrer\">ioBroker.pvforecast</a> sowie ausreichend Live-PV.",
+	"curtailmentForecastPlantPath": "PV-Forecast Anlagenpfad (z. B. pvforecast.0.plants.pv)"
 }

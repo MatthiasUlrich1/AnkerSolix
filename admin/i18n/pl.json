@@ -81,11 +81,9 @@
 	"cloud_state": "Stan chmury",
 	"wifi_state": "Stan Wi-Fi",
 	"CurtailmentAvoidance": "Unikanie ograniczeń",
-	"curtailment_hint": "W dni z wysoką prognozą PV (ryzyko ograniczenia) adapter celowo opóźnia ładowanie akumulatora i przesuwa je na czasy, w których produkcja przekracza limit falownika. Po upływie okna czasowego przywracany jest wybrany tryb użytkowania. Wymagane są również: adapter <a href=\"https://www.iobroker.net/#en/adapters/adapterref/iobroker.pvforecast/README.md\" target=\"_blank\" rel=\"noopener noreferrer\">iobroker.pvforecast</a> (prognoza fotowoltaiczna z pvforecast) i wystarczająca ilość fotowoltaiki na żywo.",
 	"enableCurtailmentAvoidance": "Włącz unikanie ograniczeń",
 	"curtailmentMinPvW": "Minimalna wartość PV na żywo (W) dla elementów sterujących",
 	"curtailmentMinPvW_help": "Tryb ręczny i limit wyjścia AC mają zastosowanie tylko wtedy, gdy wartość PV na żywo wynosi co najmniej tę wartość (domyślnie 50). Przy 0 wystarczy dowolny PV powyżej 0 W. Zapobiega nocnemu zasilaniu z prognozy.",
-	"curtailmentForecastPath": "Ścieżka instalacji PV forecast (np. pvforecast.0.plants.pv)",
 	"curtailmentForecastPath_help": "Plant path only. Power values: {path}.power.hoursToday.*",
 	"curtailmentForecastResolutionMin": "Forecast resolution (minutes)",
 	"curtailmentForecastResolutionMin_help": "Must match the interval in the pvforecast adapter.",
@@ -112,5 +110,7 @@
 	"profile_solarbank2": "Solarbank 2",
 	"profile_solarbank3pro": "Solarbank 3Pro",
 	"profile_solarbank4pro": "Solarbank 4Pro",
-	"curtailment_limits_hint": "Limity AC: samodzielny zawsze 800 W. Na sumatorze na podłączony bank: SB2 1000 W, SB3 Pro 1200 W, SB4 Pro 2500 W (suma, do 4 gniazd)."
+	"curtailment_limits_hint": "Limity AC: samodzielny zawsze 800 W. Na sumatorze na podłączony bank: SB2 1000 W, SB3 Pro 1200 W, SB4 Pro 2500 W (suma, do 4 gniazd).",
+	"curtailment_hint_pv": "W dni z wysoką prognozą PV (ryzyko ograniczenia) adapter celowo opóźnia ładowanie akumulatora i przesuwa je na czasy, w których produkcja przekracza limit falownika. Po upływie okna czasowego przywracany jest wybrany tryb użytkowania. Wymagane są również: adapter <a href=\"https://www.iobroker.net/#en/adapters/adapterref/iobroker.pvforecast/README.md\" target=\"_blank\" rel=\"noopener noreferrer\">iobroker.pvforecast</a> (prognoza fotowoltaiczna z pvforecast) i wystarczająca ilość fotowoltaiki na żywo.",
+	"curtailmentForecastPlantPath": "Ścieżka instalacji PV forecast (np. pvforecast.0.plants.pv)"
 }

@@ -81,11 +81,9 @@
 	"cloud_state": "Estado da nuvem",
 	"wifi_state": "Estado do Wi-Fi",
 	"CurtailmentAvoidance": "Evitar redução",
-	"curtailment_hint": "Em dias com alta previsão de PV (risco de redução), o adaptador atrasa deliberadamente o carregamento da bateria e o transfere para horários em que a geração excede o limite do inversor. Após a janela de tempo, o modo de uso selecionado é restaurado. Também é necessário: adaptador <a href=\"https://www.iobroker.net/#en/adapters/adapterref/iobroker.pvforecast/README.md\" target=\"_blank\" rel=\"noopener noreferrer\">iobroker.pvforecast</a> (previsão de PV de pvforecast) e PV ativo suficiente.",
 	"enableCurtailmentAvoidance": "Habilite a prevenção de redução",
 	"curtailmentMinPvW": "PV ativo mínimo (W) para controles",
 	"curtailmentMinPvW_help": "O modo manual e o limite de saída CA aplicam-se somente quando PV ativo tem pelo menos esse valor (padrão 50). Em 0, qualquer PV acima de 0 W é suficiente. Impede a previsão da alimentação noturna.",
-	"curtailmentForecastPath": "Caminho da planta PV forecast (ex. pvforecast.0.plants.pv)",
 	"curtailmentForecastPath_help": "Plant path only. Power values: {path}.power.hoursToday.*",
 	"curtailmentForecastResolutionMin": "Forecast resolution (minutes)",
 	"curtailmentForecastResolutionMin_help": "Must match the interval in the pvforecast adapter.",
@@ -112,5 +110,7 @@
 	"profile_solarbank2": "Banco Solar 2",
 	"profile_solarbank3pro": "Solarbank 3 Pró",
 	"profile_solarbank4pro": "Solarbank 4 Pró",
-	"curtailment_limits_hint": "Limites AC: autônomo sempre 800 W. No combinador por banco conectado: SB2 1000 W, SB3 Pro 1200 W, SB4 Pro 2500 W (soma, até 4 slots)."
+	"curtailment_limits_hint": "Limites AC: autônomo sempre 800 W. No combinador por banco conectado: SB2 1000 W, SB3 Pro 1200 W, SB4 Pro 2500 W (soma, até 4 slots).",
+	"curtailment_hint_pv": "Em dias com alta previsão de PV (risco de redução), o adaptador atrasa deliberadamente o carregamento da bateria e o transfere para horários em que a geração excede o limite do inversor. Após a janela de tempo, o modo de uso selecionado é restaurado. Também é necessário: adaptador <a href=\"https://www.iobroker.net/#en/adapters/adapterref/iobroker.pvforecast/README.md\" target=\"_blank\" rel=\"noopener noreferrer\">iobroker.pvforecast</a> (previsão de PV de pvforecast) e PV ativo suficiente.",
+	"curtailmentForecastPlantPath": "Caminho da planta PV forecast (ex. pvforecast.0.plants.pv)"
 }

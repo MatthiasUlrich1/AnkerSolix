@@ -81,11 +81,9 @@
 	"cloud_state": "Estado de la nube",
 	"wifi_state": "Estado WiFi",
 	"CurtailmentAvoidance": "Evitación de restricciones",
-	"curtailment_hint": "En los días con una previsión fotovoltaica alta (riesgo de reducción), el adaptador retrasa deliberadamente la carga de la batería y la cambia a momentos en los que la generación supera el límite del inversor. Después de la ventana de tiempo, se restablece el modo de uso seleccionado. También se requiere: adaptador <a href=\"https://www.iobroker.net/#en/adapters/adapterref/iobroker.pvforecast/README.md\" target=\"_blank\" rel=\"noopener noreferrer\">iobroker.pvforecast</a> (previsión fotovoltaica de pvforecast) y suficiente fotovoltaica activa.",
 	"enableCurtailmentAvoidance": "Permitir evitar restricciones",
 	"curtailmentMinPvW": "PV vivo mínimo (W) para controles",
 	"curtailmentMinPvW_help": "El modo manual y el límite de salida de CA se aplican solo cuando el PV activo tiene al menos este valor (predeterminado 50). En 0, cualquier PV superior a 0 W es suficiente. Evita la alimentación nocturna según el pronóstico.",
-	"curtailmentForecastPath": "Ruta de planta PV forecast (p. ej. pvforecast.0.plants.pv)",
 	"curtailmentForecastPath_help": "Plant path only. Power values: {path}.power.hoursToday.*",
 	"curtailmentForecastResolutionMin": "Forecast resolution (minutes)",
 	"curtailmentForecastResolutionMin_help": "Must match the interval in the pvforecast adapter.",
@@ -112,5 +110,7 @@
 	"profile_solarbank2": "Banco solar 2",
 	"profile_solarbank3pro": "Banco Solar 3 Pro",
 	"profile_solarbank4pro": "Banco Solar 4 Pro",
-	"curtailment_limits_hint": "Límites de CA: independiente siempre 800 W. En combinador por banco conectado: SB2 1000 W, SB3 Pro 1200 W, SB4 Pro 2500 W (suma, hasta 4 ranuras)."
+	"curtailment_limits_hint": "Límites de CA: independiente siempre 800 W. En combinador por banco conectado: SB2 1000 W, SB3 Pro 1200 W, SB4 Pro 2500 W (suma, hasta 4 ranuras).",
+	"curtailment_hint_pv": "En los días con una previsión fotovoltaica alta (riesgo de reducción), el adaptador retrasa deliberadamente la carga de la batería y la cambia a momentos en los que la generación supera el límite del inversor. Después de la ventana de tiempo, se restablece el modo de uso seleccionado. También se requiere: adaptador <a href=\"https://www.iobroker.net/#en/adapters/adapterref/iobroker.pvforecast/README.md\" target=\"_blank\" rel=\"noopener noreferrer\">iobroker.pvforecast</a> (previsión fotovoltaica de pvforecast) y suficiente fotovoltaica activa.",
+	"curtailmentForecastPlantPath": "Ruta de planta PV forecast (p. ej. pvforecast.0.plants.pv)"
 }

@@ -81,11 +81,9 @@
 	"cloud_state": "云态",
 	"wifi_state": "WiFi状态",
 	"CurtailmentAvoidance": "避免限电",
-	"curtailment_hint": "在光伏预测较高的日子（限电风险），适配器会故意延迟电池充电，并将其转移到发电量超过逆变器限制的时间。在该时间窗口之后，恢复所选择的使用模式。还需要：<a href=\"https://www.iobroker.net/#en/adapters/adapterref/iobroker.pvforecast/README.md\" target=\"_blank\" rel=\"noopener noreferrer\">iobroker.pvforecast</a>适配器（来自pvforecast的PV预测）和足够的实时PV。",
 	"enableCurtailmentAvoidance": "启用避免限电措施",
 	"curtailmentMinPvW": "控件的最小实时 PV (W)",
 	"curtailmentMinPvW_help": "手动模式和交流输出限制仅在实时 PV 至少为该值（默认 50）时适用。当为 0 时，任何高于 0 W 的 PV 就足够了。防止夜间供电不受预报。",
-	"curtailmentForecastPath": "PV forecast 电站路径（例如 pvforecast.0.plants.pv）",
 	"curtailmentForecastPath_help": "Plant path only. Power values: {path}.power.hoursToday.*",
 	"curtailmentForecastResolutionMin": "Forecast resolution (minutes)",
 	"curtailmentForecastResolutionMin_help": "Must match the interval in the pvforecast adapter.",
@@ -112,5 +110,7 @@
 	"profile_solarbank2": "太阳能银行2",
 	"profile_solarbank3pro": "太阳能银行 3 专业版",
 	"profile_solarbank4pro": "太阳能银行 4 专业版",
-	"curtailment_limits_hint": "交流限制：独立始终为 800 W。在每个连接组的组合器上：SB2 1000 W、SB3 Pro 1200 W、SB4 Pro 2500 W（总计，最多 4 个插槽）。"
+	"curtailment_limits_hint": "交流限制：独立始终为 800 W。在每个连接组的组合器上：SB2 1000 W、SB3 Pro 1200 W、SB4 Pro 2500 W（总计，最多 4 个插槽）。",
+	"curtailment_hint_pv": "在光伏预测较高的日子（限电风险），适配器会故意延迟电池充电，并将其转移到发电量超过逆变器限制的时间。在该时间窗口之后，恢复所选择的使用模式。还需要：<a href=\"https://www.iobroker.net/#en/adapters/adapterref/iobroker.pvforecast/README.md\" target=\"_blank\" rel=\"noopener noreferrer\">iobroker.pvforecast</a>适配器（来自pvforecast的PV预测）和足够的实时PV。",
+	"curtailmentForecastPlantPath": "PV forecast 电站路径（例如 pvforecast.0.plants.pv）"
 }

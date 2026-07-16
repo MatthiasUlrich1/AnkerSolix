@@ -472,7 +472,7 @@
 			"items": {
 				"_curtailment_hint": {
 					"type": "staticText",
-					"text": "curtailment_hint",
+					"text": "curtailment_hint_pv",
 					"format": "html",
 					"xs": 12,
 					"sm": 12,
@@ -506,7 +506,7 @@
 				},
 				"curtailmentForecastPath": {
 					"type": "text",
-					"label": "curtailmentForecastPath",
+					"label": "curtailmentForecastPlantPath",
 					"default": "pvforecast.0.plants.pv",
 					"help": "curtailmentForecastPath_help",
 					"hidden": "!data.enableCurtailmentAvoidance",

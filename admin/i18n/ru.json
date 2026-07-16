@@ -81,11 +81,9 @@
 	"cloud_state": "Облачное состояние",
 	"wifi_state": "Состояние Wi-Fi",
 	"CurtailmentAvoidance": "Избежание сокращения",
-	"curtailment_hint": "В дни с прогнозом высокого уровня солнечной энергии (риск сокращения) адаптер намеренно задерживает зарядку аккумулятора и переносит ее на те моменты, когда выработка превышает предел инвертора. По истечении временного окна выбранный режим использования восстанавливается. Также требуется: адаптер <a href=\"https://www.iobroker.net/#en/adapters/adapterref/iobroker.pvforecast/README.md\" target=\"_blank\" rel=\"noopener noreferrer\">iobroker.pvforecast</a> (прогноз PV с сайта pvforecast) и достаточное количество действующих PV.",
 	"enableCurtailmentAvoidance": "Включить предотвращение сокращения",
 	"curtailmentMinPvW": "Минимальное активное PV (Вт) для элементов управления",
 	"curtailmentMinPvW_help": "Ручной режим и ограничение выхода переменного тока применяются только в том случае, если живая фотоэлектрическая система не ниже этого значения (по умолчанию 50). При 0 достаточно любого PV мощностью выше 0 Вт. Предотвращает подачу прогноза в ночное время.",
-	"curtailmentForecastPath": "Путь установки PV forecast (напр. pvforecast.0.plants.pv)",
 	"curtailmentForecastPath_help": "Plant path only. Power values: {path}.power.hoursToday.*",
 	"curtailmentForecastResolutionMin": "Forecast resolution (minutes)",
 	"curtailmentForecastResolutionMin_help": "Must match the interval in the pvforecast adapter.",
@@ -112,5 +110,7 @@
 	"profile_solarbank2": "Соларбанк 2",
 	"profile_solarbank3pro": "Солярбанк 3 Про",
 	"profile_solarbank4pro": "Солярбанк 4 Про",
-	"curtailment_limits_hint": "Ограничения по переменному току: автономный всегда 800 Вт. На сумматоре на подключенный банк: SB2 1000 Вт, SB3 Pro 1200 Вт, SB4 Pro 2500 Вт (сумма до 4 слотов)."
+	"curtailment_limits_hint": "Ограничения по переменному току: автономный всегда 800 Вт. На сумматоре на подключенный банк: SB2 1000 Вт, SB3 Pro 1200 Вт, SB4 Pro 2500 Вт (сумма до 4 слотов).",
+	"curtailment_hint_pv": "В дни с прогнозом высокого уровня солнечной энергии (риск сокращения) адаптер намеренно задерживает зарядку аккумулятора и переносит ее на те моменты, когда выработка превышает предел инвертора. По истечении временного окна выбранный режим использования восстанавливается. Также требуется: адаптер <a href=\"https://www.iobroker.net/#en/adapters/adapterref/iobroker.pvforecast/README.md\" target=\"_blank\" rel=\"noopener noreferrer\">iobroker.pvforecast</a> (прогноз PV с сайта pvforecast) и достаточное количество действующих PV.",
+	"curtailmentForecastPlantPath": "Путь установки PV forecast (напр. pvforecast.0.plants.pv)"
 }

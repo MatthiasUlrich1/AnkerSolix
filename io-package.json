@@ -1,9 +1,22 @@
 {
 	"common": {
 		"name": "anker-solix",
-		"version": "0.10.84",
+		"version": "0.10.85",
 		"messagebox": true,
 		"news": {
+			"0.10.85": {
+				"en": "Admin: refresh curtailment labels to pvforecast (new i18n keys; clears stale solarprognose text)",
+				"de": "Admin: Abregelungs-Texte auf pvforecast aktualisiert (neue i18n-Keys; alte solarprognose-Texte weg)",
+				"ru": "Admin: refresh curtailment labels to pvforecast",
+				"pt": "Admin: refresh curtailment labels to pvforecast",
+				"nl": "Admin: refresh curtailment labels to pvforecast",
+				"fr": "Admin: refresh curtailment labels to pvforecast",
+				"it": "Admin: refresh curtailment labels to pvforecast",
+				"es": "Admin: refresh curtailment labels to pvforecast",
+				"pl": "Admin: refresh curtailment labels to pvforecast",
+				"uk": "Admin: refresh curtailment labels to pvforecast",
+				"zh-cn": "管理界面：限电规避文案改为 pvforecast"
+			},
 			"0.10.84": {
 				"en": "Curtailment: switch to pvforecast (solarprognose.de shutting down); plant path power.hoursToday; resolution 60/30/15",
 				"de": "Abregelung: Wechsel auf pvforecast (Abschaltung von solarprognose.de); Anlagenpfad power.hoursToday; Auflösung 60/30/15",
@@ -81,19 +94,6 @@
 				"pl": "English logs and state labels for repository review",
 				"uk": "English logs and state labels for repository review",
 				"zh-cn": "仓库审查：英文日志与默认状态名称"
-			},
-			"0.10.76": {
-				"en": "Object structure: list controls use role state (max_total_ac_output, EV charger modes; E1008/E1009)",
-				"de": "Objektstruktur: Listen-Controls mit Rolle state (max_total_ac_output, EV-Lader-Modi; E1008/E1009)",
-				"ru": "List control role fixes for repository review",
-				"pt": "List control role fixes for repository review",
-				"nl": "List control role fixes for repository review",
-				"fr": "List control role fixes for repository review",
-				"it": "List control role fixes for repository review",
-				"es": "List control role fixes for repository review",
-				"pl": "List control role fixes for repository review",
-				"uk": "List control role fixes for repository review",
-				"zh-cn": "列表控件角色修复（仓库审查）"
 			}
 		},
 		"titleLang": {

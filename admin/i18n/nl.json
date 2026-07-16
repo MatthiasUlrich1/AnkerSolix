@@ -81,11 +81,9 @@
 	"cloud_state": "Wolkenstaat",
 	"wifi_state": "WiFi-status",
 	"CurtailmentAvoidance": "Het vermijden van inkortingen",
-	"curtailment_hint": "Op dagen met een hoge PV-voorspelling (risico op inperking) stelt de adapter het opladen van de batterij opzettelijk uit en verschuift deze naar momenten waarop de opwekking de limiet van de omvormer overschrijdt. Na het tijdvenster wordt de geselecteerde gebruiksmodus hersteld. Ook vereist: <a href=\"https://www.iobroker.net/#en/adapters/adapterref/iobroker.pvforecast/README.md\" target=\"_blank\" rel=\"noopener noreferrer\">iobroker.pvforecast</a> adapter (PV-voorspelling van pvforecast) en voldoende live PV.",
 	"enableCurtailmentAvoidance": "Schakel het vermijden van inkortingen in",
 	"curtailmentMinPvW": "Minimale live-PV (W) voor bedieningselementen",
 	"curtailmentMinPvW_help": "Handmatige modus en AC-uitgangslimiet zijn alleen van toepassing als live PV minimaal deze waarde bedraagt ​​(standaard 50). Bij 0 is elke PV boven 0 W voldoende. Voorkomt nachtelijke feed-in van de voorspelling.",
-	"curtailmentForecastPath": "PV-forecast plantpad (bijv. pvforecast.0.plants.pv)",
 	"curtailmentForecastPath_help": "Plant path only. Power values: {path}.power.hoursToday.*",
 	"curtailmentForecastResolutionMin": "Forecast resolution (minutes)",
 	"curtailmentForecastResolutionMin_help": "Must match the interval in the pvforecast adapter.",
@@ -112,5 +110,7 @@
 	"profile_solarbank2": "Zonnebank 2",
 	"profile_solarbank3pro": "Zonnebank 3 Pro",
 	"profile_solarbank4pro": "Zonnebank 4 Pro",
-	"curtailment_limits_hint": "AC-limieten: standalone altijd 800 W. Op combiner per aangesloten bank: SB2 1000 W, SB3 Pro 1200 W, SB4 Pro 2500 W (som, maximaal 4 slots)."
+	"curtailment_limits_hint": "AC-limieten: standalone altijd 800 W. Op combiner per aangesloten bank: SB2 1000 W, SB3 Pro 1200 W, SB4 Pro 2500 W (som, maximaal 4 slots).",
+	"curtailment_hint_pv": "Op dagen met een hoge PV-voorspelling (risico op inperking) stelt de adapter het opladen van de batterij opzettelijk uit en verschuift deze naar momenten waarop de opwekking de limiet van de omvormer overschrijdt. Na het tijdvenster wordt de geselecteerde gebruiksmodus hersteld. Ook vereist: <a href=\"https://www.iobroker.net/#en/adapters/adapterref/iobroker.pvforecast/README.md\" target=\"_blank\" rel=\"noopener noreferrer\">iobroker.pvforecast</a> adapter (PV-voorspelling van pvforecast) en voldoende live PV.",
+	"curtailmentForecastPlantPath": "PV-forecast plantpad (bijv. pvforecast.0.plants.pv)"
 }
