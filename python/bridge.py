@@ -882,6 +882,31 @@ async def apply_control(
             deviceSn=device_id,
             export=bool(value),
         )
+    elif control == "preset_charge_priority":
+        # Solarbank 1 schedule only (MI80 / charge priority % in active timeslot)
+        if not (dev_type == SOLARBANK and int(device.get("generation") or 0) < 2):
+            raise ValueError(
+                "preset_charge_priority is only supported for Solarbank 1 (E1600)"
+            )
+        charge_prio = int(value)
+        if charge_prio < 0 or charge_prio > 100:
+            raise ValueError("preset_charge_priority must be between 0 and 100")
+        result = await api.set_home_load(
+            siteId=site_id,
+            deviceSn=device_id,
+            charge_prio=charge_prio,
+        )
+    elif control == "preset_discharge_priority":
+        # Solarbank 1 schedule only (priority_discharge_switch / "discharge from battery")
+        if not (dev_type == SOLARBANK and int(device.get("generation") or 0) < 2):
+            raise ValueError(
+                "preset_discharge_priority is only supported for Solarbank 1 (E1600)"
+            )
+        result = await api.set_home_load(
+            siteId=site_id,
+            deviceSn=device_id,
+            discharge_prio=1 if bool(value) else 0,
+        )
     elif control == "set_output_power":
         load = int(value)
         if dev_type == SOLARBANK and int(device.get("generation") or 0) < 2:

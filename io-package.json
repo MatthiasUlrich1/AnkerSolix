@@ -1,9 +1,22 @@
 {
 	"common": {
 		"name": "anker-solix",
-		"version": "0.10.85",
+		"version": "0.10.86",
 		"messagebox": true,
 		"news": {
+			"0.10.86": {
+				"en": "Solarbank 1: writable preset_charge_priority and preset_discharge_priority (set_home_load)",
+				"de": "Solarbank 1: preset_charge_priority und preset_discharge_priority schreibbar (set_home_load)",
+				"ru": "Solarbank 1: writable charge/discharge priority controls",
+				"pt": "Solarbank 1: writable charge/discharge priority controls",
+				"nl": "Solarbank 1: writable charge/discharge priority controls",
+				"fr": "Solarbank 1: writable charge/discharge priority controls",
+				"it": "Solarbank 1: writable charge/discharge priority controls",
+				"es": "Solarbank 1: writable charge/discharge priority controls",
+				"pl": "Solarbank 1: writable charge/discharge priority controls",
+				"uk": "Solarbank 1: writable charge/discharge priority controls",
+				"zh-cn": "Solarbank 1：可写充电/放电优先级控制"
+			},
 			"0.10.85": {
 				"en": "Admin: refresh curtailment labels to pvforecast (new i18n keys; clears stale solarprognose text)",
 				"de": "Admin: Abregelungs-Texte auf pvforecast aktualisiert (neue i18n-Keys; alte solarprognose-Texte weg)",
@@ -81,19 +94,6 @@
 				"pl": "E5005 adapter.setTimeout fix",
 				"uk": "E5005 adapter.setTimeout fix",
 				"zh-cn": "适配器检查：使用 adapter.setTimeout (E5005)"
-			},
-			"0.10.77": {
-				"en": "Repository review: English-only logs; English default state names and list labels",
-				"de": "Repository-Review: englische Logs; englische Standard-State-Namen und Listen-Labels",
-				"ru": "English logs and state labels for repository review",
-				"pt": "English logs and state labels for repository review",
-				"nl": "English logs and state labels for repository review",
-				"fr": "English logs and state labels for repository review",
-				"it": "English logs and state labels for repository review",
-				"es": "English logs and state labels for repository review",
-				"pl": "English logs and state labels for repository review",
-				"uk": "English logs and state labels for repository review",
-				"zh-cn": "仓库审查：英文日志与默认状态名称"
 			}
 		},
 		"titleLang": {

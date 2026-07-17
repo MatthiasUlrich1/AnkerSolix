@@ -608,9 +608,7 @@ def writable_controls_for_device(
     controls = controls_for_type(dev_type, config)
     # Advanced / PPS controls: read-only until explicit bridge set support
     _read_only_controls = {
-        "preset_discharge_priority",
         "preset_backup_option",
-        "preset_charge_priority",
         "preset_device_output_power",
         "max_soc",
         "backup_soc",
@@ -618,7 +616,15 @@ def writable_controls_for_device(
         "ac_output_power_switch",
         "ac_fast_charge_switch_pps",
     }
-    controls = [c for c in controls if c not in _read_only_controls or False]
+    controls = [c for c in controls if c not in _read_only_controls]
+    # SB1 schedule controls (charge/discharge priority via set_home_load)
+    is_sb1 = dev_type == SOLARBANK and int(data.get("generation") or 0) < 2
+    if not is_sb1:
+        controls = [
+            c
+            for c in controls
+            if c not in ("preset_charge_priority", "preset_discharge_priority")
+        ]
     if dev_type == SOLARBANK and "ac_charge_limit" in controls:
         if not (
             data.get("mqtt_data")
