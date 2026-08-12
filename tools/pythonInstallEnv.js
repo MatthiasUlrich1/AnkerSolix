@@ -4,7 +4,12 @@
 
 const fs = require("node:fs");
 
-/** @returns {"windows" | "macos" | "linux-server" | "ha-iobroker" | "container"} */
+/** Default minimum Python minor (upstream anker-solix-api / HA). */
+const DEFAULT_MIN_PYTHON_MINOR = 12;
+/** Best-effort floor for Debian 12 Bookworm containers (system python3 is 3.11). */
+const BOOKWORM_CONTAINER_MIN_PYTHON_MINOR = 11;
+
+/** @returns {"windows" | "macos" | "linux-server" | "ha-iobroker" | "container"} Install profile id */
 function detectInstallProfile(adapterRoot) {
 	if (process.platform === "win32") {
 		return "windows";
@@ -24,7 +29,7 @@ function detectInstallProfile(adapterRoot) {
 		return "ha-iobroker";
 	}
 
-	if (fs.existsSync("/.dockerenv") || inContainerCgroup()) {
+	if (isLinuxContainer()) {
 		return "container";
 	}
 
@@ -48,6 +53,10 @@ function isHomeAssistantOs() {
 	}
 }
 
+function isLinuxContainer() {
+	return fs.existsSync("/.dockerenv") || inContainerCgroup();
+}
+
 function inContainerCgroup() {
 	try {
 		if (!fs.existsSync("/proc/1/cgroup")) {
@@ -60,7 +69,45 @@ function inContainerCgroup() {
 	}
 }
 
-/** @returns {"venv-first" | "site-packages-first"} */
+/**
+ * Debian 12 Bookworm (e.g. buanet/iobroker:latest-v11).
+ * Prefer VERSION_CODENAME; do not treat other distros with VERSION_ID=12 as Bookworm.
+ */
+function parseOsReleaseIsBookworm(text) {
+	return /^\s*VERSION_CODENAME\s*=\s*"?bookworm"?\s*$/im.test(text || "");
+}
+
+function isDebianBookworm() {
+	try {
+		if (!fs.existsSync("/etc/os-release")) {
+			return false;
+		}
+		return parseOsReleaseIsBookworm(fs.readFileSync("/etc/os-release", "utf8"));
+	} catch {
+		return false;
+	}
+}
+
+/**
+ * True only for Linux containers on Debian Bookworm.
+ * Bare-metal Bookworm, Windows, macOS, and non-Bookworm containers stay on 3.12+.
+ */
+function isDebianBookwormContainer() {
+	if (process.platform === "win32" || process.platform === "darwin") {
+		return false;
+	}
+	return isLinuxContainer() && isDebianBookworm();
+}
+
+/** @returns {number} Minimum accepted Python 3.x minor version for this host */
+function getMinimumPythonMinor() {
+	if (isDebianBookwormContainer()) {
+		return BOOKWORM_CONTAINER_MIN_PYTHON_MINOR;
+	}
+	return DEFAULT_MIN_PYTHON_MINOR;
+}
+
+/** @returns {"venv-first" | "site-packages-first"} Preferred install order */
 function installOrder(profile) {
 	if (profile === "ha-iobroker" || profile === "container") {
 		// venv is not subject to PEP 668; prefer it before touching system pip
@@ -69,7 +116,7 @@ function installOrder(profile) {
 	return "venv-first";
 }
 
-/** @returns {string[]} */
+/** @returns {string[]} Log hint lines for the profile */
 function hintLines(profile) {
 	switch (profile) {
 		case "ha-iobroker":
@@ -79,7 +126,16 @@ function hintLines(profile) {
 				"If it still fails: copy python/site-packages from a working Ubuntu install, or run node tools/install-python.js in the add-on SSH shell.",
 			];
 		case "container":
-			return ["Container host: prefer site-packages in the adapter folder; venv may be unavailable."];
+			if (isDebianBookwormContainer()) {
+				return [
+					"Debian 12 Bookworm container: system python3 is 3.11 — accepted as best-effort (upstream prefers 3.12+).",
+					"Preferred: install Python 3.12+ into a persistent path and set pythonPath in admin.",
+				];
+			}
+			return [
+				"Container host: prefer Python 3.12+ (venv or site-packages in the adapter folder).",
+				"If venv is unavailable, installer falls back to site-packages.",
+			];
 		case "windows":
 			return [
 				"Windows: install Python 3.12+ from python.org (include pip).",
@@ -89,11 +145,11 @@ function hintLines(profile) {
 		case "macos":
 			return ["macOS: brew install python@3.12 (includes pip) if automatic install fails."];
 		default:
-			return ["Debian/Ubuntu: sudo apt install python3-venv python3-pip"];
+			return ["Debian/Ubuntu: sudo apt install python3-venv python3-pip (Python 3.12+)"];
 	}
 }
 
-/** @returns {string} */
+/** @returns {string} Human-readable profile label */
 function profileLabel(profile) {
 	const labels = {
 		windows: "Windows",
@@ -106,9 +162,16 @@ function profileLabel(profile) {
 }
 
 module.exports = {
+	DEFAULT_MIN_PYTHON_MINOR,
+	BOOKWORM_CONTAINER_MIN_PYTHON_MINOR,
 	detectInstallProfile,
 	installOrder,
 	hintLines,
 	profileLabel,
 	isHomeAssistantOs,
+	isLinuxContainer,
+	isDebianBookworm,
+	isDebianBookwormContainer,
+	getMinimumPythonMinor,
+	parseOsReleaseIsBookworm,
 };

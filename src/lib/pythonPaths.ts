@@ -24,7 +24,7 @@ export function hasSitePackagesDeps(): boolean {
 	return fs.existsSync(path.join(sitePackagesPath(), "aiohttp"));
 }
 
-/** Resolved spawn target for bridge/installer (venv path or system Python 3.12+). */
+/** Resolved spawn target for bridge/installer (venv path or system Python meeting host minimum). */
 export interface PythonSpawnSpec {
 	cmd: string;
 	prefix: string[];

@@ -1,9 +1,22 @@
 {
 	"common": {
 		"name": "anker-solix",
-		"version": "0.10.86",
+		"version": "0.10.87",
 		"messagebox": true,
 		"news": {
+			"0.10.87": {
+				"en": "Python: Debian 12 Bookworm Docker containers accept Python 3.11 best-effort (others still need 3.12+)",
+				"de": "Python: Debian-12-Bookworm-Docker-Container akzeptieren Python 3.11 best-effort (sonst weiter 3.12+)",
+				"ru": "Python: Bookworm Docker containers may use 3.11 best-effort",
+				"pt": "Python: Bookworm Docker containers may use 3.11 best-effort",
+				"nl": "Python: Bookworm Docker containers may use 3.11 best-effort",
+				"fr": "Python: Bookworm Docker containers may use 3.11 best-effort",
+				"it": "Python: Bookworm Docker containers may use 3.11 best-effort",
+				"es": "Python: Bookworm Docker containers may use 3.11 best-effort",
+				"pl": "Python: Bookworm Docker containers may use 3.11 best-effort",
+				"uk": "Python: Bookworm Docker containers may use 3.11 best-effort",
+				"zh-cn": "Python：Debian 12 Bookworm Docker 容器可尽力使用 3.11（其他环境仍需 3.12+）"
+			},
 			"0.10.86": {
 				"en": "Solarbank 1: writable preset_charge_priority and preset_discharge_priority (set_home_load)",
 				"de": "Solarbank 1: preset_charge_priority und preset_discharge_priority schreibbar (set_home_load)",
@@ -81,19 +94,6 @@
 				"pl": "Repository re-review fixes: schedule jitter and sensor migration",
 				"uk": "Repository re-review fixes: schedule jitter and sensor migration",
 				"zh-cn": "仓库复审修复：周期调度抖动与传感器名称迁移"
-			},
-			"0.10.78": {
-				"en": "Adapter-check: use adapter.setTimeout instead of plain setTimeout (E5005)",
-				"de": "Adapter-Check: adapter.setTimeout statt plain setTimeout (E5005)",
-				"ru": "E5005 adapter.setTimeout fix",
-				"pt": "E5005 adapter.setTimeout fix",
-				"nl": "E5005 adapter.setTimeout fix",
-				"fr": "E5005 adapter.setTimeout fix",
-				"it": "E5005 adapter.setTimeout fix",
-				"es": "E5005 adapter.setTimeout fix",
-				"pl": "E5005 adapter.setTimeout fix",
-				"uk": "E5005 adapter.setTimeout fix",
-				"zh-cn": "适配器检查：使用 adapter.setTimeout (E5005)"
 			}
 		},
 		"titleLang": {

@@ -10,7 +10,14 @@ const fs = require("node:fs");
 const https = require("node:https");
 const path = require("node:path");
 
-const { detectInstallProfile, hintLines, installOrder, profileLabel } = require("./pythonInstallEnv");
+const {
+	detectInstallProfile,
+	getMinimumPythonMinor,
+	hintLines,
+	installOrder,
+	isDebianBookwormContainer,
+	profileLabel,
+} = require("./pythonInstallEnv");
 const { describePythonProbe, resolvePythonCommand, runPython } = require("./pythonCommand");
 
 const adapterRoot = path.join(__dirname, "..");
@@ -321,12 +328,18 @@ async function main() {
 	const order = installOrder(profile);
 	log(`Install profile: ${profileLabel(profile)} (${order})`);
 
+	const minMinor = getMinimumPythonMinor();
 	const systemSpec = resolvePythonCommand(cli.python, adapterRoot);
 	if (!systemSpec) {
-		log("Python 3.12+ not found on this host.");
+		log(`Python 3.${minMinor}+ not found on this host.`);
 		log(describePythonProbe(cli.python, adapterRoot));
 		finish(false, profile);
 		return;
+	}
+	if (isDebianBookwormContainer() && minMinor < 12) {
+		log(
+			"Debian Bookworm container: accepting Python 3.11 as best-effort (upstream anker-solix-api prefers 3.12+).",
+		);
 	}
 
 	log(`System Python: ${systemSpec.label}`);

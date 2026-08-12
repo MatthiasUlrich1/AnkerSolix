@@ -1,12 +1,14 @@
 /**
- * Resolve a Python 3.12+ executable (Windows: py -3.12 / py -3.13 before generic py -3).
+ * Resolve a Python executable (default 3.12+; Debian Bookworm containers allow 3.11).
  *
  * @module
  */
 
 const { spawnSync } = require("node:child_process");
+const { getMinimumPythonMinor } = require("./pythonInstallEnv");
 
 const MIN_MAJOR = 3;
+/** Documented / default floor (non-Bookworm hosts). Dynamic floor: getMinimumPythonMinor(). */
 const MIN_MINOR = 12;
 
 /** @param {string} text stdout/stderr from `python --version` */
@@ -18,9 +20,13 @@ function parsePythonVersionText(text) {
 	return { major: Number(m[1]), minor: Number(m[2]), patch: Number(m[3] || 0) };
 }
 
-/** @param {number} major @param {number} minor */
-function versionMeetsMinimum(major, minor) {
-	return major > MIN_MAJOR || (major === MIN_MAJOR && minor >= MIN_MINOR);
+/**
+ * @param {number} major
+ * @param {number} minor
+ * @param {number} [minMinor] Override minimum minor (default: host-aware)
+ */
+function versionMeetsMinimum(major, minor, minMinor = getMinimumPythonMinor()) {
+	return major > MIN_MAJOR || (major === MIN_MAJOR && minor >= minMinor);
 }
 
 function trySpawn(cmd, args, cwd) {
@@ -92,7 +98,7 @@ function pythonVersionText(spec, cwd) {
 
 /**
  * @param {string} [customPath] Admin pythonPath or installer --python
- * @returns {PythonCommand[]}
+ * @returns {PythonCommand[]} Candidate spawn specs in preference order
  */
 function buildCandidates(customPath, cwd) {
 	const list = [];
@@ -131,7 +137,7 @@ function buildCandidates(customPath, cwd) {
 /**
  * @param {string} [customPath]
  * @param {string} [cwd]
- * @returns {PythonCommand | null}
+ * @returns {PythonCommand | null} First matching Python command or null
  */
 function resolvePythonCommand(customPath, cwd) {
 	for (const spec of buildCandidates(customPath, cwd)) {
@@ -154,6 +160,7 @@ function resolvePythonCommand(customPath, cwd) {
  * @returns {string | null} Human-readable reason when nothing matches
  */
 function describePythonProbe(customPath, cwd) {
+	const minMinor = getMinimumPythonMinor();
 	const lines = [];
 	for (const spec of buildCandidates(customPath, cwd)) {
 		const ver = runPython(spec, ["--version"], cwd);
@@ -163,7 +170,7 @@ function describePythonProbe(customPath, cwd) {
 		}
 		const text = pythonVersionText(spec, cwd) || (ver.stdout + ver.stderr).trim();
 		if (!pythonVersionOk(spec, cwd)) {
-			lines.push(`${spec.label}: ${text} (need ${MIN_MAJOR}.${MIN_MINOR}+)`);
+			lines.push(`${spec.label}: ${text} (need ${MIN_MAJOR}.${minMinor}+)`);
 		} else {
 			lines.push(`${spec.label}: ${text} OK`);
 		}
@@ -188,4 +195,5 @@ module.exports = {
 	parsePythonVersionText,
 	versionMeetsMinimum,
 	isPyLauncherSpec,
+	getMinimumPythonMinor,
 };

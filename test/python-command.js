@@ -4,19 +4,39 @@ const {
 	parsePythonVersionText,
 	resolvePythonCommand,
 	versionMeetsMinimum,
+	getMinimumPythonMinor,
+	MIN_MINOR,
 } = require("../tools/pythonCommand");
+const { parseOsReleaseIsBookworm, BOOKWORM_CONTAINER_MIN_PYTHON_MINOR } = require("../tools/pythonInstallEnv");
 
 describe("python command resolution", () => {
 	it("parsePythonVersionText accepts Python 3.12.4", () => {
 		const parsed = parsePythonVersionText("Python 3.12.4");
 		assert.deepStrictEqual(parsed, { major: 3, minor: 12, patch: 4 });
-		assert.strictEqual(versionMeetsMinimum(parsed.major, parsed.minor), true);
+		assert.strictEqual(versionMeetsMinimum(parsed.major, parsed.minor, 12), true);
 	});
 
-	it("parsePythonVersionText rejects Python 3.11", () => {
+	it("rejects Python 3.11 when minMinor is 12 (default hosts)", () => {
 		const parsed = parsePythonVersionText("Python 3.11.9");
 		assert.ok(parsed);
-		assert.strictEqual(versionMeetsMinimum(parsed.major, parsed.minor), false);
+		assert.strictEqual(versionMeetsMinimum(parsed.major, parsed.minor, 12), false);
+	});
+
+	it("accepts Python 3.11 when minMinor is 11 (Bookworm container floor)", () => {
+		const parsed = parsePythonVersionText("Python 3.11.2");
+		assert.ok(parsed);
+		assert.strictEqual(versionMeetsMinimum(parsed.major, parsed.minor, 11), true);
+		assert.strictEqual(versionMeetsMinimum(3, 10, 11), false);
+	});
+
+	it("Windows / non-Bookworm CI hosts keep default min minor 12", function () {
+		if (process.platform === "win32" || process.platform === "darwin") {
+			assert.strictEqual(getMinimumPythonMinor(), MIN_MINOR);
+			assert.strictEqual(getMinimumPythonMinor(), 12);
+			return;
+		}
+		// Linux CI runners are not Bookworm containers → still 12
+		assert.strictEqual(getMinimumPythonMinor(), 12);
 	});
 
 	it("Windows candidates prefer py -3.13 and py -3.12 before py -3", function () {
@@ -33,12 +53,29 @@ describe("python command resolution", () => {
 		assert.ok(i312 < i3);
 	});
 
-	it("resolvePythonCommand returns null or a 3.12+ spec", function () {
+	it("resolvePythonCommand returns null or a host-minimum-compliant spec", function () {
 		const spec = resolvePythonCommand();
 		if (!spec) {
-			this.skip("no Python 3.12+ on this CI host");
+			this.skip(`no Python 3.${getMinimumPythonMinor()}+ on this CI host`);
 		}
 		assert.ok(spec.label.length > 0);
 		assert.ok(spec.cmd.length > 0);
+	});
+});
+
+describe("Bookworm os-release detection", () => {
+	it("detects Debian Bookworm VERSION_CODENAME", () => {
+		assert.strictEqual(
+			parseOsReleaseIsBookworm('PRETTY_NAME="Debian GNU/Linux 12 (bookworm)"\nVERSION_CODENAME=bookworm\n'),
+			true,
+		);
+		assert.strictEqual(parseOsReleaseIsBookworm('VERSION_CODENAME="bookworm"\n'), true);
+	});
+
+	it("rejects non-Bookworm codenames and VERSION_ID-only matches", () => {
+		assert.strictEqual(parseOsReleaseIsBookworm("VERSION_CODENAME=trixie\nVERSION_ID=13\n"), false);
+		assert.strictEqual(parseOsReleaseIsBookworm('VERSION_ID="12"\nVERSION_CODENAME=jammy\n'), false);
+		assert.strictEqual(parseOsReleaseIsBookworm("VERSION_ID=12\n"), false);
+		assert.strictEqual(BOOKWORM_CONTAINER_MIN_PYTHON_MINOR, 11);
 	});
 });
