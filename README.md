@@ -143,7 +143,7 @@ Cloud login is still used for older devices and MQTT. Solarbank 3 is **not** in 
 
 ### Docker (`buanet/iobroker`)
 
-The official image ships **Python 3.11**. From **0.10.87** the adapter accepts 3.11 as best-effort on Debian 12 Bookworm containers; **3.12+** is still recommended. Optional custom image or userscript: **[docs/docker-buanet.md](docs/docker-buanet.md)** (files under [`docs/docker/`](docs/docker/), PDF: [docs/Anker-Solix-buanet-Docker-Anleitung.pdf](docs/Anker-Solix-buanet-Docker-Anleitung.pdf)).
+The official image ships **Python 3.11**. From **0.10.87** the adapter accepts that as **best-effort** on Debian 12 Bookworm containers — no custom image required. **3.12+** remains recommended (upstream) and is still required on bare metal and non-Bookworm hosts. Guide: **[docs/docker-buanet.md](docs/docker-buanet.md)** (optional 3.12 files under [`docs/docker/`](docs/docker/), PDF: [docs/Anker-Solix-buanet-Docker-Anleitung.pdf](docs/Anker-Solix-buanet-Docker-Anleitung.pdf)).
 
 ---
 
@@ -363,6 +363,11 @@ Tab **Abregelungsvermeidung** / **Curtailment avoidance**: requires the [ioBroke
 ---
 
 ## Changelog
+
+### 0.10.89
+
+- **Admin:** fix GUI error when opening **Modbus (local)** (`hidden` must use `data.enableModbus`; table `items` as array with `attr`)
+- **Docker:** buanet guide uses stock Python **3.11** as default (0.10.87 best-effort); 3.12 image/userscript optional
 
 ### 0.10.88
 

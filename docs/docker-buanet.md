@@ -3,25 +3,52 @@
 **PDF zum Hochladen (Forum / GitHub):** [Anker-Solix-buanet-Docker-Anleitung.pdf](Anker-Solix-buanet-Docker-Anleitung.pdf)  
 (Neu erzeugen: `python tools/build-docker-guide-pdf.py`)
 
-Das Image [`buanet/iobroker`](https://hub.docker.com/r/buanet/iobroker/) basiert auf **Debian Bookworm** und bringt nur **Python 3.11** mit (`python3` / `python3-dev`). Für diesen Adapter (solixapi) brauchst du **Python 3.12+** sowie die Möglichkeit, ein venv anzulegen.
+Das Image [`buanet/iobroker`](https://hub.docker.com/r/buanet/iobroker/) basiert auf **Debian 12 Bookworm** und bringt **Python 3.11** mit (`python3` / `python3-dev`).
 
-`PACKAGES=python3-venv python3-pip` reicht **nicht** – das installiert nur Werkzeuge für 3.11, die der Adapter ablehnt.
-
-Zwei praktikable Wege:
+**Ab Adapter 0.10.87** akzeptiert ioBroker.anker-solix genau in diesem Fall (Linux-**Container** auf Debian Bookworm, z. B. `buanet/iobroker:latest-v11`) System-**Python 3.11** als Best-Effort. Bare-Metal-Bookworm, andere Distros und Nicht-Bookworm-Container brauchen weiter **Python 3.12+**. Upstream (solixapi / HA) bevorzugt weiterhin 3.12+.
 
 | Weg | Wann sinnvoll |
 |-----|----------------|
-| [A – Eigenes Image](#a--eigenes-image-empfohlen) | Dauerhaft, Updates des Base-Images planbar, kein apt bei jedem Recreate |
-| [B – Userscript](#b--userscript) | Kein Image-Build, schnelle Anpassung am laufenden Stack |
+| [Stock-Image mit 3.11](#stock-image-mit-python-311-empfohlen) | Normalfall ab 0.10.87: kein Extra-Image, kein Backport |
+| [A – Eigenes Image mit 3.12](#a--eigenes-image-mit-python-312-optional) | Wenn du die Upstream-Version 3.12+ willst; Updates des Base-Images planbar |
+| [B – Userscript mit 3.12](#b--userscript-mit-python-312-optional) | 3.12 nachrüsten ohne Image-Build |
 
-Nach beiden Varianten: Adapter installieren und unter **Options** den Python-Befehl auf `/usr/bin/python3.12` setzen (oder leer lassen, wenn die Auto-Erkennung greift). **autoInstallPython** aktivieren bzw. einmal **Python-Abhängigkeiten installieren**.
-
-Offizielle Container-Doku: [docs.buanet.de – ioBroker Docker](https://docs.buanet.de/iobroker-docker-image/docs/).  
-Python-3.12-Pakete: [pascallj/python3.12-backport](https://github.com/pascallj/python3.12-backport) (amd64, arm64, armhf).
+Offizielle Container-Doku: [docs.buanet.de – ioBroker Docker](https://docs.buanet.de/iobroker-docker-image/docs/).
 
 ---
 
-## A – Eigenes Image (empfohlen)
+## Stock-Image mit Python 3.11 (empfohlen)
+
+Voraussetzung: Adapter **0.10.87 oder neuer**.
+
+1. Unverändertes Image nutzen, z. B. `buanet/iobroker:latest-v11` (oder `latest`).
+2. Im Container **venv/pip für 3.11** bereitstellen, damit der Adapter Abhängigkeiten installieren kann. In der buanet-Compose z. B.:
+
+   ```yaml
+   environment:
+     - PACKAGES=python3-venv python3-pip
+   ```
+
+   (Das installiert Werkzeuge für das **System-Python 3.11** — das reicht hier.)
+3. Adapter **anker-solix** installieren bzw. Instanz anlegen.
+4. **Options:** **Python-Befehl** leer lassen (Auto-Erkennung) oder `/usr/bin/python3` setzen. **autoInstallPython** aktivieren bzw. einmal **Python-Abhängigkeiten installieren**.
+
+Prüfen:
+
+```bash
+docker exec -it iobroker python3 --version
+# erwartet z. B.: Python 3.11.x
+```
+
+Im Adapter-Log kann ein Hinweis stehen, dass 3.11 in Bookworm-Containern best-effort akzeptiert wird. `info.pythonReady` sollte `true` werden.
+
+---
+
+## A – Eigenes Image mit Python 3.12 (optional)
+
+Nur nötig, wenn du **3.12+** neben dem System-Python haben willst (empfohlen von Upstream, nicht mehr Pflicht für buanet).
+
+Python-3.12-Pakete: [pascallj/python3.12-backport](https://github.com/pascallj/python3.12-backport) (amd64, arm64, armhf).
 
 ### 1. Dateien anlegen
 
@@ -32,7 +59,7 @@ Auf dem Docker-Host einen Ordner anlegen, z. B. `~/iobroker-anker-solix/`:
 ```dockerfile
 FROM buanet/iobroker:latest
 
-# Python 3.12 neben dem System-Python 3.11 (Bookworm)
+# Optional: Python 3.12 neben dem System-Python 3.11 (Bookworm)
 # Quelle: https://github.com/pascallj/python3.12-backport
 USER root
 RUN set -eux; \
@@ -131,9 +158,11 @@ Die ioBroker-Daten liegen im Volume und bleiben erhalten.
 
 ---
 
-## B – Userscript
+## B – Userscript mit Python 3.12 (optional)
 
 Ohne eigenes Image: beim Container-Start ein Script ausführen, das Python 3.12 per apt nachzieht. Dafür den Ordner [`/opt/userscripts`](https://docs.buanet.de/iobroker-docker-image/docs/) vom Host mounten.
+
+Für den Normalbetrieb mit 3.11 ist das **nicht** nötig.
 
 ### 1. Host-Ordner und Script
 
@@ -146,7 +175,7 @@ Auf dem Host z. B. `~/iobroker-userscripts/` anlegen. Beim **ersten** Start mi
 
 ```bash
 #!/usr/bin/env bash
-# Installiert Python 3.12 beim ersten Start eines neuen Containers (buanet/iobroker).
+# Optional: installiert Python 3.12 beim ersten Start eines neuen Containers (buanet/iobroker).
 # Läuft erneut nach Recreate des Containers (Container-FS ist dann wieder „frisch“).
 set -euo pipefail
 
@@ -227,32 +256,32 @@ Im Container-Log unter dem Schritt zu den Userscripts sollte die Zeile
 docker exec -it iobroker python3.12 --version
 ```
 
-Weiter wie unter [A → Adapter](#4-adapter): **pythonPath** = `/usr/bin/python3.12`, Dependencies installieren.
+**pythonPath** = `/usr/bin/python3.12`, Dependencies installieren.
 
 ### Hinweise zum Userscript
 
-- Pakete liegen im **Container-Dateisystem**, nicht im ioBroker-Volume. Nach `docker compose down` + neuem Container ohne firststart-Lauf wäre Python wieder weg – deshalb Script aktiv lassen.
+- Pakete liegen im **Container-Dateisystem**, nicht im ioBroker-Volume. Nach `docker compose down` + neuem Container ohne firststart-Lauf wäre Python 3.12 wieder weg – deshalb Script aktiv lassen.
 - Einfacher **Restart** (`docker restart`) behält die Installation; firststart läuft dann nicht erneut.
-- Externe apt-Quelle (Third-Party): nur verwenden, wenn du dem Backport-Repo vertraust. Alternative: eigenes Image mit selbst gebautem Python (aufwändiger).
+- Externe apt-Quelle (Third-Party): nur verwenden, wenn du dem Backport-Repo vertraust.
 
 ---
 
 ## Nach der Einrichtung – Kurzcheck
 
-| Check | Erwartung |
-|-------|-----------|
-| `python3.12 --version` im Container | `Python 3.12.x` |
-| Adapter-Log | Python setup OK / `info.pythonReady` = true |
-| Admin **Options** | `pythonPath` = `/usr/bin/python3.12` (empfohlen) |
+| Check | Stock 3.11 | Optional 3.12 |
+|-------|------------|----------------|
+| Version im Container | `python3 --version` → `Python 3.11.x` | `python3.12 --version` → `Python 3.12.x` |
+| Admin **Options** `pythonPath` | leer oder `/usr/bin/python3` | `/usr/bin/python3.12` |
+| Adapter-Log | Python setup OK / `info.pythonReady` = true | gleich |
 
-Fehler „Python 3.12+ not found“ → Image/Userscript hat 3.12 nicht installiert oder falscher `pythonPath`.  
-Fehler zu `venv` / `pip` → Pakete `python3.12-venv` fehlen; Installationsschritt wiederholen.
+Fehler „Python 3.12+ not found“ auf einem **Stock-buanet-Image** → Adapter ist älter als **0.10.87**, oder der Prozess läuft nicht als Linux-Container auf Debian Bookworm.  
+Fehler zu `venv` / `pip` → `python3-venv` / `python3-pip` (3.11) bzw. `python3.12-venv` fehlen.
 
 ---
 
 ## Fertige Dateien im Repo
 
-Zum Kopieren liegen dieselben Vorlagen unter:
+Zum Kopieren liegen Vorlagen für den **optionalen** 3.12-Weg unter:
 
 - [`docs/docker/Dockerfile`](docker/Dockerfile)
 - [`docs/docker/docker-compose.image.yml`](docker/docker-compose.image.yml)

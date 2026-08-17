@@ -118,7 +118,7 @@ def build_html(md_text: str) -> str:
 </style>
 </head>
 <body>
-<p class="meta">ioBroker.anker-solix · Anleitung für buanet/iobroker · Stand: Juli 2026<br/>
+<p class="meta">ioBroker.anker-solix · Anleitung für buanet/iobroker · Stand: August 2026<br/>
 Quelle: docs/docker-buanet.md im Adapter-Repository</p>
 {body}
 </body>

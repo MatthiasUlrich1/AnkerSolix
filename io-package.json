@@ -1,9 +1,22 @@
 {
 	"common": {
 		"name": "anker-solix",
-		"version": "0.10.88",
+		"version": "0.10.89",
 		"messagebox": true,
 		"news": {
+			"0.10.89": {
+				"en": "Admin: fix GUI error on Modbus (local) tab; buanet Docker docs match Python 3.11 best-effort",
+				"de": "Admin: GUI-Fehler im Tab Modbus (lokal) behoben; buanet-Docker-Doku an Python 3.11 best-effort angepasst",
+				"ru": "Fix Modbus admin GUI error; Docker docs for Python 3.11",
+				"pt": "Fix Modbus admin GUI error; Docker docs for Python 3.11",
+				"nl": "Fix Modbus admin GUI error; Docker docs for Python 3.11",
+				"fr": "Fix Modbus admin GUI error; Docker docs for Python 3.11",
+				"it": "Fix Modbus admin GUI error; Docker docs for Python 3.11",
+				"es": "Fix Modbus admin GUI error; Docker docs for Python 3.11",
+				"pl": "Fix Modbus admin GUI error; Docker docs for Python 3.11",
+				"uk": "Fix Modbus admin GUI error; Docker docs for Python 3.11",
+				"zh-cn": "修复本地 Modbus 管理界面错误；Docker 文档适配 Python 3.11"
+			},
 			"0.10.88": {
 				"en": "Optional local Modbus TCP: poll and control official Anker devices; buanet Docker Python guide",
 				"de": "Optionaler lokaler Modbus-TCP: offizielle Anker-Geräte lesen und steuern; buanet-Docker-Anleitung",
@@ -81,19 +94,6 @@
 				"pl": "Standard CI workflow and Linux+Windows platform declaration",
 				"uk": "Standard CI workflow and Linux+Windows platform declaration",
 				"zh-cn": "仓库审查：标准 CI 工作流与 Linux+Windows 平台声明"
-			},
-			"0.10.80": {
-				"en": "Fix periodScheduleOffsetSec persistence: use extendForeignObjectAsync (no invalid anker-solix.0.system.adapter.* object in dumps)",
-				"de": "Fix periodScheduleOffsetSec: extendForeignObjectAsync (kein ungültiges anker-solix.0.system.adapter.*-Objekt mehr in Dumps)",
-				"ru": "Fix periodScheduleOffsetSec persistence via extendForeignObjectAsync",
-				"pt": "Fix periodScheduleOffsetSec persistence via extendForeignObjectAsync",
-				"nl": "Fix periodScheduleOffsetSec persistence via extendForeignObjectAsync",
-				"fr": "Fix periodScheduleOffsetSec persistence via extendForeignObjectAsync",
-				"it": "Fix periodScheduleOffsetSec persistence via extendForeignObjectAsync",
-				"es": "Fix periodScheduleOffsetSec persistence via extendForeignObjectAsync",
-				"pl": "Fix periodScheduleOffsetSec persistence via extendForeignObjectAsync",
-				"uk": "Fix periodScheduleOffsetSec persistence via extendForeignObjectAsync",
-				"zh-cn": "修复 periodScheduleOffsetSec 持久化（extendForeignObjectAsync）"
 			}
 		},
 		"titleLang": {

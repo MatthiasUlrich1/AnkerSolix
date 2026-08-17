@@ -1,5 +1,6 @@
 #!/usr/bin/env bash
-# Installs Python 3.12 on first start of a new buanet/iobroker container.
+# Optional: installs Python 3.12 on first start of a new buanet/iobroker container.
+# Not required from adapter 0.10.87 (system Python 3.11 is accepted as best-effort).
 # Place as /opt/userscripts/userscript_firststart.sh (executable).
 # Docs: ../docker-buanet.md
 set -euo pipefail

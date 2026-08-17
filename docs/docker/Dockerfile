@@ -1,6 +1,7 @@
 FROM buanet/iobroker:latest
 
-# Python 3.12 beside system Python 3.11 (Debian Bookworm).
+# Optional: Python 3.12 beside system Python 3.11 (Debian Bookworm).
+# Not required from adapter 0.10.87 (3.11 is accepted as best-effort in this container).
 # https://github.com/pascallj/python3.12-backport
 USER root
 RUN set -eux; \

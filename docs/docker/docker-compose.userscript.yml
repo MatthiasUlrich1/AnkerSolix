@@ -1,4 +1,5 @@
-# Example: stock buanet image + userscript for Python 3.12
+# Example: stock buanet image + optional userscript for Python 3.12
+# Not required from adapter 0.10.87 (stock Python 3.11 is accepted).
 # Mount a host folder that contains userscript_firststart.sh (see userscript_firststart.sh).
 # See ../docker-buanet.md
 services:

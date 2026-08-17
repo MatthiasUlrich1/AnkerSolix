@@ -1,4 +1,5 @@
-# Example: custom image with Python 3.12 for ioBroker.anker-solix
+# Example: custom image with optional Python 3.12 for ioBroker.anker-solix
+# Not required from adapter 0.10.87 (stock buanet Python 3.11 is accepted).
 # See ../docker-buanet.md
 services:
   iobroker:

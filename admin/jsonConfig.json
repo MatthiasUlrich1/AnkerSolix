@@ -179,7 +179,7 @@
 					"min": 2,
 					"max": 60,
 					"default": 5,
-					"hidden": "!enableModbus",
+					"hidden": "!data.enableModbus",
 					"xs": 12,
 					"sm": 6,
 					"md": 4,
@@ -189,47 +189,54 @@
 				"modbusDevices": {
 					"type": "table",
 					"label": "modbusDevices",
-					"hidden": "!enableModbus",
+					"hidden": "!data.enableModbus",
+					"default": [],
 					"xs": 12,
 					"sm": 12,
 					"md": 12,
 					"lg": 12,
 					"xl": 12,
-					"items": {
-						"enabled": {
+					"items": [
+						{
 							"type": "checkbox",
+							"attr": "enabled",
 							"title": "modbusEnabled",
 							"default": true,
 							"width": 80
 						},
-						"name": {
+						{
 							"type": "text",
+							"attr": "name",
 							"title": "modbusName",
 							"width": 140
 						},
-						"host": {
+						{
 							"type": "text",
+							"attr": "host",
 							"title": "modbusHost",
 							"width": 160
 						},
-						"port": {
+						{
 							"type": "number",
+							"attr": "port",
 							"title": "modbusPort",
 							"default": 502,
 							"min": 1,
 							"max": 65535,
 							"width": 90
 						},
-						"unitId": {
+						{
 							"type": "number",
+							"attr": "unitId",
 							"title": "modbusUnitId",
 							"default": 1,
 							"min": 1,
 							"max": 247,
 							"width": 90
 						},
-						"profile": {
+						{
 							"type": "select",
+							"attr": "profile",
 							"title": "modbusProfile",
 							"default": "auto",
 							"width": 220,
@@ -242,7 +249,7 @@
 								{ "label": "modbusProfileSmartPlugGen2", "value": "smartPlugGen2" }
 							]
 						}
-					}
+					]
 				}
 			}
 		},
