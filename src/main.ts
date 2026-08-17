@@ -46,6 +46,7 @@ import {
 } from "./lib/systemBatPower";
 import { parseControlStateId, syncDevices, type CurtailmentPvSyncHost } from "./lib/stateSync";
 import type { BridgeConfig, BridgeDevice, BridgeServiceConfig, DeviceControlContext } from "./lib/types";
+import { ModbusChannel } from "./lib/modbus/channel";
 
 class AnkerSolix extends utils.Adapter {
 	private pollTimer: ioBroker.Interval | undefined;
@@ -58,6 +59,7 @@ class AnkerSolix extends utils.Adapter {
 	private siteSolarbanks = new Map<string, string[]>();
 	private pollAfterControlTimer: AdapterTimer | undefined;
 	private pollInFlight = false;
+	private modbusChannel: ModbusChannel | undefined;
 
 	public constructor(options: Partial<utils.AdapterOptions> = {}) {
 		super({
@@ -625,6 +627,11 @@ class AnkerSolix extends utils.Adapter {
 			return;
 		}
 
+		if (id.startsWith(`${this.namespace}.modbus.`)) {
+			await this.modbusChannel?.handleControl(id, state);
+			return;
+		}
+
 		if (id.startsWith(`${this.namespace}.services.`) && state.val === true) {
 			await this.handleServiceTrigger(id);
 			return;
@@ -867,6 +874,9 @@ class AnkerSolix extends utils.Adapter {
 		this.subscribeCurtailmentPvStates();
 		this.subscribeSystemBatPowerAggregation();
 
+		this.modbusChannel = new ModbusChannel(this);
+		await this.modbusChannel.start();
+
 		await this.pollOnce();
 		this.pollTimer = this.setInterval(() => {
 			void this.pollOnce();
@@ -885,6 +895,8 @@ class AnkerSolix extends utils.Adapter {
 		this.lastNotifiedPvW.clear();
 		(this as CurtailmentPvSyncHost).onCurtailmentPvUpdated = undefined;
 		(this as CurtailmentPvSyncHost).onCurtailmentSystemPvUpdated = undefined;
+		this.modbusChannel?.stop();
+		this.modbusChannel = undefined;
 		void stopBridgeDaemon().finally(() => callback());
 	}
 }

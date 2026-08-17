@@ -2,7 +2,12 @@
 
 Current releases **0.10.63 and newer** (except the latest seven messagebox news entries) are documented in [README.md](README.md#changelog).
 
-Removed from `common.news` when trimming to the ioBroker repository limit of **7** entries: 0.10.63 and older (see README), plus versions never published to npm (e.g. 0.10.50–0.10.53, 0.10.58), **0.10.69**, **0.10.70**, **0.10.71**, **0.10.72**, **0.10.73**, **0.10.74**, **0.10.75**, unpublished **0.10.82** / **0.10.83** (folded into 0.10.84), **0.10.77**, and **0.10.78**.
+Removed from `common.news` when trimming to the ioBroker repository limit of **7** entries: 0.10.63 and older (see README), plus versions never published to npm (e.g. 0.10.50–0.10.53, 0.10.58), **0.10.69**, **0.10.70**, **0.10.71**, **0.10.72**, **0.10.73**, **0.10.74**, **0.10.75**, unpublished **0.10.82** / **0.10.83** (folded into 0.10.84), **0.10.77**, **0.10.78**, and **0.10.79**.
+
+## 0.10.79
+
+- **en:** Repository re-review: period schedule jitter, sensor migration, Windows support documented, remove curtailmentModeBefore
+- **de:** Repository Re-Review: Perioden-Jitter, Sensor-Migration, Windows-Unterstützung dokumentiert, curtailmentModeBefore entfernt
 
 ## 0.10.78
 

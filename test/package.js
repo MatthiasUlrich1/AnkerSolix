@@ -15,3 +15,6 @@ require("./python-install-env");
 
 // Windows py -3.12 / py -3.13 resolution (tools/pythonCommand.js)
 require("./python-command");
+
+// Local Modbus TCP decode / profiles / writes
+require("./modbus");

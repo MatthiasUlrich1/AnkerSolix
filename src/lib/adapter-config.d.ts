@@ -74,6 +74,17 @@ declare global {
 			curtailmentCombinerUnit4?: string;
 			/** Legacy JSON array; used if structured fields are empty. */
 			curtailmentDevicesJson?: string;
+			/** Optional local Modbus TCP for officially supported devices (sensors + controls). */
+			enableModbus?: boolean;
+			modbusScanInterval?: number;
+			modbusDevices?: Array<{
+				enabled?: boolean;
+				host?: string;
+				port?: number;
+				unitId?: number;
+				profile?: string;
+				name?: string;
+			}>;
 		}
 	}
 }

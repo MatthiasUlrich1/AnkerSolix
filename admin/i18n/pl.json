@@ -112,5 +112,22 @@
 	"profile_solarbank4pro": "Solarbank 4Pro",
 	"curtailment_limits_hint": "Limity AC: samodzielny zawsze 800 W. Na sumatorze na podłączony bank: SB2 1000 W, SB3 Pro 1200 W, SB4 Pro 2500 W (suma, do 4 gniazd).",
 	"curtailment_hint_pv": "W dni z wysoką prognozą PV (ryzyko ograniczenia) adapter celowo opóźnia ładowanie akumulatora i przesuwa je na czasy, w których produkcja przekracza limit falownika. Po upływie okna czasowego przywracany jest wybrany tryb użytkowania. Wymagane są również: adapter <a href=\"https://www.iobroker.net/#en/adapters/adapterref/iobroker.pvforecast/README.md\" target=\"_blank\" rel=\"noopener noreferrer\">iobroker.pvforecast</a> (prognoza fotowoltaiczna z pvforecast) i wystarczająca ilość fotowoltaiki na żywo.",
-	"curtailmentForecastPlantPath": "Ścieżka instalacji PV forecast (np. pvforecast.0.plants.pv)"
+	"curtailmentForecastPlantPath": "Ścieżka instalacji PV forecast (np. pvforecast.0.plants.pv)",
+	"ModbusLocal": "Modbus (local)",
+	"modbus_hint": "Optional local Modbus TCP for officially supported Anker devices (Solarbank 4 / Max AC / Max, Smart Meter Gen 2, Smart Plug Gen 2). Enable Modbus TCP in the Anker app (system or Three-Party Control). Writes operating mode, SOC limits, battery setpoint (third-party mode) and plug on/off under modbus.<name>.control.*. Cloud/Python bridge is unchanged. Each device has its own IP (port 502).",
+	"enableModbus": "Enable local Modbus channel",
+	"modbusScanInterval": "Modbus poll interval (seconds, HA: 5)",
+	"modbusDevices": "Modbus devices",
+	"modbusEnabled": "Enabled",
+	"modbusName": "Name",
+	"modbusHost": "IP address",
+	"modbusPort": "Port",
+	"modbusUnitId": "Unit ID",
+	"modbusProfile": "Profile",
+	"modbusProfileAuto": "Auto-detect",
+	"modbusProfileSolarbank4": "Solarbank 4 E5000 Pro",
+	"modbusProfileSolarbankMaxAc": "Solarbank Max AC",
+	"modbusProfileSolarbankMax": "Solarbank Max",
+	"modbusProfileSmartMeterGen2": "Smart Meter Gen 2",
+	"modbusProfileSmartPlugGen2": "Smart Plug Gen 2"
 }

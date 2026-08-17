@@ -1,9 +1,22 @@
 {
 	"common": {
 		"name": "anker-solix",
-		"version": "0.10.87",
+		"version": "0.10.88",
 		"messagebox": true,
 		"news": {
+			"0.10.88": {
+				"en": "Optional local Modbus TCP: poll and control official Anker devices; buanet Docker Python guide",
+				"de": "Optionaler lokaler Modbus-TCP: offizielle Anker-Geräte lesen und steuern; buanet-Docker-Anleitung",
+				"ru": "Optional local Modbus TCP and Docker Python guide",
+				"pt": "Optional local Modbus TCP and Docker Python guide",
+				"nl": "Optional local Modbus TCP and Docker Python guide",
+				"fr": "Optional local Modbus TCP and Docker Python guide",
+				"it": "Optional local Modbus TCP and Docker Python guide",
+				"es": "Optional local Modbus TCP and Docker Python guide",
+				"pl": "Optional local Modbus TCP and Docker Python guide",
+				"uk": "Optional local Modbus TCP and Docker Python guide",
+				"zh-cn": "可选本地 Modbus TCP 控制与 Docker Python 指南"
+			},
 			"0.10.87": {
 				"en": "Python: Debian 12 Bookworm Docker containers accept Python 3.11 best-effort (others still need 3.12+)",
 				"de": "Python: Debian-12-Bookworm-Docker-Container akzeptieren Python 3.11 best-effort (sonst weiter 3.12+)",
@@ -81,19 +94,6 @@
 				"pl": "Fix periodScheduleOffsetSec persistence via extendForeignObjectAsync",
 				"uk": "Fix periodScheduleOffsetSec persistence via extendForeignObjectAsync",
 				"zh-cn": "修复 periodScheduleOffsetSec 持久化（extendForeignObjectAsync）"
-			},
-			"0.10.79": {
-				"en": "Repository re-review: period schedule jitter, sensor migration, Windows support documented, remove curtailmentModeBefore",
-				"de": "Repository Re-Review: Perioden-Jitter, Sensor-Migration, Windows-Unterstützung dokumentiert, curtailmentModeBefore entfernt",
-				"ru": "Repository re-review fixes: schedule jitter and sensor migration",
-				"pt": "Repository re-review fixes: schedule jitter and sensor migration",
-				"nl": "Repository re-review fixes: schedule jitter and sensor migration",
-				"fr": "Repository re-review fixes: schedule jitter and sensor migration",
-				"it": "Repository re-review fixes: schedule jitter and sensor migration",
-				"es": "Repository re-review fixes: schedule jitter and sensor migration",
-				"pl": "Repository re-review fixes: schedule jitter and sensor migration",
-				"uk": "Repository re-review fixes: schedule jitter and sensor migration",
-				"zh-cn": "仓库复审修复：周期调度抖动与传感器名称迁移"
 			}
 		},
 		"titleLang": {
@@ -211,7 +211,10 @@
 		"curtailmentCombinerUnit2": "",
 		"curtailmentCombinerUnit3": "",
 		"curtailmentCombinerUnit4": "",
-		"curtailmentDevicesJson": "[]"
+		"curtailmentDevicesJson": "[]",
+		"enableModbus": false,
+		"modbusScanInterval": 5,
+		"modbusDevices": []
 	},
 	"objects": [],
 	"instanceObjects": [

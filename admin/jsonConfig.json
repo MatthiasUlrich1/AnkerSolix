@@ -150,6 +150,102 @@
 				}
 			}
 		},
+		"_tab_modbus": {
+			"type": "panel",
+			"label": "ModbusLocal",
+			"items": {
+				"_modbus_hint": {
+					"type": "staticText",
+					"text": "modbus_hint",
+					"xs": 12,
+					"sm": 12,
+					"md": 12,
+					"lg": 12,
+					"xl": 12
+				},
+				"enableModbus": {
+					"type": "checkbox",
+					"label": "enableModbus",
+					"default": false,
+					"xs": 12,
+					"sm": 6,
+					"md": 4,
+					"lg": 4,
+					"xl": 4
+				},
+				"modbusScanInterval": {
+					"type": "number",
+					"label": "modbusScanInterval",
+					"min": 2,
+					"max": 60,
+					"default": 5,
+					"hidden": "!enableModbus",
+					"xs": 12,
+					"sm": 6,
+					"md": 4,
+					"lg": 4,
+					"xl": 4
+				},
+				"modbusDevices": {
+					"type": "table",
+					"label": "modbusDevices",
+					"hidden": "!enableModbus",
+					"xs": 12,
+					"sm": 12,
+					"md": 12,
+					"lg": 12,
+					"xl": 12,
+					"items": {
+						"enabled": {
+							"type": "checkbox",
+							"title": "modbusEnabled",
+							"default": true,
+							"width": 80
+						},
+						"name": {
+							"type": "text",
+							"title": "modbusName",
+							"width": 140
+						},
+						"host": {
+							"type": "text",
+							"title": "modbusHost",
+							"width": 160
+						},
+						"port": {
+							"type": "number",
+							"title": "modbusPort",
+							"default": 502,
+							"min": 1,
+							"max": 65535,
+							"width": 90
+						},
+						"unitId": {
+							"type": "number",
+							"title": "modbusUnitId",
+							"default": 1,
+							"min": 1,
+							"max": 247,
+							"width": 90
+						},
+						"profile": {
+							"type": "select",
+							"title": "modbusProfile",
+							"default": "auto",
+							"width": 220,
+							"options": [
+								{ "label": "modbusProfileAuto", "value": "auto" },
+								{ "label": "modbusProfileSolarbank4", "value": "solarbank4" },
+								{ "label": "modbusProfileSolarbankMaxAc", "value": "solarbankMaxAc" },
+								{ "label": "modbusProfileSolarbankMax", "value": "solarbankMax" },
+								{ "label": "modbusProfileSmartMeterGen2", "value": "smartMeterGen2" },
+								{ "label": "modbusProfileSmartPlugGen2", "value": "smartPlugGen2" }
+							]
+						}
+					}
+				}
+			}
+		},
 		"_tab_entities": {
 			"type": "panel",
 			"label": "Objects",

@@ -127,6 +127,24 @@ iobroker restart anker-solix.0
 
 Copy **`authcache/<email>.json`** from a working Anker setup (e.g. ha-anker-solix) into `iobroker-data/anker-solix.0/authcache/` to avoid captcha on first login.
 
+### Local Modbus (optional)
+
+Newer Anker devices (Solarbank 4 / Max AC / Max, Smart Meter Gen 2, Smart Plug Gen 2) can be polled **locally via Modbus TCP** (port 502). This is a separate channel from the cloud Python bridge (register maps from [ha-anker-solix-official](https://github.com/anker-charging/ha-anker-solix-official)).
+
+1. Enable **Modbus TCP** in the Anker app (system / Three-Party Control).
+2. Adapter Admin → **Modbus (local)** → enable the channel, add each device IP.
+3. Sensors: `anker-solix.0.modbus.<name>.sensors.*` (SOC, PV, grid, battery, SN, …).
+4. Controls: `anker-solix.0.modbus.<name>.control.*`
+   - Solarbank: `operating_mode`, SOC limits, `backup_soc_enable`, `battery_power_direction` + `battery_power_setpoint` (setpoint only in **third_party_control**; set direction first; charge is written as negative watts).
+   - Smart Plug Gen 2: `power_switch`.
+   - Smart Meter Gen 2: read-only.
+
+Cloud login is still used for older devices and MQTT. Solarbank 3 is **not** in Anker’s official Modbus maps.
+
+### Docker (`buanet/iobroker`)
+
+The official image ships **Python 3.11**. From **0.10.87** the adapter accepts 3.11 as best-effort on Debian 12 Bookworm containers; **3.12+** is still recommended. Optional custom image or userscript: **[docs/docker-buanet.md](docs/docker-buanet.md)** (files under [`docs/docker/`](docs/docker/), PDF: [docs/Anker-Solix-buanet-Docker-Anleitung.pdf](docs/Anker-Solix-buanet-Docker-Anleitung.pdf)).
+
 ---
 
 ## Configuration
@@ -345,6 +363,11 @@ Tab **Abregelungsvermeidung** / **Curtailment avoidance**: requires the [ioBroke
 ---
 
 ## Changelog
+
+### 0.10.88
+
+- **Modbus (optional):** local TCP poll and control for official devices (Solarbank 4 / Max AC / Max, Smart Meter Gen 2, Smart Plug Gen 2); cloud Python bridge unchanged
+- **Docker:** buanet/iobroker Python guide (`docs/docker-buanet.md`)
 
 ### 0.10.87
 

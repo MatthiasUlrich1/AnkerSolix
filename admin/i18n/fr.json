@@ -112,5 +112,22 @@
 	"profile_solarbank4pro": "Banque solaire 4 Pro",
 	"curtailment_limits_hint": "Limites AC : autonome toujours 800 W. Sur combineur par banque connectée : SB2 1000 W, SB3 Pro 1200 W, SB4 Pro 2500 W (somme, jusqu'à 4 emplacements).",
 	"curtailment_hint_pv": "Les jours où les prévisions PV sont élevées (risque de réduction), l'adaptateur retarde délibérément la charge de la batterie et la déplace aux moments où la production dépasse la limite de l'onduleur. Après la fenêtre de temps, le mode d'utilisation sélectionné est restauré. Également requis : un adaptateur <a href=\"https://www.iobroker.net/#en/adapters/adapterref/iobroker.pvforecast/README.md\" target=\"_blank\" rel=\"noopener noreferrer\">iobroker.pvforecast</a> (prévisions PV de pvforecast) et suffisamment de PV sous tension.",
-	"curtailmentForecastPlantPath": "Chemin de l'installation PV forecast (p. ex. pvforecast.0.plants.pv)"
+	"curtailmentForecastPlantPath": "Chemin de l'installation PV forecast (p. ex. pvforecast.0.plants.pv)",
+	"ModbusLocal": "Modbus (local)",
+	"modbus_hint": "Optional local Modbus TCP for officially supported Anker devices (Solarbank 4 / Max AC / Max, Smart Meter Gen 2, Smart Plug Gen 2). Enable Modbus TCP in the Anker app (system or Three-Party Control). Writes operating mode, SOC limits, battery setpoint (third-party mode) and plug on/off under modbus.<name>.control.*. Cloud/Python bridge is unchanged. Each device has its own IP (port 502).",
+	"enableModbus": "Enable local Modbus channel",
+	"modbusScanInterval": "Modbus poll interval (seconds, HA: 5)",
+	"modbusDevices": "Modbus devices",
+	"modbusEnabled": "Enabled",
+	"modbusName": "Name",
+	"modbusHost": "IP address",
+	"modbusPort": "Port",
+	"modbusUnitId": "Unit ID",
+	"modbusProfile": "Profile",
+	"modbusProfileAuto": "Auto-detect",
+	"modbusProfileSolarbank4": "Solarbank 4 E5000 Pro",
+	"modbusProfileSolarbankMaxAc": "Solarbank Max AC",
+	"modbusProfileSolarbankMax": "Solarbank Max",
+	"modbusProfileSmartMeterGen2": "Smart Meter Gen 2",
+	"modbusProfileSmartPlugGen2": "Smart Plug Gen 2"
 }

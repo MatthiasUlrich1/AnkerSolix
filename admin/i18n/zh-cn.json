@@ -112,5 +112,22 @@
 	"profile_solarbank4pro": "太阳能银行 4 专业版",
 	"curtailment_limits_hint": "交流限制：独立始终为 800 W。在每个连接组的组合器上：SB2 1000 W、SB3 Pro 1200 W、SB4 Pro 2500 W（总计，最多 4 个插槽）。",
 	"curtailment_hint_pv": "在光伏预测较高的日子（限电风险），适配器会故意延迟电池充电，并将其转移到发电量超过逆变器限制的时间。在该时间窗口之后，恢复所选择的使用模式。还需要：<a href=\"https://www.iobroker.net/#en/adapters/adapterref/iobroker.pvforecast/README.md\" target=\"_blank\" rel=\"noopener noreferrer\">iobroker.pvforecast</a>适配器（来自pvforecast的PV预测）和足够的实时PV。",
-	"curtailmentForecastPlantPath": "PV forecast 电站路径（例如 pvforecast.0.plants.pv）"
+	"curtailmentForecastPlantPath": "PV forecast 电站路径（例如 pvforecast.0.plants.pv）",
+	"ModbusLocal": "Modbus (local)",
+	"modbus_hint": "Optional local Modbus TCP for officially supported Anker devices (Solarbank 4 / Max AC / Max, Smart Meter Gen 2, Smart Plug Gen 2). Enable Modbus TCP in the Anker app (system or Three-Party Control). Writes operating mode, SOC limits, battery setpoint (third-party mode) and plug on/off under modbus.<name>.control.*. Cloud/Python bridge is unchanged. Each device has its own IP (port 502).",
+	"enableModbus": "Enable local Modbus channel",
+	"modbusScanInterval": "Modbus poll interval (seconds, HA: 5)",
+	"modbusDevices": "Modbus devices",
+	"modbusEnabled": "Enabled",
+	"modbusName": "Name",
+	"modbusHost": "IP address",
+	"modbusPort": "Port",
+	"modbusUnitId": "Unit ID",
+	"modbusProfile": "Profile",
+	"modbusProfileAuto": "Auto-detect",
+	"modbusProfileSolarbank4": "Solarbank 4 E5000 Pro",
+	"modbusProfileSolarbankMaxAc": "Solarbank Max AC",
+	"modbusProfileSolarbankMax": "Solarbank Max",
+	"modbusProfileSmartMeterGen2": "Smart Meter Gen 2",
+	"modbusProfileSmartPlugGen2": "Smart Plug Gen 2"
 }

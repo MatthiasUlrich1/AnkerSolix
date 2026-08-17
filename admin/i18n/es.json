@@ -112,5 +112,22 @@
 	"profile_solarbank4pro": "Banco Solar 4 Pro",
 	"curtailment_limits_hint": "Límites de CA: independiente siempre 800 W. En combinador por banco conectado: SB2 1000 W, SB3 Pro 1200 W, SB4 Pro 2500 W (suma, hasta 4 ranuras).",
 	"curtailment_hint_pv": "En los días con una previsión fotovoltaica alta (riesgo de reducción), el adaptador retrasa deliberadamente la carga de la batería y la cambia a momentos en los que la generación supera el límite del inversor. Después de la ventana de tiempo, se restablece el modo de uso seleccionado. También se requiere: adaptador <a href=\"https://www.iobroker.net/#en/adapters/adapterref/iobroker.pvforecast/README.md\" target=\"_blank\" rel=\"noopener noreferrer\">iobroker.pvforecast</a> (previsión fotovoltaica de pvforecast) y suficiente fotovoltaica activa.",
-	"curtailmentForecastPlantPath": "Ruta de planta PV forecast (p. ej. pvforecast.0.plants.pv)"
+	"curtailmentForecastPlantPath": "Ruta de planta PV forecast (p. ej. pvforecast.0.plants.pv)",
+	"ModbusLocal": "Modbus (local)",
+	"modbus_hint": "Optional local Modbus TCP for officially supported Anker devices (Solarbank 4 / Max AC / Max, Smart Meter Gen 2, Smart Plug Gen 2). Enable Modbus TCP in the Anker app (system or Three-Party Control). Writes operating mode, SOC limits, battery setpoint (third-party mode) and plug on/off under modbus.<name>.control.*. Cloud/Python bridge is unchanged. Each device has its own IP (port 502).",
+	"enableModbus": "Enable local Modbus channel",
+	"modbusScanInterval": "Modbus poll interval (seconds, HA: 5)",
+	"modbusDevices": "Modbus devices",
+	"modbusEnabled": "Enabled",
+	"modbusName": "Name",
+	"modbusHost": "IP address",
+	"modbusPort": "Port",
+	"modbusUnitId": "Unit ID",
+	"modbusProfile": "Profile",
+	"modbusProfileAuto": "Auto-detect",
+	"modbusProfileSolarbank4": "Solarbank 4 E5000 Pro",
+	"modbusProfileSolarbankMaxAc": "Solarbank Max AC",
+	"modbusProfileSolarbankMax": "Solarbank Max",
+	"modbusProfileSmartMeterGen2": "Smart Meter Gen 2",
+	"modbusProfileSmartPlugGen2": "Smart Plug Gen 2"
 }

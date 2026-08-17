@@ -37,6 +37,7 @@ var import_services = require("./lib/services");
 var import_curtailmentConfig = require("./lib/curtailmentConfig");
 var import_systemBatPower = require("./lib/systemBatPower");
 var import_stateSync = require("./lib/stateSync");
+var import_channel = require("./lib/modbus/channel");
 class AnkerSolix extends utils.Adapter {
   pollTimer;
   controlQueue;
@@ -48,6 +49,7 @@ class AnkerSolix extends utils.Adapter {
   siteSolarbanks = /* @__PURE__ */ new Map();
   pollAfterControlTimer;
   pollInFlight = false;
+  modbusChannel;
   constructor(options = {}) {
     super({
       ...options,
@@ -516,7 +518,7 @@ class AnkerSolix extends utils.Adapter {
     }, 12e3);
   }
   async onStateChange(id, state) {
-    var _a;
+    var _a, _b;
     if (!state) {
       return;
     }
@@ -544,6 +546,10 @@ class AnkerSolix extends utils.Adapter {
     if (state.ack) {
       return;
     }
+    if (id.startsWith(`${this.namespace}.modbus.`)) {
+      await ((_a = this.modbusChannel) == null ? void 0 : _a.handleControl(id, state));
+      return;
+    }
     if (id.startsWith(`${this.namespace}.services.`) && state.val === true) {
       await this.handleServiceTrigger(id);
       return;
@@ -553,7 +559,7 @@ class AnkerSolix extends utils.Adapter {
       return;
     }
     if (control.control === "ev_charger_mode") {
-      const mode = String((_a = state.val) != null ? _a : "");
+      const mode = String((_b = state.val) != null ? _b : "");
       if (mode === "wait_plug" || mode === "wait_start") {
         await this.setState(id, { val: state.val, ack: true });
         return;
@@ -749,12 +755,15 @@ class AnkerSolix extends utils.Adapter {
     this.subscribeStates(`${this.namespace}.services.*`);
     this.subscribeCurtailmentPvStates();
     this.subscribeSystemBatPowerAggregation();
+    this.modbusChannel = new import_channel.ModbusChannel(this);
+    await this.modbusChannel.start();
     await this.pollOnce();
     this.pollTimer = this.setInterval(() => {
       void this.pollOnce();
     }, intervalSec * 1e3);
   }
   onUnload(callback) {
+    var _a;
     if (this.pollTimer) {
       this.clearInterval(this.pollTimer);
       this.pollTimer = void 0;
@@ -766,6 +775,8 @@ class AnkerSolix extends utils.Adapter {
     this.lastNotifiedPvW.clear();
     this.onCurtailmentPvUpdated = void 0;
     this.onCurtailmentSystemPvUpdated = void 0;
+    (_a = this.modbusChannel) == null ? void 0 : _a.stop();
+    this.modbusChannel = void 0;
     void (0, import_pythonBridge.stopBridgeDaemon)().finally(() => callback());
   }
 }
