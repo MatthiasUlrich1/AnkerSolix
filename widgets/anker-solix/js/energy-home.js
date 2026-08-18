@@ -61,7 +61,7 @@ $.extend(true, systemDictionary, {
 });
 
 vis.binds["anker-solix"] = {
-	version: "0.1.3",
+	version: "0.1.4",
 
 	discoveryRules: {
 		pv: [
@@ -244,7 +244,6 @@ vis.binds["anker-solix"] = {
 		} else {
 			api.applyManualOids(ctx);
 			api.bindStates(ctx);
-			api.render(ctx);
 		}
 	},
 
@@ -376,7 +375,6 @@ vis.binds["anker-solix"] = {
 		function finish() {
 			api.applyManualOids(ctx);
 			api.bindStates(ctx);
-			api.render(ctx);
 		}
 
 		function runDiscovery() {
@@ -434,6 +432,131 @@ vis.binds["anker-solix"] = {
 		});
 	},
 
+	collectBoundOids: function (ctx) {
+		var oids = [];
+		var keys = ["pv", "home", "grid", "soc", "bat", "ev", "daily", "self", "batDischarge", "batCharge"];
+
+		for (var i = 0; i < keys.length; i++) {
+			if (ctx.oids[keys[i]]) {
+				oids.push(ctx.oids[keys[i]]);
+			}
+		}
+
+		if (ctx.oids.evPowerParts && ctx.oids.evPowerParts.length) {
+			for (var p = 0; p < ctx.oids.evPowerParts.length; p++) {
+				oids.push(ctx.oids.evPowerParts[p]);
+			}
+		}
+
+		var unique = {};
+		for (var j = 0; j < oids.length; j++) {
+			unique[oids[j]] = true;
+		}
+		return Object.keys(unique);
+	},
+
+	ensureRuntimeSubscription: function (oids, done) {
+		if (!oids.length) {
+			done();
+			return;
+		}
+
+		if (vis.editMode) {
+			done();
+			return;
+		}
+
+		function finishGetStates(data) {
+			if (data && typeof vis.updateStates === "function") {
+				vis.updateStates(data);
+			}
+			done();
+		}
+
+		if (vis.conn && typeof vis.conn.getStates === "function") {
+			vis.conn.getStates(oids, function (_err, data) {
+				var toSubscribe = [];
+				if (vis.subscribing && vis.subscribing.active) {
+					for (var i = 0; i < oids.length; i++) {
+						if (vis.subscribing.active.indexOf(oids[i]) < 0) {
+							vis.subscribing.active.push(oids[i]);
+							toSubscribe.push(oids[i]);
+						}
+					}
+				} else {
+					toSubscribe = oids.slice();
+				}
+
+				if (toSubscribe.length && vis.conn.subscribe) {
+					vis.conn.subscribe(toSubscribe);
+				}
+
+				finishGetStates(data);
+			});
+			return;
+		}
+
+		if (typeof vis.subscribeOidAtRuntime === "function") {
+			var index = 0;
+			function nextOid() {
+				if (index >= oids.length) {
+					done();
+					return;
+				}
+				vis.subscribeOidAtRuntime(oids[index++], nextOid);
+			}
+			nextOid();
+			return;
+		}
+
+		done();
+	},
+
+	syncInitialValues: function (ctx) {
+		var api = vis.binds["anker-solix"];
+		var keys = ["pv", "home", "grid", "soc", "bat", "ev", "daily", "self"];
+
+		for (var i = 0; i < keys.length; i++) {
+			var oid = ctx.oids[keys[i]];
+			if (!oid) {
+				continue;
+			}
+			var stateKey = oid + ".val";
+			if (vis.states[stateKey] !== undefined) {
+				ctx.values[keys[i]] = api.toNumber(vis.states[stateKey]);
+			}
+		}
+
+		if (ctx.oids.batDischarge || ctx.oids.batCharge) {
+			var discharge = ctx.oids.batDischarge
+				? api.toNumber(vis.states[ctx.oids.batDischarge + ".val"])
+				: 0;
+			var charge = ctx.oids.batCharge
+				? api.toNumber(vis.states[ctx.oids.batCharge + ".val"])
+				: 0;
+			ctx.values.bat = discharge - charge;
+		}
+
+		if (ctx.oids.evPowerParts && ctx.oids.evPowerParts.length) {
+			var sum = 0;
+			for (var p = 0; p < ctx.oids.evPowerParts.length; p++) {
+				sum += api.toNumber(vis.states[ctx.oids.evPowerParts[p] + ".val"]);
+			}
+			ctx.values.ev = sum;
+		}
+	},
+
+	registerVisBindings: function (ctx) {
+		var handlers = [];
+		if (ctx._handlers && ctx._handlers.length) {
+			for (var i = 0; i < ctx._handlers.length; i++) {
+				handlers.push(ctx._handlers[i].fn);
+			}
+		}
+		ctx.$root.data("bound", ctx.bound.slice());
+		ctx.$root.data("bindHandler", handlers);
+	},
+
 	bindStates: function (ctx) {
 		var api = vis.binds["anker-solix"];
 		var keys = ["pv", "home", "grid", "soc", "bat", "ev", "daily", "self", "batDischarge", "batCharge"];
@@ -460,13 +583,6 @@ vis.binds["anker-solix"] = {
 				}
 				api.onValue(ctx, key, newVal);
 			}
-			if (vis.states[stateKey] !== undefined) {
-				if (key === "batDischarge" || key === "batCharge") {
-					api.updateBatteryParts(ctx);
-				} else {
-					api.onValue(ctx, key, vis.states[stateKey]);
-				}
-			}
 			vis.states.bind(stateKey, onChange);
 			ctx.bound.push(stateKey);
 			ctx._handlers.push({ key: stateKey, fn: onChange });
@@ -492,10 +608,16 @@ vis.binds["anker-solix"] = {
 					}
 					vis.states.bind(stateKey, onEvPart);
 					ctx.bound.push(stateKey);
-					onEvPart();
+					ctx._handlers.push({ key: stateKey, fn: onEvPart });
 				})(ctx.oids.evPowerParts[p]);
 			}
 		}
+
+		api.ensureRuntimeSubscription(api.collectBoundOids(ctx), function () {
+			api.syncInitialValues(ctx);
+			api.registerVisBindings(ctx);
+			api.render(ctx);
+		});
 	},
 
 	updateBatteryParts: function (ctx) {
