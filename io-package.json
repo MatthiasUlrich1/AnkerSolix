@@ -1,9 +1,22 @@
 {
 	"common": {
 		"name": "anker-solix",
-		"version": "0.10.91",
+		"version": "0.10.92",
 		"messagebox": true,
 		"news": {
+			"0.10.92": {
+				"en": "VIS Energy Home: clean background, slim overlay flows, broader auto-discovery, live view state subscription fix",
+				"de": "VIS Energy Home: bereinigter Hintergrund, schlanke Overlay-Linien, erweiterte Auto-Discovery, Live-Ansicht-Fix",
+				"ru": "VIS Energy Home: clean background, overlay flows, auto-discovery, live view fix",
+				"pt": "VIS Energy Home: clean background, overlay flows, auto-discovery, live view fix",
+				"nl": "VIS Energy Home: clean background, overlay flows, auto-discovery, live view fix",
+				"fr": "VIS Energy Home: clean background, overlay flows, auto-discovery, live view fix",
+				"it": "VIS Energy Home: clean background, overlay flows, auto-discovery, live view fix",
+				"es": "VIS Energy Home: clean background, overlay flows, auto-discovery, live view fix",
+				"pl": "VIS Energy Home: clean background, overlay flows, auto-discovery, live view fix",
+				"uk": "VIS Energy Home: clean background, overlay flows, auto-discovery, live view fix",
+				"zh-cn": "VIS Energy Home：干净背景、叠加能量线、自动发现与实时视图修复"
+			},
 			"0.10.91": {
 				"en": "VIS/VIS-2: Energy Home widget (photoreal dashboard, auto state discovery); run iobroker upload anker-solix after install",
 				"de": "VIS/VIS-2: Energy-Home-Widget (Dashboard, Auto-Discovery); nach Installation iobroker upload anker-solix ausführen",

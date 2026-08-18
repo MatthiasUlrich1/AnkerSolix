@@ -379,7 +379,7 @@ Tab **Abregelungsvermeidung** / **Curtailment avoidance**: requires the [ioBroke
 
 Widget set **anker-solix** → **Energy Home** (photoreal house background, live PV / home / grid / battery / EV overlays, auto state discovery).
 
-**Important:** Widgets ship with **GitHub main / 0.10.91+** only. npm **0.10.90** does **not** include them. After install or update:
+**Important:** Widgets ship with **GitHub main / 0.10.92+** only. npm **0.10.90** does **not** include them. After install or update:
 
 ```bash
 iobroker upload anker-solix
@@ -394,6 +394,10 @@ Enable **Power flows** and **Energy statistics** in adapter **Objects** for foot
 ---
 
 ## Changelog
+
+### 0.10.92
+
+- **VIS / VIS-2 Energy Home:** clean house background (no baked-in UI); slim animated SVG energy lines and cards as overlays; broader auto-discovery (system, combiner, smartmeter, solarbank, modbus, ev_charger); all cards always visible; live view subscribes discovered states (GitHub-only until next npm release)
 
 ### 0.10.91
 
