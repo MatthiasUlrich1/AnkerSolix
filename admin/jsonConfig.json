@@ -173,6 +173,18 @@
 					"lg": 4,
 					"xl": 4
 				},
+				"modbusOnly": {
+					"type": "checkbox",
+					"label": "modbusOnly",
+					"help": "modbusOnly_help",
+					"default": false,
+					"hidden": "!data.enableModbus",
+					"xs": 12,
+					"sm": 6,
+					"md": 4,
+					"lg": 4,
+					"xl": 4
+				},
 				"modbusScanInterval": {
 					"type": "number",
 					"label": "modbusScanInterval",

@@ -58,6 +58,11 @@ export function parseModbusScanInterval(raw: unknown): number {
 	return Math.max(2, Math.min(60, Math.round(n)));
 }
 
+/** Local Modbus without Anker cloud/Python; instance LED follows Modbus devices. */
+export function isModbusOnly(config: { enableModbus?: boolean; modbusOnly?: boolean }): boolean {
+	return config.enableModbus === true && config.modbusOnly === true;
+}
+
 /** `namespace.modbus.<deviceId>.control.<id>` (deviceId has no dots). */
 export function parseModbusControlStateId(
 	namespace: string,

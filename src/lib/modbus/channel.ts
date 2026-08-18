@@ -23,9 +23,14 @@ interface DeviceRuntime {
 	config: ModbusDeviceConfig;
 	client: ModbusTcpClient;
 	profile: ModbusDeviceProfile | undefined;
+	connected: boolean;
 	pollInFlight: boolean;
 	snapshot: ModbusControlSnapshot;
 	writeGuardUntil: Map<string, number>;
+}
+
+export interface ModbusChannelHooks {
+	onAliveChange?: (alive: boolean) => void;
 }
 
 export class ModbusChannel {
@@ -33,7 +38,10 @@ export class ModbusChannel {
 	private timer: ioBroker.Interval | undefined;
 	private stopped = false;
 
-	constructor(private readonly adapter: ioBroker.Adapter) {}
+	constructor(
+		private readonly adapter: ioBroker.Adapter,
+		private readonly hooks: ModbusChannelHooks = {},
+	) {}
 
 	async start(): Promise<void> {
 		if (this.adapter.config.enableModbus !== true) {
@@ -42,6 +50,7 @@ export class ModbusChannel {
 		const configs = parseModbusDevices(this.adapter.config.modbusDevices).filter(d => d.enabled);
 		if (!configs.length) {
 			this.adapter.log.info("Local Modbus channel enabled but no devices configured");
+			this.notifyAlive();
 			return;
 		}
 		const intervalSec = parseModbusScanInterval(this.adapter.config.modbusScanInterval);
@@ -54,6 +63,7 @@ export class ModbusChannel {
 				config,
 				client,
 				profile,
+				connected: false,
 				pollInFlight: false,
 				snapshot: {},
 				writeGuardUntil: new Map(),
@@ -189,11 +199,19 @@ export class ModbusChannel {
 		}
 	}
 
+	private notifyAlive(): void {
+		if (this.stopped || !this.hooks.onAliveChange) {
+			return;
+		}
+		this.hooks.onAliveChange(this.devices.some(d => d.connected));
+	}
+
 	private async pollAll(): Promise<void> {
 		if (this.stopped) {
 			return;
 		}
 		await Promise.all(this.devices.map(device => this.pollDevice(device)));
+		this.notifyAlive();
 	}
 
 	private async pollDevice(device: DeviceRuntime): Promise<void> {
@@ -216,6 +234,7 @@ export class ModbusChannel {
 			const modeStates = operatingModeStatesFromPoints(points);
 			await ensureModbusControlObjects(this.adapter, device.id, profile, modeStates);
 			await this.publishControlStates(device, profile, points);
+			device.connected = true;
 			await this.adapter.setState(`modbus.${device.id}.info.connected`, true, true);
 			await this.adapter.setState(`modbus.${device.id}.info.profile`, profile.id, true);
 			await this.adapter.setState(`modbus.${device.id}.info.lastError`, "", true);
@@ -223,6 +242,7 @@ export class ModbusChannel {
 			const message = err instanceof Error ? err.message : String(err);
 			this.adapter.log.warn(`Modbus ${device.config.host}:${device.config.port}: ${message}`);
 			device.client.close();
+			device.connected = false;
 			if (!this.stopped) {
 				await this.adapter.setState(`modbus.${device.id}.info.connected`, false, true);
 				await this.adapter.setState(`modbus.${device.id}.info.lastError`, message, true);

@@ -46,6 +46,7 @@ import {
 } from "./lib/systemBatPower";
 import { parseControlStateId, syncDevices, type CurtailmentPvSyncHost } from "./lib/stateSync";
 import type { BridgeConfig, BridgeDevice, BridgeServiceConfig, DeviceControlContext } from "./lib/types";
+import { isModbusOnly, parseModbusDevices } from "./lib/modbus/config";
 import { ModbusChannel } from "./lib/modbus/channel";
 
 class AnkerSolix extends utils.Adapter {
@@ -203,6 +204,9 @@ class AnkerSolix extends utils.Adapter {
 	}
 
 	private async pollOnceBody(): Promise<void> {
+		if (isModbusOnly(this.config)) {
+			return;
+		}
 		if (!this.config.acceptTerms) {
 			this.log.warn("Please accept the usage terms in the adapter configuration.");
 			await this.setState("info.connection", false, true);
@@ -632,6 +636,11 @@ class AnkerSolix extends utils.Adapter {
 			return;
 		}
 
+		if (isModbusOnly(this.config)) {
+			this.log.warn(`Ignored cloud control in Modbus-only mode: ${id}`);
+			return;
+		}
+
 		if (id.startsWith(`${this.namespace}.services.`) && state.val === true) {
 			await this.handleServiceTrigger(id);
 			return;
@@ -846,6 +855,12 @@ class AnkerSolix extends utils.Adapter {
 			},
 			native: {},
 		});
+		await this.setState("info.connection", false, true);
+
+		if (isModbusOnly(this.config)) {
+			await this.startModbusOnly();
+			return;
+		}
 
 		await setupServiceStates(this);
 		await setupCurtailmentStates(this);
@@ -854,7 +869,6 @@ class AnkerSolix extends utils.Adapter {
 		(this as CurtailmentPvSyncHost).onCurtailmentSystemPvUpdated = (siteId, livePvW) =>
 			this.handleCurtailmentSystemPvUpdated(siteId, livePvW);
 		this.refreshCurtailmentDeviceIds();
-		await this.setState("info.connection", false, true);
 
 		const intervalSec = Math.max(30, Number(this.config.scanInterval) || 60);
 		this.log.info(
@@ -881,6 +895,25 @@ class AnkerSolix extends utils.Adapter {
 		this.pollTimer = this.setInterval(() => {
 			void this.pollOnce();
 		}, intervalSec * 1000);
+	}
+
+	private async startModbusOnly(): Promise<void> {
+		await this.setState("info.pythonReady", false, true);
+		this.log.info(
+			"Modbus-only mode: Anker cloud and Python are disabled. Instance status follows local Modbus devices.",
+		);
+		if (!parseModbusDevices(this.config.modbusDevices).some(d => d.enabled)) {
+			this.log.warn(
+				"Modbus-only mode: no enabled devices configured — instance stays yellow until a device connects.",
+			);
+		}
+		this.subscribeStates(`${this.namespace}.*.control.*`);
+		this.modbusChannel = new ModbusChannel(this, {
+			onAliveChange: alive => {
+				void this.setState("info.connection", alive, true);
+			},
+		});
+		await this.modbusChannel.start();
 	}
 
 	private onUnload(callback: () => void): void {

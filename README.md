@@ -68,7 +68,7 @@ The adapter uses an **unofficial** Python library to talk to the Anker Power **c
 
 Poll interval should be **60–180 s** (same recommendation as HA). Site list is updated every cycle; device/site details and energy data run on a slower interval (`deviceDetailMultiplier`, default every 10th poll).
 
-> **Important:** The cloud API is **mandatory**. MQTT alone is not enough for full system data. This adapter does **not** replace local BLE or Modbus integrations — see [Additional resources](#credits--further-reading).
+> **Important:** For cloud devices the Anker API is **mandatory** (MQTT alone is not enough for full system data). Exception: **Modbus only** mode uses local TCP and does not need cloud credentials. This adapter does **not** replace local BLE integrations — see [Additional resources](#credits--further-reading).
 
 ---
 
@@ -133,13 +133,14 @@ Newer Anker devices (Solarbank 4 / Max AC / Max, Smart Meter Gen 2, Smart Plug G
 
 1. Enable **Modbus TCP** in the Anker app (system / Three-Party Control).
 2. Adapter Admin → **Modbus (local)** → enable the channel, add each device IP.
-3. Sensors: `anker-solix.0.modbus.<name>.sensors.*` (SOC, PV, grid, battery, SN, …).
-4. Controls: `anker-solix.0.modbus.<name>.control.*`
+3. Optional: enable **Modbus only (no cloud)** if you do not want Anker cloud login. Then Python, credentials and usage terms are not required; the instance is **green** when at least one Modbus device is connected (otherwise yellow).
+4. Sensors: `anker-solix.0.modbus.<name>.sensors.*` (SOC, PV, grid, battery, SN, …).
+5. Controls: `anker-solix.0.modbus.<name>.control.*`
    - Solarbank: `operating_mode`, SOC limits, `backup_soc_enable`, `battery_power_direction` + `battery_power_setpoint` (setpoint only in **third_party_control**; set direction first; charge is written as negative watts).
    - Smart Plug Gen 2: `power_switch`.
    - Smart Meter Gen 2: read-only.
 
-Cloud login is still used for older devices and MQTT. Solarbank 3 is **not** in Anker’s official Modbus maps.
+Without **Modbus only**, cloud login is still used for older devices and MQTT. Solarbank 3 is **not** in Anker’s official Modbus maps. If another Modbus client just queried the device, the first poll may get **connection refused** until that client’s cooldown expires; the next poll interval retries.
 
 ### Docker (`buanet/iobroker`)
 
@@ -363,6 +364,10 @@ Tab **Abregelungsvermeidung** / **Curtailment avoidance**: requires the [ioBroke
 ---
 
 ## Changelog
+
+### 0.10.90
+
+- **Modbus only:** skip Anker cloud/Python when the checkbox is enabled; no credentials or usage terms required; instance LED is green when at least one local Modbus device is connected
 
 ### 0.10.89
 

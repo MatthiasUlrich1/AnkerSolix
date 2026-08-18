@@ -18,6 +18,7 @@ var __copyProps = (to, from, except, desc) => {
 var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: true }), mod);
 var config_exports = {};
 __export(config_exports, {
+  isModbusOnly: () => isModbusOnly,
   modbusDeviceId: () => modbusDeviceId,
   parseModbusControlStateId: () => parseModbusControlStateId,
   parseModbusDevices: () => parseModbusDevices,
@@ -77,6 +78,9 @@ function parseModbusScanInterval(raw) {
   }
   return Math.max(2, Math.min(60, Math.round(n)));
 }
+function isModbusOnly(config) {
+  return config.enableModbus === true && config.modbusOnly === true;
+}
 function parseModbusControlStateId(namespace, stateId) {
   const prefix = `${namespace}.modbus.`;
   if (!stateId.startsWith(prefix)) {
@@ -90,6 +94,7 @@ function parseModbusControlStateId(namespace, stateId) {
 }
 // Annotate the CommonJS export names for ESM import in node:
 0 && (module.exports = {
+  isModbusOnly,
   modbusDeviceId,
   parseModbusControlStateId,
   parseModbusDevices,

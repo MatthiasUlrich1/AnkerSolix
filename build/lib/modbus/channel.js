@@ -29,8 +29,9 @@ var import_states = require("./states");
 var import_tcpClient = require("./tcpClient");
 var import_types = require("./types");
 class ModbusChannel {
-  constructor(adapter) {
+  constructor(adapter, hooks = {}) {
     this.adapter = adapter;
+    this.hooks = hooks;
   }
   devices = [];
   timer;
@@ -42,6 +43,7 @@ class ModbusChannel {
     const configs = (0, import_config.parseModbusDevices)(this.adapter.config.modbusDevices).filter((d) => d.enabled);
     if (!configs.length) {
       this.adapter.log.info("Local Modbus channel enabled but no devices configured");
+      this.notifyAlive();
       return;
     }
     const intervalSec = (0, import_config.parseModbusScanInterval)(this.adapter.config.modbusScanInterval);
@@ -54,6 +56,7 @@ class ModbusChannel {
         config,
         client,
         profile,
+        connected: false,
         pollInFlight: false,
         snapshot: {},
         writeGuardUntil: /* @__PURE__ */ new Map()
@@ -184,11 +187,18 @@ class ModbusChannel {
       this.applyLocalSnapshot(device, id, st.val);
     }
   }
+  notifyAlive() {
+    if (this.stopped || !this.hooks.onAliveChange) {
+      return;
+    }
+    this.hooks.onAliveChange(this.devices.some((d) => d.connected));
+  }
   async pollAll() {
     if (this.stopped) {
       return;
     }
     await Promise.all(this.devices.map((device) => this.pollDevice(device)));
+    this.notifyAlive();
   }
   async pollDevice(device) {
     var _a;
@@ -211,6 +221,7 @@ class ModbusChannel {
       const modeStates = (0, import_states.operatingModeStatesFromPoints)(points);
       await (0, import_states.ensureModbusControlObjects)(this.adapter, device.id, profile, modeStates);
       await this.publishControlStates(device, profile, points);
+      device.connected = true;
       await this.adapter.setState(`modbus.${device.id}.info.connected`, true, true);
       await this.adapter.setState(`modbus.${device.id}.info.profile`, profile.id, true);
       await this.adapter.setState(`modbus.${device.id}.info.lastError`, "", true);
@@ -218,6 +229,7 @@ class ModbusChannel {
       const message = err instanceof Error ? err.message : String(err);
       this.adapter.log.warn(`Modbus ${device.config.host}:${device.config.port}: ${message}`);
       device.client.close();
+      device.connected = false;
       if (!this.stopped) {
         await this.adapter.setState(`modbus.${device.id}.info.connected`, false, true);
         await this.adapter.setState(`modbus.${device.id}.info.lastError`, message, true);

@@ -27,6 +27,7 @@ const {
 } = require("../build/lib/modbus/protocol");
 const { matchProfileByProductCode, MODBUS_PROFILES } = require("../build/lib/modbus/profiles");
 const {
+	isModbusOnly,
 	parseModbusControlStateId,
 	parseModbusDevices,
 	parseModbusScanInterval,
@@ -136,6 +137,13 @@ describe("modbus config", () => {
 		assert.strictEqual(devices[1].enabled, false);
 		assert.strictEqual(parseModbusScanInterval(5), 5);
 		assert.strictEqual(parseModbusScanInterval(1), 2);
+	});
+
+	it("enables Modbus-only only when both flags are set", () => {
+		assert.strictEqual(isModbusOnly({}), false);
+		assert.strictEqual(isModbusOnly({ enableModbus: true }), false);
+		assert.strictEqual(isModbusOnly({ modbusOnly: true }), false);
+		assert.strictEqual(isModbusOnly({ enableModbus: true, modbusOnly: true }), true);
 	});
 
 	it("matches official product codes", () => {

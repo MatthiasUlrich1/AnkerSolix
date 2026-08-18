@@ -37,6 +37,7 @@ var import_services = require("./lib/services");
 var import_curtailmentConfig = require("./lib/curtailmentConfig");
 var import_systemBatPower = require("./lib/systemBatPower");
 var import_stateSync = require("./lib/stateSync");
+var import_config = require("./lib/modbus/config");
 var import_channel = require("./lib/modbus/channel");
 class AnkerSolix extends utils.Adapter {
   pollTimer;
@@ -178,6 +179,9 @@ class AnkerSolix extends utils.Adapter {
   }
   async pollOnceBody() {
     var _a, _b, _c, _d;
+    if ((0, import_config.isModbusOnly)(this.config)) {
+      return;
+    }
     if (!this.config.acceptTerms) {
       this.log.warn("Please accept the usage terms in the adapter configuration.");
       await this.setState("info.connection", false, true);
@@ -550,6 +554,10 @@ class AnkerSolix extends utils.Adapter {
       await ((_a = this.modbusChannel) == null ? void 0 : _a.handleControl(id, state));
       return;
     }
+    if ((0, import_config.isModbusOnly)(this.config)) {
+      this.log.warn(`Ignored cloud control in Modbus-only mode: ${id}`);
+      return;
+    }
     if (id.startsWith(`${this.namespace}.services.`) && state.val === true) {
       await this.handleServiceTrigger(id);
       return;
@@ -737,12 +745,16 @@ class AnkerSolix extends utils.Adapter {
       },
       native: {}
     });
+    await this.setState("info.connection", false, true);
+    if ((0, import_config.isModbusOnly)(this.config)) {
+      await this.startModbusOnly();
+      return;
+    }
     await (0, import_services.setupServiceStates)(this);
     await (0, import_curtailmentStates.setupCurtailmentStates)(this);
     this.onCurtailmentPvUpdated = (deviceId, livePvW) => this.handleCurtailmentPvUpdated(deviceId, livePvW);
     this.onCurtailmentSystemPvUpdated = (siteId, livePvW) => this.handleCurtailmentSystemPvUpdated(siteId, livePvW);
     this.refreshCurtailmentDeviceIds();
-    await this.setState("info.connection", false, true);
     const intervalSec = Math.max(30, Number(this.config.scanInterval) || 60);
     this.log.info(
       `Anker Solix adapter started (poll every ${intervalSec}s, MQTT: ${this.config.mqttUsage !== false})`
@@ -761,6 +773,24 @@ class AnkerSolix extends utils.Adapter {
     this.pollTimer = this.setInterval(() => {
       void this.pollOnce();
     }, intervalSec * 1e3);
+  }
+  async startModbusOnly() {
+    await this.setState("info.pythonReady", false, true);
+    this.log.info(
+      "Modbus-only mode: Anker cloud and Python are disabled. Instance status follows local Modbus devices."
+    );
+    if (!(0, import_config.parseModbusDevices)(this.config.modbusDevices).some((d) => d.enabled)) {
+      this.log.warn(
+        "Modbus-only mode: no enabled devices configured \u2014 instance stays yellow until a device connects."
+      );
+    }
+    this.subscribeStates(`${this.namespace}.*.control.*`);
+    this.modbusChannel = new import_channel.ModbusChannel(this, {
+      onAliveChange: (alive) => {
+        void this.setState("info.connection", alive, true);
+      }
+    });
+    await this.modbusChannel.start();
   }
   onUnload(callback) {
     var _a;

@@ -1,21 +1,21 @@
 {
 	"common": {
 		"name": "anker-solix",
-		"version": "0.10.89",
+		"version": "0.10.90",
 		"messagebox": true,
 		"news": {
-			"0.10.89": {
-				"en": "Admin: fix GUI error on Modbus (local) tab; buanet Docker docs match Python 3.11 best-effort",
-				"de": "Admin: GUI-Fehler im Tab Modbus (lokal) behoben; buanet-Docker-Doku an Python 3.11 best-effort angepasst",
-				"ru": "Fix Modbus admin GUI error; Docker docs for Python 3.11",
-				"pt": "Fix Modbus admin GUI error; Docker docs for Python 3.11",
-				"nl": "Fix Modbus admin GUI error; Docker docs for Python 3.11",
-				"fr": "Fix Modbus admin GUI error; Docker docs for Python 3.11",
-				"it": "Fix Modbus admin GUI error; Docker docs for Python 3.11",
-				"es": "Fix Modbus admin GUI error; Docker docs for Python 3.11",
-				"pl": "Fix Modbus admin GUI error; Docker docs for Python 3.11",
-				"uk": "Fix Modbus admin GUI error; Docker docs for Python 3.11",
-				"zh-cn": "修复本地 Modbus 管理界面错误；Docker 文档适配 Python 3.11"
+			"0.10.90": {
+				"en": "Modbus only: skip Anker cloud/Python; instance is green when a local Modbus device is connected",
+				"de": "Nur Modbus: keine Anker-Cloud/Python; Instanz ist grün, sobald ein lokales Modbus-Gerät verbunden ist",
+				"ru": "Modbus-only mode: skip cloud/Python; green when a local device is connected",
+				"pt": "Modbus-only mode: skip cloud/Python; green when a local device is connected",
+				"nl": "Modbus-only mode: skip cloud/Python; green when a local device is connected",
+				"fr": "Modbus-only mode: skip cloud/Python; green when a local device is connected",
+				"it": "Modbus-only mode: skip cloud/Python; green when a local device is connected",
+				"es": "Modbus-only mode: skip cloud/Python; green when a local device is connected",
+				"pl": "Modbus-only mode: skip cloud/Python; green when a local device is connected",
+				"uk": "Modbus-only mode: skip cloud/Python; green when a local device is connected",
+				"zh-cn": "仅 Modbus：跳过云/Python；本地设备已连接时实例为绿色"
 			},
 			"0.10.87": {
 				"en": "Python: Debian 12 Bookworm Docker containers accept Python 3.11 best-effort (others still need 3.12+)",
@@ -213,6 +213,7 @@
 		"curtailmentCombinerUnit4": "",
 		"curtailmentDevicesJson": "[]",
 		"enableModbus": false,
+		"modbusOnly": false,
 		"modbusScanInterval": 5,
 		"modbusDevices": []
 	},

@@ -76,6 +76,8 @@ declare global {
 			curtailmentDevicesJson?: string;
 			/** Optional local Modbus TCP for officially supported devices (sensors + controls). */
 			enableModbus?: boolean;
+			/** Skip Anker cloud/Python; instance connection follows local Modbus devices. */
+			modbusOnly?: boolean;
 			modbusScanInterval?: number;
 			modbusDevices?: Array<{
 				enabled?: boolean;
