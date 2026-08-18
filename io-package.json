@@ -1,9 +1,22 @@
 {
 	"common": {
 		"name": "anker-solix",
-		"version": "0.10.90",
+		"version": "0.10.91",
 		"messagebox": true,
 		"news": {
+			"0.10.91": {
+				"en": "VIS/VIS-2: Energy Home widget (photoreal dashboard, auto state discovery); run iobroker upload anker-solix after install",
+				"de": "VIS/VIS-2: Energy-Home-Widget (Dashboard, Auto-Discovery); nach Installation iobroker upload anker-solix ausführen",
+				"ru": "VIS/VIS-2 Energy Home widget; run iobroker upload anker-solix after install",
+				"pt": "VIS/VIS-2 Energy Home widget; run iobroker upload anker-solix after install",
+				"nl": "VIS/VIS-2 Energy Home widget; run iobroker upload anker-solix after install",
+				"fr": "VIS/VIS-2 Energy Home widget; run iobroker upload anker-solix after install",
+				"it": "VIS/VIS-2 Energy Home widget; run iobroker upload anker-solix after install",
+				"es": "VIS/VIS-2 Energy Home widget; run iobroker upload anker-solix after install",
+				"pl": "VIS/VIS-2 Energy Home widget; run iobroker upload anker-solix after install",
+				"uk": "VIS/VIS-2 Energy Home widget; run iobroker upload anker-solix after install",
+				"zh-cn": "VIS/VIS-2 Energy Home 组件；安装后请运行 iobroker upload anker-solix"
+			},
 			"0.10.90": {
 				"en": "Modbus only: skip Anker cloud/Python; instance is green when a local Modbus device is connected",
 				"de": "Nur Modbus: keine Anker-Cloud/Python; Instanz ist grün, sobald ein lokales Modbus-Gerät verbunden ist",
@@ -81,19 +94,6 @@
 				"pl": "Standard CI workflow and Linux+Windows platform declaration",
 				"uk": "Standard CI workflow and Linux+Windows platform declaration",
 				"zh-cn": "仓库审查：标准 CI 工作流与 Linux+Windows 平台声明"
-			},
-			"0.10.80": {
-				"en": "Fix periodScheduleOffsetSec persistence: use extendForeignObjectAsync (no invalid anker-solix.0.system.adapter.* object in dumps)",
-				"de": "Fix periodScheduleOffsetSec: extendForeignObjectAsync (kein ungültiges anker-solix.0.system.adapter.*-Objekt mehr in Dumps)",
-				"ru": "Fix periodScheduleOffsetSec persistence via extendForeignObjectAsync",
-				"pt": "Fix periodScheduleOffsetSec persistence via extendForeignObjectAsync",
-				"nl": "Fix periodScheduleOffsetSec persistence via extendForeignObjectAsync",
-				"fr": "Fix periodScheduleOffsetSec persistence via extendForeignObjectAsync",
-				"it": "Fix periodScheduleOffsetSec persistence via extendForeignObjectAsync",
-				"es": "Fix periodScheduleOffsetSec persistence via extendForeignObjectAsync",
-				"pl": "Fix periodScheduleOffsetSec persistence via extendForeignObjectAsync",
-				"uk": "Fix periodScheduleOffsetSec persistence via extendForeignObjectAsync",
-				"zh-cn": "修复 periodScheduleOffsetSec 持久化（extendForeignObjectAsync）"
 			}
 		},
 		"titleLang": {
@@ -135,6 +135,7 @@
 		"readme": "https://github.com/MatthiasUlrich1/ioBroker.anker-solix/blob/main/README.md",
 		"loglevel": "info",
 		"tier": 3,
+		"restartAdapters": ["vis", "vis-2"],
 		"mode": "daemon",
 		"type": "energy",
 		"compact": true,

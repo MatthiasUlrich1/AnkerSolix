@@ -114,6 +114,14 @@ describe("io-package policy", () => {
 		}
 	});
 
+	it("ships VIS widget set files", () => {
+		assert.ok(fs.existsSync(path.join(root, "widgets/anker-solix.html")), "widgets/anker-solix.html missing");
+		assert.ok(
+			fs.existsSync(path.join(root, "widgets/anker-solix/js/energy-home.js")),
+			"widgets/anker-solix/js/energy-home.js missing",
+		);
+	});
+
 	it("npm pack excludes CHANGELOG_OLD.md (S9508)", function () {
 		this.timeout(60_000);
 		const packJson = JSON.parse(

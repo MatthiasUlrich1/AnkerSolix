@@ -375,7 +375,29 @@ Tab **Abregelungsvermeidung** / **Curtailment avoidance**: requires the [ioBroke
 
 ---
 
+## VIS / VIS-2 dashboard (Energy Home)
+
+Widget set **anker-solix** → **Energy Home** (photoreal house background, live PV / home / grid / battery / EV overlays, auto state discovery).
+
+**Important:** Widgets ship with **GitHub main / 0.10.91+** only. npm **0.10.90** does **not** include them. After install or update:
+
+```bash
+iobroker upload anker-solix
+```
+
+Then restart **vis** and/or **vis-2** (or reload the editor with F5). In the widget picker, search for set **anker-solix** → **Energy Home**. Default instance: `anker-solix.0`, **Auto-discover** on.
+
+Optional VIS-2 view import: `widgets/anker-solix/views/energy-home.vis2.json`.
+
+Enable **Power flows** and **Energy statistics** in adapter **Objects** for footer values (self-consumption, today PV).
+
+---
+
 ## Changelog
+
+### 0.10.91
+
+- **VIS / VIS-2:** first **Energy Home** widget (auto state discovery, combiner/modbus aware); `restartAdapters` vis + vis-2; requires `iobroker upload anker-solix` after install (GitHub-only until next npm release)
 
 ### 0.10.90
 
