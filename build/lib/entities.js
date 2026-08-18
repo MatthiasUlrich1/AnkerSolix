@@ -171,7 +171,7 @@ const SENSOR_ENTITIES = [
   {
     id: "ev_charger_mode_status",
     kind: "sensor",
-    role: "state",
+    role: "value",
     states: EV_CHARGER_MODE_STATES
   },
   { id: "ev_charger_plug_status", kind: "sensor", role: "indicator" },
@@ -217,7 +217,7 @@ const CONTROL_ENTITIES = [
   {
     id: "max_total_ac_output",
     kind: "list",
-    role: "state",
+    role: "level",
     unit: "W"
   },
   { id: "min_soc", kind: "number", role: "level.battery", unit: "%", min: 0, max: 100 },
@@ -248,18 +248,18 @@ const CONTROL_ENTITIES = [
   {
     id: "preset_usage_mode",
     kind: "list",
-    role: "state",
+    role: "value",
     states: USAGE_MODE_STATES
   },
   { id: "ac_fast_charge_switch", kind: "switch", role: "switch" },
-  { id: "ev_charger_mode", kind: "list", role: "state", states: EV_CHARGER_MODE_ACTION_STATES },
+  { id: "ev_charger_mode", kind: "list", role: "value", states: EV_CHARGER_MODE_ACTION_STATES },
   { id: "ev_charger_schedule_switch", kind: "switch", role: "switch" },
-  { id: "ev_charger_schedule_mode", kind: "list", role: "state", states: EV_CHARGER_SCHEDULE_MODE_STATES },
+  { id: "ev_charger_schedule_mode", kind: "list", role: "value", states: EV_CHARGER_SCHEDULE_MODE_STATES },
   { id: "ev_charger_week_start_time", kind: "text", role: "text" },
   { id: "ev_charger_week_end_time", kind: "text", role: "text" },
   { id: "ev_charger_weekend_start_time", kind: "text", role: "text" },
   { id: "ev_charger_weekend_end_time", kind: "text", role: "text" },
-  { id: "ev_charger_weekend_mode", kind: "list", role: "state", states: EV_CHARGER_WEEKEND_MODE_STATES },
+  { id: "ev_charger_weekend_mode", kind: "list", role: "value", states: EV_CHARGER_WEEKEND_MODE_STATES },
   { id: "ev_charger_auto_start_switch", kind: "switch", role: "switch" },
   { id: "ev_charger_auto_charge_restart_switch", kind: "switch", role: "switch" },
   { id: "ev_charger_random_delay_switch", kind: "switch", role: "switch" },
@@ -275,7 +275,7 @@ const CONTROL_ENTITIES = [
   {
     id: "ev_charger_solar_mode",
     kind: "list",
-    role: "state",
+    role: "value",
     states: EV_CHARGER_SOLAR_MODE_STATES
   },
   {
@@ -289,7 +289,7 @@ const CONTROL_ENTITIES = [
   {
     id: "ev_charger_phase_mode",
     kind: "list",
-    role: "state",
+    role: "value",
     states: EV_CHARGER_PHASE_MODE_STATES
   },
   { id: "ev_charger_auto_phase_switch", kind: "switch", role: "switch" },
@@ -321,20 +321,20 @@ const CONTROL_ENTITIES = [
   {
     id: "ev_charger_smart_touch_mode",
     kind: "list",
-    role: "state",
+    role: "value",
     states: EV_CHARGER_SMART_TOUCH_MODE_STATES
   },
   { id: "ev_charger_modbus_switch", kind: "switch", role: "switch" },
   {
     id: "ev_charger_wipe_up_mode",
     kind: "list",
-    role: "state",
+    role: "value",
     states: EV_CHARGER_SWIPE_MODE_STATES
   },
   {
     id: "ev_charger_wipe_down_mode",
     kind: "list",
-    role: "state",
+    role: "value",
     states: EV_CHARGER_SWIPE_MODE_STATES
   },
   { id: "preset_discharge_priority", kind: "switch", role: "switch" },

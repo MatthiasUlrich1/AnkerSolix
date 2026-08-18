@@ -193,24 +193,26 @@ To help add devices: export anonymized data via HA [export systems](https://gith
 
 ## Supported devices
 
-Same device coverage as [ha-anker-solix](https://github.com/thomluther/ha-anker-solix#supported-sensors-and-devices) (via solixapi). In ioBroker, data appears under state IDs by device type (`solarbank`, `smartmeter`, `combiner_box`, `system`, …).
+Manufacturer: [Anker SOLIX](https://www.anker.com/anker-solix) ([support / downloads](https://support.ankersolix.com/)). Cloud coverage matches [ha-anker-solix](https://github.com/thomluther/ha-anker-solix#supported-sensors-and-devices) (via solixapi). In ioBroker, data appears under state IDs by device type (`solarbank`, `smartmeter`, `combiner_box`, `system`, `modbus`, …).
 
-| Device type | Examples / notes |
-|-------------|------------------|
-| **system / site** | Power system from the Anker app (= API “site”) |
-| **solarbank** | E1600 (Gen1), SB2 Pro/Plus/AC, SB3 E2700 — API + MQTT |
-| **combiner_box** | Power Dock (multisystem) — merged controls in ioBroker when applicable |
-| **smartmeter** | Anker 3-phase, US meter, Shelly 3EM / 3EM Pro |
-| **inverter** | MI80 standalone (virtual site in API) |
-| **smartplug** | Smart Plug 2500 W |
-| **pps** / **solarbank_pps** | Portable power stations — mostly MQTT |
-| **ev_charger** | V1 Smart EV Charger — mostly MQTT |
-| **vehicle** | Virtual EVs for charger accounts — read-oriented in ioBroker |
-| **powerpanel** / **hes** | US Power Panel, X1 HES — limited API, heavy stats polling |
-| **charger** | Prime / charging stations — MQTT |
-| **home_backup** | E10, AX170 — very limited API |
+| Device type | Examples | Cloud / MQTT | Local Modbus |
+|-------------|----------|--------------|--------------|
+| **system / site** | Power system from the Anker app (= API “site”) | yes | — |
+| **solarbank** | E1600 (Gen1), SB2 Pro/Plus/AC, SB3 E2700, **SB4 E5000 Pro**, **Solarbank Max / Max AC** (XE) | API + MQTT | **SB4, Max, Max AC** (port 502) |
+| **combiner_box** | Power Dock (multisystem) — merged controls when applicable | yes | — |
+| **smartmeter** | Anker 3-phase, US meter, Shelly 3EM / 3EM Pro, **Smart Meter Gen 2** (AE1X0) | yes | **Gen 2** (read-only) |
+| **inverter** | MI80 standalone (virtual site in API) | yes | — |
+| **smartplug** | Smart Plug 2500 W, **Smart Plug Gen 2** | yes | **Gen 2** (`power_switch`) |
+| **pps** / **solarbank_pps** | Portable power stations | mostly MQTT | — |
+| **ev_charger** | V1 Smart EV Charger | mostly MQTT | — |
+| **vehicle** | Virtual EVs for charger accounts | read-oriented | — |
+| **powerpanel** / **hes** | US Power Panel, X1 HES | limited API | X1 uses a different Anker Modbus spec (not this adapter) |
+| **charger** | Prime / charging stations | MQTT | — |
+| **home_backup** | E10, AX170 | very limited API | — |
 
-Device hierarchy (how HA structures entities): [discussion #239](https://github.com/thomluther/ha-anker-solix/discussions/239).
+**Solarbank 3** has cloud/MQTT in this adapter but is **not** in Anker’s official Modbus register maps.
+
+Device hierarchy (how HA structures entities): [discussion #239](https://github.com/thomluther/ha-anker-solix/discussions/239). Local Modbus setup: [Local Modbus (optional)](#local-modbus-optional).
 
 ---
 
@@ -246,7 +248,17 @@ Decoding new models: [MQTT guidelines](https://github.com/thomluther/anker-solix
 
 ## Special device notes
 
-Condensed from the [HA integration README](https://github.com/thomluther/ha-anker-solix); behavior is the same via solixapi.
+Condensed from the [HA integration README](https://github.com/thomluther/ha-anker-solix); cloud/MQTT behavior is the same via solixapi. Local Modbus notes are adapter-specific.
+
+### Solarbank 4 E5000 Pro / Solarbank Max / Max AC
+
+Cloud: same poll path as other solarbanks (API + optional MQTT). **Local Modbus TCP** (official maps): enable Modbus in the Anker app (system / Three-Party Control), then Admin → **Modbus (local)**. Typical model codes include AE103 (SB4). States: `anker-solix.0.modbus.<name>.sensors.*` and `.control.*` (operating mode, SOC limits, battery setpoint in **third_party_control**). **Modbus only** skips cloud/Python; the instance LED is green when at least one Modbus device is connected.
+
+If another Modbus client just queried the device, the first poll may get **connection refused** until that client’s cooldown expires — the next poll interval retries.
+
+### Smart Meter Gen 2 / Smart Plug Gen 2
+
+Cloud entities as for other meters/plugs. **Local Modbus:** Gen 2 meter is **read-only** (power/voltage/current per phase). Smart Plug Gen 2 exposes `power_switch`. Each device needs its own IP (port 502).
 
 ### Standalone inverters (MI80)
 
@@ -294,7 +306,7 @@ Virtual devices per account EV; no creation via adapter — discovered on refres
 
 ### Power Panel & HES (X1)
 
-Limited API power; workaround uses **~5 min averages** from energy stats (**~80 MB/day** extra traffic per system if enabled). Disable heavy categories in **Objects** if needed. X1: consider local **Modbus** ([Anker spec](https://support.ankersolix.com/de/s/download-preview?urlname=Anker-SOLIX-X1-Series-Modbus-Protocol)) — not part of this adapter.
+Limited API power; workaround uses **~5 min averages** from energy stats (**~80 MB/day** extra traffic per system if enabled). Disable heavy categories in **Objects** if needed. X1 local **Modbus** uses a [separate Anker protocol](https://support.ankersolix.com/de/s/download-preview?urlname=Anker-SOLIX-X1-Series-Modbus-Protocol) — **not** implemented in this adapter (only official Solarbank 4 / Max / meter / plug Gen 2 maps).
 
 ### Home Backup (E10, AX170)
 
@@ -368,6 +380,7 @@ Tab **Abregelungsvermeidung** / **Curtailment avoidance**: requires the [ioBroke
 ### 0.10.90
 
 - **Modbus only:** skip Anker cloud/Python when the checkbox is enabled; no credentials or usage terms required; instance LED is green when at least one local Modbus device is connected
+- **Docs:** README supported devices + special notes for SB4 / Max / Modbus Gen 2; valid state roles for usage-mode and EV-charger lists; Modbus admin i18n
 
 ### 0.10.89
 

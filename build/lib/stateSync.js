@@ -68,6 +68,9 @@ function resolveEntityRole(meta, writable) {
   if (meta.kind === "switch") {
     return writable ? "switch" : "indicator";
   }
+  if (meta.role === "state") {
+    return "value";
+  }
   return meta.role;
 }
 function coerceStateValue(type, value) {

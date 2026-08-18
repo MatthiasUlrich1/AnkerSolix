@@ -71,6 +71,9 @@ function resolveEntityRole(meta: EntityMeta | undefined, writable: boolean): str
 	if (meta.kind === "switch") {
 		return writable ? "switch" : "indicator";
 	}
+	if (meta.role === "state") {
+		return "value";
+	}
 	return meta.role;
 }
 
