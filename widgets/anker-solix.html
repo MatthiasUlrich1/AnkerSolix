@@ -1,0 +1,29 @@
+<!--
+    ioBroker.anker-solix VIS / VIS-2 widget set — Energy Home dashboard
+
+    Install: iobroker upload anker-solix
+    VIS:     Widget "Energy Home" under set "anker-solix"
+    VIS-2:   Same widget set (legacy widget compatibility)
+-->
+<link rel="stylesheet" type="text/css" href="widgets/anker-solix/css/energy-home.css" />
+<script type="text/javascript" src="widgets/anker-solix/js/energy-home.js"></script>
+
+<script
+	id="tplAnkerSolixEnergyHome"
+	type="text/ejs"
+	class="vis-tpl"
+	data-vis-set="anker-solix"
+	data-vis-name="Energy Home"
+	data-vis-update-style="true"
+	data-vis-type="energy,static"
+	data-vis-prev='<div style="width:640px;height:360px;background:url(widgets/anker-solix/img/dashboard-bg.png) center/cover no-repeat;border-radius:8px;position:relative;overflow:hidden"><div style="position:absolute;left:50%;top:11%;transform:translate(-50%,-50%);background:rgba(12,18,28,.75);color:#fff;padding:6px 10px;border-radius:10px;font:600 12px Segoe UI,sans-serif">PV 3.2 kW</div><div style="position:absolute;left:50%;top:46%;transform:translate(-50%,-50%);background:rgba(12,18,28,.75);color:#fff;padding:6px 10px;border-radius:10px;font:600 12px Segoe UI,sans-serif">Home 2.4 kW</div></div>'
+	data-vis-attrs="instance[anker-solix.0]/id/anker_instance;autoDiscover[true]/checkbox/anker_auto_discover;backgroundImage[widgets/anker-solix/img/dashboard-bg.png]/image/anker_background"
+	data-vis-attrs0="group.manual/anker_group_manual;oidPv/id;oidHome/id;oidGrid/id;oidSoc/id;oidBatPower/id;oidEv/id;oidDailyPv/id;oidSelfConsumption/id"
+>
+	<div
+		class="vis-widget <%== this.data.attr('class') %>"
+		style="<%== this.data.attr('style') %>"
+		id="<%= this.data.attr('wid') %>"
+	></div>
+	<% vis.binds['anker-solix'].createWidget(this.data.wid, this.view, this.data, this.style); %>
+</script>

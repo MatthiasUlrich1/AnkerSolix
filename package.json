@@ -61,6 +61,7 @@
     "!python/.venv/**",
     "!python/site-packages/**",
     "tools/",
+    "widgets/",
     "www/",
     "io-package.json",
     "LICENSE",
