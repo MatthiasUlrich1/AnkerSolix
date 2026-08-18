@@ -1,9 +1,22 @@
 {
 	"common": {
 		"name": "anker-solix",
-		"version": "0.10.92",
+		"version": "0.10.93",
 		"messagebox": true,
 		"news": {
+			"0.10.93": {
+				"en": "VIS Energy Home: separate grid import/export and battery charge/discharge with correct flow direction",
+				"de": "VIS Energy Home: getrennt Netz Import/Export und Batterie Laden/Entladen mit korrekter Linienrichtung",
+				"ru": "VIS Energy Home: grid import/export and battery charge/discharge flow direction",
+				"pt": "VIS Energy Home: grid import/export and battery charge/discharge flow direction",
+				"nl": "VIS Energy Home: grid import/export and battery charge/discharge flow direction",
+				"fr": "VIS Energy Home: grid import/export and battery charge/discharge flow direction",
+				"it": "VIS Energy Home: grid import/export and battery charge/discharge flow direction",
+				"es": "VIS Energy Home: grid import/export and battery charge/discharge flow direction",
+				"pl": "VIS Energy Home: grid import/export and battery charge/discharge flow direction",
+				"uk": "VIS Energy Home: grid import/export and battery charge/discharge flow direction",
+				"zh-cn": "VIS Energy Home：电网进出口与电池充放电及流向动画"
+			},
 			"0.10.92": {
 				"en": "VIS Energy Home: clean background, slim overlay flows, broader auto-discovery, live view state subscription fix",
 				"de": "VIS Energy Home: bereinigter Hintergrund, schlanke Overlay-Linien, erweiterte Auto-Discovery, Live-Ansicht-Fix",
