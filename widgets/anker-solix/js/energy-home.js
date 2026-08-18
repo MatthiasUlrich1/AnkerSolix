@@ -61,7 +61,72 @@ $.extend(true, systemDictionary, {
 });
 
 vis.binds["anker-solix"] = {
-	version: "0.1.0",
+	version: "0.1.2",
+
+	icons: {
+		pv: '<svg viewBox="0 0 24 24" fill="none" stroke="#ffb020" stroke-width="1.8"><circle cx="12" cy="12" r="4"/><path d="M12 2v3M12 19v3M4.2 4.2l2.1 2.1M17.7 17.7l2.1 2.1M2 12h3M19 12h3M4.2 19.8l2.1-2.1M17.7 6.3l2.1-2.1"/></svg>',
+		home: '<svg viewBox="0 0 24 24" fill="none" stroke="#ffb020" stroke-width="1.8"><path d="M4 10.5 12 4l8 6.5V20a1 1 0 0 1-1 1h-5v-6H10v6H5a1 1 0 0 1-1-1v-9.5z"/></svg>',
+		grid: '<svg viewBox="0 0 24 24" fill="none" stroke="#4da3ff" stroke-width="1.8"><path d="M12 3v18M8 6h8M9 10h6M10 14h4"/></svg>',
+		battery: '<svg viewBox="0 0 24 24" fill="none" stroke="#45d17a" stroke-width="1.8"><rect x="4" y="7" width="16" height="10" rx="2"/><path d="M7 10h8M20 10v4"/></svg>',
+		ev: '<svg viewBox="0 0 24 24" fill="none" stroke="#b07cff" stroke-width="1.8"><path d="M5 16h14l-1.5-5H7L5 16z"/><circle cx="8" cy="17" r="1.5"/><circle cx="16" cy="17" r="1.5"/></svg>',
+	},
+
+	flowMarkup:
+		'<defs>' +
+		'<linearGradient id="anker-grad-pv" gradientUnits="userSpaceOnUse" x1="50" y1="13" x2="50" y2="40"><stop offset="0%" stop-color="#ffd36a"/><stop offset="100%" stop-color="#ff9a1a"/></linearGradient>' +
+		'<linearGradient id="anker-grad-grid" gradientUnits="userSpaceOnUse" x1="14" y1="51" x2="44" y2="44"><stop offset="0%" stop-color="#6eb6ff"/><stop offset="100%" stop-color="#2f7fe8"/></linearGradient>' +
+		'<linearGradient id="anker-grad-battery" gradientUnits="userSpaceOnUse" x1="47" y1="45" x2="20" y2="73"><stop offset="0%" stop-color="#8ef0b0"/><stop offset="100%" stop-color="#45d17a"/></linearGradient>' +
+		'<linearGradient id="anker-grad-ev" gradientUnits="userSpaceOnUse" x1="53" y1="45" x2="81" y2="54"><stop offset="0%" stop-color="#c89bff"/><stop offset="100%" stop-color="#8b4dff"/></linearGradient>' +
+		'<linearGradient id="anker-grad-ev-cable" gradientUnits="userSpaceOnUse" x1="83" y1="55" x2="88" y2="56"><stop offset="0%" stop-color="#c89bff"/><stop offset="100%" stop-color="#8b4dff"/></linearGradient>' +
+		'<filter id="anker-glow-pv" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="0.35" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>' +
+		'<filter id="anker-glow-grid" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="0.35" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>' +
+		'<filter id="anker-glow-battery" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="0.35" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>' +
+		'<filter id="anker-glow-ev" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="0.35" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>' +
+		'<marker id="anker-arrow-pv" markerWidth="4" markerHeight="4" refX="3.2" refY="2" orient="auto"><path d="M0,0 L4,2 L0,4 Z" fill="#ffb020"/></marker>' +
+		'<marker id="anker-arrow-grid" markerWidth="4" markerHeight="4" refX="3.2" refY="2" orient="auto"><path d="M0,0 L4,2 L0,4 Z" fill="#4da3ff"/></marker>' +
+		'<marker id="anker-arrow-battery" markerWidth="4" markerHeight="4" refX="3.2" refY="2" orient="auto"><path d="M0,0 L4,2 L0,4 Z" fill="#45d17a"/></marker>' +
+		'<marker id="anker-arrow-ev" markerWidth="4" markerHeight="4" refX="3.2" refY="2" orient="auto"><path d="M0,0 L4,2 L0,4 Z" fill="#b07cff"/></marker>' +
+		"</defs>" +
+		'<path class="anker-energy-home__flow-glow anker-energy-home__flow--pv" data-flow-glow="pv" d="M50,13 L50,40"/>' +
+		'<path class="anker-energy-home__flow anker-energy-home__flow--pv" data-flow="pv" d="M50,13 L50,40" stroke="url(#anker-grad-pv)" filter="url(#anker-glow-pv)" marker-end="url(#anker-arrow-pv)"/>' +
+		'<path class="anker-energy-home__flow-glow anker-energy-home__flow--grid" data-flow-glow="grid" d="M14,51 C26,51 36,47 44,44"/>' +
+		'<path class="anker-energy-home__flow anker-energy-home__flow--grid" data-flow="grid" d="M14,51 C26,51 36,47 44,44" stroke="url(#anker-grad-grid)" filter="url(#anker-glow-grid)" marker-end="url(#anker-arrow-grid)"/>' +
+		'<path class="anker-energy-home__flow-glow anker-energy-home__flow--battery" data-flow-glow="battery" d="M47,45 L47,57 Q47,61 43,61 L20,61 L20,73"/>' +
+		'<path class="anker-energy-home__flow anker-energy-home__flow--battery" data-flow="battery" d="M47,45 L47,57 Q47,61 43,61 L20,61 L20,73" stroke="url(#anker-grad-battery)" filter="url(#anker-glow-battery)" marker-end="url(#anker-arrow-battery)"/>' +
+		'<path class="anker-energy-home__flow-glow anker-energy-home__flow--ev" data-flow-glow="ev" d="M53,45 L53,57 Q53,61 57,61 L81,61 L81,54"/>' +
+		'<path class="anker-energy-home__flow anker-energy-home__flow--ev" data-flow="ev" d="M53,45 L53,57 Q53,61 57,61 L81,61 L81,54" stroke="url(#anker-grad-ev)" filter="url(#anker-glow-ev)" marker-end="url(#anker-arrow-ev)"/>' +
+		'<path class="anker-energy-home__flow-glow anker-energy-home__flow--ev anker-energy-home__flow--ev-cable" data-flow-glow="ev-cable" d="M83,55 L88,56"/>' +
+		'<path class="anker-energy-home__flow anker-energy-home__flow--ev anker-energy-home__flow--ev-cable" data-flow="ev-cable" d="M83,55 L88,56" stroke="url(#anker-grad-ev-cable)" filter="url(#anker-glow-ev)" marker-end="url(#anker-arrow-ev)"/>',
+
+	cardMarkup: function (zone, iconKey, label, valKey, subKey, left, top, hidden) {
+		var icons = vis.binds["anker-solix"].icons;
+		var sub = subKey
+			? '<div class="anker-energy-home__sub" data-val="' + subKey + '"></div>'
+			: "";
+		return (
+			'<div class="anker-energy-home__card' +
+			(hidden ? " anker-energy-home__card--hidden" : "") +
+			'" data-zone="' +
+			zone +
+			'" style="left:' +
+			left +
+			";top:" +
+			top +
+			'">' +
+			'<div class="anker-energy-home__icon">' +
+			icons[iconKey] +
+			"</div>" +
+			'<div class="anker-energy-home__card-body">' +
+			'<div class="anker-energy-home__label">' +
+			label +
+			"</div>" +
+			'<div class="anker-energy-home__value" data-val="' +
+			valKey +
+			'">—</div>' +
+			sub +
+			"</div></div>"
+		);
+	},
 
 	showVersion: function () {
 		if (vis.binds["anker-solix"].version) {
@@ -87,22 +152,20 @@ vis.binds["anker-solix"] = {
 			.html(
 				'<div class="anker-energy-home__bg"></div>' +
 					'<div class="anker-energy-home__overlay"></div>' +
-					'<svg class="anker-energy-home__flows" viewBox="0 0 100 100" preserveAspectRatio="none">' +
-					'<path class="anker-energy-home__flow anker-energy-home__flow--pv" data-flow="pv" d="M50,12 L50,42"/>' +
-					'<path class="anker-energy-home__flow anker-energy-home__flow--grid" data-flow="grid" d="M12,52 L42,52"/>' +
-					'<path class="anker-energy-home__flow anker-energy-home__flow--battery" data-flow="battery" d="M22,72 L42,58"/>' +
-					'<path class="anker-energy-home__flow anker-energy-home__flow--ev" data-flow="ev" d="M58,52 L82,58"/>' +
+					'<svg class="anker-energy-home__flows" viewBox="0 0 100 100" preserveAspectRatio="xMidYMid slice">' +
+					api.flowMarkup +
 					"</svg>" +
-					'<div class="anker-energy-home__card" data-zone="pv" style="left:50%;top:11%"><div class="anker-energy-home__label">PV</div><div class="anker-energy-home__value" data-val="pv">—</div></div>' +
-					'<div class="anker-energy-home__card" data-zone="home" style="left:50%;top:46%"><div class="anker-energy-home__label">Home</div><div class="anker-energy-home__value" data-val="home">—</div></div>' +
-					'<div class="anker-energy-home__card" data-zone="grid" style="left:14%;top:52%"><div class="anker-energy-home__label">Grid</div><div class="anker-energy-home__value" data-val="grid">—</div></div>' +
-					'<div class="anker-energy-home__card" data-zone="battery" style="left:22%;top:74%"><div class="anker-energy-home__label">Battery</div><div class="anker-energy-home__value" data-val="soc">—</div><div class="anker-energy-home__sub" data-val="bat"> </div></div>' +
-					'<div class="anker-energy-home__card anker-energy-home__card--hidden" data-zone="ev" style="left:78%;top:56%"><div class="anker-energy-home__label">EV</div><div class="anker-energy-home__value" data-val="ev">—</div></div>' +
+					'<div class="anker-energy-home__cards">' +
+					api.cardMarkup("pv", "pv", "PV", "pv", null, "50%", "10%") +
+					api.cardMarkup("home", "home", "Home", "home", null, "50%", "44%") +
+					api.cardMarkup("grid", "grid", "Grid", "grid", null, "13%", "51%") +
+					api.cardMarkup("battery", "battery", "SOC", "soc", null, "21%", "76%") +
+					api.cardMarkup("ev", "ev", "EV", "ev", null, "79%", "55%", true) +
+					"</div>" +
 					'<div class="anker-energy-home__footer">' +
 					'<div class="anker-energy-home__footer-item"><span class="anker-energy-home__footer-dot"></span><span data-val="self">Self-consumption —</span></div>' +
 					'<div class="anker-energy-home__footer-item"><span class="anker-energy-home__footer-dot anker-energy-home__footer-dot--pv"></span><span data-val="daily">Today PV —</span></div>' +
-					"</div>" +
-					'<div class="anker-energy-home__status" data-val="status"></div>',
+					"</div>",
 			);
 
 		$root.find(".anker-energy-home__bg").css("background-image", 'url("' + bg + '")');
@@ -324,10 +387,7 @@ vis.binds["anker-solix"] = {
 		if (Math.abs(n) < 15) {
 			return "0 W";
 		}
-		if (n > 0) {
-			return this.formatPower(n) + " import";
-		}
-		return this.formatPower(n) + " export";
+		return this.formatPower(n);
 	},
 
 	render: function (ctx) {
@@ -338,17 +398,17 @@ vis.binds["anker-solix"] = {
 		$r.find('[data-val="home"]').text(this.formatPower(v.home));
 		$r.find('[data-val="grid"]').text(this.formatGrid(v.grid));
 
-		if (ctx.oids.soc) {
-			$r.find('[data-val="soc"]').text("SOC " + Math.round(this.toNumber(v.soc)) + "%");
+		if (ctx.oids.soc && ctx.oids.bat) {
+			$r.find('[data-val="soc"]').text(
+				Math.round(this.toNumber(v.soc)) + "% | " + this.formatPower(v.bat),
+			);
+		} else if (ctx.oids.soc) {
+			$r.find('[data-val="soc"]').text(Math.round(this.toNumber(v.soc)) + "%");
+		} else if (ctx.oids.bat) {
+			$r.find('[data-val="soc"]').text(this.formatPower(v.bat));
 		} else {
-			$r.find('[data-val="soc"]').text("Battery");
+			$r.find('[data-val="soc"]').text("—");
 		}
-
-		var batText = "";
-		if (ctx.oids.bat) {
-			batText = this.formatPower(v.bat);
-		}
-		$r.find('[data-val="bat"]').text(batText);
 
 		if (ctx.oids.ev || (ctx.oids.evPowerParts && ctx.oids.evPowerParts.length)) {
 			$r.find('[data-val="ev"]').text(this.formatPower(v.ev));
@@ -370,35 +430,50 @@ vis.binds["anker-solix"] = {
 	},
 
 	updateFlows: function ($r, v) {
-		function setFlow(name, active, reverse) {
-			var $p = $r.find('[data-flow="' + name + '"]');
-			$p.toggleClass("anker-energy-home__flow--idle", !active);
-			if (reverse) {
-				$p.css("stroke-dasharray", "8 8").css("animation", "anker-flow-reverse 1.2s linear infinite");
-			} else if (active) {
-				$p.css("stroke-dasharray", "8 8").css("animation", "anker-flow 1.2s linear infinite");
-			} else {
-				$p.css("animation", "none");
+		var api = vis.binds["anker-solix"];
+
+		function flowSpeed(w) {
+			var abs = Math.abs(api.toNumber(w));
+			if (abs < 20) {
+				return null;
 			}
+			return Math.max(0.55, Math.min(2.2, 1.8 - abs / 8000)) + "s";
 		}
 
-		setFlow("pv", Math.abs(v.pv) > 20, false);
-		setFlow("grid", Math.abs(v.grid) > 20, v.grid < 0);
-		setFlow("battery", Math.abs(v.bat) > 20, v.bat < 0);
-		setFlow("ev", Math.abs(v.ev) > 20, false);
+		function setFlow(name, watts, reverseWhenNegative) {
+			var active = Math.abs(api.toNumber(watts)) > 20;
+			var reverse = reverseWhenNegative && api.toNumber(watts) < 0;
+			var speed = flowSpeed(watts);
+			var dash = "3 5";
+
+			$r.find('[data-flow="' + name + '"], [data-flow-glow="' + name + '"]').each(function () {
+				var el = this;
+				el.classList.remove(
+					"anker-energy-home__flow--idle",
+					"anker-energy-home__flow--animate-forward",
+					"anker-energy-home__flow--animate-reverse",
+				);
+				if (!active) {
+					el.classList.add("anker-energy-home__flow--idle");
+					el.style.strokeDasharray = "";
+					el.style.animation = "";
+					el.style.removeProperty("--anker-flow-speed");
+					return;
+				}
+				el.style.strokeDasharray = dash;
+				if (speed) {
+					el.style.setProperty("--anker-flow-speed", speed);
+				}
+				el.classList.add(reverse ? "anker-energy-home__flow--animate-reverse" : "anker-energy-home__flow--animate-forward");
+			});
+		}
+
+		setFlow("pv", v.pv, false);
+		setFlow("grid", v.grid, true);
+		setFlow("battery", v.bat, true);
+		setFlow("ev", v.ev, false);
+		setFlow("ev-cable", v.ev, false);
 	},
 };
-
-if (typeof document !== "undefined") {
-	var ankerFlowStyle = document.getElementById("anker-energy-home-keyframes");
-	if (!ankerFlowStyle) {
-		ankerFlowStyle = document.createElement("style");
-		ankerFlowStyle.id = "anker-energy-home-keyframes";
-		ankerFlowStyle.textContent =
-			"@keyframes anker-flow { from { stroke-dashoffset: 16; } to { stroke-dashoffset: 0; } }" +
-			"@keyframes anker-flow-reverse { from { stroke-dashoffset: 0; } to { stroke-dashoffset: 16; } }";
-		document.head.appendChild(ankerFlowStyle);
-	}
-}
 
 vis.binds["anker-solix"].showVersion();
