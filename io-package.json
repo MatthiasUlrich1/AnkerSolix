@@ -1,9 +1,22 @@
 {
 	"common": {
 		"name": "anker-solix",
-		"version": "0.10.94",
+		"version": "0.10.95",
 		"messagebox": true,
 		"news": {
+			"0.10.95": {
+				"en": "VIS Energy Home: separate cards and flow lines for grid import/export and battery charge/discharge",
+				"de": "VIS Energy Home: getrennte Karten und Energielinien für Netz Import/Export und Batterie Laden/Entladen",
+				"ru": "VIS Energy Home: separate grid and battery cards and flow lines",
+				"pt": "VIS Energy Home: separate grid and battery cards and flow lines",
+				"nl": "VIS Energy Home: separate grid and battery cards and flow lines",
+				"fr": "VIS Energy Home: separate grid and battery cards and flow lines",
+				"it": "VIS Energy Home: separate grid and battery cards and flow lines",
+				"es": "VIS Energy Home: separate grid and battery cards and flow lines",
+				"pl": "VIS Energy Home: separate grid and battery cards and flow lines",
+				"uk": "VIS Energy Home: separate grid and battery cards and flow lines",
+				"zh-cn": "VIS Energy Home：电网与电池分卡及独立能量线"
+			},
 			"0.10.94": {
 				"en": "VIS Energy Home: manual state bindings only (no auto-discovery); all values selectable in widget settings",
 				"de": "VIS Energy Home: nur manuelle State-Zuordnung (keine Auto-Discovery); alle Werte in Widget-Einstellungen wählbar",

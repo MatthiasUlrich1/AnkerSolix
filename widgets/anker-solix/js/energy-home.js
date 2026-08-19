@@ -58,9 +58,35 @@ $.extend(true, systemDictionary, {
 		"uk": "Home load",
 		"zh-cn": "Home load"
 	},
+	"anker_group_grid": {
+		"en": "Grid flows",
+		"de": "Netz-Flüsse",
+		"ru": "Grid flows",
+		"pt": "Grid flows",
+		"nl": "Grid flows",
+		"fr": "Grid flows",
+		"it": "Grid flows",
+		"es": "Grid flows",
+		"pl": "Grid flows",
+		"uk": "Grid flows",
+		"zh-cn": "Grid flows"
+	},
+	"anker_group_battery": {
+		"en": "Battery",
+		"de": "Batterie",
+		"ru": "Battery",
+		"pt": "Battery",
+		"nl": "Battery",
+		"fr": "Battery",
+		"it": "Battery",
+		"es": "Battery",
+		"pl": "Battery",
+		"uk": "Battery",
+		"zh-cn": "Battery"
+	},
 	"anker_oid_grid_import": {
-		"en": "Grid import (grid_to_home_power)",
-		"de": "Netzbezug (grid_to_home_power)",
+		"en": "Grid → Home (grid_to_home_power)",
+		"de": "Netz → Haus (grid_to_home_power)",
 		"ru": "Grid import (grid_to_home_power)",
 		"pt": "Grid import (grid_to_home_power)",
 		"nl": "Grid import (grid_to_home_power)",
@@ -72,8 +98,8 @@ $.extend(true, systemDictionary, {
 		"zh-cn": "Grid import (grid_to_home_power)"
 	},
 	"anker_oid_grid_export": {
-		"en": "Grid export (photovoltaic_to_grid_power)",
-		"de": "Netzeinspeisung (photovoltaic_to_grid_power)",
+		"en": "PV → Grid (photovoltaic_to_grid_power)",
+		"de": "PV → Netz (photovoltaic_to_grid_power)",
 		"ru": "Grid export (photovoltaic_to_grid_power)",
 		"pt": "Grid export (photovoltaic_to_grid_power)",
 		"nl": "Grid export (photovoltaic_to_grid_power)",
@@ -165,7 +191,7 @@ $.extend(true, systemDictionary, {
 });
 
 vis.binds["anker-solix"] = {
-	version: "0.2.0",
+	version: "0.2.1",
 
 	flowThresholdW: 20,
 
@@ -180,8 +206,10 @@ vis.binds["anker-solix"] = {
 	flowMarkup:
 		'<defs>' +
 		'<linearGradient id="anker-grad-pv" gradientUnits="userSpaceOnUse" x1="50" y1="13" x2="50" y2="40"><stop offset="0%" stop-color="#ffd36a"/><stop offset="100%" stop-color="#ff9a1a"/></linearGradient>' +
-		'<linearGradient id="anker-grad-grid" gradientUnits="userSpaceOnUse" x1="14" y1="51" x2="44" y2="44"><stop offset="0%" stop-color="#6eb6ff"/><stop offset="100%" stop-color="#2f7fe8"/></linearGradient>' +
-		'<linearGradient id="anker-grad-battery" gradientUnits="userSpaceOnUse" x1="47" y1="45" x2="20" y2="73"><stop offset="0%" stop-color="#8ef0b0"/><stop offset="100%" stop-color="#45d17a"/></linearGradient>' +
+		'<linearGradient id="anker-grad-grid-import" gradientUnits="userSpaceOnUse" x1="14" y1="51" x2="44" y2="44"><stop offset="0%" stop-color="#6eb6ff"/><stop offset="100%" stop-color="#2f7fe8"/></linearGradient>' +
+		'<linearGradient id="anker-grad-grid-export" gradientUnits="userSpaceOnUse" x1="44" y1="46" x2="14" y2="54"><stop offset="0%" stop-color="#6eb6ff"/><stop offset="100%" stop-color="#2f7fe8"/></linearGradient>' +
+		'<linearGradient id="anker-grad-bat-charge" gradientUnits="userSpaceOnUse" x1="47" y1="45" x2="20" y2="73"><stop offset="0%" stop-color="#8ef0b0"/><stop offset="100%" stop-color="#45d17a"/></linearGradient>' +
+		'<linearGradient id="anker-grad-bat-discharge" gradientUnits="userSpaceOnUse" x1="20" y1="73" x2="47" y2="45"><stop offset="0%" stop-color="#45d17a"/><stop offset="100%" stop-color="#8ef0b0"/></linearGradient>' +
 		'<linearGradient id="anker-grad-ev" gradientUnits="userSpaceOnUse" x1="53" y1="45" x2="81" y2="54"><stop offset="0%" stop-color="#c89bff"/><stop offset="100%" stop-color="#8b4dff"/></linearGradient>' +
 		'<linearGradient id="anker-grad-ev-cable" gradientUnits="userSpaceOnUse" x1="83" y1="55" x2="88" y2="56"><stop offset="0%" stop-color="#c89bff"/><stop offset="100%" stop-color="#8b4dff"/></linearGradient>' +
 		'<filter id="anker-glow-pv" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="0.35" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>' +
@@ -195,10 +223,14 @@ vis.binds["anker-solix"] = {
 		"</defs>" +
 		'<path class="anker-energy-home__flow-glow anker-energy-home__flow--pv" data-flow-glow="pv" d="M50,13 L50,40"/>' +
 		'<path class="anker-energy-home__flow anker-energy-home__flow--pv" data-flow="pv" d="M50,13 L50,40" stroke="url(#anker-grad-pv)" filter="url(#anker-glow-pv)" marker-end="url(#anker-arrow-pv)"/>' +
-		'<path class="anker-energy-home__flow-glow anker-energy-home__flow--grid" data-flow-glow="grid" d="M14,51 C26,51 36,47 44,44"/>' +
-		'<path class="anker-energy-home__flow anker-energy-home__flow--grid" data-flow="grid" d="M14,51 C26,51 36,47 44,44" stroke="url(#anker-grad-grid)" filter="url(#anker-glow-grid)" marker-end="url(#anker-arrow-grid)"/>' +
-		'<path class="anker-energy-home__flow-glow anker-energy-home__flow--battery" data-flow-glow="battery" d="M47,45 L47,57 Q47,61 43,61 L20,61 L20,73"/>' +
-		'<path class="anker-energy-home__flow anker-energy-home__flow--battery" data-flow="battery" d="M47,45 L47,57 Q47,61 43,61 L20,61 L20,73" stroke="url(#anker-grad-battery)" filter="url(#anker-glow-battery)" marker-end="url(#anker-arrow-battery)"/>' +
+		'<path class="anker-energy-home__flow-glow anker-energy-home__flow--grid" data-flow-glow="grid-import" d="M14,51 C26,51 36,47 44,44"/>' +
+		'<path class="anker-energy-home__flow anker-energy-home__flow--grid" data-flow="grid-import" d="M14,51 C26,51 36,47 44,44" stroke="url(#anker-grad-grid-import)" filter="url(#anker-glow-grid)" marker-end="url(#anker-arrow-grid)"/>' +
+		'<path class="anker-energy-home__flow-glow anker-energy-home__flow--grid" data-flow-glow="grid-export" d="M44,46 C36,50 26,52 14,54"/>' +
+		'<path class="anker-energy-home__flow anker-energy-home__flow--grid" data-flow="grid-export" d="M44,46 C36,50 26,52 14,54" stroke="url(#anker-grad-grid-export)" filter="url(#anker-glow-grid)" marker-end="url(#anker-arrow-grid)"/>' +
+		'<path class="anker-energy-home__flow-glow anker-energy-home__flow--battery" data-flow-glow="bat-charge" d="M47,45 L47,57 Q47,61 43,61 L20,61 L20,73"/>' +
+		'<path class="anker-energy-home__flow anker-energy-home__flow--battery" data-flow="bat-charge" d="M47,45 L47,57 Q47,61 43,61 L20,61 L20,73" stroke="url(#anker-grad-bat-charge)" filter="url(#anker-glow-battery)" marker-end="url(#anker-arrow-battery)"/>' +
+		'<path class="anker-energy-home__flow-glow anker-energy-home__flow--battery" data-flow-glow="bat-discharge" d="M20,73 L20,61 L43,61 Q47,61 47,57 L47,45"/>' +
+		'<path class="anker-energy-home__flow anker-energy-home__flow--battery" data-flow="bat-discharge" d="M20,73 L20,61 L43,61 Q47,61 47,57 L47,45" stroke="url(#anker-grad-bat-discharge)" filter="url(#anker-glow-battery)" marker-end="url(#anker-arrow-battery)"/>' +
 		'<path class="anker-energy-home__flow-glow anker-energy-home__flow--ev" data-flow-glow="ev" d="M53,45 L53,57 Q53,61 57,61 L81,61 L81,54"/>' +
 		'<path class="anker-energy-home__flow anker-energy-home__flow--ev" data-flow="ev" d="M53,45 L53,57 Q53,61 57,61 L81,61 L81,54" stroke="url(#anker-grad-ev)" filter="url(#anker-glow-ev)" marker-end="url(#anker-arrow-ev)"/>' +
 		'<path class="anker-energy-home__flow-glow anker-energy-home__flow--ev anker-energy-home__flow--ev-cable" data-flow-glow="ev-cable" d="M83,55 L88,56"/>' +
@@ -257,8 +289,11 @@ vis.binds["anker-solix"] = {
 					'<div class="anker-energy-home__cards">' +
 					api.cardMarkup("pv", "pv", "PV", "pv", "50%", "10%") +
 					api.cardMarkup("home", "home", "Home", "home", "50%", "44%") +
-					api.cardMarkup("grid", "grid", "Grid", "grid", "13%", "51%") +
-					api.cardMarkup("battery", "battery", "SOC", "soc", "21%", "76%") +
+					api.cardMarkup("grid-import", "grid", "Grid → Home", "gridImport", "13%", "47%") +
+					api.cardMarkup("grid-export", "grid", "PV → Grid", "gridExport", "13%", "55%") +
+					api.cardMarkup("soc", "battery", "SOC", "soc", "21%", "70%") +
+					api.cardMarkup("bat-charge", "battery", "Laden", "batCharge", "30%", "78%") +
+					api.cardMarkup("bat-discharge", "battery", "Entladen", "batDischarge", "14%", "82%") +
 					api.cardMarkup("ev", "ev", "EV", "ev", "79%", "55%") +
 					"</div>" +
 					'<div class="anker-energy-home__footer">' +
@@ -276,11 +311,9 @@ vis.binds["anker-solix"] = {
 			values: {
 				pv: 0,
 				home: 0,
-				grid: 0,
 				gridImport: 0,
 				gridExport: 0,
 				soc: null,
-				bat: 0,
 				batCharge: 0,
 				batDischarge: 0,
 				ev: 0,
@@ -416,9 +449,6 @@ vis.binds["anker-solix"] = {
 				ctx.values[keys[i]] = api.toNumber(vis.states[stateKey]);
 			}
 		}
-
-		ctx.values.grid = (ctx.values.gridImport || 0) - (ctx.values.gridExport || 0);
-		ctx.values.bat = (ctx.values.batDischarge || 0) - (ctx.values.batCharge || 0);
 	},
 
 	registerVisBindings: function (ctx) {
@@ -463,18 +493,6 @@ vis.binds["anker-solix"] = {
 				return;
 			}
 			function onChange(_e, newVal) {
-				if (key === "gridImport" || key === "gridExport") {
-					ctx.values[key] = api.toNumber(newVal);
-					ctx.values.grid = (ctx.values.gridImport || 0) - (ctx.values.gridExport || 0);
-					api.render(ctx);
-					return;
-				}
-				if (key === "batCharge" || key === "batDischarge") {
-					ctx.values[key] = api.toNumber(newVal);
-					ctx.values.bat = (ctx.values.batDischarge || 0) - (ctx.values.batCharge || 0);
-					api.render(ctx);
-					return;
-				}
 				api.onValue(ctx, key, newVal);
 			}
 			vis.states.bind(stateKey, onChange);
@@ -517,7 +535,7 @@ vis.binds["anker-solix"] = {
 
 	formatGrid: function (w) {
 		var n = this.toNumber(w);
-		if (Math.abs(n) < 15) {
+		if (n < 15) {
 			return "0 W";
 		}
 		return this.formatPower(n);
@@ -529,21 +547,21 @@ vis.binds["anker-solix"] = {
 
 		$r.find('[data-val="pv"]').text(ctx.oids.pv ? this.formatPower(v.pv) : "—");
 		$r.find('[data-val="home"]').text(ctx.oids.home ? this.formatPower(v.home) : "—");
-		$r.find('[data-val="grid"]').text(
-			ctx.oids.gridImport || ctx.oids.gridExport ? this.formatGrid(v.grid) : "—",
+		$r.find('[data-val="gridImport"]').text(
+			ctx.oids.gridImport ? this.formatGrid(v.gridImport) : "—",
 		);
-
-		if (ctx.oids.soc && (ctx.oids.batCharge || ctx.oids.batDischarge)) {
-			$r.find('[data-val="soc"]').text(
-				Math.round(this.toNumber(v.soc)) + "% | " + this.formatPower(v.bat),
-			);
-		} else if (ctx.oids.soc) {
-			$r.find('[data-val="soc"]').text(Math.round(this.toNumber(v.soc)) + "%");
-		} else if (ctx.oids.batCharge || ctx.oids.batDischarge) {
-			$r.find('[data-val="soc"]').text(this.formatPower(v.bat));
-		} else {
-			$r.find('[data-val="soc"]').text("—");
-		}
+		$r.find('[data-val="gridExport"]').text(
+			ctx.oids.gridExport ? this.formatGrid(v.gridExport) : "—",
+		);
+		$r.find('[data-val="soc"]').text(
+			ctx.oids.soc ? Math.round(this.toNumber(v.soc)) + "%" : "—",
+		);
+		$r.find('[data-val="batCharge"]').text(
+			ctx.oids.batCharge ? this.formatGrid(v.batCharge) : "—",
+		);
+		$r.find('[data-val="batDischarge"]').text(
+			ctx.oids.batDischarge ? this.formatGrid(v.batDischarge) : "—",
+		);
 
 		$r.find('[data-val="ev"]').text(ctx.oids.ev ? this.formatPower(v.ev) : "—");
 		$r.find('[data-val="self"]').text(
@@ -596,29 +614,10 @@ vis.binds["anker-solix"] = {
 		}
 
 		setFlowDirection("pv", ctx.oids.pv ? v.pv : 0, false);
-
-		if (ctx.oids.gridImport || ctx.oids.gridExport) {
-			var gridImport = api.toNumber(v.gridImport);
-			var gridExport = api.toNumber(v.gridExport);
-			var gridActive = gridImport > threshold || gridExport > threshold;
-			var gridReverse = gridExport > gridImport;
-			var gridWatts = Math.max(gridImport, gridExport);
-			setFlowDirection("grid", gridActive ? gridWatts : 0, gridReverse);
-		} else {
-			setFlowDirection("grid", 0, false);
-		}
-
-		if (ctx.oids.batCharge || ctx.oids.batDischarge) {
-			var batCharge = api.toNumber(v.batCharge);
-			var batDischarge = api.toNumber(v.batDischarge);
-			var batActive = batCharge > threshold || batDischarge > threshold;
-			var batReverse = batDischarge > batCharge;
-			var batWatts = Math.max(batCharge, batDischarge);
-			setFlowDirection("battery", batActive ? batWatts : 0, batReverse);
-		} else {
-			setFlowDirection("battery", 0, false);
-		}
-
+		setFlowDirection("grid-import", ctx.oids.gridImport ? v.gridImport : 0, false);
+		setFlowDirection("grid-export", ctx.oids.gridExport ? v.gridExport : 0, false);
+		setFlowDirection("bat-charge", ctx.oids.batCharge ? v.batCharge : 0, false);
+		setFlowDirection("bat-discharge", ctx.oids.batDischarge ? v.batDischarge : 0, false);
 		setFlowDirection("ev", ctx.oids.ev ? v.ev : 0, false);
 		setFlowDirection("ev-cable", ctx.oids.ev ? v.ev : 0, false);
 	},
