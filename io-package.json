@@ -1,9 +1,22 @@
 {
 	"common": {
 		"name": "anker-solix",
-		"version": "0.10.99",
+		"version": "0.10.100",
 		"messagebox": true,
 		"news": {
+			"0.10.100": {
+				"en": "VIS Energy Home: fix duplicate grid flow line — legacy path cleanup, exclusive import/export animation",
+				"de": "VIS Energy Home: doppelte Netz-Linie behoben — Legacy-Cleanup, wechselseitige Import/Export-Animation",
+				"ru": "VIS Energy Home: duplicate grid flow line fix",
+				"pt": "VIS Energy Home: duplicate grid flow line fix",
+				"nl": "VIS Energy Home: duplicate grid flow line fix",
+				"fr": "VIS Energy Home: duplicate grid flow line fix",
+				"it": "VIS Energy Home: duplicate grid flow line fix",
+				"es": "VIS Energy Home: duplicate grid flow line fix",
+				"pl": "VIS Energy Home: duplicate grid flow line fix",
+				"uk": "VIS Energy Home: duplicate grid flow line fix",
+				"zh-cn": "VIS Energy Home：修复重复电网能量线"
+			},
 			"0.10.99": {
 				"en": "VIS Energy Home: fix VIS-1 duplicate cards — destroy/cleanup on re-render, cache-bust widget assets",
 				"de": "VIS Energy Home: VIS-1-Doppelkarten behoben — Cleanup bei Re-Render, Cache-Busting für Widget-Dateien",

@@ -91,6 +91,11 @@
 	opacity: 0.14;
 }
 
+.anker-energy-home__flow--hidden,
+.anker-energy-home__flow-glow.anker-energy-home__flow--hidden {
+	display: none;
+}
+
 .anker-energy-home__flow-glow.anker-energy-home__flow--idle {
 	opacity: 0.06;
 }

@@ -191,7 +191,7 @@ $.extend(true, systemDictionary, {
 });
 
 vis.binds["anker-solix"] = {
-	version: "0.2.5",
+	version: "0.2.6",
 
 	flowThresholdW: 20,
 
@@ -309,6 +309,27 @@ vis.binds["anker-solix"] = {
 		}
 	},
 
+	cleanupLegacyFlows: function ($scope) {
+		$scope
+			.find(
+				'[data-flow="grid"], [data-flow-glow="grid"], [data-flow="battery"], [data-flow-glow="battery"]',
+			)
+			.remove();
+
+		var names = ["pv", "grid-import", "grid-export", "bat-discharge", "bat-charge", "ev", "ev-cable"];
+		for (var i = 0; i < names.length; i++) {
+			var name = names[i];
+			var $main = $scope.find('[data-flow="' + name + '"]');
+			if ($main.length > 1) {
+				$main.slice(1).remove();
+			}
+			var $glow = $scope.find('[data-flow-glow="' + name + '"]');
+			if ($glow.length > 1) {
+				$glow.slice(1).remove();
+			}
+		}
+	},
+
 	destroy: function (widgetID, view, data, style) {
 		vis.binds["anker-solix"].destroyWidget(widgetID);
 	},
@@ -354,6 +375,7 @@ vis.binds["anker-solix"] = {
 			);
 
 		api.cleanupLegacyCards($root);
+		api.cleanupLegacyFlows($root);
 		$root.find(".anker-energy-home__bg").css("background-image", 'url("' + bg + '")');
 
 		var ctx = {
@@ -642,6 +664,7 @@ vis.binds["anker-solix"] = {
 		var $r = ctx.$root;
 
 		this.cleanupLegacyCards($r);
+		this.cleanupLegacyFlows($r);
 
 		$r.find('[data-val="pv"]').text(ctx.oids.pv ? this.formatPower(v.pv) : "—");
 		$r.find('[data-val="home"]').text(ctx.oids.home ? this.formatPower(v.home) : "—");
@@ -695,8 +718,11 @@ vis.binds["anker-solix"] = {
 			return Math.max(0.55, Math.min(2.2, 1.8 - abs / 8000)) + "s";
 		}
 
-		function setFlowDirection(name, watts, reverse) {
-			var active = Math.abs(api.toNumber(watts)) > threshold;
+		function setFlowDirection(name, watts, reverse, visible) {
+			if (visible === undefined) {
+				visible = true;
+			}
+			var active = visible && Math.abs(api.toNumber(watts)) > threshold;
 			var speed = flowSpeed(watts);
 			var dash = "3 5";
 
@@ -704,9 +730,17 @@ vis.binds["anker-solix"] = {
 				var el = this;
 				el.classList.remove(
 					"anker-energy-home__flow--idle",
+					"anker-energy-home__flow--hidden",
 					"anker-energy-home__flow--animate-forward",
 					"anker-energy-home__flow--animate-reverse",
 				);
+				if (!visible) {
+					el.classList.add("anker-energy-home__flow--hidden");
+					el.style.strokeDasharray = "";
+					el.style.animation = "";
+					el.style.removeProperty("--anker-flow-speed");
+					return;
+				}
 				if (!active) {
 					el.classList.add("anker-energy-home__flow--idle");
 					el.style.strokeDasharray = "";
@@ -722,11 +756,44 @@ vis.binds["anker-solix"] = {
 			});
 		}
 
+		var gridMode = api.pickFlowMode(
+			v.gridImport,
+			v.gridExport,
+			!!ctx.oids.gridImport,
+			!!ctx.oids.gridExport,
+		);
+		var batMode = api.pickFlowMode(
+			v.batDischarge,
+			v.batCharge,
+			!!ctx.oids.batDischarge,
+			!!ctx.oids.batCharge,
+		);
+
 		setFlowDirection("pv", ctx.oids.pv ? v.pv : 0, false);
-		setFlowDirection("grid-import", ctx.oids.gridImport ? v.gridImport : 0, false);
-		setFlowDirection("grid-export", ctx.oids.gridExport ? v.gridExport : 0, false);
-		setFlowDirection("bat-charge", ctx.oids.batCharge ? v.batCharge : 0, false);
-		setFlowDirection("bat-discharge", ctx.oids.batDischarge ? v.batDischarge : 0, false);
+		setFlowDirection(
+			"grid-import",
+			ctx.oids.gridImport ? v.gridImport : 0,
+			false,
+			gridMode === "a" && !!ctx.oids.gridImport,
+		);
+		setFlowDirection(
+			"grid-export",
+			ctx.oids.gridExport ? v.gridExport : 0,
+			false,
+			gridMode === "b" && !!ctx.oids.gridExport,
+		);
+		setFlowDirection(
+			"bat-discharge",
+			ctx.oids.batDischarge ? v.batDischarge : 0,
+			false,
+			batMode === "a" && !!ctx.oids.batDischarge,
+		);
+		setFlowDirection(
+			"bat-charge",
+			ctx.oids.batCharge ? v.batCharge : 0,
+			false,
+			batMode === "b" && !!ctx.oids.batCharge,
+		);
 		setFlowDirection("ev", ctx.oids.ev ? v.ev : 0, false);
 		setFlowDirection("ev-cable", ctx.oids.ev ? v.ev : 0, false);
 	},
