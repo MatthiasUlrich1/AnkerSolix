@@ -191,7 +191,7 @@ $.extend(true, systemDictionary, {
 });
 
 vis.binds["anker-solix"] = {
-	version: "0.2.1",
+	version: "0.2.2",
 
 	flowThresholdW: 20,
 
@@ -205,13 +205,13 @@ vis.binds["anker-solix"] = {
 
 	flowMarkup:
 		'<defs>' +
-		'<linearGradient id="anker-grad-pv" gradientUnits="userSpaceOnUse" x1="50" y1="13" x2="50" y2="40"><stop offset="0%" stop-color="#ffd36a"/><stop offset="100%" stop-color="#ff9a1a"/></linearGradient>' +
-		'<linearGradient id="anker-grad-grid-import" gradientUnits="userSpaceOnUse" x1="14" y1="51" x2="44" y2="44"><stop offset="0%" stop-color="#6eb6ff"/><stop offset="100%" stop-color="#2f7fe8"/></linearGradient>' +
-		'<linearGradient id="anker-grad-grid-export" gradientUnits="userSpaceOnUse" x1="44" y1="46" x2="14" y2="54"><stop offset="0%" stop-color="#6eb6ff"/><stop offset="100%" stop-color="#2f7fe8"/></linearGradient>' +
-		'<linearGradient id="anker-grad-bat-charge" gradientUnits="userSpaceOnUse" x1="47" y1="45" x2="20" y2="73"><stop offset="0%" stop-color="#8ef0b0"/><stop offset="100%" stop-color="#45d17a"/></linearGradient>' +
-		'<linearGradient id="anker-grad-bat-discharge" gradientUnits="userSpaceOnUse" x1="20" y1="73" x2="47" y2="45"><stop offset="0%" stop-color="#45d17a"/><stop offset="100%" stop-color="#8ef0b0"/></linearGradient>' +
-		'<linearGradient id="anker-grad-ev" gradientUnits="userSpaceOnUse" x1="53" y1="45" x2="81" y2="54"><stop offset="0%" stop-color="#c89bff"/><stop offset="100%" stop-color="#8b4dff"/></linearGradient>' +
-		'<linearGradient id="anker-grad-ev-cable" gradientUnits="userSpaceOnUse" x1="83" y1="55" x2="88" y2="56"><stop offset="0%" stop-color="#c89bff"/><stop offset="100%" stop-color="#8b4dff"/></linearGradient>' +
+		'<linearGradient id="anker-grad-pv" gradientUnits="userSpaceOnUse" x1="50" y1="14" x2="50" y2="38"><stop offset="0%" stop-color="#ffd36a"/><stop offset="100%" stop-color="#ff9a1a"/></linearGradient>' +
+		'<linearGradient id="anker-grad-grid-import" gradientUnits="userSpaceOnUse" x1="16" y1="47" x2="43" y2="44"><stop offset="0%" stop-color="#6eb6ff"/><stop offset="100%" stop-color="#2f7fe8"/></linearGradient>' +
+		'<linearGradient id="anker-grad-grid-export" gradientUnits="userSpaceOnUse" x1="43" y1="46" x2="16" y2="55"><stop offset="0%" stop-color="#6eb6ff"/><stop offset="100%" stop-color="#2f7fe8"/></linearGradient>' +
+		'<linearGradient id="anker-grad-bat-charge" gradientUnits="userSpaceOnUse" x1="44" y1="48" x2="24" y2="72"><stop offset="0%" stop-color="#8ef0b0"/><stop offset="100%" stop-color="#45d17a"/></linearGradient>' +
+		'<linearGradient id="anker-grad-bat-discharge" gradientUnits="userSpaceOnUse" x1="24" y1="72" x2="44" y2="48"><stop offset="0%" stop-color="#45d17a"/><stop offset="100%" stop-color="#8ef0b0"/></linearGradient>' +
+		'<linearGradient id="anker-grad-ev" gradientUnits="userSpaceOnUse" x1="57" y1="44" x2="76" y2="55"><stop offset="0%" stop-color="#c89bff"/><stop offset="100%" stop-color="#8b4dff"/></linearGradient>' +
+		'<linearGradient id="anker-grad-ev-cable" gradientUnits="userSpaceOnUse" x1="78" y1="55" x2="83" y2="55"><stop offset="0%" stop-color="#c89bff"/><stop offset="100%" stop-color="#8b4dff"/></linearGradient>' +
 		'<filter id="anker-glow-pv" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="0.35" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>' +
 		'<filter id="anker-glow-grid" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="0.35" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>' +
 		'<filter id="anker-glow-battery" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="0.35" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>' +
@@ -221,20 +221,20 @@ vis.binds["anker-solix"] = {
 		'<marker id="anker-arrow-battery" markerWidth="4" markerHeight="4" refX="3.2" refY="2" orient="auto"><path d="M0,0 L4,2 L0,4 Z" fill="#45d17a"/></marker>' +
 		'<marker id="anker-arrow-ev" markerWidth="4" markerHeight="4" refX="3.2" refY="2" orient="auto"><path d="M0,0 L4,2 L0,4 Z" fill="#b07cff"/></marker>' +
 		"</defs>" +
-		'<path class="anker-energy-home__flow-glow anker-energy-home__flow--pv" data-flow-glow="pv" d="M50,13 L50,40"/>' +
-		'<path class="anker-energy-home__flow anker-energy-home__flow--pv" data-flow="pv" d="M50,13 L50,40" stroke="url(#anker-grad-pv)" filter="url(#anker-glow-pv)" marker-end="url(#anker-arrow-pv)"/>' +
-		'<path class="anker-energy-home__flow-glow anker-energy-home__flow--grid" data-flow-glow="grid-import" d="M14,51 C26,51 36,47 44,44"/>' +
-		'<path class="anker-energy-home__flow anker-energy-home__flow--grid" data-flow="grid-import" d="M14,51 C26,51 36,47 44,44" stroke="url(#anker-grad-grid-import)" filter="url(#anker-glow-grid)" marker-end="url(#anker-arrow-grid)"/>' +
-		'<path class="anker-energy-home__flow-glow anker-energy-home__flow--grid" data-flow-glow="grid-export" d="M44,46 C36,50 26,52 14,54"/>' +
-		'<path class="anker-energy-home__flow anker-energy-home__flow--grid" data-flow="grid-export" d="M44,46 C36,50 26,52 14,54" stroke="url(#anker-grad-grid-export)" filter="url(#anker-glow-grid)" marker-end="url(#anker-arrow-grid)"/>' +
-		'<path class="anker-energy-home__flow-glow anker-energy-home__flow--battery" data-flow-glow="bat-charge" d="M47,45 L47,57 Q47,61 43,61 L20,61 L20,73"/>' +
-		'<path class="anker-energy-home__flow anker-energy-home__flow--battery" data-flow="bat-charge" d="M47,45 L47,57 Q47,61 43,61 L20,61 L20,73" stroke="url(#anker-grad-bat-charge)" filter="url(#anker-glow-battery)" marker-end="url(#anker-arrow-battery)"/>' +
-		'<path class="anker-energy-home__flow-glow anker-energy-home__flow--battery" data-flow-glow="bat-discharge" d="M20,73 L20,61 L43,61 Q47,61 47,57 L47,45"/>' +
-		'<path class="anker-energy-home__flow anker-energy-home__flow--battery" data-flow="bat-discharge" d="M20,73 L20,61 L43,61 Q47,61 47,57 L47,45" stroke="url(#anker-grad-bat-discharge)" filter="url(#anker-glow-battery)" marker-end="url(#anker-arrow-battery)"/>' +
-		'<path class="anker-energy-home__flow-glow anker-energy-home__flow--ev" data-flow-glow="ev" d="M53,45 L53,57 Q53,61 57,61 L81,61 L81,54"/>' +
-		'<path class="anker-energy-home__flow anker-energy-home__flow--ev" data-flow="ev" d="M53,45 L53,57 Q53,61 57,61 L81,61 L81,54" stroke="url(#anker-grad-ev)" filter="url(#anker-glow-ev)" marker-end="url(#anker-arrow-ev)"/>' +
-		'<path class="anker-energy-home__flow-glow anker-energy-home__flow--ev anker-energy-home__flow--ev-cable" data-flow-glow="ev-cable" d="M83,55 L88,56"/>' +
-		'<path class="anker-energy-home__flow anker-energy-home__flow--ev anker-energy-home__flow--ev-cable" data-flow="ev-cable" d="M83,55 L88,56" stroke="url(#anker-grad-ev-cable)" filter="url(#anker-glow-ev)" marker-end="url(#anker-arrow-ev)"/>',
+		'<path class="anker-energy-home__flow-glow anker-energy-home__flow--pv" data-flow-glow="pv" d="M50,14 L50,38"/>' +
+		'<path class="anker-energy-home__flow anker-energy-home__flow--pv" data-flow="pv" d="M50,14 L50,38" stroke="url(#anker-grad-pv)" filter="url(#anker-glow-pv)" marker-end="url(#anker-arrow-pv)"/>' +
+		'<path class="anker-energy-home__flow-glow anker-energy-home__flow--grid" data-flow-glow="grid-import" d="M16,47 C30,47 38,45 43,44"/>' +
+		'<path class="anker-energy-home__flow anker-energy-home__flow--grid" data-flow="grid-import" d="M16,47 C30,47 38,45 43,44" stroke="url(#anker-grad-grid-import)" filter="url(#anker-glow-grid)" marker-end="url(#anker-arrow-grid)"/>' +
+		'<path class="anker-energy-home__flow-glow anker-energy-home__flow--grid" data-flow-glow="grid-export" d="M43,46 C38,49 28,53 16,55"/>' +
+		'<path class="anker-energy-home__flow anker-energy-home__flow--grid" data-flow="grid-export" d="M43,46 C38,49 28,53 16,55" stroke="url(#anker-grad-grid-export)" filter="url(#anker-glow-grid)" marker-end="url(#anker-arrow-grid)"/>' +
+		'<path class="anker-energy-home__flow-glow anker-energy-home__flow--battery" data-flow-glow="bat-discharge" d="M24,72 L24,57 L44,57 L44,48"/>' +
+		'<path class="anker-energy-home__flow anker-energy-home__flow--battery" data-flow="bat-discharge" d="M24,72 L24,57 L44,57 L44,48" stroke="url(#anker-grad-bat-discharge)" filter="url(#anker-glow-battery)" marker-end="url(#anker-arrow-battery)"/>' +
+		'<path class="anker-energy-home__flow-glow anker-energy-home__flow--battery" data-flow-glow="bat-charge" d="M44,48 L44,57 L24,57 L24,72"/>' +
+		'<path class="anker-energy-home__flow anker-energy-home__flow--battery" data-flow="bat-charge" d="M44,48 L44,57 L24,57 L24,72" stroke="url(#anker-grad-bat-charge)" filter="url(#anker-glow-battery)" marker-end="url(#anker-arrow-battery)"/>' +
+		'<path class="anker-energy-home__flow-glow anker-energy-home__flow--ev" data-flow-glow="ev" d="M57,44 L57,60 L76,60 L76,55"/>' +
+		'<path class="anker-energy-home__flow anker-energy-home__flow--ev" data-flow="ev" d="M57,44 L57,60 L76,60 L76,55" stroke="url(#anker-grad-ev)" filter="url(#anker-glow-ev)" marker-end="url(#anker-arrow-ev)"/>' +
+		'<path class="anker-energy-home__flow-glow anker-energy-home__flow--ev anker-energy-home__flow--ev-cable" data-flow-glow="ev-cable" d="M78,55 L83,55"/>' +
+		'<path class="anker-energy-home__flow anker-energy-home__flow--ev anker-energy-home__flow--ev-cable" data-flow="ev-cable" d="M78,55 L83,55" stroke="url(#anker-grad-ev-cable)" filter="url(#anker-glow-ev)" marker-end="url(#anker-arrow-ev)"/>',
 
 	cardMarkup: function (zone, iconKey, label, valKey, left, top) {
 		var icons = vis.binds["anker-solix"].icons;
@@ -283,7 +283,7 @@ vis.binds["anker-solix"] = {
 			.html(
 				'<div class="anker-energy-home__bg"></div>' +
 					'<div class="anker-energy-home__overlay"></div>' +
-					'<svg class="anker-energy-home__flows" viewBox="0 0 100 100" preserveAspectRatio="xMidYMid slice">' +
+					'<svg class="anker-energy-home__flows" viewBox="0 0 100 100" preserveAspectRatio="none">' +
 					api.flowMarkup +
 					"</svg>" +
 					'<div class="anker-energy-home__cards">' +

@@ -1,9 +1,22 @@
 {
 	"common": {
 		"name": "anker-solix",
-		"version": "0.10.95",
+		"version": "0.10.96",
 		"messagebox": true,
 		"news": {
+			"0.10.96": {
+				"en": "VIS Energy Home: fix flow lines to connect PV, grid, battery and EV through the Home hub",
+				"de": "VIS Energy Home: Energielinien korrigiert – PV, Netz, Batterie und EV führen über Home",
+				"ru": "VIS Energy Home: flow lines aligned to Home hub",
+				"pt": "VIS Energy Home: flow lines aligned to Home hub",
+				"nl": "VIS Energy Home: flow lines aligned to Home hub",
+				"fr": "VIS Energy Home: flow lines aligned to Home hub",
+				"it": "VIS Energy Home: flow lines aligned to Home hub",
+				"es": "VIS Energy Home: flow lines aligned to Home hub",
+				"pl": "VIS Energy Home: flow lines aligned to Home hub",
+				"uk": "VIS Energy Home: flow lines aligned to Home hub",
+				"zh-cn": "VIS Energy Home：能量线对齐至 Home 中心"
+			},
 			"0.10.95": {
 				"en": "VIS Energy Home: separate cards and flow lines for grid import/export and battery charge/discharge",
 				"de": "VIS Energy Home: getrennte Karten und Energielinien für Netz Import/Export und Batterie Laden/Entladen",
