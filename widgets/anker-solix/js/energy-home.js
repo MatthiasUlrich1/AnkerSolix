@@ -191,7 +191,7 @@ $.extend(true, systemDictionary, {
 });
 
 vis.binds["anker-solix"] = {
-	version: "0.2.2",
+	version: "0.2.3",
 
 	flowThresholdW: 20,
 
@@ -289,11 +289,11 @@ vis.binds["anker-solix"] = {
 					'<div class="anker-energy-home__cards">' +
 					api.cardMarkup("pv", "pv", "PV", "pv", "50%", "10%") +
 					api.cardMarkup("home", "home", "Home", "home", "50%", "44%") +
-					api.cardMarkup("grid-import", "grid", "Grid → Home", "gridImport", "13%", "47%") +
-					api.cardMarkup("grid-export", "grid", "PV → Grid", "gridExport", "13%", "55%") +
+					api.cardMarkup("grid-import", "grid", "Grid → Home", "gridImport", "13%", "51%") +
+					api.cardMarkup("grid-export", "grid", "PV → Grid", "gridExport", "13%", "51%") +
 					api.cardMarkup("soc", "battery", "SOC", "soc", "21%", "70%") +
-					api.cardMarkup("bat-charge", "battery", "Laden", "batCharge", "30%", "78%") +
-					api.cardMarkup("bat-discharge", "battery", "Entladen", "batDischarge", "14%", "82%") +
+					api.cardMarkup("bat-charge", "battery", "Laden", "batCharge", "21%", "78%") +
+					api.cardMarkup("bat-discharge", "battery", "Entladen", "batDischarge", "21%", "78%") +
 					api.cardMarkup("ev", "ev", "EV", "ev", "79%", "55%") +
 					"</div>" +
 					'<div class="anker-energy-home__footer">' +
@@ -541,6 +541,41 @@ vis.binds["anker-solix"] = {
 		return this.formatPower(n);
 	},
 
+	isFlowActive: function (w) {
+		return this.toNumber(w) >= this.flowThresholdW;
+	},
+
+	updateExclusiveCards: function ($r, zoneA, zoneB, wattsA, wattsB, hasA, hasB) {
+		var $a = $r.find('[data-zone="' + zoneA + '"]');
+		var $b = $r.find('[data-zone="' + zoneB + '"]');
+
+		if (!hasA && !hasB) {
+			$a.addClass("anker-energy-home__card--hidden");
+			$b.addClass("anker-energy-home__card--hidden");
+			return;
+		}
+
+		var aActive = hasA && this.isFlowActive(wattsA);
+		var bActive = hasB && this.isFlowActive(wattsB);
+		var showA = false;
+		var showB = false;
+
+		if (aActive && !bActive) {
+			showA = true;
+		} else if (bActive && !aActive) {
+			showB = true;
+		} else if (aActive && bActive) {
+			if (this.toNumber(wattsA) >= this.toNumber(wattsB)) {
+				showA = true;
+			} else {
+				showB = true;
+			}
+		}
+
+		$a.toggleClass("anker-energy-home__card--hidden", !showA);
+		$b.toggleClass("anker-energy-home__card--hidden", !showB);
+	},
+
 	render: function (ctx) {
 		var v = ctx.values;
 		var $r = ctx.$root;
@@ -561,6 +596,25 @@ vis.binds["anker-solix"] = {
 		);
 		$r.find('[data-val="batDischarge"]').text(
 			ctx.oids.batDischarge ? this.formatGrid(v.batDischarge) : "—",
+		);
+
+		this.updateExclusiveCards(
+			$r,
+			"grid-import",
+			"grid-export",
+			v.gridImport,
+			v.gridExport,
+			!!ctx.oids.gridImport,
+			!!ctx.oids.gridExport,
+		);
+		this.updateExclusiveCards(
+			$r,
+			"bat-discharge",
+			"bat-charge",
+			v.batDischarge,
+			v.batCharge,
+			!!ctx.oids.batDischarge,
+			!!ctx.oids.batCharge,
 		);
 
 		$r.find('[data-val="ev"]').text(ctx.oids.ev ? this.formatPower(v.ev) : "—");

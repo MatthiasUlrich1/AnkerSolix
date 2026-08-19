@@ -1,9 +1,22 @@
 {
 	"common": {
 		"name": "anker-solix",
-		"version": "0.10.96",
+		"version": "0.10.97",
 		"messagebox": true,
 		"news": {
+			"0.10.97": {
+				"en": "VIS Energy Home: toggle grid and battery cards by active flow (import vs export, charge vs discharge)",
+				"de": "VIS Energy Home: Netz- und Batterie-Karten wechseln je nach aktivem Fluss (Import/Export, Laden/Entladen)",
+				"ru": "VIS Energy Home: exclusive grid and battery card display by active flow",
+				"pt": "VIS Energy Home: exclusive grid and battery card display by active flow",
+				"nl": "VIS Energy Home: exclusive grid and battery card display by active flow",
+				"fr": "VIS Energy Home: exclusive grid and battery card display by active flow",
+				"it": "VIS Energy Home: exclusive grid and battery card display by active flow",
+				"es": "VIS Energy Home: exclusive grid and battery card display by active flow",
+				"pl": "VIS Energy Home: exclusive grid and battery card display by active flow",
+				"uk": "VIS Energy Home: exclusive grid and battery card display by active flow",
+				"zh-cn": "VIS Energy Home：按活跃流向切换电网与电池卡片"
+			},
 			"0.10.96": {
 				"en": "VIS Energy Home: fix flow lines to connect PV, grid, battery and EV through the Home hub",
 				"de": "VIS Energy Home: Energielinien korrigiert – PV, Netz, Batterie und EV führen über Home",
