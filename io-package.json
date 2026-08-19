@@ -1,9 +1,22 @@
 {
 	"common": {
 		"name": "anker-solix",
-		"version": "0.10.98",
+		"version": "0.10.99",
 		"messagebox": true,
 		"news": {
+			"0.10.99": {
+				"en": "VIS Energy Home: fix VIS-1 duplicate cards — destroy/cleanup on re-render, cache-bust widget assets",
+				"de": "VIS Energy Home: VIS-1-Doppelkarten behoben — Cleanup bei Re-Render, Cache-Busting für Widget-Dateien",
+				"ru": "VIS Energy Home: VIS-1 duplicate card fix with destroy/cleanup and cache busting",
+				"pt": "VIS Energy Home: VIS-1 duplicate card fix with destroy/cleanup and cache busting",
+				"nl": "VIS Energy Home: VIS-1 duplicate card fix with destroy/cleanup and cache busting",
+				"fr": "VIS Energy Home: VIS-1 duplicate card fix with destroy/cleanup and cache busting",
+				"it": "VIS Energy Home: VIS-1 duplicate card fix with destroy/cleanup and cache busting",
+				"es": "VIS Energy Home: VIS-1 duplicate card fix with destroy/cleanup and cache busting",
+				"pl": "VIS Energy Home: VIS-1 duplicate card fix with destroy/cleanup and cache busting",
+				"uk": "VIS Energy Home: VIS-1 duplicate card fix with destroy/cleanup and cache busting",
+				"zh-cn": "VIS Energy Home：修复 VIS-1 重复卡片，重渲染清理与缓存刷新"
+			},
 			"0.10.98": {
 				"en": "VIS Energy Home: keep grid and battery cards visible; label and value alternate by flow direction",
 				"de": "VIS Energy Home: Netz- und Batterie-Karte bleiben sichtbar; Label und Wert wechseln je nach Flussrichtung",

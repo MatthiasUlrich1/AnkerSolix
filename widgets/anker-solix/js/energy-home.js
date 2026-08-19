@@ -191,7 +191,7 @@ $.extend(true, systemDictionary, {
 });
 
 vis.binds["anker-solix"] = {
-	version: "0.2.4",
+	version: "0.2.5",
 
 	flowThresholdW: 20,
 
@@ -269,7 +269,59 @@ vis.binds["anker-solix"] = {
 		}
 	},
 
+	destroyWidget: function (widgetID) {
+		var $all = $('[id="' + widgetID + '"]');
+		if ($all.length > 1) {
+			$all.slice(0, -1).remove();
+			$all = $('[id="' + widgetID + '"]');
+		}
+
+		var $root = $all.first();
+		if (!$root.length) {
+			return;
+		}
+
+		var ctx = $root.data("ankerEnergyCtx");
+		if (ctx && ctx._handlers && vis.states && vis.states.unbind) {
+			for (var i = 0; i < ctx._handlers.length; i++) {
+				vis.states.unbind(ctx._handlers[i].key, ctx._handlers[i].fn);
+			}
+		}
+
+		$root.removeData("ankerEnergyCtx");
+		$root.removeData("bound");
+		$root.removeData("bindHandler");
+	},
+
+	cleanupLegacyCards: function ($scope) {
+		$scope
+			.find(
+				'[data-zone="grid-import"], [data-zone="grid-export"], [data-zone="bat-charge"], [data-zone="bat-discharge"]',
+			)
+			.remove();
+
+		var zones = ["grid", "bat-flow", "pv", "home", "soc", "ev"];
+		for (var i = 0; i < zones.length; i++) {
+			var $cards = $scope.find('[data-zone="' + zones[i] + '"]');
+			if ($cards.length > 1) {
+				$cards.slice(1).remove();
+			}
+		}
+	},
+
+	destroy: function (widgetID, view, data, style) {
+		vis.binds["anker-solix"].destroyWidget(widgetID);
+	},
+
 	createWidget: function (widgetID, view, data, style) {
+		var api = vis.binds["anker-solix"];
+		api.destroyWidget(widgetID);
+
+		var $all = $('[id="' + widgetID + '"]');
+		if ($all.length > 1) {
+			$all.slice(0, -1).remove();
+		}
+
 		var $root = $("#" + widgetID);
 		if (!$root.length) {
 			return setTimeout(function () {
@@ -277,7 +329,6 @@ vis.binds["anker-solix"] = {
 			}, 100);
 		}
 
-		var api = vis.binds["anker-solix"];
 		var bg = data.backgroundImage || "widgets/anker-solix/img/dashboard-bg.png";
 
 		$root
@@ -302,6 +353,7 @@ vis.binds["anker-solix"] = {
 					"</div>",
 			);
 
+		api.cleanupLegacyCards($root);
 		$root.find(".anker-energy-home__bg").css("background-image", 'url("' + bg + '")');
 
 		var ctx = {
@@ -588,6 +640,8 @@ vis.binds["anker-solix"] = {
 	render: function (ctx) {
 		var v = ctx.values;
 		var $r = ctx.$root;
+
+		this.cleanupLegacyCards($r);
 
 		$r.find('[data-val="pv"]').text(ctx.oids.pv ? this.formatPower(v.pv) : "—");
 		$r.find('[data-val="home"]').text(ctx.oids.home ? this.formatPower(v.home) : "—");
