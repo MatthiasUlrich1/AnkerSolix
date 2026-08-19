@@ -16,8 +16,6 @@
 					"tpl": "tplAnkerSolixEnergyHome",
 					"set": "anker-solix",
 					"data": {
-						"instance": "anker-solix.0",
-						"autoDiscover": true,
 						"backgroundImage": "widgets/anker-solix/img/dashboard-bg.png",
 						"g_x": 0,
 						"g_y": 0,

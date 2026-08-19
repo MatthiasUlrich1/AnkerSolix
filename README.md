@@ -377,15 +377,15 @@ Tab **Abregelungsvermeidung** / **Curtailment avoidance**: requires the [ioBroke
 
 ## VIS / VIS-2 dashboard (Energy Home)
 
-Widget set **anker-solix** → **Energy Home** (photoreal house background, live PV / home / grid / battery / EV overlays, auto state discovery).
+Widget set **anker-solix** → **Energy Home** (photoreal house background, live PV / home / grid / battery / EV overlays). All states are bound manually in the widget settings (object picker).
 
-**Important:** Widgets ship with **GitHub main / 0.10.93+** only. npm **0.10.90** does **not** include them. After install or update:
+**Important:** Widgets ship with **GitHub main / 0.10.94+** only. npm **0.10.90** does **not** include them. After install or update:
 
 ```bash
 iobroker upload anker-solix
 ```
 
-Then restart **vis** and/or **vis-2** (or reload the editor with F5). In the widget picker, search for set **anker-solix** → **Energy Home**. Default instance: `anker-solix.0`, **Auto-discover** on.
+Then restart **vis** and/or **vis-2** (or reload the editor with F5). In the widget picker, search for set **anker-solix** → **Energy Home**. In widget settings, assign each state under **State bindings** (PV, home, grid import/export, SOC, battery charge/discharge, EV, footer statistics).
 
 Optional VIS-2 view import: `widgets/anker-solix/views/energy-home.vis2.json`.
 
@@ -394,6 +394,10 @@ Enable **Power flows** and **Energy statistics** in adapter **Objects** for foot
 ---
 
 ## Changelog
+
+### 0.10.94
+
+- **VIS Energy Home:** removed auto-discovery and card hiding; all states (PV, home, grid import/export, SOC, battery charge/discharge, EV, footer) are assigned manually in widget settings (GitHub-only)
 
 ### 0.10.93
 
