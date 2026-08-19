@@ -1,9 +1,22 @@
 {
 	"common": {
 		"name": "anker-solix",
-		"version": "0.10.97",
+		"version": "0.10.98",
 		"messagebox": true,
 		"news": {
+			"0.10.98": {
+				"en": "VIS Energy Home: keep grid and battery cards visible; label and value alternate by flow direction",
+				"de": "VIS Energy Home: Netz- und Batterie-Karte bleiben sichtbar; Label und Wert wechseln je nach Flussrichtung",
+				"ru": "VIS Energy Home: grid and battery cards stay visible with alternating label/value",
+				"pt": "VIS Energy Home: grid and battery cards stay visible with alternating label/value",
+				"nl": "VIS Energy Home: grid and battery cards stay visible with alternating label/value",
+				"fr": "VIS Energy Home: grid and battery cards stay visible with alternating label/value",
+				"it": "VIS Energy Home: grid and battery cards stay visible with alternating label/value",
+				"es": "VIS Energy Home: grid and battery cards stay visible with alternating label/value",
+				"pl": "VIS Energy Home: grid and battery cards stay visible with alternating label/value",
+				"uk": "VIS Energy Home: grid and battery cards stay visible with alternating label/value",
+				"zh-cn": "VIS Energy Home：电网与电池卡片常显，标签与数值随流向切换"
+			},
 			"0.10.97": {
 				"en": "VIS Energy Home: toggle grid and battery cards by active flow (import vs export, charge vs discharge)",
 				"de": "VIS Energy Home: Netz- und Batterie-Karten wechseln je nach aktivem Fluss (Import/Export, Laden/Entladen)",

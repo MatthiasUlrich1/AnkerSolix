@@ -191,7 +191,7 @@ $.extend(true, systemDictionary, {
 });
 
 vis.binds["anker-solix"] = {
-	version: "0.2.3",
+	version: "0.2.4",
 
 	flowThresholdW: 20,
 
@@ -250,7 +250,9 @@ vis.binds["anker-solix"] = {
 			icons[iconKey] +
 			"</div>" +
 			'<div class="anker-energy-home__card-body">' +
-			'<div class="anker-energy-home__label">' +
+			'<div class="anker-energy-home__label" data-label="' +
+			zone +
+			'">' +
 			label +
 			"</div>" +
 			'<div class="anker-energy-home__value" data-val="' +
@@ -289,11 +291,9 @@ vis.binds["anker-solix"] = {
 					'<div class="anker-energy-home__cards">' +
 					api.cardMarkup("pv", "pv", "PV", "pv", "50%", "10%") +
 					api.cardMarkup("home", "home", "Home", "home", "50%", "44%") +
-					api.cardMarkup("grid-import", "grid", "Grid → Home", "gridImport", "13%", "51%") +
-					api.cardMarkup("grid-export", "grid", "PV → Grid", "gridExport", "13%", "51%") +
+					api.cardMarkup("grid", "grid", "Grid → Home", "gridFlow", "13%", "51%") +
 					api.cardMarkup("soc", "battery", "SOC", "soc", "21%", "70%") +
-					api.cardMarkup("bat-charge", "battery", "Laden", "batCharge", "21%", "78%") +
-					api.cardMarkup("bat-discharge", "battery", "Entladen", "batDischarge", "21%", "78%") +
+					api.cardMarkup("bat-flow", "battery", "Entladen", "batFlow", "21%", "78%") +
 					api.cardMarkup("ev", "ev", "EV", "ev", "79%", "55%") +
 					"</div>" +
 					'<div class="anker-energy-home__footer">' +
@@ -545,35 +545,44 @@ vis.binds["anker-solix"] = {
 		return this.toNumber(w) >= this.flowThresholdW;
 	},
 
-	updateExclusiveCards: function ($r, zoneA, zoneB, wattsA, wattsB, hasA, hasB) {
-		var $a = $r.find('[data-zone="' + zoneA + '"]');
-		var $b = $r.find('[data-zone="' + zoneB + '"]');
+	pickFlowMode: function (wattsA, wattsB, hasA, hasB) {
+		var aActive = hasA && this.isFlowActive(wattsA);
+		var bActive = hasB && this.isFlowActive(wattsB);
+
+		if (aActive && !bActive) {
+			return "a";
+		}
+		if (bActive && !aActive) {
+			return "b";
+		}
+		if (aActive && bActive) {
+			return this.toNumber(wattsA) >= this.toNumber(wattsB) ? "a" : "b";
+		}
+		if (hasA) {
+			return "a";
+		}
+		if (hasB) {
+			return "b";
+		}
+		return "a";
+	},
+
+	updateAlternatingCard: function ($r, zone, valKey, labelA, labelB, wattsA, wattsB, hasA, hasB) {
+		var $card = $r.find('[data-zone="' + zone + '"]');
 
 		if (!hasA && !hasB) {
-			$a.addClass("anker-energy-home__card--hidden");
-			$b.addClass("anker-energy-home__card--hidden");
+			$card.addClass("anker-energy-home__card--hidden");
 			return;
 		}
 
-		var aActive = hasA && this.isFlowActive(wattsA);
-		var bActive = hasB && this.isFlowActive(wattsB);
-		var showA = false;
-		var showB = false;
+		$card.removeClass("anker-energy-home__card--hidden");
+		var mode = this.pickFlowMode(wattsA, wattsB, hasA, hasB);
+		var label = mode === "a" ? labelA : labelB;
+		var watts = mode === "a" ? wattsA : wattsB;
+		var hasOid = mode === "a" ? hasA : hasB;
 
-		if (aActive && !bActive) {
-			showA = true;
-		} else if (bActive && !aActive) {
-			showB = true;
-		} else if (aActive && bActive) {
-			if (this.toNumber(wattsA) >= this.toNumber(wattsB)) {
-				showA = true;
-			} else {
-				showB = true;
-			}
-		}
-
-		$a.toggleClass("anker-energy-home__card--hidden", !showA);
-		$b.toggleClass("anker-energy-home__card--hidden", !showB);
+		$card.find('[data-label="' + zone + '"]').text(label);
+		$card.find('[data-val="' + valKey + '"]').text(hasOid ? this.formatGrid(watts) : "—");
 	},
 
 	render: function (ctx) {
@@ -582,35 +591,27 @@ vis.binds["anker-solix"] = {
 
 		$r.find('[data-val="pv"]').text(ctx.oids.pv ? this.formatPower(v.pv) : "—");
 		$r.find('[data-val="home"]').text(ctx.oids.home ? this.formatPower(v.home) : "—");
-		$r.find('[data-val="gridImport"]').text(
-			ctx.oids.gridImport ? this.formatGrid(v.gridImport) : "—",
-		);
-		$r.find('[data-val="gridExport"]').text(
-			ctx.oids.gridExport ? this.formatGrid(v.gridExport) : "—",
-		);
 		$r.find('[data-val="soc"]').text(
 			ctx.oids.soc ? Math.round(this.toNumber(v.soc)) + "%" : "—",
 		);
-		$r.find('[data-val="batCharge"]').text(
-			ctx.oids.batCharge ? this.formatGrid(v.batCharge) : "—",
-		);
-		$r.find('[data-val="batDischarge"]').text(
-			ctx.oids.batDischarge ? this.formatGrid(v.batDischarge) : "—",
-		);
 
-		this.updateExclusiveCards(
+		this.updateAlternatingCard(
 			$r,
-			"grid-import",
-			"grid-export",
+			"grid",
+			"gridFlow",
+			"Grid → Home",
+			"PV → Grid",
 			v.gridImport,
 			v.gridExport,
 			!!ctx.oids.gridImport,
 			!!ctx.oids.gridExport,
 		);
-		this.updateExclusiveCards(
+		this.updateAlternatingCard(
 			$r,
-			"bat-discharge",
-			"bat-charge",
+			"bat-flow",
+			"batFlow",
+			"Entladen",
+			"Laden",
 			v.batDischarge,
 			v.batCharge,
 			!!ctx.oids.batDischarge,

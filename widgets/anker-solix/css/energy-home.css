@@ -165,12 +165,14 @@
 	color: #ffb020;
 }
 
+.anker-energy-home__card[data-zone="grid"] .anker-energy-home__value,
 .anker-energy-home__card[data-zone="grid-import"] .anker-energy-home__value,
 .anker-energy-home__card[data-zone="grid-export"] .anker-energy-home__value {
 	color: #6eb6ff;
 }
 
 .anker-energy-home__card[data-zone="soc"] .anker-energy-home__value,
+.anker-energy-home__card[data-zone="bat-flow"] .anker-energy-home__value,
 .anker-energy-home__card[data-zone="bat-charge"] .anker-energy-home__value,
 .anker-energy-home__card[data-zone="bat-discharge"] .anker-energy-home__value {
 	color: #45d17a;
