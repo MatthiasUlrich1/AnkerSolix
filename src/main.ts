@@ -45,6 +45,7 @@ import {
 	sumSolarbankBatPowerToSystem,
 } from "./lib/systemBatPower";
 import { parseControlStateId, syncDevices, type CurtailmentPvSyncHost } from "./lib/stateSync";
+import { syncHtmlDashboards } from "./lib/dashboardSync";
 import type { BridgeConfig, BridgeDevice, BridgeServiceConfig, DeviceControlContext } from "./lib/types";
 import { isModbusOnly, parseModbusDevices } from "./lib/modbus/config";
 import { ModbusChannel } from "./lib/modbus/channel";
@@ -245,6 +246,7 @@ class AnkerSolix extends utils.Adapter {
 				this.rememberDeviceEntities(pollDevices);
 				this.siteSolarbanks = buildSiteSolarbankMap(pollDevices);
 				await syncDevices(this, pollDevices);
+				await syncHtmlDashboards(this, pollDevices);
 				if (this.batPowerAggregationEnabled()) {
 					await refreshAllSystemBatPowerSums(this, this.siteSolarbanks);
 				}

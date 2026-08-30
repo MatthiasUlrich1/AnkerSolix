@@ -37,6 +37,7 @@ var import_services = require("./lib/services");
 var import_curtailmentConfig = require("./lib/curtailmentConfig");
 var import_systemBatPower = require("./lib/systemBatPower");
 var import_stateSync = require("./lib/stateSync");
+var import_dashboardSync = require("./lib/dashboardSync");
 var import_config = require("./lib/modbus/config");
 var import_channel = require("./lib/modbus/channel");
 class AnkerSolix extends utils.Adapter {
@@ -215,6 +216,7 @@ class AnkerSolix extends utils.Adapter {
         this.rememberDeviceEntities(pollDevices);
         this.siteSolarbanks = (0, import_systemBatPower.buildSiteSolarbankMap)(pollDevices);
         await (0, import_stateSync.syncDevices)(this, pollDevices);
+        await (0, import_dashboardSync.syncHtmlDashboards)(this, pollDevices);
         if (this.batPowerAggregationEnabled()) {
           await (0, import_systemBatPower.refreshAllSystemBatPowerSums)(this, this.siteSolarbanks);
         }

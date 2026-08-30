@@ -401,7 +401,35 @@ Enable **Power flows** and **Energy statistics** in adapter **Objects** for foot
 
 ---
 
+## HTML dashboards (solix4-style)
+
+Inspired by **[ioBroker.solix4](https://github.com/michihorn64/ioBroker.solix4)** by **Michael Horn ([@michihorn64](https://github.com/michihorn64))** — thank you for the original dashboard concept! Details: [CREDITS.md](CREDITS.md).
+
+After each successful poll the adapter writes **self-contained HTML** (dark theme, live energy flow, settings, daily kWh, diagnosis, device list) to string states with role `html`:
+
+| State | Content |
+|-------|---------|
+| `anker-solix.0.dashboard.sites.<siteKey>.live.html` | Live power flow (Solar → Home ↔ Grid, battery) |
+| `…dashboard.html` | Live + settings combined (tablet layout) |
+| `…energy.html` | Daily kWh tiles + autarky / self-consumption |
+| `…settings.html` | Limits & modes (read-only) |
+| `…diagnosis.html` | Warnings, MQTT, device health |
+| `…devices.html` | Device inventory |
+| `anker-solix.0.dashboard.overview.html` | Multi-site comparison |
+
+`<siteKey>` is the first 8 characters of the Anker site ID (same idea as solix4).
+
+**VIS / VIS-2:** add a standard **HTML** (or **String**) widget, bind it to e.g. `anker-solix.0.dashboard.sites.<siteKey>.dashboard.html`, resize to tablet size (~900×700 px). The HTML refreshes on each adapter poll.
+
+Enable **Objects → Tagesstatistiken** for kWh tiles; enable **Leistungsflüsse** for live power values.
+
+---
+
 ## Changelog
+
+### 0.10.103
+
+- **HTML dashboards** (solix4-style): live flow, settings, daily kWh, diagnosis, devices, overview under `dashboard.sites.*.html` — inspired by [ioBroker.solix4](https://github.com/michihorn64/ioBroker.solix4) (Michael Horn / michihorn64); see [CREDITS.md](CREDITS.md)
 
 ### 0.10.102
 

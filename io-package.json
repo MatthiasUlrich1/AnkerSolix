@@ -1,21 +1,21 @@
 {
 	"common": {
 		"name": "anker-solix",
-		"version": "0.10.102",
+		"version": "0.10.103",
 		"messagebox": true,
 		"news": {
-			"0.10.102": {
-				"en": "Fix SB4/Power Dock daily kWh statistics: clearer logs, combiner fallback, recover stuck poll state",
-				"de": "Fix Tages-kWh für SB4/Power Dock: klarere Logs, Combiner-Fallback, hängenden Poll-Status beheben",
-				"ru": "Fix daily kWh statistics logging and combiner fallback",
-				"pt": "Fix daily kWh statistics logging and combiner fallback",
-				"nl": "Fix daily kWh statistics logging and combiner fallback",
-				"fr": "Fix daily kWh statistics logging and combiner fallback",
-				"it": "Fix daily kWh statistics logging and combiner fallback",
-				"es": "Fix daily kWh statistics logging and combiner fallback",
-				"pl": "Fix daily kWh statistics logging and combiner fallback",
-				"uk": "Fix daily kWh statistics logging and combiner fallback",
-				"zh-cn": "修复 SB4/Power Dock 日 kWh 统计：日志、combiner 回退与 poll 状态"
+			"0.10.103": {
+				"en": "HTML dashboards (solix4-style): live flow, energy, settings, diagnosis under dashboard.*.html — thanks michihorn64",
+				"de": "HTML-Dashboards (solix4-Stil): Live-Flow, Energie, Einstellungen, Diagnose unter dashboard.*.html — Danke michihorn64",
+				"ru": "HTML dashboards inspired by ioBroker.solix4 (michihorn64)",
+				"pt": "HTML dashboards inspired by ioBroker.solix4 (michihorn64)",
+				"nl": "HTML dashboards inspired by ioBroker.solix4 (michihorn64)",
+				"fr": "HTML dashboards inspired by ioBroker.solix4 (michihorn64)",
+				"it": "HTML dashboards inspired by ioBroker.solix4 (michihorn64)",
+				"es": "HTML dashboards inspired by ioBroker.solix4 (michihorn64)",
+				"pl": "HTML dashboards inspired by ioBroker.solix4 (michihorn64)",
+				"uk": "HTML dashboards inspired by ioBroker.solix4 (michihorn64)",
+				"zh-cn": "HTML 仪表盘（solix4 风格，致谢 michihorn64）"
 			},
 			"0.10.90": {
 				"en": "Modbus only: skip Anker cloud/Python; instance is green when a local Modbus device is connected",
