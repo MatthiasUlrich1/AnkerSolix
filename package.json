@@ -79,13 +79,15 @@
     "test:package": "mocha test/package --exit",
     "test:integration": "mocha test/integration --exit",
     "test": "npm run build && npm run test:ts && npm run test:package",
+    "verify:ci": "npm run check && npm run lint && npm run build && npm run test:package",
     "verify:build": "npm run build && git diff --exit-code build/",
     "generate:object-dump": "npm run build && node tools/generate-object-dump.mjs",
     "check": "tsc --noEmit",
     "lint": "eslint -c eslint.config.mjs .",
     "format": "prettier --write \"src/**/*.ts\" \"tools/*.js\"",
     "translate": "translate-adapter",
-    "release": "release-script"
+    "release": "release-script",
+    "prepare": "node scripts/setup-githooks.mjs"
   },
   "bugs": {
     "url": "https://github.com/MatthiasUlrich1/ioBroker.anker-solix/issues"

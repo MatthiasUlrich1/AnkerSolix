@@ -1,0 +1,7 @@
+#!/bin/sh
+# Same gate as GitHub Actions job check-and-lint. Skip with: SKIP_VERIFY=1 git push
+if [ "$SKIP_VERIFY" = "1" ]; then
+	exit 0
+fi
+cd "$(dirname "$0")/.." || exit 1
+npm run verify:ci

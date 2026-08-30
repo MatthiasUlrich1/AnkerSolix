@@ -764,7 +764,7 @@ Older release notes: [CHANGELOG_OLD.md](CHANGELOG_OLD.md) and git history.
 
 **npm:** Release via git tag (`v*`) and CI deploy after [adapter check](https://adaptercheck.iobroker.in/) is green. Publishing uses **npm trusted publishing** (OIDC from GitHub Actions — no long-lived npm token). Classic automation tokens are deprecated by npm from **January 2027**; this adapter is already on trusted publishing. Register in [ioBroker.repositories](https://github.com/ioBroker/ioBroker.repositories) once the package is on npm.
 
-**Before each release** (enforced by `npm run test:package` → `test/io-package-policy.js`):
+**Before each release** (enforced by `npm run test:package` → `test/io-package-policy.js`; run locally via `npm run verify:ci` before every push):
 
 1. Bump `version` in `package.json` and `io-package.json` (must match).
 2. Add a `### x.y.z` section to this README changelog (E6006).
