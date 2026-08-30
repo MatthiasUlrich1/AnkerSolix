@@ -56,6 +56,7 @@
 	"endpointLimit": "Обмеження API на кінцеву точку/хвилину (HA: 10, 0=вимкнено)",
 	"mqttUsage": "Використовуйте підключення MQTT (як інтеграція HA)",
 	"enableEnergyStatistics": "Отримайте щоденну статистику енергії (кВт-год) із хмари",
+	"energy_statistics_hint": "Daily kWh on detail polls; restart after enabling. Power Dock/combiner: combiner_box.<SN>.statistics.* (not solarbank.*). Week/month/year evening only (Europe/Berlin).",
 	"enableEnergyStatisticsWeek": "Енергетична статистика за тиждень (кВт*год, поточний календарний тиждень)",
 	"enableEnergyStatisticsMonth": "Щомісячна енергетична статистика (кВт*год, поточний місяць)",
 	"enableEnergyStatisticsYear": "Річна енергетична статистика (кВт*год, поточний рік)",

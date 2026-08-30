@@ -27,6 +27,7 @@ from entity_groups import (
 )
 from combiner_soc import enrich_combiner_soc
 from energy_statistics import (
+    build_site_combiner_device_present,
     build_site_has_combiner,
     device_exposes_energy_statistics,
 )
@@ -1187,6 +1188,7 @@ def _enrich_cache_entry(
     info: dict,
     *,
     site_has_combiner: bool,
+    combiner_device_present: bool,
     enable_stats: bool,
 ) -> dict:
     """Attach site-level energy_details only to the statistics holder device(s)."""
@@ -1207,6 +1209,7 @@ def _enrich_cache_entry(
         str(info.get("type") or ""),
         site_has_combiner,
         enable_stats=enable_stats,
+        combiner_device_present=combiner_device_present,
     ):
         return ctx_data
     site = client.api.sites.get(site_id) or {}
@@ -1221,6 +1224,7 @@ def _devices_from_caches(
 ) -> list[dict]:
     devices: list[dict] = []
     site_has_combiner = build_site_has_combiner(caches)
+    combiner_device_present = build_site_combiner_device_present(caches)
     _enabled = enabled_entity_groups(config)
     enable_stats = (
         GROUP_ENERGY_STATISTICS in _enabled
@@ -1239,12 +1243,14 @@ def _devices_from_caches(
         if info["type"] in ("site", "system") and not site_id:
             site_id = str(ctx_id)
         combiner_site = site_has_combiner.get(site_id, False)
+        combiner_present = combiner_device_present.get(site_id, False)
         ctx_data = _enrich_cache_entry(
             client,
             str(ctx_id),
             ctx_data,
             info,
             site_has_combiner=combiner_site,
+            combiner_device_present=combiner_present,
             enable_stats=enable_stats,
         )
         if info["type"] == "combiner_box":
@@ -1293,6 +1299,7 @@ def _devices_from_caches(
             str(info.get("type") or ""),
             combiner_site,
             enable_stats=enable_stats,
+            combiner_device_present=combiner_present,
         )
         devices.append(
             {
@@ -1323,6 +1330,8 @@ async def run_poll_with_client(
         "intervalcount": poll_result.get("intervalcount"),
         "deviceintervals": poll_result.get("deviceintervals"),
         "periodEnergyUpdated": poll_result.get("periodEnergyUpdated") or [],
+        "dailyEnergyFetched": bool(poll_result.get("dailyEnergyFetched")),
+        "dailyEnergyHasValues": bool(poll_result.get("dailyEnergyHasValues")),
         "persistent": True,
     }
 

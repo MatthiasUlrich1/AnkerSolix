@@ -56,6 +56,7 @@
 	"endpointLimit": "每个端点/分钟的 API 限制（HA：10，0=关闭）",
 	"mqttUsage": "使用 MQTT 连接（如 HA 集成）",
 	"enableEnergyStatistics": "从云端获取每日能源统计数据（kWh）",
+	"energy_statistics_hint": "Daily kWh on detail polls; restart after enabling. Power Dock/combiner: combiner_box.<SN>.statistics.* (not solarbank.*). Week/month/year evening only (Europe/Berlin).",
 	"enableEnergyStatisticsWeek": "每周能源统计数据（kWh，当前日历周）",
 	"enableEnergyStatisticsMonth": "每月能源统计数据（千瓦时，当月）",
 	"enableEnergyStatisticsYear": "年度能源统计数据（千瓦时，当年）",

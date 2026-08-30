@@ -169,9 +169,48 @@ class IoBrokerAnkerApiClient:
     async def authenticate(self) -> None:
         await safe_authenticate(self.api, self._logger)
 
+    def _daily_energy_has_values(self) -> bool:
+        for site in self.api.sites.values():
+            block = (site.get("energy_details") or {}).get("today") or {}
+            if not isinstance(block, dict):
+                continue
+            for key in (
+                "solar_production",
+                "home_usage",
+                "battery_charge",
+                "battery_discharge",
+                "solarbank_charge",
+                "solarbank_discharge",
+            ):
+                val = block.get(key)
+                if val not in (None, "", "0", 0, 0.0):
+                    return True
+        return False
+
+    async def _fetch_daily_energy(self) -> bool:
+        """Run poll_device_energy when daily stats/detail groups are enabled."""
+        if not needs_daily_energy_poll(self.config):
+            return False
+        await self.api.update_device_energy(exclude=set(self.exclude_categories))
+        return True
+
+    def _log_daily_energy_outcome(self, fetched: bool) -> None:
+        if not fetched or not needs_daily_energy_poll(self.config):
+            return
+        if self._daily_energy_has_values():
+            self._logger.info(
+                "Daily kWh statistics updated from cloud (today/yesterday)"
+            )
+        else:
+            self._logger.warning(
+                "Daily kWh fetch ran but cloud returned no values for today; "
+                "retry on next detail poll (~deviceDetailMultiplier cycles)"
+            )
+
     async def async_get_data(self) -> dict[str, Any]:
         """Same sequence as HA AnkerSolixApiClient.async_get_data (normal poll path)."""
         self._last_period_energy_updated = []
+        daily_energy_fetched = False
         self.reapply_max_total_ac_stamps()
         await self.api.update_sites(exclude=set(self.exclude_categories))
 
@@ -189,17 +228,24 @@ class IoBrokerAnkerApiClient:
             await self._refresh_power_limits()
             if self._startup:
                 if needs_daily_energy_poll(self.config):
-                    self._logger.info("Deferring energy updates on first device refresh")
+                    if self.deferred_data:
+                        self._logger.info(
+                            "Updating deferred energy data (recovered poll state)"
+                        )
+                        daily_energy_fetched = await self._fetch_daily_energy()
+                        await self._update_energy_periods()
+                        self._startup = False
+                    else:
+                        self._logger.info(
+                            "Deferring energy updates on first device refresh"
+                        )
                 else:
                     updated = await self._update_energy_periods()
                     if updated:
                         self.deferred_data = True
                         self._startup = False
             else:
-                if needs_daily_energy_poll(self.config):
-                    await self.api.update_device_energy(
-                        exclude=set(self.exclude_categories)
-                    )
+                daily_energy_fetched = await self._fetch_daily_energy()
                 await self._update_energy_periods()
             self._intervalcount = self._deviceintervals
             self.active_device_refresh = False
@@ -210,14 +256,13 @@ class IoBrokerAnkerApiClient:
         elif self._startup and not self.deferred_data:
             self.active_device_refresh = True
             self._logger.info("Updating deferred energy data")
-            if needs_daily_energy_poll(self.config):
-                await self.api.update_device_energy(
-                    exclude=set(self.exclude_categories)
-                )
+            daily_energy_fetched = await self._fetch_daily_energy()
             await self._update_energy_periods()
             self.deferred_data = True
             self._startup = False
             self.active_device_refresh = False
+
+        self._log_daily_energy_outcome(daily_energy_fetched)
 
         if self._mqtt_usage and self.api.mqttsession and self.api.mqttsession.is_connected():
             self.api.update_device_mqtt()
@@ -230,6 +275,9 @@ class IoBrokerAnkerApiClient:
             "intervalcount": self._intervalcount,
             "deviceintervals": self._deviceintervals,
             "periodEnergyUpdated": list(self._last_period_energy_updated),
+            "dailyEnergyFetched": daily_energy_fetched,
+            "dailyEnergyHasValues": daily_energy_fetched
+            and self._daily_energy_has_values(),
         }
 
     async def check_mqtt_session(self) -> None:

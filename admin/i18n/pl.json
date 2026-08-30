@@ -56,6 +56,7 @@
 	"endpointLimit": "Limit API na punkt końcowy/minutę (HA: 10, 0 = wyłączone)",
 	"mqttUsage": "Użyj połączenia MQTT (np. integracji HA)",
 	"enableEnergyStatistics": "Pobieraj dzienne statystyki energii (kWh) z chmury",
+	"energy_statistics_hint": "Daily kWh on detail polls; restart after enabling. Power Dock/combiner: combiner_box.<SN>.statistics.* (not solarbank.*). Week/month/year evening only (Europe/Berlin).",
 	"enableEnergyStatisticsWeek": "Tygodniowe statystyki energii (kWh, bieżący tydzień kalendarzowy)",
 	"enableEnergyStatisticsMonth": "Miesięczne statystyki energii (kWh, bieżący miesiąc)",
 	"enableEnergyStatisticsYear": "Roczne statystyki energii (kWh, bieżący rok)",

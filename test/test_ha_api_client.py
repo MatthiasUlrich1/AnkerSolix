@@ -2,7 +2,7 @@
 
 import sys
 from pathlib import Path
-from unittest.mock import MagicMock
+from unittest.mock import AsyncMock, MagicMock
 
 import pytest
 
@@ -37,6 +37,33 @@ def client() -> IoBrokerAnkerApiClient:
 def test_client_stores_config(client: IoBrokerAnkerApiClient) -> None:
     assert client.config is not None
     assert client.config.get("username") == "user@example.com"
+
+
+def test_stuck_startup_state_still_fetches_daily_energy(
+    client: IoBrokerAnkerApiClient,
+) -> None:
+    """startup=true and deferred_data=true must not skip daily energy forever."""
+    client._startup = True
+    client.deferred_data = True
+    client._intervalcount = 0
+    client.config["enableEnergyStatistics"] = True
+    client.api.update_sites = AsyncMock(return_value=None)  # type: ignore[method-assign]
+    client.api.update_device_details = AsyncMock(return_value=None)  # type: ignore[method-assign]
+    client.api.update_site_details = AsyncMock(return_value=None)  # type: ignore[method-assign]
+    client.api.update_device_energy = AsyncMock(return_value=None)  # type: ignore[method-assign]
+    client.api.getCaches = MagicMock(return_value={})  # type: ignore[method-assign]
+    client.api.sites = {"s1": {"energy_details": {"today": {"solar_production": "1.2"}}}}
+    client.api.mqttsession = None
+    client._refresh_power_limits = AsyncMock(return_value=None)  # type: ignore[method-assign]
+
+    import asyncio
+
+    result = asyncio.run(client.async_get_data())
+
+    client.api.update_device_energy.assert_called_once()
+    assert result["dailyEnergyFetched"] is True
+    assert result["dailyEnergyHasValues"] is True
+    assert client._startup is False
 
 
 def test_period_rotation_fetches_one_period_at_a_time(

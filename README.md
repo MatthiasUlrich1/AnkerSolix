@@ -252,7 +252,9 @@ Condensed from the [HA integration README](https://github.com/thomluther/ha-anke
 
 ### Solarbank 4 E5000 Pro / Solarbank Max / Max AC
 
-Cloud: same poll path as other solarbanks (API + optional MQTT). **Local Modbus TCP** (official maps): enable Modbus in the Anker app (system / Three-Party Control), then Admin → **Modbus (local)**. Typical model codes include AE103 (SB4). States: `anker-solix.0.modbus.<name>.sensors.*` and `.control.*` (operating mode, SOC limits, battery setpoint in **third_party_control**). **Modbus only** skips cloud/Python; the instance LED is green when at least one Modbus device is connected.
+Cloud: same poll path as other solarbanks (API + optional MQTT). **Daily kWh** (`statistics.daily_*`) is fetched on **detail polls** (every `deviceDetailMultiplier` cycles, default ~10), not every minute — check the log for `Daily kWh statistics updated`. **With Power Dock/combiner:** values are only under `combiner_box.<SN>.statistics.*`, not under each `solarbank.*`. Restart the adapter after enabling **Objects → Tagesstatistiken**. Week/month/year totals run on the evening schedule (23:00 / 23:15 / 23:30 Europe/Berlin).
+
+**Local Modbus TCP** (official maps): enable Modbus in the Anker app (system / Three-Party Control), then Admin → **Modbus (local)**. Typical model codes include AE103 (SB4). States: `anker-solix.0.modbus.<name>.sensors.*` and `.control.*` (operating mode, SOC limits, battery setpoint in **third_party_control**). **Modbus only** skips cloud/Python; the instance LED is green when at least one Modbus device is connected.
 
 If another Modbus client just queried the device, the first poll may get **connection refused** until that client’s cooldown expires — the next poll interval retries.
 
@@ -400,6 +402,11 @@ Enable **Power flows** and **Energy statistics** in adapter **Objects** for foot
 ---
 
 ## Changelog
+
+### 0.10.102
+
+- **Fix:** daily kWh statistics for SB4 / Power Dock — info/warn logs when cloud fetch runs or returns empty; recover poll state that could skip daily energy forever; fallback to `solarbank.*.statistics.*` when combiner site has no `combiner_box` object yet
+- **Admin:** hint under energy statistics (daily vs week/month/year schedule, combiner path)
 
 ### 0.10.101
 

@@ -61,6 +61,7 @@ class AnkerSolix extends utils.Adapter {
 	private pollAfterControlTimer: AdapterTimer | undefined;
 	private pollInFlight = false;
 	private modbusChannel: ModbusChannel | undefined;
+	private statisticsPathHintLogged = false;
 
 	public constructor(options: Partial<utils.AdapterOptions> = {}) {
 		super({
@@ -260,6 +261,35 @@ class AnkerSolix extends utils.Adapter {
 					? `, next detail in ~${result.intervalcount} polls`
 					: "";
 			this.log.debug(`Poll OK (${pollDevices?.length ?? 0} devices, ${detailHint}${intervalHint})`);
+
+			if (this.config.enableEnergyStatistics && pollDevices?.length && !this.statisticsPathHintLogged) {
+				const statsDevices = pollDevices.filter(d => d.hasStatistics);
+				if (statsDevices.length) {
+					const paths = statsDevices.map(
+						d => `${d.info.type}.${d.info.id}.statistics.daily_solar_production`,
+					);
+					this.log.info(
+						`Daily kWh statistics are under: ${paths.join(", ")} ` +
+							"(Power Dock/combiner sites: combiner_box.*, not each solarbank.*)",
+					);
+					this.statisticsPathHintLogged = true;
+				}
+			}
+
+			if (result.dailyEnergyFetched) {
+				if (result.dailyEnergyHasValues) {
+					this.log.info(
+						"Daily kWh statistics updated from cloud – see combiner_box.*.statistics.* " +
+							"(or solarbank.* when no Power Dock)",
+					);
+				} else {
+					this.log.warn(
+						"Daily kWh fetch ran but cloud returned no values for today – " +
+							"retry on next detail poll; check Objects → Tagesstatistiken and adapter restart after enabling",
+					);
+				}
+			}
+
 			if (result.periodEnergyUpdated?.length) {
 				const hasWeekValues = pollDevices?.some(
 					d =>

@@ -65,6 +65,10 @@ export interface BridgePollResult {
 	deviceintervals?: number;
 	/** week|month|year — set when period energy_analysis ran this poll */
 	periodEnergyUpdated?: string[];
+	/** True when poll_device_energy ran this poll (daily stats/detail groups). */
+	dailyEnergyFetched?: boolean;
+	/** True when site energy_details.today has kWh after daily fetch. */
+	dailyEnergyHasValues?: boolean;
 }
 
 export interface BridgeConfig {

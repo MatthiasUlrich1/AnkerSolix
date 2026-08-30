@@ -1,21 +1,21 @@
 {
 	"common": {
 		"name": "anker-solix",
-		"version": "0.10.101",
+		"version": "0.10.102",
 		"messagebox": true,
 		"news": {
-			"0.10.101": {
-				"en": "Modbus: add SOLIX X1 HES and V1 Smart EV Charger profiles (official protocol maps, X1 little-endian decode)",
-				"de": "Modbus: Profile SOLIX X1 HES und V1 Smart EV Charger (offizielle Protokollkarten, X1 Little-Endian-Dekodierung)",
-				"ru": "Modbus: SOLIX X1 HES and V1 EV Charger profiles",
-				"pt": "Modbus: SOLIX X1 HES and V1 EV Charger profiles",
-				"nl": "Modbus: SOLIX X1 HES and V1 EV Charger profiles",
-				"fr": "Modbus: SOLIX X1 HES and V1 EV Charger profiles",
-				"it": "Modbus: SOLIX X1 HES and V1 EV Charger profiles",
-				"es": "Modbus: SOLIX X1 HES and V1 EV Charger profiles",
-				"pl": "Modbus: SOLIX X1 HES and V1 EV Charger profiles",
-				"uk": "Modbus: SOLIX X1 HES and V1 EV Charger profiles",
-				"zh-cn": "Modbus：新增 SOLIX X1 HES 与 V1 充电桩配置文件"
+			"0.10.102": {
+				"en": "Fix SB4/Power Dock daily kWh statistics: clearer logs, combiner fallback, recover stuck poll state",
+				"de": "Fix Tages-kWh für SB4/Power Dock: klarere Logs, Combiner-Fallback, hängenden Poll-Status beheben",
+				"ru": "Fix daily kWh statistics logging and combiner fallback",
+				"pt": "Fix daily kWh statistics logging and combiner fallback",
+				"nl": "Fix daily kWh statistics logging and combiner fallback",
+				"fr": "Fix daily kWh statistics logging and combiner fallback",
+				"it": "Fix daily kWh statistics logging and combiner fallback",
+				"es": "Fix daily kWh statistics logging and combiner fallback",
+				"pl": "Fix daily kWh statistics logging and combiner fallback",
+				"uk": "Fix daily kWh statistics logging and combiner fallback",
+				"zh-cn": "修复 SB4/Power Dock 日 kWh 统计：日志、combiner 回退与 poll 状态"
 			},
 			"0.10.90": {
 				"en": "Modbus only: skip Anker cloud/Python; instance is green when a local Modbus device is connected",

@@ -51,6 +51,7 @@ class AnkerSolix extends utils.Adapter {
   pollAfterControlTimer;
   pollInFlight = false;
   modbusChannel;
+  statisticsPathHintLogged = false;
   constructor(options = {}) {
     super({
       ...options,
@@ -225,6 +226,29 @@ class AnkerSolix extends utils.Adapter {
       const detailHint = result.refreshDetails ? "devices+mqtt" : "sites";
       const intervalHint = result.intervalcount !== void 0 && result.deviceintervals !== void 0 ? `, next detail in ~${result.intervalcount} polls` : "";
       this.log.debug(`Poll OK (${(_c = pollDevices == null ? void 0 : pollDevices.length) != null ? _c : 0} devices, ${detailHint}${intervalHint})`);
+      if (this.config.enableEnergyStatistics && (pollDevices == null ? void 0 : pollDevices.length) && !this.statisticsPathHintLogged) {
+        const statsDevices = pollDevices.filter((d) => d.hasStatistics);
+        if (statsDevices.length) {
+          const paths = statsDevices.map(
+            (d) => `${d.info.type}.${d.info.id}.statistics.daily_solar_production`
+          );
+          this.log.info(
+            `Daily kWh statistics are under: ${paths.join(", ")} (Power Dock/combiner sites: combiner_box.*, not each solarbank.*)`
+          );
+          this.statisticsPathHintLogged = true;
+        }
+      }
+      if (result.dailyEnergyFetched) {
+        if (result.dailyEnergyHasValues) {
+          this.log.info(
+            "Daily kWh statistics updated from cloud \u2013 see combiner_box.*.statistics.* (or solarbank.* when no Power Dock)"
+          );
+        } else {
+          this.log.warn(
+            "Daily kWh fetch ran but cloud returned no values for today \u2013 retry on next detail poll; check Objects \u2192 Tagesstatistiken and adapter restart after enabling"
+          );
+        }
+      }
       if ((_d = result.periodEnergyUpdated) == null ? void 0 : _d.length) {
         const hasWeekValues = pollDevices == null ? void 0 : pollDevices.some(
           (d) => d.hasStatistics && Object.keys(d.entities).some((k) => k.startsWith("week_") && d.entities[k] != null)

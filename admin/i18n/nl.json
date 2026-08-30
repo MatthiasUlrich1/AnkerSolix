@@ -56,6 +56,7 @@
 	"endpointLimit": "API-limiet per eindpunt/minuut (HA: 10, 0=uit)",
 	"mqttUsage": "Gebruik een MQTT-verbinding (zoals HA-integratie)",
 	"enableEnergyStatistics": "Haal dagelijkse energiestatistieken (kWh) op uit de cloud",
+	"energy_statistics_hint": "Daily kWh on detail polls; restart after enabling. Power Dock/combiner: combiner_box.<SN>.statistics.* (not solarbank.*). Week/month/year evening only (Europe/Berlin).",
 	"enableEnergyStatisticsWeek": "Wekelijkse energiestatistieken (kWh, huidige kalenderweek)",
 	"enableEnergyStatisticsMonth": "Maandelijkse energiestatistieken (kWh, huidige maand)",
 	"enableEnergyStatisticsYear": "Jaarlijkse energiestatistieken (kWh, huidig ​​jaar)",

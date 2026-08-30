@@ -401,6 +401,15 @@
 					"lg": 4,
 					"xl": 4
 				},
+				"_energy_statistics_hint": {
+					"type": "staticText",
+					"text": "energy_statistics_hint",
+					"xs": 12,
+					"sm": 12,
+					"md": 12,
+					"lg": 12,
+					"xl": 12
+				},
 				"enableEnergyDetail": {
 					"type": "checkbox",
 					"label": "enableEnergyDetail",

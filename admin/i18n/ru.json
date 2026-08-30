@@ -56,6 +56,7 @@
 	"endpointLimit": "Ограничение API на конечную точку в минуту (HA: 10, 0 = выключено)",
 	"mqttUsage": "Используйте соединение MQTT (например, интеграцию HA)",
 	"enableEnergyStatistics": "Получайте ежедневную статистику энергопотребления (кВтч) из облака",
+	"energy_statistics_hint": "Daily kWh on detail polls; restart after enabling. Power Dock/combiner: combiner_box.<SN>.statistics.* (not solarbank.*). Week/month/year evening only (Europe/Berlin).",
 	"enableEnergyStatisticsWeek": "Еженедельная статистика энергопотребления (кВтч, текущая календарная неделя)",
 	"enableEnergyStatisticsMonth": "Ежемесячная статистика энергопотребления (кВтч, текущий месяц)",
 	"enableEnergyStatisticsYear": "Годовая статистика энергопотребления (кВтч, текущий год)",
