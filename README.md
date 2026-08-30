@@ -385,15 +385,33 @@ Tab **Abregelungsvermeidung** / **Curtailment avoidance**: requires the [ioBroke
 
 ## VIS / VIS-2 dashboard (Energy Home)
 
-Widget set **anker-solix** → **Energy Home** (photoreal house background, live PV / home / grid / battery / EV overlays). All states are bound manually in the widget settings (object picker).
+Widget set **anker-solix** in the VIS/VIS-2 editor:
 
-**Important:** Widgets ship with **GitHub main / 0.10.100+** only. npm **0.10.90** does **not** include them. After install or update:
+| Widget | Purpose |
+|--------|---------|
+| **Energy Home** | Photoreal house background, live PV / home / grid / battery / EV (manual state bindings) |
+| **HTML Dashboard** | Any `dashboard.sites.*.html` state (live, energy, settings, …) |
+| **Site Dashboard (tablet)** | Same as HTML Dashboard, sized for ~900×700 px |
+| **Multi-site Overview** | Bind to `anker-solix.0.dashboard.overview.html` |
+
+**Important:** Widgets ship with **GitHub main / 0.10.100+** only. npm **0.10.90** does **not** include them.
+
+From **0.10.104** the adapter copies `widgets/` into VIS/VIS-2 file storage on start and triggers a VIS-2 rebuild. After install or update:
+
+1. Restart the **anker-solix** instance (or wait for the automatic sync log line).
+2. Reload the VIS/VIS-2 editor (**F5**).
+3. In the widget picker, open set **anker-solix**.
+
+If widgets are still missing, run on the ioBroker host:
 
 ```bash
-iobroker upload anker-solix
+iobroker upload vis widgets
+iobroker upload vis-2 widgets
+iobroker restart vis
+iobroker restart vis-2
 ```
 
-Then restart **vis** and/or **vis-2** (or reload the editor with F5). In the widget picker, search for set **anker-solix** → **Energy Home**. In widget settings, assign each state: **State bindings** (PV, home, EV, footer), **Grid flows** (grid import, grid export), **Battery** (SOC, charge, discharge).
+Then reload the editor again. For **Energy Home**, assign states in widget settings: **State bindings**, **Grid flows**, **Battery**.
 
 Optional VIS-2 view import: `widgets/anker-solix/views/energy-home.vis2.json`.
 
@@ -419,13 +437,18 @@ After each successful poll the adapter writes **self-contained HTML** (dark them
 
 `<siteKey>` is the first 8 characters of the Anker site ID (same idea as solix4).
 
-**VIS / VIS-2:** add a standard **HTML** (or **String**) widget, bind it to e.g. `anker-solix.0.dashboard.sites.<siteKey>.dashboard.html`, resize to tablet size (~900×700 px). The HTML refreshes on each adapter poll.
+**VIS / VIS-2:** add widget **HTML Dashboard** (set **anker-solix**) and bind it to e.g. `anker-solix.0.dashboard.sites.<siteKey>.dashboard.html`, or use the generic VIS **HTML** widget. Resize to tablet size (~900×700 px). The HTML refreshes on each adapter poll.
 
 Enable **Objects → Tagesstatistiken** for kWh tiles; enable **Leistungsflüsse** for live power values.
 
 ---
 
 ## Changelog
+
+### 0.10.104
+
+- **VIS / VIS-2:** widget set **anker-solix** is copied to VIS file storage on adapter start; VIS-2 catalog rebuild triggered automatically
+- **VIS widgets:** **HTML Dashboard**, **Site Dashboard (tablet)**, **Multi-site Overview** (bind `dashboard.*.html` states) plus existing **Energy Home**
 
 ### 0.10.103
 

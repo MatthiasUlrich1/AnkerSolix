@@ -1,21 +1,21 @@
 {
 	"common": {
 		"name": "anker-solix",
-		"version": "0.10.103",
+		"version": "0.10.104",
 		"messagebox": true,
 		"news": {
-			"0.10.103": {
-				"en": "HTML dashboards (solix4-style): live flow, energy, settings, diagnosis under dashboard.*.html — thanks michihorn64",
-				"de": "HTML-Dashboards (solix4-Stil): Live-Flow, Energie, Einstellungen, Diagnose unter dashboard.*.html — Danke michihorn64",
-				"ru": "HTML dashboards inspired by ioBroker.solix4 (michihorn64)",
-				"pt": "HTML dashboards inspired by ioBroker.solix4 (michihorn64)",
-				"nl": "HTML dashboards inspired by ioBroker.solix4 (michihorn64)",
-				"fr": "HTML dashboards inspired by ioBroker.solix4 (michihorn64)",
-				"it": "HTML dashboards inspired by ioBroker.solix4 (michihorn64)",
-				"es": "HTML dashboards inspired by ioBroker.solix4 (michihorn64)",
-				"pl": "HTML dashboards inspired by ioBroker.solix4 (michihorn64)",
-				"uk": "HTML dashboards inspired by ioBroker.solix4 (michihorn64)",
-				"zh-cn": "HTML 仪表盘（solix4 风格，致谢 michihorn64）"
+			"0.10.104": {
+				"en": "VIS/VIS-2: widget set auto-sync on start; HTML Dashboard + Site Dashboard + Overview widgets in editor",
+				"de": "VIS/VIS-2: Widget-Set wird beim Start synchronisiert; HTML-Dashboard-Widgets im Editor",
+				"ru": "VIS/VIS-2: auto widget sync; HTML dashboard widgets in editor",
+				"pt": "VIS/VIS-2: auto widget sync; HTML dashboard widgets in editor",
+				"nl": "VIS/VIS-2: auto widget sync; HTML dashboard widgets in editor",
+				"fr": "VIS/VIS-2: auto widget sync; HTML dashboard widgets in editor",
+				"it": "VIS/VIS-2: auto widget sync; HTML dashboard widgets in editor",
+				"es": "VIS/VIS-2: auto widget sync; HTML dashboard widgets in editor",
+				"pl": "VIS/VIS-2: auto widget sync; HTML dashboard widgets in editor",
+				"uk": "VIS/VIS-2: auto widget sync; HTML dashboard widgets in editor",
+				"zh-cn": "VIS/VIS-2：启动时自动同步 Widget；编辑器中新增 HTML 仪表盘 Widget"
 			},
 			"0.10.90": {
 				"en": "Modbus only: skip Anker cloud/Python; instance is green when a local Modbus device is connected",

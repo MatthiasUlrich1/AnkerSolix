@@ -38,6 +38,7 @@ var import_curtailmentConfig = require("./lib/curtailmentConfig");
 var import_systemBatPower = require("./lib/systemBatPower");
 var import_stateSync = require("./lib/stateSync");
 var import_dashboardSync = require("./lib/dashboardSync");
+var import_visWidgetSync = require("./lib/visWidgetSync");
 var import_config = require("./lib/modbus/config");
 var import_channel = require("./lib/modbus/channel");
 class AnkerSolix extends utils.Adapter {
@@ -739,6 +740,9 @@ class AnkerSolix extends utils.Adapter {
   }
   async onReady() {
     this.cleanupLegacyInstallSymlink();
+    void (0, import_visWidgetSync.syncVisWidgets)(this, this.adapterDir).catch(
+      (err) => this.log.debug(`VIS widget sync: ${err.message}`)
+    );
     await this.setObjectNotExistsAsync("account", {
       type: "device",
       common: { name: "Account" },

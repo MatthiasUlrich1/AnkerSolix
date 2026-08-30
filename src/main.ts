@@ -46,6 +46,7 @@ import {
 } from "./lib/systemBatPower";
 import { parseControlStateId, syncDevices, type CurtailmentPvSyncHost } from "./lib/stateSync";
 import { syncHtmlDashboards } from "./lib/dashboardSync";
+import { syncVisWidgets } from "./lib/visWidgetSync";
 import type { BridgeConfig, BridgeDevice, BridgeServiceConfig, DeviceControlContext } from "./lib/types";
 import { isModbusOnly, parseModbusDevices } from "./lib/modbus/config";
 import { ModbusChannel } from "./lib/modbus/channel";
@@ -854,6 +855,9 @@ class AnkerSolix extends utils.Adapter {
 
 	private async onReady(): Promise<void> {
 		this.cleanupLegacyInstallSymlink();
+		void syncVisWidgets(this, this.adapterDir).catch(err =>
+			this.log.debug(`VIS widget sync: ${(err as Error).message}`),
+		);
 
 		await this.setObjectNotExistsAsync("account", {
 			type: "device",

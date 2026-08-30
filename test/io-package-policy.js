@@ -120,6 +120,10 @@ describe("io-package policy", () => {
 			fs.existsSync(path.join(root, "widgets/anker-solix/js/energy-home.js")),
 			"widgets/anker-solix/js/energy-home.js missing",
 		);
+		assert.ok(
+			fs.existsSync(path.join(root, "widgets/anker-solix/js/html-dashboard.js")),
+			"widgets/anker-solix/js/html-dashboard.js missing",
+		);
 	});
 
 	it("npm pack excludes CHANGELOG_OLD.md (S9508)", function () {

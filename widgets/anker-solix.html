@@ -1,12 +1,12 @@
 <!--
-    ioBroker.anker-solix VIS / VIS-2 widget set — Energy Home dashboard
+    ioBroker.anker-solix VIS / VIS-2 widget set
 
-    Install: iobroker upload anker-solix
-    VIS:     Widget "Energy Home" under set "anker-solix"
-    VIS-2:   Same widget set (legacy widget compatibility)
+    Install: update adapter, then reload VIS/VIS-2 editor (F5).
+    Widget set: anker-solix
 -->
-<link rel="stylesheet" type="text/css" href="widgets/anker-solix/css/energy-home.css?v=0.2.6" />
-<script type="text/javascript" src="widgets/anker-solix/js/energy-home.js?v=0.2.6"></script>
+<link rel="stylesheet" type="text/css" href="widgets/anker-solix/css/energy-home.css?v=0.2.7" />
+<script type="text/javascript" src="widgets/anker-solix/js/energy-home.js?v=0.2.7"></script>
+<script type="text/javascript" src="widgets/anker-solix/js/html-dashboard.js?v=0.2.7"></script>
 
 <script
 	id="tplAnkerSolixEnergyHome"
@@ -28,4 +28,76 @@
 		id="<%= this.data.attr('wid') %>"
 	></div>
 	<% vis.binds['anker-solix'].createWidget(this.data.wid, this.view, this.data, this.style); %>
+</script>
+
+<script
+	id="tplAnkerSolixHtmlDashboard"
+	type="text/ejs"
+	class="vis-tpl"
+	data-vis-set="anker-solix"
+	data-vis-name="HTML Dashboard"
+	data-vis-update-style="true"
+	data-vis-type="energy,static"
+	data-vis-prev='<div style="width:420px;height:280px;background:#0b1220;color:#8fa3bf;border-radius:8px;display:flex;align-items:center;justify-content:center;font:14px sans-serif">Solix HTML</div>'
+	data-vis-attrs="group.html/anker_group_html;oidHtml/id/anker_oid_html"
+>
+	<div
+		class="vis-widget <%== this.data.attr('class') %> anker-html-dashboard"
+		style="<%== this.data.attr('style') %>;overflow:auto"
+		id="<%= this.data.attr('wid') %>"
+	></div>
+	<%
+		vis.binds['anker-solix'].destroyHtmlDashboardWidget(this.data.wid);
+		vis.binds['anker-solix'].createHtmlDashboardWidget(this.data.wid, this.view, this.data, this.style);
+	%>
+</script>
+
+<script
+	id="tplAnkerSolixSiteDashboard"
+	type="text/ejs"
+	class="vis-tpl"
+	data-vis-set="anker-solix"
+	data-vis-name="Site Dashboard (tablet)"
+	data-vis-update-style="true"
+	data-vis-type="energy,static"
+	data-vis-prev='<div style="width:480px;height:340px;background:#0b1220;color:#45d17a;border-radius:8px;display:flex;align-items:center;justify-content:center;font:14px sans-serif">Live + Settings</div>'
+	data-vis-attrs="group.html/anker_group_html;oidHtml/id/anker_oid_html"
+>
+	<div
+		class="vis-widget <%== this.data.attr('class') %> anker-html-dashboard"
+		style="<%== this.data.attr('style') %>;overflow:auto;min-width:320px;min-height:240px"
+		id="<%= this.data.attr('wid') %>"
+	></div>
+	<%
+		if (!this.data.oidHtml && !this.data.attr('oidHtml')) {
+			this.data.oidHtml = this.data.oidHtml || '';
+		}
+		vis.binds['anker-solix'].destroyHtmlDashboardWidget(this.data.wid);
+		vis.binds['anker-solix'].createHtmlDashboardWidget(this.data.wid, this.view, this.data, this.style);
+	%>
+</script>
+
+<script
+	id="tplAnkerSolixOverview"
+	type="text/ejs"
+	class="vis-tpl"
+	data-vis-set="anker-solix"
+	data-vis-name="Multi-site Overview"
+	data-vis-update-style="true"
+	data-vis-type="energy,static"
+	data-vis-prev='<div style="width:400px;height:200px;background:#0b1220;color:#ffb020;border-radius:8px;display:flex;align-items:center;justify-content:center;font:14px sans-serif">Overview</div>'
+	data-vis-attrs="oidOverview/id/anker_oid_html"
+>
+	<div
+		class="vis-widget <%== this.data.attr('class') %> anker-html-dashboard"
+		style="<%== this.data.attr('style') %>;overflow:auto"
+		id="<%= this.data.attr('wid') %>"
+	></div>
+	<%
+		if (!this.data.oidHtml) {
+			this.data.oidHtml = this.data.oidOverview || this.data.attr('oidOverview') || '';
+		}
+		vis.binds['anker-solix'].destroyHtmlDashboardWidget(this.data.wid);
+		vis.binds['anker-solix'].createHtmlDashboardWidget(this.data.wid, this.view, this.data, this.style);
+	%>
 </script>

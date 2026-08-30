@@ -191,7 +191,7 @@ $.extend(true, systemDictionary, {
 });
 
 vis.binds["anker-solix"] = {
-	version: "0.2.6",
+	version: "0.2.7",
 
 	flowThresholdW: 20,
 
