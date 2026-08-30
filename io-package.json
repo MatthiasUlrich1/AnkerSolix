@@ -17,136 +17,6 @@
 				"uk": "Modbus: SOLIX X1 HES and V1 EV Charger profiles",
 				"zh-cn": "Modbus：新增 SOLIX X1 HES 与 V1 充电桩配置文件"
 			},
-			"0.10.100": {
-				"en": "VIS Energy Home: fix duplicate grid flow line — legacy path cleanup, exclusive import/export animation",
-				"de": "VIS Energy Home: doppelte Netz-Linie behoben — Legacy-Cleanup, wechselseitige Import/Export-Animation",
-				"ru": "VIS Energy Home: duplicate grid flow line fix",
-				"pt": "VIS Energy Home: duplicate grid flow line fix",
-				"nl": "VIS Energy Home: duplicate grid flow line fix",
-				"fr": "VIS Energy Home: duplicate grid flow line fix",
-				"it": "VIS Energy Home: duplicate grid flow line fix",
-				"es": "VIS Energy Home: duplicate grid flow line fix",
-				"pl": "VIS Energy Home: duplicate grid flow line fix",
-				"uk": "VIS Energy Home: duplicate grid flow line fix",
-				"zh-cn": "VIS Energy Home：修复重复电网能量线"
-			},
-			"0.10.99": {
-				"en": "VIS Energy Home: fix VIS-1 duplicate cards — destroy/cleanup on re-render, cache-bust widget assets",
-				"de": "VIS Energy Home: VIS-1-Doppelkarten behoben — Cleanup bei Re-Render, Cache-Busting für Widget-Dateien",
-				"ru": "VIS Energy Home: VIS-1 duplicate card fix with destroy/cleanup and cache busting",
-				"pt": "VIS Energy Home: VIS-1 duplicate card fix with destroy/cleanup and cache busting",
-				"nl": "VIS Energy Home: VIS-1 duplicate card fix with destroy/cleanup and cache busting",
-				"fr": "VIS Energy Home: VIS-1 duplicate card fix with destroy/cleanup and cache busting",
-				"it": "VIS Energy Home: VIS-1 duplicate card fix with destroy/cleanup and cache busting",
-				"es": "VIS Energy Home: VIS-1 duplicate card fix with destroy/cleanup and cache busting",
-				"pl": "VIS Energy Home: VIS-1 duplicate card fix with destroy/cleanup and cache busting",
-				"uk": "VIS Energy Home: VIS-1 duplicate card fix with destroy/cleanup and cache busting",
-				"zh-cn": "VIS Energy Home：修复 VIS-1 重复卡片，重渲染清理与缓存刷新"
-			},
-			"0.10.98": {
-				"en": "VIS Energy Home: keep grid and battery cards visible; label and value alternate by flow direction",
-				"de": "VIS Energy Home: Netz- und Batterie-Karte bleiben sichtbar; Label und Wert wechseln je nach Flussrichtung",
-				"ru": "VIS Energy Home: grid and battery cards stay visible with alternating label/value",
-				"pt": "VIS Energy Home: grid and battery cards stay visible with alternating label/value",
-				"nl": "VIS Energy Home: grid and battery cards stay visible with alternating label/value",
-				"fr": "VIS Energy Home: grid and battery cards stay visible with alternating label/value",
-				"it": "VIS Energy Home: grid and battery cards stay visible with alternating label/value",
-				"es": "VIS Energy Home: grid and battery cards stay visible with alternating label/value",
-				"pl": "VIS Energy Home: grid and battery cards stay visible with alternating label/value",
-				"uk": "VIS Energy Home: grid and battery cards stay visible with alternating label/value",
-				"zh-cn": "VIS Energy Home：电网与电池卡片常显，标签与数值随流向切换"
-			},
-			"0.10.97": {
-				"en": "VIS Energy Home: toggle grid and battery cards by active flow (import vs export, charge vs discharge)",
-				"de": "VIS Energy Home: Netz- und Batterie-Karten wechseln je nach aktivem Fluss (Import/Export, Laden/Entladen)",
-				"ru": "VIS Energy Home: exclusive grid and battery card display by active flow",
-				"pt": "VIS Energy Home: exclusive grid and battery card display by active flow",
-				"nl": "VIS Energy Home: exclusive grid and battery card display by active flow",
-				"fr": "VIS Energy Home: exclusive grid and battery card display by active flow",
-				"it": "VIS Energy Home: exclusive grid and battery card display by active flow",
-				"es": "VIS Energy Home: exclusive grid and battery card display by active flow",
-				"pl": "VIS Energy Home: exclusive grid and battery card display by active flow",
-				"uk": "VIS Energy Home: exclusive grid and battery card display by active flow",
-				"zh-cn": "VIS Energy Home：按活跃流向切换电网与电池卡片"
-			},
-			"0.10.96": {
-				"en": "VIS Energy Home: fix flow lines to connect PV, grid, battery and EV through the Home hub",
-				"de": "VIS Energy Home: Energielinien korrigiert – PV, Netz, Batterie und EV führen über Home",
-				"ru": "VIS Energy Home: flow lines aligned to Home hub",
-				"pt": "VIS Energy Home: flow lines aligned to Home hub",
-				"nl": "VIS Energy Home: flow lines aligned to Home hub",
-				"fr": "VIS Energy Home: flow lines aligned to Home hub",
-				"it": "VIS Energy Home: flow lines aligned to Home hub",
-				"es": "VIS Energy Home: flow lines aligned to Home hub",
-				"pl": "VIS Energy Home: flow lines aligned to Home hub",
-				"uk": "VIS Energy Home: flow lines aligned to Home hub",
-				"zh-cn": "VIS Energy Home：能量线对齐至 Home 中心"
-			},
-			"0.10.95": {
-				"en": "VIS Energy Home: separate cards and flow lines for grid import/export and battery charge/discharge",
-				"de": "VIS Energy Home: getrennte Karten und Energielinien für Netz Import/Export und Batterie Laden/Entladen",
-				"ru": "VIS Energy Home: separate grid and battery cards and flow lines",
-				"pt": "VIS Energy Home: separate grid and battery cards and flow lines",
-				"nl": "VIS Energy Home: separate grid and battery cards and flow lines",
-				"fr": "VIS Energy Home: separate grid and battery cards and flow lines",
-				"it": "VIS Energy Home: separate grid and battery cards and flow lines",
-				"es": "VIS Energy Home: separate grid and battery cards and flow lines",
-				"pl": "VIS Energy Home: separate grid and battery cards and flow lines",
-				"uk": "VIS Energy Home: separate grid and battery cards and flow lines",
-				"zh-cn": "VIS Energy Home：电网与电池分卡及独立能量线"
-			},
-			"0.10.94": {
-				"en": "VIS Energy Home: manual state bindings only (no auto-discovery); all values selectable in widget settings",
-				"de": "VIS Energy Home: nur manuelle State-Zuordnung (keine Auto-Discovery); alle Werte in Widget-Einstellungen wählbar",
-				"ru": "VIS Energy Home: manual state bindings only, no auto-discovery",
-				"pt": "VIS Energy Home: manual state bindings only, no auto-discovery",
-				"nl": "VIS Energy Home: manual state bindings only, no auto-discovery",
-				"fr": "VIS Energy Home: manual state bindings only, no auto-discovery",
-				"it": "VIS Energy Home: manual state bindings only, no auto-discovery",
-				"es": "VIS Energy Home: manual state bindings only, no auto-discovery",
-				"pl": "VIS Energy Home: manual state bindings only, no auto-discovery",
-				"uk": "VIS Energy Home: manual state bindings only, no auto-discovery",
-				"zh-cn": "VIS Energy Home：仅手动绑定状态，无自动发现"
-			},
-			"0.10.93": {
-				"en": "VIS Energy Home: separate grid import/export and battery charge/discharge with correct flow direction",
-				"de": "VIS Energy Home: getrennt Netz Import/Export und Batterie Laden/Entladen mit korrekter Linienrichtung",
-				"ru": "VIS Energy Home: grid import/export and battery charge/discharge flow direction",
-				"pt": "VIS Energy Home: grid import/export and battery charge/discharge flow direction",
-				"nl": "VIS Energy Home: grid import/export and battery charge/discharge flow direction",
-				"fr": "VIS Energy Home: grid import/export and battery charge/discharge flow direction",
-				"it": "VIS Energy Home: grid import/export and battery charge/discharge flow direction",
-				"es": "VIS Energy Home: grid import/export and battery charge/discharge flow direction",
-				"pl": "VIS Energy Home: grid import/export and battery charge/discharge flow direction",
-				"uk": "VIS Energy Home: grid import/export and battery charge/discharge flow direction",
-				"zh-cn": "VIS Energy Home：电网进出口与电池充放电及流向动画"
-			},
-			"0.10.92": {
-				"en": "VIS Energy Home: clean background, slim overlay flows, broader auto-discovery, live view state subscription fix",
-				"de": "VIS Energy Home: bereinigter Hintergrund, schlanke Overlay-Linien, erweiterte Auto-Discovery, Live-Ansicht-Fix",
-				"ru": "VIS Energy Home: clean background, overlay flows, auto-discovery, live view fix",
-				"pt": "VIS Energy Home: clean background, overlay flows, auto-discovery, live view fix",
-				"nl": "VIS Energy Home: clean background, overlay flows, auto-discovery, live view fix",
-				"fr": "VIS Energy Home: clean background, overlay flows, auto-discovery, live view fix",
-				"it": "VIS Energy Home: clean background, overlay flows, auto-discovery, live view fix",
-				"es": "VIS Energy Home: clean background, overlay flows, auto-discovery, live view fix",
-				"pl": "VIS Energy Home: clean background, overlay flows, auto-discovery, live view fix",
-				"uk": "VIS Energy Home: clean background, overlay flows, auto-discovery, live view fix",
-				"zh-cn": "VIS Energy Home：干净背景、叠加能量线、自动发现与实时视图修复"
-			},
-			"0.10.91": {
-				"en": "VIS/VIS-2: Energy Home widget (photoreal dashboard, auto state discovery); run iobroker upload anker-solix after install",
-				"de": "VIS/VIS-2: Energy-Home-Widget (Dashboard, Auto-Discovery); nach Installation iobroker upload anker-solix ausführen",
-				"ru": "VIS/VIS-2 Energy Home widget; run iobroker upload anker-solix after install",
-				"pt": "VIS/VIS-2 Energy Home widget; run iobroker upload anker-solix after install",
-				"nl": "VIS/VIS-2 Energy Home widget; run iobroker upload anker-solix after install",
-				"fr": "VIS/VIS-2 Energy Home widget; run iobroker upload anker-solix after install",
-				"it": "VIS/VIS-2 Energy Home widget; run iobroker upload anker-solix after install",
-				"es": "VIS/VIS-2 Energy Home widget; run iobroker upload anker-solix after install",
-				"pl": "VIS/VIS-2 Energy Home widget; run iobroker upload anker-solix after install",
-				"uk": "VIS/VIS-2 Energy Home widget; run iobroker upload anker-solix after install",
-				"zh-cn": "VIS/VIS-2 Energy Home 组件；安装后请运行 iobroker upload anker-solix"
-			},
 			"0.10.90": {
 				"en": "Modbus only: skip Anker cloud/Python; instance is green when a local Modbus device is connected",
 				"de": "Nur Modbus: keine Anker-Cloud/Python; Instanz ist grün, sobald ein lokales Modbus-Gerät verbunden ist",
@@ -198,32 +68,6 @@
 				"pl": "Admin: refresh curtailment labels to pvforecast",
 				"uk": "Admin: refresh curtailment labels to pvforecast",
 				"zh-cn": "管理界面：限电规避文案改为 pvforecast"
-			},
-			"0.10.84": {
-				"en": "Curtailment: switch to pvforecast (solarprognose.de shutting down); plant path power.hoursToday; resolution 60/30/15",
-				"de": "Abregelung: Wechsel auf pvforecast (Abschaltung von solarprognose.de); Anlagenpfad power.hoursToday; Auflösung 60/30/15",
-				"ru": "Curtailment: switch to pvforecast (solarprognose.de shutting down)",
-				"pt": "Curtailment: switch to pvforecast (solarprognose.de shutting down)",
-				"nl": "Curtailment: switch to pvforecast (solarprognose.de shutting down)",
-				"fr": "Curtailment: switch to pvforecast (solarprognose.de shutting down)",
-				"it": "Curtailment: switch to pvforecast (solarprognose.de shutting down)",
-				"es": "Curtailment: switch to pvforecast (solarprognose.de shutting down)",
-				"pl": "Curtailment: switch to pvforecast (solarprognose.de shutting down)",
-				"uk": "Curtailment: switch to pvforecast (solarprognose.de shutting down)",
-				"zh-cn": "限电规避：因 solarprognose.de 关停改用 pvforecast"
-			},
-			"0.10.81": {
-				"en": "Repository review: standard CI workflow (Linux+Windows tests on every push/tag), package.json os linux+win32, macOS not supported",
-				"de": "Repository-Review: Standard-CI (Linux+Windows bei jedem Push/Tag), package.json os linux+win32, macOS nicht unterstützt",
-				"ru": "Standard CI workflow and Linux+Windows platform declaration",
-				"pt": "Standard CI workflow and Linux+Windows platform declaration",
-				"nl": "Standard CI workflow and Linux+Windows platform declaration",
-				"fr": "Standard CI workflow and Linux+Windows platform declaration",
-				"it": "Standard CI workflow and Linux+Windows platform declaration",
-				"es": "Standard CI workflow and Linux+Windows platform declaration",
-				"pl": "Standard CI workflow and Linux+Windows platform declaration",
-				"uk": "Standard CI workflow and Linux+Windows platform declaration",
-				"zh-cn": "仓库审查：标准 CI 工作流与 Linux+Windows 平台声明"
 			}
 		},
 		"titleLang": {
@@ -252,8 +96,17 @@
 			"uk": "Anker Solix через хмарний API",
 			"zh-cn": "通过云 API 的 Anker Solix"
 		},
-		"authors": ["MatthiasUlrich1 <info@my-smart-home-support.de>"],
-		"keywords": ["anker", "solix", "solarbank", "energy", "solar", "battery"],
+		"authors": [
+			"MatthiasUlrich1 <info@my-smart-home-support.de>"
+		],
+		"keywords": [
+			"anker",
+			"solix",
+			"solarbank",
+			"energy",
+			"solar",
+			"battery"
+		],
 		"licenseInformation": {
 			"type": "free",
 			"license": "MIT"
@@ -265,7 +118,10 @@
 		"readme": "https://github.com/MatthiasUlrich1/ioBroker.anker-solix/blob/main/README.md",
 		"loglevel": "info",
 		"tier": 3,
-		"restartAdapters": ["vis", "vis-2"],
+		"restartAdapters": [
+			"vis",
+			"vis-2"
+		],
 		"mode": "daemon",
 		"type": "energy",
 		"compact": true,
@@ -285,8 +141,12 @@
 			}
 		]
 	},
-	"encryptedNative": ["password"],
-	"protectedNative": ["password"],
+	"encryptedNative": [
+		"password"
+	],
+	"protectedNative": [
+		"password"
+	],
 	"native": {
 		"username": "",
 		"password": "",

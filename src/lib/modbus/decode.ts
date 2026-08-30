@@ -68,8 +68,8 @@ export function decodeRegisterValue(
 			}
 			const unsigned =
 				wordOrder === "little"
-					? (((registers[1] & 0xffff) * 0x10000 + (registers[0] & 0xffff)) >>> 0)
-					: (((registers[0] & 0xffff) * 0x10000 + (registers[1] & 0xffff)) >>> 0);
+					? ((registers[1] & 0xffff) * 0x10000 + (registers[0] & 0xffff)) >>> 0
+					: ((registers[0] & 0xffff) * 0x10000 + (registers[1] & 0xffff)) >>> 0;
 			return unsigned > 0x7fffffff ? unsigned - 0x100000000 : unsigned;
 		}
 		case "VERSION": {

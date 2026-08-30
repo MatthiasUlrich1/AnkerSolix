@@ -55,7 +55,8 @@ jobs:
           os: ${{ matrix.os }}
           build: true
 
-  # Deploys the final package to NPM (npm trusted publishing via OIDC)
+  # Deploys the final package to NPM (npm trusted publishing via OIDC).
+  # Runs only on version tags (v*), not on ordinary main pushes — see docs/release-policy.md.
   # See https://docs.npmjs.com/trusted-publishers
   deploy:
     needs: [check-and-lint, adapter-tests]
