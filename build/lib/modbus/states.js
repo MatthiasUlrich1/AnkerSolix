@@ -206,10 +206,16 @@ function applyControlSnapshot(snapshot, points) {
     snapshot.max_discharge_power = maxDischarge;
   }
 }
-function operatingModeStatesFromPoints(points) {
-  var _a;
-  const mask = (_a = points.find((p) => p.id === "ems_mode_mask")) == null ? void 0 : _a.value;
-  return (0, import_encode.filterOperatingModes)(typeof mask === "number" ? mask : void 0);
+function operatingModeStatesFromPoints(points, profile) {
+  var _a, _b;
+  const maskPoint = points.find((p) => p.id === "ems_mode_mask");
+  if (!maskPoint) {
+    const labels = (_b = (_a = profile == null ? void 0 : profile.controls) == null ? void 0 : _a.find((c) => c.id === "operating_mode")) == null ? void 0 : _b.optionLabels;
+    if (labels) {
+      return { ...labels };
+    }
+  }
+  return (0, import_encode.filterOperatingModes)(typeof (maskPoint == null ? void 0 : maskPoint.value) === "number" ? maskPoint.value : void 0);
 }
 function controlValueFromPoints(spec, points) {
   var _a;
@@ -218,7 +224,11 @@ function controlValueFromPoints(spec, points) {
   if (!point) {
     return void 0;
   }
-  return controlStateValue(spec, point.value);
+  const raw = controlStateValue(spec, point.value);
+  if (spec.kind === "number" && typeof raw === "number" && spec.writeGain && spec.writeGain !== 1) {
+    return raw;
+  }
+  return raw;
 }
 // Annotate the CommonJS export names for ESM import in node:
 0 && (module.exports = {

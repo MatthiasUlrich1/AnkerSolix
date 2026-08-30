@@ -1,4 +1,16 @@
-import type { ModbusDataType, ModbusDecodedPoint, ModbusDeviceProfile, ModbusReadQuantity } from "./types";
+import type {
+	ModbusDataType,
+	ModbusDecodedPoint,
+	ModbusDeviceProfile,
+	ModbusReadQuantity,
+	ModbusStringByteOrder,
+	ModbusWordOrder,
+} from "./types";
+
+export interface ModbusDecodeOptions {
+	wordOrder?: ModbusWordOrder;
+	stringByteOrder?: ModbusStringByteOrder;
+}
 
 export function registersToSlice(map: Map<number, number>, address: number, count: number): number[] | null {
 	const out: number[] = [];
@@ -12,10 +24,28 @@ export function registersToSlice(map: Map<number, number>, address: number, coun
 	return out;
 }
 
-export function decodeRegisterValue(dataType: ModbusDataType, registers: number[]): string | number {
+function stringBytesFromRegisters(registers: number[], stringByteOrder: ModbusStringByteOrder): number[] {
+	const bytes: number[] = [];
+	for (const reg of registers) {
+		if (stringByteOrder === "low") {
+			bytes.push(reg & 0xff, (reg >> 8) & 0xff);
+		} else {
+			bytes.push((reg >> 8) & 0xff, reg & 0xff);
+		}
+	}
+	return bytes;
+}
+
+export function decodeRegisterValue(
+	dataType: ModbusDataType,
+	registers: number[],
+	options: ModbusDecodeOptions = {},
+): string | number {
 	if (!registers.length) {
 		return dataType === "STRING" || dataType === "VERSION" ? "" : 0;
 	}
+	const wordOrder = options.wordOrder ?? "big";
+	const stringByteOrder = options.stringByteOrder ?? "high";
 	switch (dataType) {
 		case "UINT16":
 			return registers[0] & 0xffff;
@@ -27,27 +57,27 @@ export function decodeRegisterValue(dataType: ModbusDataType, registers: number[
 			if (registers.length < 2) {
 				return 0;
 			}
+			if (wordOrder === "little") {
+				return ((registers[1] & 0xffff) * 0x10000 + (registers[0] & 0xffff)) >>> 0;
+			}
 			return ((registers[0] & 0xffff) * 0x10000 + (registers[1] & 0xffff)) >>> 0;
 		}
 		case "INT32": {
 			if (registers.length < 2) {
 				return 0;
 			}
-			const unsigned = ((registers[0] & 0xffff) * 0x10000 + (registers[1] & 0xffff)) >>> 0;
+			const unsigned =
+				wordOrder === "little"
+					? (((registers[1] & 0xffff) * 0x10000 + (registers[0] & 0xffff)) >>> 0)
+					: (((registers[0] & 0xffff) * 0x10000 + (registers[1] & 0xffff)) >>> 0);
 			return unsigned > 0x7fffffff ? unsigned - 0x100000000 : unsigned;
 		}
 		case "VERSION": {
-			const bytes: number[] = [];
-			for (const reg of registers.slice(0, 2)) {
-				bytes.push((reg >> 8) & 0xff, reg & 0xff);
-			}
+			const bytes = stringBytesFromRegisters(registers.slice(0, 2), stringByteOrder);
 			return bytes.length >= 4 ? `${bytes[0]}.${bytes[1]}.${bytes[2]}.${bytes[3]}` : "";
 		}
 		case "STRING": {
-			const bytes: number[] = [];
-			for (const reg of registers) {
-				bytes.push((reg >> 8) & 0xff, reg & 0xff);
-			}
+			const bytes = stringBytesFromRegisters(registers, stringByteOrder);
 			return Buffer.from(bytes).toString("utf8").replace(/\0+$/g, "").trim();
 		}
 		default:
@@ -86,7 +116,13 @@ export function decodeProfilePoints(
 		if (!slice) {
 			continue;
 		}
-		rawById[id] = applyGainAndSplit(quantity, decodeRegisterValue(quantity.dataType, slice));
+		rawById[id] = applyGainAndSplit(
+			quantity,
+			decodeRegisterValue(quantity.dataType, slice, {
+				wordOrder: quantity.wordOrder,
+				stringByteOrder: quantity.stringByteOrder,
+			}),
+		);
 	}
 
 	const points: ModbusDecodedPoint[] = [];

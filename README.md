@@ -129,9 +129,9 @@ Copy **`authcache/<email>.json`** from a working Anker setup (e.g. ha-anker-soli
 
 ### Local Modbus (optional)
 
-Newer Anker devices (Solarbank 4 / Max AC / Max, Smart Meter Gen 2, Smart Plug Gen 2) can be polled **locally via Modbus TCP** (port 502). This is a separate channel from the cloud Python bridge (register maps from [ha-anker-solix-official](https://github.com/anker-charging/ha-anker-solix-official)).
+Newer Anker devices (Solarbank 4 / Max AC / Max, Smart Meter Gen 2, Smart Plug Gen 2, **SOLIX X1 HES**, **V1 Smart EV Charger**) can be polled **locally via Modbus TCP** (port 502). Register maps follow [Anker’s official Modbus protocols](https://support.ankersolix.com/) and community-verified X1 mappings ([anker-x1-ha](https://github.com/afewyards/anker-x1-ha)).
 
-1. Enable **Modbus TCP** in the Anker app (system / Three-Party Control).
+1. Enable **Modbus TCP** in the Anker app (Solarbank: system / Three-Party Control; **X1**: Professional app → Communication Settings; **V1 EV Charger**: Settings → Integrations).
 2. Adapter Admin → **Modbus (local)** → enable the channel, add each device IP.
 3. Optional: enable **Modbus only (no cloud)** if you do not want Anker cloud login. Then Python, credentials and usage terms are not required; the instance is **green** when at least one Modbus device is connected (otherwise yellow).
 4. Sensors: `anker-solix.0.modbus.<name>.sensors.*` (SOC, PV, grid, battery, SN, …).
@@ -204,9 +204,9 @@ Manufacturer: [Anker SOLIX](https://www.anker.com/anker-solix) ([support / downl
 | **inverter** | MI80 standalone (virtual site in API) | yes | — |
 | **smartplug** | Smart Plug 2500 W, **Smart Plug Gen 2** | yes | **Gen 2** (`power_switch`) |
 | **pps** / **solarbank_pps** | Portable power stations | mostly MQTT | — |
-| **ev_charger** | V1 Smart EV Charger | mostly MQTT | — |
+| **ev_charger** | V1 Smart EV Charger | mostly MQTT | **Modbus TCP** (local) |
 | **vehicle** | Virtual EVs for charger accounts | read-oriented | — |
-| **powerpanel** / **hes** | US Power Panel, X1 HES | limited API | X1 uses a different Anker Modbus spec (not this adapter) |
+| **powerpanel** / **hes** | US Power Panel, X1 HES | limited API | **X1 Modbus TCP** (local) |
 | **charger** | Prime / charging stations | MQTT | — |
 | **home_backup** | E10, AX170 | very limited API | — |
 
@@ -306,7 +306,13 @@ Virtual devices per account EV; no creation via adapter — discovered on refres
 
 ### Power Panel & HES (X1)
 
-Limited API power; workaround uses **~5 min averages** from energy stats (**~80 MB/day** extra traffic per system if enabled). Disable heavy categories in **Objects** if needed. X1 local **Modbus** uses a [separate Anker protocol](https://support.ankersolix.com/de/s/download-preview?urlname=Anker-SOLIX-X1-Series-Modbus-Protocol) — **not** implemented in this adapter (only official Solarbank 4 / Max / meter / plug Gen 2 maps).
+Limited API power; workaround uses **~5 min averages** from energy stats (**~80 MB/day** extra traffic per system if enabled). Disable heavy categories in **Objects** if needed.
+
+**Local Modbus (X1):** enable Modbus TCP in the **Anker Solix Professional** app, then Admin → **Modbus (local)** → profile **SOLIX X1 HES** (or auto-detect). States under `modbus.<name>.sensors.*` and controls for work mode / battery setpoint (VPP / third-party mode). The X1 accepts **only one Modbus TCP client** at a time.
+
+### V1 Smart EV Charger (local Modbus)
+
+Cloud/MQTT entities remain available when using the Anker account. For **local-only** control, enable Modbus TCP under **Integrations** in the Anker app and add profile **V1 Smart EV Charger**. Controls: start/stop charging, max current (6–32 A). Up to **two** simultaneous Modbus clients are supported on the charger.
 
 ### Home Backup (E10, AX170)
 
@@ -394,6 +400,10 @@ Enable **Power flows** and **Energy statistics** in adapter **Objects** for foot
 ---
 
 ## Changelog
+
+### 0.10.101
+
+- **Modbus (local):** profiles for **Anker SOLIX X1 HES** and **V1 Smart EV Charger** (official protocol register maps; X1 little-endian 32-bit and string decode; existing Solarbank/Gen2 profiles unchanged)
 
 ### 0.10.100
 

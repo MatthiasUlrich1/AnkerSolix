@@ -200,9 +200,18 @@ export function applyControlSnapshot(snapshot: ModbusControlSnapshot, points: Mo
 	}
 }
 
-export function operatingModeStatesFromPoints(points: ModbusDecodedPoint[]): Record<string, string> {
-	const mask = points.find(p => p.id === "ems_mode_mask")?.value;
-	return filterOperatingModes(typeof mask === "number" ? mask : undefined);
+export function operatingModeStatesFromPoints(
+	points: ModbusDecodedPoint[],
+	profile?: ModbusDeviceProfile,
+): Record<string, string> {
+	const maskPoint = points.find(p => p.id === "ems_mode_mask");
+	if (!maskPoint) {
+		const labels = profile?.controls?.find(c => c.id === "operating_mode")?.optionLabels;
+		if (labels) {
+			return { ...labels };
+		}
+	}
+	return filterOperatingModes(typeof maskPoint?.value === "number" ? maskPoint.value : undefined);
 }
 
 export function controlValueFromPoints(
@@ -214,5 +223,9 @@ export function controlValueFromPoints(
 	if (!point) {
 		return undefined;
 	}
-	return controlStateValue(spec, point.value);
+	const raw = controlStateValue(spec, point.value);
+	if (spec.kind === "number" && typeof raw === "number" && spec.writeGain && spec.writeGain !== 1) {
+		return raw;
+	}
+	return raw;
 }

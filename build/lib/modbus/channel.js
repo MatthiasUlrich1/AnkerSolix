@@ -84,7 +84,7 @@ class ModbusChannel {
     this.devices.length = 0;
   }
   async handleControl(stateId, state) {
-    var _a;
+    var _a, _b;
     const parsed = (0, import_config.parseModbusControlStateId)(this.adapter.namespace, stateId);
     if (!parsed) {
       this.adapter.log.warn(`Ignored Modbus state change (not a control): ${stateId}`);
@@ -116,7 +116,8 @@ class ModbusChannel {
         await this.adapter.setState(`modbus.${device.id}.control.${spec.id}`, { val: value, ack: true });
         return;
       }
-      const registers = (0, import_encode.encodeRegisterValues)(spec.dataType, resolved.value);
+      const writeValue = spec.writeGain && spec.writeGain !== 1 ? Math.round(resolved.value * spec.writeGain) : resolved.value;
+      const registers = (0, import_encode.encodeRegisterValues)(spec.dataType, writeValue, (_b = spec.wordOrder) != null ? _b : "big");
       device.writeGuardUntil.set(spec.id, Date.now() + import_types.MODBUS_WRITE_GUARD_MS);
       try {
         await this.writeWithRetry(device, spec.address, registers);
@@ -218,7 +219,7 @@ class ModbusChannel {
       }
       await (0, import_states.writeModbusPoints)(this.adapter, device.id, points);
       (0, import_states.applyControlSnapshot)(device.snapshot, points);
-      const modeStates = (0, import_states.operatingModeStatesFromPoints)(points);
+      const modeStates = (0, import_states.operatingModeStatesFromPoints)(points, profile);
       await (0, import_states.ensureModbusControlObjects)(this.adapter, device.id, profile, modeStates);
       await this.publishControlStates(device, profile, points);
       device.connected = true;

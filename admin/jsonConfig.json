@@ -258,7 +258,9 @@
 								{ "label": "modbusProfileSolarbankMaxAc", "value": "solarbankMaxAc" },
 								{ "label": "modbusProfileSolarbankMax", "value": "solarbankMax" },
 								{ "label": "modbusProfileSmartMeterGen2", "value": "smartMeterGen2" },
-								{ "label": "modbusProfileSmartPlugGen2", "value": "smartPlugGen2" }
+								{ "label": "modbusProfileSmartPlugGen2", "value": "smartPlugGen2" },
+								{ "label": "modbusProfileX1Hes", "value": "x1Hes" },
+								{ "label": "modbusProfileEvChargerV1", "value": "evChargerV1" }
 							]
 						}
 					]

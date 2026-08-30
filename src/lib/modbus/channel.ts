@@ -124,7 +124,9 @@ export class ModbusChannel {
 				await this.adapter.setState(`modbus.${device.id}.control.${spec.id}`, { val: value, ack: true });
 				return;
 			}
-			const registers = encodeRegisterValues(spec.dataType, resolved.value);
+			const writeValue =
+				spec.writeGain && spec.writeGain !== 1 ? Math.round(resolved.value * spec.writeGain) : resolved.value;
+			const registers = encodeRegisterValues(spec.dataType, writeValue, spec.wordOrder ?? "big");
 			device.writeGuardUntil.set(spec.id, Date.now() + MODBUS_WRITE_GUARD_MS);
 			try {
 				await this.writeWithRetry(device, spec.address, registers);
@@ -231,7 +233,7 @@ export class ModbusChannel {
 			}
 			await writeModbusPoints(this.adapter, device.id, points);
 			applyControlSnapshot(device.snapshot, points);
-			const modeStates = operatingModeStatesFromPoints(points);
+			const modeStates = operatingModeStatesFromPoints(points, profile);
 			await ensureModbusControlObjects(this.adapter, device.id, profile, modeStates);
 			await this.publishControlStates(device, profile, points);
 			device.connected = true;

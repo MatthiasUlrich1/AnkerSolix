@@ -37,10 +37,24 @@ function registersToSlice(map, address, count) {
   }
   return out;
 }
-function decodeRegisterValue(dataType, registers) {
+function stringBytesFromRegisters(registers, stringByteOrder) {
+  const bytes = [];
+  for (const reg of registers) {
+    if (stringByteOrder === "low") {
+      bytes.push(reg & 255, reg >> 8 & 255);
+    } else {
+      bytes.push(reg >> 8 & 255, reg & 255);
+    }
+  }
+  return bytes;
+}
+function decodeRegisterValue(dataType, registers, options = {}) {
+  var _a, _b;
   if (!registers.length) {
     return dataType === "STRING" || dataType === "VERSION" ? "" : 0;
   }
+  const wordOrder = (_a = options.wordOrder) != null ? _a : "big";
+  const stringByteOrder = (_b = options.stringByteOrder) != null ? _b : "high";
   switch (dataType) {
     case "UINT16":
       return registers[0] & 65535;
@@ -52,27 +66,24 @@ function decodeRegisterValue(dataType, registers) {
       if (registers.length < 2) {
         return 0;
       }
+      if (wordOrder === "little") {
+        return (registers[1] & 65535) * 65536 + (registers[0] & 65535) >>> 0;
+      }
       return (registers[0] & 65535) * 65536 + (registers[1] & 65535) >>> 0;
     }
     case "INT32": {
       if (registers.length < 2) {
         return 0;
       }
-      const unsigned = (registers[0] & 65535) * 65536 + (registers[1] & 65535) >>> 0;
+      const unsigned = wordOrder === "little" ? (registers[1] & 65535) * 65536 + (registers[0] & 65535) >>> 0 : (registers[0] & 65535) * 65536 + (registers[1] & 65535) >>> 0;
       return unsigned > 2147483647 ? unsigned - 4294967296 : unsigned;
     }
     case "VERSION": {
-      const bytes = [];
-      for (const reg of registers.slice(0, 2)) {
-        bytes.push(reg >> 8 & 255, reg & 255);
-      }
+      const bytes = stringBytesFromRegisters(registers.slice(0, 2), stringByteOrder);
       return bytes.length >= 4 ? `${bytes[0]}.${bytes[1]}.${bytes[2]}.${bytes[3]}` : "";
     }
     case "STRING": {
-      const bytes = [];
-      for (const reg of registers) {
-        bytes.push(reg >> 8 & 255, reg & 255);
-      }
+      const bytes = stringBytesFromRegisters(registers, stringByteOrder);
       return Buffer.from(bytes).toString("utf8").replace(/\0+$/g, "").trim();
     }
     default:
@@ -107,7 +118,13 @@ function decodeProfilePoints(profile, registers) {
     if (!slice) {
       continue;
     }
-    rawById[id] = applyGainAndSplit(quantity, decodeRegisterValue(quantity.dataType, slice));
+    rawById[id] = applyGainAndSplit(
+      quantity,
+      decodeRegisterValue(quantity.dataType, slice, {
+        wordOrder: quantity.wordOrder,
+        stringByteOrder: quantity.stringByteOrder
+      })
+    );
   }
   const points = [];
   for (const [id, quantity] of Object.entries(profile.quantities)) {

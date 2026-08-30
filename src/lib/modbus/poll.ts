@@ -1,4 +1,4 @@
-import { decodeProfilePoints, decodeRegisterValue } from "./decode";
+import { decodeProfilePoints, decodeRegisterValue, type ModbusDecodeOptions } from "./decode";
 import { matchProfileByProductCode } from "./profiles";
 import type { ModbusTcpClient } from "./tcpClient";
 import type { ModbusDecodedPoint, ModbusDeviceProfile, ModbusRegisterType } from "./types";
@@ -29,15 +29,19 @@ export async function pollProfile(
 }
 
 export async function probeProductCode(client: ModbusTcpClient): Promise<string> {
-	const probes: Array<{ type: ModbusRegisterType; address: number; count: number }> = [
-		{ type: "input", address: 32768, count: 5 },
-		{ type: "holding", address: 32768, count: 5 },
-		{ type: "holding", address: 10620, count: 10 },
+	const probes: Array<{ type: ModbusRegisterType; address: number; count: number; decode: ModbusDecodeOptions }> = [
+		{ type: "input", address: 10090, count: 10, decode: { stringByteOrder: "low" } },
+		{ type: "input", address: 10100, count: 12, decode: { stringByteOrder: "low" } },
+		{ type: "input", address: 20011, count: 12, decode: {} },
+		{ type: "input", address: 20001, count: 10, decode: {} },
+		{ type: "input", address: 32768, count: 5, decode: {} },
+		{ type: "holding", address: 32768, count: 5, decode: {} },
+		{ type: "holding", address: 10620, count: 10, decode: {} },
 	];
 	for (const probe of probes) {
 		try {
 			const registers = await client.readRegisters(probe.type, probe.address, probe.count);
-			const text = decodeRegisterValue("STRING", registers);
+			const text = decodeRegisterValue("STRING", registers, probe.decode);
 			if (typeof text === "string" && text.replace(/[\s\0]/g, "").length >= 3) {
 				return text;
 			}
@@ -58,7 +62,16 @@ export function detectProfileFromPoints(points: ModbusDecodedPoint[]): ModbusDev
 	}
 	const model = points.find(p => p.id.endsWith("_model") || p.id === "device_model")?.value;
 	if (typeof model === "string" && model) {
-		return matchProfileByProductCode(model);
+		const fromModel = matchProfileByProductCode(model);
+		if (fromModel) {
+			return fromModel;
+		}
+		if (/x1/i.test(model)) {
+			return matchProfileByProductCode("A5101");
+		}
+		if (/a5191|v1 smart ev|ev charger/i.test(model)) {
+			return matchProfileByProductCode("A5191");
+		}
 	}
 	return undefined;
 }

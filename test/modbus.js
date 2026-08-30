@@ -40,6 +40,18 @@ describe("modbus decode", () => {
 		assert.strictEqual(decodeRegisterValue("INT32", [0xffff, 0xff9c]), -100);
 	});
 
+	it("decodes INT32 little-endian including negatives", () => {
+		assert.strictEqual(decodeRegisterValue("INT32", [0x05dc, 0], { wordOrder: "little" }), 1500);
+		assert.strictEqual(decodeRegisterValue("INT32", [0xff9c, 0xffff], { wordOrder: "little" }), -100);
+	});
+
+	it("decodes X1 low-byte STRING", () => {
+		assert.strictEqual(
+			decodeRegisterValue("STRING", [0x3158, 0x482d], { stringByteOrder: "low" }),
+			"X1-H",
+		);
+	});
+
 	it("decodes STRING and VERSION", () => {
 		assert.strictEqual(decodeRegisterValue("STRING", [0x4142, 0x4300]), "ABC");
 		assert.strictEqual(decodeRegisterValue("VERSION", [0x0001, 0x0203]), "0.1.2.3");
@@ -150,6 +162,8 @@ describe("modbus config", () => {
 		assert.strictEqual(matchProfileByProductCode("DN7Mxxxx").id, "solarbank4");
 		assert.strictEqual(matchProfileByProductCode("DNSL1234").id, "smartMeterGen2");
 		assert.strictEqual(matchProfileByProductCode("DMWH9999").id, "solarbankMaxAc");
+		assert.strictEqual(matchProfileByProductCode("A5103ABC").id, "x1Hes");
+		assert.strictEqual(matchProfileByProductCode("A5191XYZ").id, "evChargerV1");
 	});
 
 	it("parses modbus control state ids and ignores sensors", () => {
@@ -168,9 +182,11 @@ describe("modbus config", () => {
 });
 
 describe("modbus encode and control writes", () => {
-	it("encodes signed INT32 big-endian", () => {
+	it("encodes signed INT32 big-endian and little-endian", () => {
 		assert.deepStrictEqual(encodeRegisterValues("INT32", -100), [0xffff, 0xff9c]);
 		assert.deepStrictEqual(encodeRegisterValues("INT32", 1500), [0, 1500]);
+		assert.deepStrictEqual(encodeRegisterValues("INT32", -100, "little"), [0xff9c, 0xffff]);
+		assert.deepStrictEqual(encodeRegisterValues("INT32", 1500, "little"), [0x05dc, 0]);
 		assert.deepStrictEqual(encodeRegisterValues("UINT16", 3), [3]);
 	});
 
@@ -223,5 +239,7 @@ describe("modbus encode and control writes", () => {
 		assert.ok(MODBUS_PROFILES.solarbank4.controls.some(c => c.id === "operating_mode"));
 		assert.ok(MODBUS_PROFILES.smartPlugGen2.controls.some(c => c.id === "power_switch"));
 		assert.ok(!MODBUS_PROFILES.smartMeterGen2.controls);
+		assert.ok(MODBUS_PROFILES.x1Hes.quantities.pv_power.wordOrder === "little");
+		assert.ok(MODBUS_PROFILES.evChargerV1.controls.some(c => c.id === "max_current"));
 	});
 });

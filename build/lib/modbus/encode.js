@@ -28,7 +28,7 @@ __export(encode_exports, {
 });
 module.exports = __toCommonJS(encode_exports);
 var import_types = require("./types");
-function encodeRegisterValues(dataType, value) {
+function encodeRegisterValues(dataType, value, wordOrder = "big") {
   switch (dataType) {
     case "UINT16":
       return [value & 65535];
@@ -38,10 +38,16 @@ function encodeRegisterValues(dataType, value) {
     }
     case "UINT32": {
       const unsigned = value >>> 0;
+      if (wordOrder === "little") {
+        return [unsigned & 65535, unsigned >>> 16 & 65535];
+      }
       return [unsigned >>> 16 & 65535, unsigned & 65535];
     }
     case "INT32": {
       const unsigned = Math.trunc(value) >>> 0;
+      if (wordOrder === "little") {
+        return [unsigned & 65535, unsigned >>> 16 & 65535];
+      }
       return [unsigned >>> 16 & 65535, unsigned & 65535];
     }
     default:

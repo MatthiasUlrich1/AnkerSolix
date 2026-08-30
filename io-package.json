@@ -1,9 +1,22 @@
 {
 	"common": {
 		"name": "anker-solix",
-		"version": "0.10.100",
+		"version": "0.10.101",
 		"messagebox": true,
 		"news": {
+			"0.10.101": {
+				"en": "Modbus: add SOLIX X1 HES and V1 Smart EV Charger profiles (official protocol maps, X1 little-endian decode)",
+				"de": "Modbus: Profile SOLIX X1 HES und V1 Smart EV Charger (offizielle Protokollkarten, X1 Little-Endian-Dekodierung)",
+				"ru": "Modbus: SOLIX X1 HES and V1 EV Charger profiles",
+				"pt": "Modbus: SOLIX X1 HES and V1 EV Charger profiles",
+				"nl": "Modbus: SOLIX X1 HES and V1 EV Charger profiles",
+				"fr": "Modbus: SOLIX X1 HES and V1 EV Charger profiles",
+				"it": "Modbus: SOLIX X1 HES and V1 EV Charger profiles",
+				"es": "Modbus: SOLIX X1 HES and V1 EV Charger profiles",
+				"pl": "Modbus: SOLIX X1 HES and V1 EV Charger profiles",
+				"uk": "Modbus: SOLIX X1 HES and V1 EV Charger profiles",
+				"zh-cn": "Modbus：新增 SOLIX X1 HES 与 V1 充电桩配置文件"
+			},
 			"0.10.100": {
 				"en": "VIS Energy Home: fix duplicate grid flow line — legacy path cleanup, exclusive import/export animation",
 				"de": "VIS Energy Home: doppelte Netz-Linie behoben — Legacy-Cleanup, wechselseitige Import/Export-Animation",

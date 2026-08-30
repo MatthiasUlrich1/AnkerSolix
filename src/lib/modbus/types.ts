@@ -8,7 +8,18 @@ export type ModbusDataType = "UINT16" | "INT16" | "UINT32" | "INT32" | "STRING" 
 
 export type ModbusPowerSplit = "negative_only" | "positive_only";
 
-export type ModbusProfileId = "solarbank4" | "solarbankMaxAc" | "solarbankMax" | "smartMeterGen2" | "smartPlugGen2";
+export type ModbusWordOrder = "big" | "little";
+
+export type ModbusStringByteOrder = "high" | "low";
+
+export type ModbusProfileId =
+	| "solarbank4"
+	| "solarbankMaxAc"
+	| "solarbankMax"
+	| "smartMeterGen2"
+	| "smartPlugGen2"
+	| "x1Hes"
+	| "evChargerV1";
 
 export type ModbusControlKind = "select" | "number" | "switch";
 
@@ -16,6 +27,10 @@ export interface ModbusReadQuantity {
 	address: number;
 	dataType: ModbusDataType;
 	count: number;
+	/** 32-bit word order (X1 uses little-endian). Default: big. */
+	wordOrder?: ModbusWordOrder;
+	/** STRING byte order within each register (X1 uses low-byte first). Default: high. */
+	stringByteOrder?: ModbusStringByteOrder;
 	/** HA gain: numeric values are divided by this (gain 10 → 0.1). */
 	gain?: number;
 	unit?: string;
@@ -51,6 +66,9 @@ export interface ModbusControlSpec {
 	requireBackupEnable?: boolean;
 	/** Poll this quantity id into the control state (e.g. plug switch_status). */
 	readFrom?: string;
+	wordOrder?: ModbusWordOrder;
+	/** Multiply user value before write; divide raw on read (e.g. EV current ×10). */
+	writeGain?: number;
 }
 
 export interface ModbusBatchRange {

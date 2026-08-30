@@ -536,6 +536,468 @@ const SMART_PLUG_GEN2 = {
     }
   ]
 };
+const X1_LE = { wordOrder: "little" };
+const X1_STR = { stringByteOrder: "low" };
+const X1_HES = {
+  id: "x1Hes",
+  label: "Anker SOLIX X1 HES",
+  snKey: "device_sn",
+  modelKey: "device_model",
+  productCodes: {
+    A510: "Anker SOLIX X1 HES",
+    A515: "Anker SOLIX X1 HES",
+    A522: "Anker SOLIX X1 Battery Module",
+    A534: "Anker SOLIX X1 Backup Controller"
+  },
+  ranges: [
+    { type: "input", start: 1e4, end: 10039 },
+    { type: "input", start: 10090, end: 10132 },
+    { type: "input", start: 10156, end: 10215 },
+    { type: "input", start: 10224, end: 10265 },
+    { type: "holding", start: 10060, end: 10080 }
+  ],
+  quantities: {
+    plant_status: {
+      address: 1e4,
+      dataType: "UINT16",
+      count: 1,
+      name: "Plant status",
+      valueMapping: { 1: "on_grid", 2: "off_grid", 3: "standby", 4: "fault" }
+    },
+    battery_status: {
+      address: 10001,
+      dataType: "UINT16",
+      count: 1,
+      name: "Battery status",
+      valueMapping: { 0: "standby", 1: "charging", 2: "discharging", 3: "sleep" }
+    },
+    pv_power: {
+      address: 10002,
+      dataType: "INT32",
+      count: 2,
+      unit: "W",
+      name: "PV power",
+      additionalSources: ["third_party_pv_power"],
+      ...X1_LE
+    },
+    third_party_pv_power: {
+      address: 10004,
+      dataType: "INT32",
+      count: 2,
+      unit: "W",
+      name: "Third-party PV power",
+      internal: true,
+      ...X1_LE
+    },
+    battery_charging_power: {
+      address: 10008,
+      dataType: "INT32",
+      count: 2,
+      unit: "W",
+      name: "Battery charging power",
+      powerSplit: "negative_only",
+      ...X1_LE
+    },
+    battery_discharging_power: {
+      address: 10008,
+      dataType: "INT32",
+      count: 2,
+      unit: "W",
+      name: "Battery discharging power",
+      powerSplit: "positive_only",
+      ...X1_LE
+    },
+    load_power: {
+      address: 10010,
+      dataType: "INT32",
+      count: 2,
+      unit: "W",
+      name: "Load power",
+      ...X1_LE
+    },
+    grid_import_power: {
+      address: 10012,
+      dataType: "INT32",
+      count: 2,
+      unit: "W",
+      name: "Grid import power",
+      powerSplit: "positive_only",
+      ...X1_LE
+    },
+    grid_export_power: {
+      address: 10012,
+      dataType: "INT32",
+      count: 2,
+      unit: "W",
+      name: "Grid export power",
+      powerSplit: "negative_only",
+      ...X1_LE
+    },
+    battery_soc: {
+      address: 10014,
+      dataType: "UINT16",
+      count: 1,
+      unit: "%",
+      name: "Battery SOC"
+    },
+    battery_soh: {
+      address: 10015,
+      dataType: "UINT16",
+      count: 1,
+      unit: "%",
+      name: "Battery SOH"
+    },
+    pv_energy_total: {
+      address: 10018,
+      dataType: "UINT32",
+      count: 2,
+      gain: 100,
+      unit: "kWh",
+      name: "PV total generation",
+      ...X1_LE
+    },
+    cumulative_charge_energy: {
+      address: 10022,
+      dataType: "UINT32",
+      count: 2,
+      gain: 100,
+      unit: "kWh",
+      name: "Cumulative charge energy",
+      ...X1_LE
+    },
+    grid_import_energy: {
+      address: 10030,
+      dataType: "UINT32",
+      count: 2,
+      gain: 100,
+      unit: "kWh",
+      name: "Grid import energy",
+      ...X1_LE
+    },
+    grid_export_energy: {
+      address: 10034,
+      dataType: "UINT32",
+      count: 2,
+      gain: 100,
+      unit: "kWh",
+      name: "Grid export energy",
+      ...X1_LE
+    },
+    max_charge_power: {
+      address: 10036,
+      dataType: "INT32",
+      count: 2,
+      unit: "W",
+      name: "Max charge power",
+      internal: true,
+      ...X1_LE
+    },
+    max_discharge_power: {
+      address: 10038,
+      dataType: "INT32",
+      count: 2,
+      unit: "W",
+      name: "Max discharge power",
+      internal: true,
+      ...X1_LE
+    },
+    device_model: {
+      address: 10090,
+      dataType: "STRING",
+      count: 10,
+      name: "Device model",
+      ...X1_STR
+    },
+    device_sn: {
+      address: 10100,
+      dataType: "STRING",
+      count: 12,
+      name: "Device serial",
+      ...X1_STR
+    },
+    device_sw_version: {
+      address: 10112,
+      dataType: "STRING",
+      count: 6,
+      name: "Firmware",
+      ...X1_STR
+    },
+    inverter_temperature: {
+      address: 10156,
+      dataType: "INT16",
+      count: 1,
+      gain: 10,
+      unit: "\xB0C",
+      name: "Inverter temperature"
+    },
+    usable_pv_power: {
+      address: 10183,
+      dataType: "INT32",
+      count: 2,
+      unit: "W",
+      name: "Usable PV power",
+      ...X1_LE
+    },
+    backup_power: {
+      address: 10233,
+      dataType: "INT32",
+      count: 2,
+      unit: "W",
+      name: "Backup power",
+      ...X1_LE
+    },
+    cumulative_discharge_energy: {
+      address: 10264,
+      dataType: "UINT32",
+      count: 2,
+      gain: 100,
+      unit: "kWh",
+      name: "Cumulative discharge energy",
+      ...X1_LE
+    },
+    battery_module_count: {
+      address: 10249,
+      dataType: "UINT16",
+      count: 1,
+      name: "Battery module count"
+    },
+    operating_mode: {
+      address: 10064,
+      dataType: "UINT16",
+      count: 1,
+      name: "Work mode",
+      valueMapping: {
+        0: "self_consumption",
+        1: "tou_mode",
+        2: "backup_only",
+        3: "third_party_control",
+        4: "custom_mode",
+        5: "socket_overlay_mode",
+        20: "app_managed"
+      },
+      internal: true
+    },
+    battery_power_raw: {
+      address: 10071,
+      dataType: "INT32",
+      count: 2,
+      unit: "W",
+      name: "Battery power setpoint raw",
+      internal: true,
+      ...X1_LE
+    }
+  },
+  controls: [
+    {
+      id: "operating_mode",
+      name: "Work mode",
+      kind: "select",
+      address: 10064,
+      dataType: "UINT16",
+      count: 1,
+      options: {
+        self_consumption: 0,
+        tou_mode: 1,
+        backup_only: 2,
+        third_party_control: 3,
+        custom_mode: 4,
+        socket_overlay_mode: 5,
+        app_managed: 20
+      },
+      optionLabels: {
+        self_consumption: "Self-consumption",
+        tou_mode: "Time of use",
+        backup_only: "Backup only",
+        third_party_control: "VPP / third-party",
+        custom_mode: "User-defined",
+        socket_overlay_mode: "Socket aggregation",
+        app_managed: "App-managed"
+      }
+    },
+    {
+      id: "battery_power_direction",
+      name: "Battery power direction",
+      kind: "select",
+      address: 10071,
+      dataType: "INT32",
+      count: 2,
+      options: { charge: 0, discharge: 1 },
+      optionLabels: { charge: "Charge", discharge: "Discharge" },
+      neverRead: true,
+      localOnly: true,
+      requireThirdParty: true
+    },
+    {
+      id: "battery_power_setpoint",
+      name: "Battery power setpoint",
+      kind: "number",
+      address: 10071,
+      dataType: "INT32",
+      count: 2,
+      unit: "W",
+      min: 0,
+      max: 12e3,
+      neverRead: true,
+      signedFromDirection: true,
+      requireThirdParty: true,
+      wordOrder: "little"
+    }
+  ]
+};
+const EV_CHARGER_V1 = {
+  id: "evChargerV1",
+  label: "Anker SOLIX V1 Smart EV Charger",
+  snKey: "device_sn",
+  modelKey: "device_model",
+  productCodes: {
+    A519: "Anker SOLIX V1 Smart EV Charger"
+  },
+  ranges: [
+    { type: "input", start: 2e4, end: 20100 },
+    { type: "holding", start: 21e3, end: 21005 }
+  ],
+  quantities: {
+    device_model: { address: 20001, dataType: "STRING", count: 10, name: "Device model" },
+    device_sn: { address: 20011, dataType: "STRING", count: 12, name: "Device serial" },
+    device_sw_version: { address: 20023, dataType: "STRING", count: 6, name: "Firmware" },
+    rated_power: {
+      address: 20035,
+      dataType: "INT32",
+      count: 2,
+      unit: "W",
+      name: "Rated power"
+    },
+    phase_1_voltage: {
+      address: 20053,
+      dataType: "UINT16",
+      count: 1,
+      gain: 10,
+      unit: "V",
+      name: "Phase 1 voltage"
+    },
+    phase_2_voltage: {
+      address: 20054,
+      dataType: "UINT16",
+      count: 1,
+      gain: 10,
+      unit: "V",
+      name: "Phase 2 voltage"
+    },
+    phase_3_voltage: {
+      address: 20055,
+      dataType: "UINT16",
+      count: 1,
+      gain: 10,
+      unit: "V",
+      name: "Phase 3 voltage"
+    },
+    phase_1_current: {
+      address: 20059,
+      dataType: "UINT16",
+      count: 1,
+      gain: 100,
+      unit: "A",
+      name: "Phase 1 current"
+    },
+    phase_2_current: {
+      address: 20060,
+      dataType: "UINT16",
+      count: 1,
+      gain: 100,
+      unit: "A",
+      name: "Phase 2 current"
+    },
+    phase_3_current: {
+      address: 20061,
+      dataType: "UINT16",
+      count: 1,
+      gain: 100,
+      unit: "A",
+      name: "Phase 3 current"
+    },
+    charge_power: {
+      address: 20068,
+      dataType: "UINT32",
+      count: 2,
+      unit: "W",
+      name: "Charge power"
+    },
+    session_energy: {
+      address: 20084,
+      dataType: "UINT32",
+      count: 2,
+      gain: 1e3,
+      unit: "kWh",
+      name: "Session energy"
+    },
+    temperature_1: {
+      address: 20093,
+      dataType: "INT16",
+      count: 1,
+      unit: "\xB0C",
+      name: "Internal temperature 1"
+    },
+    temperature_2: {
+      address: 20094,
+      dataType: "INT16",
+      count: 1,
+      unit: "\xB0C",
+      name: "Internal temperature 2"
+    },
+    charging_status: {
+      address: 20097,
+      dataType: "UINT16",
+      count: 1,
+      name: "Charging status",
+      valueMapping: {
+        0: "idle",
+        1: "preparing",
+        2: "charging",
+        3: "charger_paused",
+        4: "vehicle_paused",
+        5: "completed",
+        6: "reserving",
+        7: "disabled",
+        8: "error"
+      }
+    },
+    max_current_setting: {
+      address: 21001,
+      dataType: "UINT16",
+      count: 1,
+      gain: 10,
+      unit: "A",
+      name: "Max current setting",
+      internal: true
+    }
+  },
+  controls: [
+    {
+      id: "charge_command",
+      name: "Charge command",
+      kind: "select",
+      address: 21e3,
+      dataType: "UINT16",
+      count: 1,
+      options: { start: 1, stop: 2 },
+      optionLabels: { start: "Start charging", stop: "Stop charging" },
+      neverRead: true
+    },
+    {
+      id: "max_current",
+      name: "Max current",
+      kind: "number",
+      address: 21001,
+      dataType: "UINT16",
+      count: 1,
+      unit: "A",
+      min: 6,
+      max: 32,
+      writeGain: 10,
+      readFrom: "max_current_setting"
+    }
+  ]
+};
 const MODBUS_PROFILES = {
   solarbank4: solarbankProfile("solarbank4", "Anker SOLIX Solarbank 4 E5000 Pro", {
     DN7M: "Anker SOLIX Solarbank 4 E5000 Pro",
@@ -558,9 +1020,13 @@ const MODBUS_PROFILES = {
     DNN4: "Anker SOLIX XE"
   }),
   smartMeterGen2: SMART_METER_GEN2,
-  smartPlugGen2: SMART_PLUG_GEN2
+  smartPlugGen2: SMART_PLUG_GEN2,
+  x1Hes: X1_HES,
+  evChargerV1: EV_CHARGER_V1
 };
 const MODBUS_PROFILE_ORDER = [
+  "x1Hes",
+  "evChargerV1",
   "solarbank4",
   "solarbankMaxAc",
   "solarbankMax",

@@ -42,14 +42,18 @@ async function pollProfile(client, profile) {
 }
 async function probeProductCode(client) {
   const probes = [
-    { type: "input", address: 32768, count: 5 },
-    { type: "holding", address: 32768, count: 5 },
-    { type: "holding", address: 10620, count: 10 }
+    { type: "input", address: 10090, count: 10, decode: { stringByteOrder: "low" } },
+    { type: "input", address: 10100, count: 12, decode: { stringByteOrder: "low" } },
+    { type: "input", address: 20011, count: 12, decode: {} },
+    { type: "input", address: 20001, count: 10, decode: {} },
+    { type: "input", address: 32768, count: 5, decode: {} },
+    { type: "holding", address: 32768, count: 5, decode: {} },
+    { type: "holding", address: 10620, count: 10, decode: {} }
   ];
   for (const probe of probes) {
     try {
       const registers = await client.readRegisters(probe.type, probe.address, probe.count);
-      const text = (0, import_decode.decodeRegisterValue)("STRING", registers);
+      const text = (0, import_decode.decodeRegisterValue)("STRING", registers, probe.decode);
       if (typeof text === "string" && text.replace(/[\s\0]/g, "").length >= 3) {
         return text;
       }
@@ -70,7 +74,16 @@ function detectProfileFromPoints(points) {
   }
   const model = (_b = points.find((p) => p.id.endsWith("_model") || p.id === "device_model")) == null ? void 0 : _b.value;
   if (typeof model === "string" && model) {
-    return (0, import_profiles.matchProfileByProductCode)(model);
+    const fromModel = (0, import_profiles.matchProfileByProductCode)(model);
+    if (fromModel) {
+      return fromModel;
+    }
+    if (/x1/i.test(model)) {
+      return (0, import_profiles.matchProfileByProductCode)("A5101");
+    }
+    if (/a5191|v1 smart ev|ev charger/i.test(model)) {
+      return (0, import_profiles.matchProfileByProductCode)("A5191");
+    }
   }
   return void 0;
 }

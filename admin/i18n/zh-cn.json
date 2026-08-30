@@ -131,5 +131,7 @@
 	"modbusProfileSolarbankMaxAc": "Solarbank Max AC",
 	"modbusProfileSolarbankMax": "Solarbank Max",
 	"modbusProfileSmartMeterGen2": "Smart Meter Gen 2",
-	"modbusProfileSmartPlugGen2": "Smart Plug Gen 2"
+	"modbusProfileSmartPlugGen2": "Smart Plug Gen 2",
+	"modbusProfileX1Hes": "SOLIX X1 HES",
+	"modbusProfileEvChargerV1": "V1 Smart EV Charger"
 }

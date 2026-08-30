@@ -5,9 +5,14 @@ import {
 	THIRD_PARTY_MODE,
 	type ModbusControlSpec,
 	type ModbusDataType,
+	type ModbusWordOrder,
 } from "./types";
 
-export function encodeRegisterValues(dataType: ModbusDataType, value: number): number[] {
+export function encodeRegisterValues(
+	dataType: ModbusDataType,
+	value: number,
+	wordOrder: ModbusWordOrder = "big",
+): number[] {
 	switch (dataType) {
 		case "UINT16":
 			return [value & 0xffff];
@@ -17,10 +22,16 @@ export function encodeRegisterValues(dataType: ModbusDataType, value: number): n
 		}
 		case "UINT32": {
 			const unsigned = value >>> 0;
+			if (wordOrder === "little") {
+				return [unsigned & 0xffff, (unsigned >>> 16) & 0xffff];
+			}
 			return [(unsigned >>> 16) & 0xffff, unsigned & 0xffff];
 		}
 		case "INT32": {
 			const unsigned = Math.trunc(value) >>> 0;
+			if (wordOrder === "little") {
+				return [unsigned & 0xffff, (unsigned >>> 16) & 0xffff];
+			}
 			return [(unsigned >>> 16) & 0xffff, unsigned & 0xffff];
 		}
 		default:
